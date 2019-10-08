@@ -1,0 +1,25 @@
+{
+  "name": "unami/unami",
+  "authors": [
+    {
+      "name": "Max Lee",
+      "email": "mlee77@mail.greenriver.edu"
+    },
+    {
+      "name": "Trang",
+      "email": "tluu9@mail.greenriver.edu"
+    },
+    {
+      "name": "Jason",
+      "email": "jengelbrecht2@mail.greenriver.edu"
+    },
+    {
+      "name": "Alvin",
+      "email": "anava8@mail.greenriver.edu"
+    }
+
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
