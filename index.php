@@ -6,8 +6,8 @@ require_once('vendor/autoload.php');
 session_start();
 
 /*
- * Name: Maxwell Lee and Jittima Goodrich
- * Date: 6/4/2019
+ * Name: Maxwell Lee
+ * Date: 10/9/2019
  * File: index.php use for routing and store session data
  */
 
@@ -36,6 +36,12 @@ $f3->route('GET /', function()
 {
     $view = new Template();
     echo $view->render('views/home.html');
+});
+
+$f3->route('GET /review', function()
+{
+    $view = new Template();
+    echo $view->render('views/review.html');
 });
 
 //Run fat-free
