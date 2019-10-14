@@ -76,6 +76,8 @@ $f3->route('GET|POST /personal_information', function($f3)
 
         // validate data
 
+        $_SESSION['applicant'] = new Applicant($first, $last, $pronouns, $address, $address2, $city, $state, $zip,
+            $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $emergency_name, $emergency_email);
         $f3->reroute('/additional_information');
     }
 
