@@ -43,11 +43,11 @@ Description
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Last Name: </u></strong></h6>
-                    <p class="pl-2">Doe</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getLname() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6><strong><u>Pronouns: </u></strong></h6>
-                    <p class="pl-2">Him/He</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getPronouns() }}</p>
                 </div>
             </div>
 
@@ -56,11 +56,11 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Address 1: </u></strong></h6>
-                    <p class="pl-2">12345 Park Place Ave SE</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getAddress() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Address 2: </u></strong></h6>
-                    <p class="pl-2">Blank</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getAddress2() }}</p>
                 </div>
             </div>
 
@@ -69,15 +69,15 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>City: </u></strong></h6>
-                    <p class="pl-2">Auburn</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getCity() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>State: </u></strong></h6>
-                    <p class="pl-2">WA</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getState() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6><strong><u>Zip: </u></strong></h6>
-                    <p class="pl-2">98820</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getZip() }}</p>
                 </div>
             </div>
 
@@ -86,11 +86,11 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Primary Phone Number: </u></strong></h6>
-                    <p class="pl-2">425 432 8431</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getPrimaryPhone() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Best time to call: </u></strong></h6>
-                    <p class="pl-2">9am</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getPrimaryTime() }}</p>
                 </div>
             </div>
 
@@ -99,11 +99,11 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Alternate Phone Number: </u></strong></h6>
-                    <p class="pl-2">425 432 8431</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getAlternatePhone() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Best time to call: </u></strong></h6>
-                    <p class="pl-2">9am</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getAlternateTime() }}</p>
                 </div>
             </div>
 
@@ -112,11 +112,11 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Email: </u></strong></h6>
-                    <p class="pl-2">testuser@gmail.com</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getEmail() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Email or Phone: </u></strong></h6>
-                    <p class="pl-2">Phone</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getPreference() }}</p>
                 </div>
             </div>
 
@@ -125,11 +125,11 @@ Description
             <div class="row mt-3 mx-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Emergency Contact Name: </u></strong></h6>
-                    <p class="pl-2">Bob Mergency</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getEmergencyName() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Emergency Contact Phone Number: </u></strong></h6>
-                    <p class="pl-2">123 435 3421</p>
+                    <p class="pl-2">{{ $_SESSION['applicant']->getEmergencyPhone() }}</p>
                 </div>
             </div>
         </div>

@@ -15,8 +15,10 @@ class Applicant
     private $_primaryTime;
     private $_alternatePhone;
     private $_alternateTime;
+    private $_email;
+    private $_preference;
     private $_emergency_name;
-    private $_emergency_email;
+    private $_emergency_phone;
 
     /**
      * Applicant constructor.
@@ -32,12 +34,14 @@ class Applicant
      * @param $_primaryTime
      * @param $_alternatePhone
      * @param $_alternateTime
+     * @param $_email
+     * @param $_preference
      * @param $_emergency_name
-     * @param $_emergency_email
+     * @param $_emergency_phone
      */
     public function __construct($_fname, $_lname, $_pronouns, $_address, $_address2, $_city, $_state, $_zip,
-                                $_primaryPhone, $_primaryTime, $_alternatePhone, $_alternateTime, $_emergency_name,
-                                $_emergency_email)
+                                $_primaryPhone, $_primaryTime, $_alternatePhone, $_alternateTime, $_email, $_preference,
+                                $_emergency_name, $_emergency_phone)
     {
         $this->_fname = $_fname;
         $this->_lname = $_lname;
@@ -51,8 +55,10 @@ class Applicant
         $this->_primaryTime = $_primaryTime;
         $this->_alternatePhone = $_alternatePhone;
         $this->_alternateTime = $_alternateTime;
+        $this->_email = $_email;
+        $this->_preference = $_preference;
         $this->_emergency_name = $_emergency_name;
-        $this->_emergency_email = $_emergency_email;
+        $this->_emergency_phone = $_emergency_phone;
     }
 
     /**
@@ -154,6 +160,22 @@ class Applicant
     /**
      * @return mixed
      */
+    public function getEmail()
+    {
+        return $this->_email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPreference()
+    {
+        return $this->_preference;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getEmergencyName()
     {
         return $this->_emergency_name;
@@ -162,9 +184,9 @@ class Applicant
     /**
      * @return mixed
      */
-    public function getEmergencyEmail()
+    public function getEmergencyPhone()
     {
-        return $this->_emergency_email;
+        return $this->_emergency_phone;
     }
 
 

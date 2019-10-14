@@ -55,8 +55,10 @@ $f3->route('GET|POST /personal_information', function($f3)
         $primaryTime = $_POST['primary_time'];
         $alternatePhone = $_POST['alternate'];
         $alternateTime = $_POST['alternate_time'];
+        $email = $_POST['email'];
+        $preference = $_POST['preference'];
         $emergency_name = $_POST['emergency_name'];
-        $emergency_email = $_POST['emergency_email'];
+        $emergency_phone = $_POST['emergency_phone'];
 
         // add data to hive
         $f3->set('fname', $first);
@@ -72,12 +74,13 @@ $f3->route('GET|POST /personal_information', function($f3)
         $f3->set('alternate_phone', $alternatePhone);
         $f3->set('alternate_time', $alternateTime);
         $f3->set('emergency_name', $emergency_name);
-        $f3->set('emergency_email', $emergency_email);
+        $f3->set('emergency_phone', $emergency_phone);
 
         // validate data
 
         $_SESSION['applicant'] = new Applicant($first, $last, $pronouns, $address, $address2, $city, $state, $zip,
-            $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $emergency_name, $emergency_email);
+            $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $emergency_name,
+            $emergency_phone);
         $f3->reroute('/additional_information');
     }
 
