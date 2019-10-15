@@ -58,11 +58,11 @@
                             <p>3. Have you ever been convicted of a crime against another person including but not limited to: assault of any
                                 kind, harassment of any kind, or stalking?</p>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <input name="convict" class="form-check-input" type="radio" id="inlineCheckbox1" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                <input name="convict" class="form-check-input" type="radio" id="inlineCheckbox2" value="no">
                                 <label class="form-check-label" for="inlineCheckbox2">No</label>
                             </div>
                         </div>
@@ -76,11 +76,11 @@
 
                             <p>6. Have you taken other NAMI classes or trainings?</p>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                                <input name="trained" class="form-check-input" type="radio" id="inlineCheckbox3" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox3">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                                <input name="trained" class="form-check-input" type="radio" id="inlineCheckbox4" value="no">
                                 <label class="form-check-label" for="inlineCheckbox4">No</label>
                             </div><br>
                             <label for="exampleFormControlTextarea4">If yes, please list: </label>
@@ -88,11 +88,11 @@
 
                             <p>7. Are you currently certified to teach/lead any other NAMI signature programs?</p>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+                                <input name="certified" class="form-check-input" type="radio" id="inlineCheckbox5" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox5">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
+                                <input name="certified" class="form-check-input" type="radio" id="inlineCheckbox6" value="no">
                                 <label class="form-check-label" for="inlineCheckbox6">No</label>
                             </div>
                             <label for="exampleFormControlTextarea5">If yes, please list all Signature Programs you are certified to lead: </label>
@@ -100,11 +100,11 @@
 
                             <p>8. Do you know with whom you want to Co-facilitate?</p>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option7">
+                                <input name="coFacWhom" class="form-check-input" type="radio" id="inlineCheckbox7" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox7">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option8">
+                                <input name="coFacWhom" class="form-check-input" type="radio" id="inlineCheckbox8" value="no">
                                 <label class="form-check-label" for="inlineCheckbox8">No</label>
                             </div><br>
                             <label for="facilitator">If yes, who? </label>
@@ -112,20 +112,17 @@
 
                             <p>9. Do you know where you want to Co-facilitate?</p>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="option9">
+                                <input name="coFacWhere" class="form-check-input" type="radio" id="inlineCheckbox9" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox9">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="option10">
+                                <input name="coFacWhere" class="form-check-input" type="radio" id="inlineCheckbox10" value="no">
                                 <label class="form-check-label" for="inlineCheckbox10">No</label>
                             </div><br>
                             <label for="location">If yes, where? </label>
                             <input class="form-control" type="text" placeholder="Default input" id="location">
                         </div>
-
-
                     </div>
-
 
                     <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
                 </form>
