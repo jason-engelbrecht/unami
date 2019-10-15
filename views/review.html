@@ -39,15 +39,15 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>First Name: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getFname() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getFname() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Last Name: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getLname() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getLname() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6><strong><u>Pronouns: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getPronouns() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPronouns() }}</p>
                 </div>
             </div>
 
@@ -56,11 +56,11 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Address 1: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getAddress() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Address 2: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getAddress2() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress2() }}</p>
                 </div>
             </div>
 
@@ -69,15 +69,15 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>City: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getCity() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getCity() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>State: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getState() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getState() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6><strong><u>Zip: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getZip() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getZip() }}</p>
                 </div>
             </div>
 
@@ -86,11 +86,11 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Primary Phone Number: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getPrimaryPhone() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Best time to call: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getPrimaryTime() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</p>
                 </div>
             </div>
 
@@ -99,11 +99,11 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Alternate Phone Number: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getAlternatePhone() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Best time to call: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getAlternateTime() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternateTime() }}</p>
                 </div>
             </div>
 
@@ -112,11 +112,11 @@ Description
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Email: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getEmail() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmail() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Email or Phone: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getPreference() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPreference() }}</p>
                 </div>
             </div>
 
@@ -125,11 +125,11 @@ Description
             <div class="row mt-3 mx-3">
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Emergency Contact Name: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getEmergencyName() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyName() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6><strong><u>Emergency Contact Phone Number: </u></strong></h6>
-                    <p class="pl-2">{{ $_SESSION['applicant']->getEmergencyPhone() }}</p>
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}</p>
                 </div>
             </div>
         </div>
@@ -210,8 +210,11 @@ Description
 
     <div class="card py-2">
         <div class="card-body">
-            <form>
-                <button type="submit" class="btn btn-primary float-right">Next<i class="fas fa-arrow-right"></i></button>
+            <form method="post" action="long_answer">
+                <button type="submit" class="btn btn-primary float-left"><i class="fas fa-arrow-left"></i> Back</button>
+            </form>
+            <form method="post" action="performance_agreement">
+                <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
             </form>
         </div>
     </div>

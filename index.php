@@ -78,7 +78,7 @@ $f3->route('GET|POST /personal_information', function($f3)
 
         // validate data
 
-        $_SESSION['applicant'] = new Applicant($first, $last, $pronouns, $address, $address2, $city, $state, $zip,
+        $_SESSION['PersonalInfo'] = new PersonalInfo($first, $last, $pronouns, $address, $address2, $city, $state, $zip,
             $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $emergency_name,
             $emergency_phone);
         $f3->reroute('/additional_information');
@@ -98,11 +98,28 @@ $f3->route('GET|POST /additional_information', function($f3)
 
         // validate data
 
-        $f3->reroute('/review');
+        $f3->reroute('/long_answer');
     }
 
     $view = new Template();
     echo $view->render('views/form2.html');
+});
+
+$f3->route('GET|POST /long_answer', function($f3)
+{
+    if(!empty($_POST))
+    {
+        // get data from form
+
+        // add data to hive
+
+        // validate data
+
+        $f3->reroute('/review');
+    }
+
+    $view = new Template();
+    echo $view->render('views/longAnswer.html');
 });
 
 $f3->route('GET|POST /review', function()

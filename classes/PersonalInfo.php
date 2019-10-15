@@ -1,7 +1,7 @@
 <?php
 
 
-class Applicant
+class PersonalInfo
 {
     private $_fname;
     private $_lname;
