@@ -35,18 +35,18 @@ Description
 <div class="container p-3">
     <div class="card mb-3">
         <h5 class="card-header">Personal Information</h5>
-        <div class="card-body">
+        <div class="card-body m-3">
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>First Name: </u></strong></h6>
+                    <h6><strong>First Name: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getFname() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Last Name: </u></strong></h6>
+                    <h6><strong>Last Name: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getLname() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
-                    <h6><strong><u>Pronouns: </u></strong></h6>
+                    <h6><strong>Pronouns: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPronouns() }}</p>
                 </div>
             </div>
@@ -55,11 +55,11 @@ Description
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Address 1: </u></strong></h6>
+                    <h6><strong>Address 1: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Address 2: </u></strong></h6>
+                    <h6><strong>Address 2: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress2() }}</p>
                 </div>
             </div>
@@ -68,15 +68,15 @@ Description
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>City: </u></strong></h6>
+                    <h6><strong>City: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getCity() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>State: </u></strong></h6>
+                    <h6><strong>State: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getState() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
-                    <h6><strong><u>Zip: </u></strong></h6>
+                    <h6><strong>Zip: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getZip() }}</p>
                 </div>
             </div>
@@ -85,11 +85,11 @@ Description
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Primary Phone Number: </u></strong></h6>
+                    <h6><strong>Primary Phone Number: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Best time to call: </u></strong></h6>
+                    <h6><strong>Best time to call: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</p>
                 </div>
             </div>
@@ -98,11 +98,11 @@ Description
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Alternate Phone Number: </u></strong></h6>
+                    <h6><strong>Alternate Phone Number: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Best time to call: </u></strong></h6>
+                    <h6><strong>Best time to call: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternateTime() }}</p>
                 </div>
             </div>
@@ -111,11 +111,11 @@ Description
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Email: </u></strong></h6>
+                    <h6><strong>Email: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmail() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Email or Phone: </u></strong></h6>
+                    <h6><strong>Email or Phone: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPreference() }}</p>
                 </div>
             </div>
@@ -124,11 +124,11 @@ Description
 
             <div class="row mt-3 mx-3">
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Emergency Contact Name: </u></strong></h6>
+                    <h6><strong>Emergency Contact Name: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyName() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6><strong><u>Emergency Contact Phone Number: </u></strong></h6>
+                    <h6><strong>Emergency Contact Phone Number: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}</p>
                 </div>
             </div>
@@ -140,16 +140,15 @@ Description
         <div class="card-body m-3">
             <div class="row m-3">
                 <div class="col-md-6 pl-0">
-                    <h6><strong><u>Accessibility needs, Dietary restrictions,
-                        or Special Accommodations: </u></strong></h6>
+                    <h6><strong>Special Needs: </strong></h6>
                     <p class="pl-2">Yes</p>
                 </div>
                 <div class="col-md-3 pl-0">
-                    <h6><strong><u>Bringing a Service Animal: </u></strong></h6>
+                    <h6><strong>Bringing a Service Animal: </strong></h6>
                     <p class="pl-2">No</p>
                 </div>
                 <div class="col-md-3 pl-0">
-                    <h6><strong><u>Walker or Wheelchair used: </u></strong></h6>
+                    <h6><strong>Walker or Wheelchair used: </strong></h6>
                     <p class="pl-2">No</p>
                 </div>
             </div>
@@ -158,11 +157,11 @@ Description
 
             <div class="row m-3">
                 <div class="col-md-6 pl-0">
-                    <h6><strong><u>Live within 1 hour of training: </u></strong></h6>
+                    <h6><strong>Live within 1 hour of training: </strong></h6>
                     <p class="pl-2">Yes</p>
                 </div>
                 <div class="col-md-3 pl-0">
-                    <h6><strong><u>Need Housing for these nights: </u></strong></h6>
+                    <h6><strong>Need Housing for these nights: </strong></h6>
                     <p class="pl-2">Friday</p>
                 </div>
             </div>
@@ -170,30 +169,30 @@ Description
             <hr>
 
             <div class="row m-3">
-                <h6><strong><u>Rooming Information: </u></strong></h6>
+                <h6><strong>Rooming Information: </strong></h6>
             </div>
             <div class="row m-3">
                 <div class="col-md-4 pl-0">
-                    <h6><strong><u>Your Gender: </u></strong></h6>
+                    <h6><strong>Your Gender: </strong></h6>
                     <p class="pl-2">Male</p>
                 </div>
                 <div class="col-md-4 pl-0">
-                    <h6><strong><u>Want to Room With: </u></strong></h6>
+                    <h6><strong>Want to Room With: </strong></h6>
                     <p class="pl-2">Male</p>
                 </div>
                 <div class="col-md-2 pl-0">
-                    <h6><strong><u>Use a CPAP: </u></strong></h6>
+                    <h6><strong>Use a CPAP: </strong></h6>
                     <p class="pl-2">No</p>
                 </div>
                 <div class="col-md-2 pl-0">
-                    <h6><strong><u>Room with a CPAP User: </u></strong></h6>
+                    <h6><strong>Room with a CPAP User: </strong></h6>
                     <p class="pl-2">No</p>
                 </div>
             </div>
 
             <div class="row mt-3 mx-3">
                 <div class="col-md-12 pl-0">
-                    <h6><strong><u>Did you want to pay extra for a single room: </u></strong></h6>
+                    <h6><strong>Did you want to pay extra for a single room: </strong></h6>
                     <p class="pl-2">Yes</p>
                 </div>
             </div>
@@ -204,16 +203,85 @@ Description
         <h5 class="card-header">Long Answer Questions</h5>
         <div class="card-body m-3">
             <div class="row m-3">
+                <div class="col-md-3 pl-0">
+                    <h6><strong>Relative with Mental Illness: </strong></h6>
+                    <p class="pl-2">Yes</p>
+                </div>
+                <div class="col-md-9 pl-0">
+                    <h6><strong>How did you hear about this training class: </strong></h6>
+                    <p class="pl-2">Yes</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row m-3">
+                <div class="col-md-3 pl-0">
+                    <h6><strong>Convicted of a Crime: </strong></h6>
+                    <p class="pl-2">No</p>
+                </div>
+                <div class="col-md-9 pl-0">
+                    <h6><strong>Why you want to be a NAMI Family Support Group Facilitator: </strong></h6>
+                    <p class="pl-2">Yes</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row m-3">
+                <div class="col-md-12 pl-0">
+                    <h6><strong>Experience in Support Group Participation: </strong></h6>
+                    <p class="pl-2">No</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row m-3">
+                <div class="col-md-3 pl-0">
+                    <h6><strong>Have you Taken Other Classes: </strong></h6>
+                    <p class="pl-2">No</p>
+                </div>
+                <div class="col-md-9 pl-0">
+                    <h6><strong>Which Classes you Took: </strong></h6>
+                    <p class="pl-2">Yes</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row m-3">
+                <div class="col-md-3 pl-0">
+                    <h6><strong>Can you Teach any Classes: </strong></h6>
+                    <p class="pl-2">No</p>
+                </div>
+                <div class="col-md-9 pl-0">
+                    <h6><strong>Which Classes you can Teach: </strong></h6>
+                    <p class="pl-2">Yes</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row m-3">
+                <div class="col-md-6 pl-0">
+                    <h6><strong>Who you want to Co-facilitate with: </strong></h6>
+                    <p class="pl-2">No</p>
+                </div>
+                <div class="col-md-6 pl-0">
+                    <h6><strong>Where you want to Co-facilitate : </strong></h6>
+                    <p class="pl-2">Yes</p>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="card py-2">
         <div class="card-body">
-            <form method="post" action="long_answer">
+            <form method="get" action="long_answer">
                 <button type="submit" class="btn btn-primary float-left"><i class="fas fa-arrow-left"></i> Back</button>
             </form>
-            <form method="post" action="performance_agreement">
+            <form method="get" action="performance_agreement">
                 <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
             </form>
         </div>
