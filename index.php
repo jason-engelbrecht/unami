@@ -35,7 +35,7 @@ if(!isset($_SESSION['user']))
 $f3->route('GET /', function()
 {
     $view = new Template();
-    echo $view->render('views/form1.html');
+    echo $view->render('views/FSGtrainingDescription.html');
 });
 
 $f3->route('GET|POST /personal_information', function($f3)
@@ -131,6 +131,13 @@ $f3->route('GET|POST /review', function()
 $f3->route('GET|POST /performance_agreement', function() {
     $view = new Template();
     echo $view->render('views/performanceAgreement.html');
+});
+
+//test route
+$f3->route('GET|POST /test', function()
+{
+    $view = new Template();
+    echo $view->render('views/FSGtrainingDescription.html');
 });
 
 //Run fat-free
