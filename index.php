@@ -64,6 +64,8 @@ $f3->route('GET|POST /personal_information', function($f3)
         $alternateTime = $_POST['alternate_time'];
         $email = $_POST['email'];
         $preference = $_POST['preference'];
+        $affiliate = $_POST['affiliate'];
+        $member = $_POST['member'];
         $emergency_name = $_POST['emergency_name'];
         $emergency_phone = $_POST['emergency_phone'];
 
@@ -80,14 +82,16 @@ $f3->route('GET|POST /personal_information', function($f3)
         $f3->set('primary_time', $primaryTime);
         $f3->set('alternate_phone', $alternatePhone);
         $f3->set('alternate_time', $alternateTime);
+        $f3->set('affiliate', $affiliate);
+        $f3->set('member', $member);
         $f3->set('emergency_name', $emergency_name);
         $f3->set('emergency_phone', $emergency_phone);
 
         // validate data
 
         $_SESSION['PersonalInfo'] = new PersonalInfo($first, $last, $pronouns, $address, $address2, $city, $state, $zip,
-            $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $emergency_name,
-            $emergency_phone);
+            $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $affiliate, $member,
+            $emergency_name, $emergency_phone);
         $f3->reroute('/additional_information');
     }
 
