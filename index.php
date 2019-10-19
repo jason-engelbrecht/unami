@@ -104,8 +104,32 @@ $f3->route('GET|POST /additional_information', function($f3)
     if(!empty($_POST))
     {
         // get data from form
+        $specialNeeds = $_POST['specialNeeds'];
+        $serviceAnimal = $_POST['serviceAnimal'];
+        $movementDisability = $_POST['movementDisability'];
+        $noAccommodations = $_POST['noAccommodations'];
+        $needRoom = $_POST['needRoom'];
+        $daysRooming = $_POST['daysRooming'];
+        $roommate = $_POST['roommate'];
+        $gender = $_POST['gender'];
+        $roommateGender = $_POST['roommateGender'];
+        $cpap = $_POST['cpap'];
+        $cpapRoommate = $_POST['cpapRoommate'];
+        $singleRoom = $_POST['singleRoom'];
 
         // add data to hive
+        $f3->set('specialNeeds', $specialNeeds);
+        $f3->set('serviceAnimal', $serviceAnimal);
+        $f3->set('movementDisability', $movementDisability);
+        $f3->set('noAccommodations', $noAccommodations);
+        $f3->set('needRoom', $needRoom);
+        $f3->set('daysRooming', $daysRooming);
+        $f3->set('roommate', $roommate);
+        $f3->set('gender', $gender);
+        $f3->set('roommateGender', $roommateGender);
+        $f3->set('cpap', $cpap);
+        $f3->set('cpapRoommate', $cpapRoommate);
+        $f3->set('singleRoom', $singleRoom);
 
         // validate data
 
