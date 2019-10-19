@@ -148,11 +148,40 @@ $f3->route('GET|POST /long_answer', function($f3)
     if(!empty($_POST))
     {
         // get data from form
+        $relativeMentalIllness = $_POST['relativeMentalIllness'];
+        $heardAboutTraining = $_POST['heardAboutTraining'];
+        $convict = $_POST['convict'];
+        $whyFacilitator = $_POST['whyFacilitator'];
+        $experience = $_POST['experience'];
+        $trained = $_POST['trained'];
+        $trainedText = $_POST['trainedText'];
+        $certified = $_POST['certified'];
+        $certifiedText = $_POST['certifiedText'];
+        $coFacWhom = $_POST['coFacWhom'];
+        $coFacWhomText = $_POST['coFacWhomText'];
+        $coFacWhere = $_POST['coFacWhere'];
+        $coFacWhereText = $_POST['coFacWhereText'];
 
         // add data to hive
+        $f3->set('relativeMentalIllness', $relativeMentalIllness);
+        $f3->set('heardAboutTraining', $heardAboutTraining);
+        $f3->set('convict', $convict);
+        $f3->set('whyFacilitator', $whyFacilitator);
+        $f3->set('experience', $experience);
+        $f3->set('trained', $trained);
+        $f3->set('trainedText', $trainedText);
+        $f3->set('certified', $certified);
+        $f3->set('certifiedText', $certifiedText);
+        $f3->set('coFacWhom', $coFacWhom);
+        $f3->set('coFacWhomText', $coFacWhomText);
+        $f3->set('coFacWhere', $coFacWhere);
+        $f3->set('coFacWhereText', $coFacWhereText);
 
         // validate data
 
+        $_SESSION['LongAnswers'] =  new LongAnswers($relativeMentalIllness, $heardAboutTraining, $convict,
+            $whyFacilitator, $experience, $trained, $trainedText, $certified, $certifiedText, $coFacWhom, $coFacWhomText,
+            $coFacWhere, $coFacWhereText);
         $f3->reroute('/review');
     }
 
