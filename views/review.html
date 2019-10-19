@@ -129,15 +129,15 @@
             <div class="row m-3">
                 <div class="col-md-6 pl-0">
                     <h6><strong>Special Needs: </strong></h6>
-                    <p class="pl-2">Yes</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() }}</p>
                 </div>
                 <div class="col-md-3 pl-0">
                     <h6><strong>Bringing a Service Animal: </strong></h6>
-                    <p class="pl-2">No</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getServiceAnimal() }}</p>
                 </div>
                 <div class="col-md-3 pl-0">
                     <h6><strong>Walker or Wheelchair used: </strong></h6>
-                    <p class="pl-2">No</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getMovementDisability() }}</p>
                 </div>
             </div>
 
@@ -146,11 +146,11 @@
             <div class="row m-3">
                 <div class="col-md-6 pl-0">
                     <h6><strong>Live within 1 hour of training: </strong></h6>
-                    <p class="pl-2">Yes</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getNoAccommodations() }}</p>
                 </div>
                 <div class="col-md-3 pl-0">
                     <h6><strong>Need Housing for these nights: </strong></h6>
-                    <p class="pl-2">Friday</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getDaysRooming() }}</p>
                 </div>
             </div>
 
@@ -162,26 +162,26 @@
             <div class="row m-3">
                 <div class="col-md-4 pl-0">
                     <h6><strong>Your Gender: </strong></h6>
-                    <p class="pl-2">Male</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getGender() }}</p>
                 </div>
                 <div class="col-md-4 pl-0">
                     <h6><strong>Want to Room With: </strong></h6>
-                    <p class="pl-2">Male</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getRoommateGender() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6><strong>Use a CPAP: </strong></h6>
-                    <p class="pl-2">No</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpap() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6><strong>Room with a CPAP User: </strong></h6>
-                    <p class="pl-2">No</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}</p>
                 </div>
             </div>
 
             <div class="row mt-3 mx-3">
                 <div class="col-md-12 pl-0">
                     <h6><strong>Did you want to pay extra for a single room: </strong></h6>
-                    <p class="pl-2">Yes</p>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSingleRoom() }}</p>
                 </div>
             </div>
         </div>

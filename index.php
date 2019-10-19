@@ -133,6 +133,9 @@ $f3->route('GET|POST /additional_information', function($f3)
 
         // validate data
 
+        $_SESSION['AdditionalInfo'] = new AdditionalInfo($specialNeeds, $serviceAnimal, $movementDisability,
+            $noAccommodations, $needRoom, $daysRooming, $roommate, $gender, $roommateGender, $cpap, $cpapRoommate,
+            $singleRoom);
         $f3->reroute('/long_answer');
     }
 
