@@ -8,11 +8,9 @@
 class LongAnswers
 {
     private $_relativeMentalIllness;
-
     private $_convict;
     private $_whyFacilitator;
     private $_experience;
-
     private $_coFacWhom;
     private $_coFacWhomText;
     private $_coFacWhere;
@@ -29,8 +27,8 @@ class LongAnswers
      * @param $_coFacWhere String if the applicant knows where they want to co facilitate
      * @param $_coFacWhereText String where the applicant wants to co facilitate
      */
-    public function __construct($_relativeMentalIllness, $_convict, $_whyFacilitator,
-                                $_experience, $_coFacWhom, $_coFacWhomText, $_coFacWhere, $_coFacWhereText)
+    public function __construct($_relativeMentalIllness, $_convict, $_whyFacilitator, $_experience, $_coFacWhom,
+                                $_coFacWhomText, $_coFacWhere, $_coFacWhereText)
     {
         $this->_relativeMentalIllness = $_relativeMentalIllness;
         $this->_convict = $_convict;

@@ -210,10 +210,6 @@
                     <h6><strong>Relative with Mental Illness: </strong></h6>
                     <p class="pl-2">{{ $_SESSION['LongAnswer']->getRelativeMentalIllness() }}</p>
                 </div>
-                <div class="col-md-9 pl-0">
-                    <h6><strong>How did you hear about this training class: </strong></h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getHeardAboutTraining() }}</p>
-                </div>
             </div>
 
             <hr>
@@ -240,32 +236,6 @@
 
             <hr>
 
-            <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6><strong>Have you Taken Other Classes: </strong></h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getTrained() }}</p>
-                </div>
-                <div class="col-md-9 pl-0">
-                    <h6><strong>Which Classes you Took: </strong></h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getTrainedText() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6><strong>Can you Teach any Classes: </strong></h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getCertified() }}</p>
-                </div>
-                <div class="col-md-9 pl-0">
-                    <h6><strong>Which Classes you can Teach: </strong></h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getCertifiedText() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
             <div class="row mx-3 mt-3">
                 <div class="col-md-6 pl-0">
                     <h6><strong>Who you want to Co-facilitate with: </strong></h6>
@@ -279,9 +249,52 @@
         </div>
     </div>
 
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="float-left">Not Required Questions</h5>
+            <form action="not_required">
+                <button type="submit" class="btn btn-primary float-right">Edit</button>
+            </form>
+        </div>
+        <div class="card-body m-3">
+            <div class="row m-3">
+                <div class="col-md-12 pl-0">
+                    <h6><strong>How did you hear about this training class: </strong></h6>
+                    <p class="pl-2">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row m-3">
+                <div class="col-md-3 pl-0">
+                    <h6><strong>Have you Taken Other Classes: </strong></h6>
+                    <p class="pl-2">{{ $_SESSION['NotRequired']->getTrained() }}</p>
+                </div>
+                <div class="col-md-9 pl-0">
+                    <h6><strong>Which Classes you Took: </strong></h6>
+                    <p class="pl-2">{{ $_SESSION['NotRequired']->getTrainedText() }}</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row m-3">
+                <div class="col-md-3 pl-0">
+                    <h6><strong>Can you Teach any Classes: </strong></h6>
+                    <p class="pl-2">{{ $_SESSION['NotRequired']->getCertified() }}</p>
+                </div>
+                <div class="col-md-9 pl-0">
+                    <h6><strong>Which Classes you can Teach: </strong></h6>
+                    <p class="pl-2">{{ $_SESSION['NotRequired']->getCertifiedText() }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card py-2">
         <div class="card-body">
-            <form method="get" action="long_answer">
+            <form method="get" action="not_required">
                 <button type="submit" class="btn btn-primary float-left"><i class="fas fa-arrow-left"></i> Back</button>
             </form>
             <form method="get" action="performance_agreement">
