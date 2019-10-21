@@ -1,0 +1,80 @@
+<include href="views/includes/header.html"/>
+
+<div class="container p-3">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 50%"
+             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+    </div>
+</div>
+
+<!-- container -->
+<div class="container p-3 ">
+    <!-- card -->
+    <div class="card shadow-sm bg-white rounded">
+        <h5 class="card-header">Further Questions</h5>
+
+        <!-- card body -->
+        <div class="card-body m-3">
+            <!-- form -->
+            <div>
+                <form method="post" action="review">
+
+                    <!-- how did you hear about this training -->
+                    <div class="mb-5">
+                        <label for="heardAboutTraining">1. How did you hear about this
+                            training class?</label>
+                        <small>*not required</small>
+                        <textarea name="heardAboutTraining" class="form-control" id="heardAboutTraining"
+                                  rows="5"></textarea>
+                    </div>
+
+                    <!-- have you taken any other NAMI classes or trainings -->
+                    <div class="my-5">
+                        <p>2. Have you taken other NAMI classes or trainings? <small>*not required</small></p>
+                        <div class="form-check form-check-inline">
+                            <input name="trained" class="form-check-input" type="radio" id="inlineCheckbox3" value="yes">
+                            <label class="form-check-label" for="inlineCheckbox3">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input name="trained" class="form-check-input" type="radio" id="inlineCheckbox4" value="no">
+                            <label class="form-check-label" for="inlineCheckbox4">No</label>
+                        </div><br>
+                        <label for="exampleFormControlTextarea4">If yes, please list: </label>
+                        <textarea name="trainedText" class="form-control" id="exampleFormControlTextarea4" rows="5"></textarea>
+                    </div>
+
+                    <!-- are your certified to teach any other nami signature programs -->
+                    <div class="my-5">
+                        <p>3. Are you currently certified to teach/lead any other NAMI signature programs? <small>*not required</small></p>
+                        <div class="form-check form-check-inline">
+                            <input name="certified" class="form-check-input" type="radio" id="inlineCheckbox5" value="yes">
+                            <label class="form-check-label" for="inlineCheckbox5">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input name="certified" class="form-check-input" type="radio" id="inlineCheckbox6" value="no">
+                            <label class="form-check-label" for="inlineCheckbox6">No</label>
+                        </div>
+                        <label for="exampleFormControlTextarea5">If yes, please list all Signature Programs you are certified to lead: </label>
+                        <textarea name="certifiedText" class="form-control" id="exampleFormControlTextarea5" rows="5"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
+
+                </form>
+
+                <form method="post" action="long_answer">
+                    <button type="submit" class="btn btn-primary float-left"><i class="fas fa-arrow-left"></i> Back</button>
+                </form>
+            </div>
+            <!-- form -->
+        </div>
+        <!-- card body -->
+    </div>
+    <!-- card -->
+</div>
+<!-- container -->
+
+
+
+
+<include href="views/includes/footer.html"/>
