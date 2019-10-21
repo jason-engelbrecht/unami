@@ -1,5 +1,8 @@
 <include href="views/includes/header.html"/>
 
+<!--font awesome-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div class="container p-3">
     <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 25%"
@@ -80,11 +83,17 @@
                             <input type="text" name="roommateGender" class="form-control"></label>
                     </div>
                     <div class="form-group col-md-6">
-                        <label><input type="checkbox" name="cpap" value="yes"> I use a C-Pap</label>
+                        <!--tooltip-->
+                        <label><input type="checkbox" name="cpap" value="yes"> I use a C-Pap
+                        <a href="#" data-toggle="tooltip" title=
+                        "C-PAP stands for continuous positive airway pressure. The machines help people with sleep apnea breathe more easily and regularly every night while they are sleeping. "><i class="fa fa-question-circle-o"></i></a></label>
                     </div>
                     <div class="form-group col-md-6">
-                        <label><input type="checkbox" name="cpapRoommate" value="yes"> I don't mind rooming with
-                            a C-Pap machine user:</label>
+
+                        <!--tooltip-->
+                        <label><input type="checkbox" name="cpapRoommate" value="yes"> I don't mind rooming with a C-PAP machine
+                         <a href="#" data-toggle="tooltip" title=
+                         "C-PAP stands for continuous positive airway pressure. The machines help people with sleep apnea breathe more easily and regularly every night while they are sleeping. "><i class="fa fa-question-circle-o"></i></a> user:</label>
                     </div>
                 </div>
 
@@ -105,5 +114,12 @@
         </div>
     </div>
 </div>
+
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 
 <include href="views/includes/footer.html"/>
