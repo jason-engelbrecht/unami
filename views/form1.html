@@ -17,35 +17,39 @@
                     <div class="form-row">
                         <div class="form-group col-md-5">
                             <label for="first">First name</label>
-                            <input name="first" type="text" class="form-control" id="first" placeholder="John" required>
+                            <input name="first" type="text" class="form-control" id="first" placeholder="John" required
+                                   value="{{ $_SESSION['PersonalInfo']->getFname() }}">
                         </div>
                         <div class="form-group col-md-5">
                             <label for="last">Last name</label>
-                            <input name="last" type="text" class="form-control" id="last" placeholder="Doe">
+                            <input name="last" type="text" class="form-control" id="last" placeholder="Doe" required
+                                   value="{{ $_SESSION['PersonalInfo']->getLname() }}">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="pronouns">Pronouns</label>
-                            <input name="pronouns" type="text" class="form-control" id="pronouns" placeholder="She/He">
+                            <input name="pronouns" type="text" class="form-control" id="pronouns" placeholder="She/He" required
+                                   value="{{ $_SESSION['PersonalInfo']->getPronouns() }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddress">Address</label>
                         <input name="inputAddress" type="text" class="form-control" id="inputAddress"
-                               placeholder="1234 Main St">
+                               placeholder="1234 Main St" required value="{{ $_SESSION['PersonalInfo']->getAddress() }}">
                     </div>
                     <div class="form-group">
                         <label for="inputAddress2">Address 2</label>
                         <input name="inputaddress2" type="text" class="form-control" id="inputAddress2"
-                               placeholder="Apartment, studio, or floor">
+                               placeholder="Apartment, studio, or floor" value="{{ $_SESSION['PersonalInfo']->getAddress2() }}">
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputCity">City</label>
-                            <input name="inputCity" type="text" class="form-control" id="inputCity">
+                            <input name="inputCity" type="text" class="form-control" id="inputCity" required
+                                   value="{{ $_SESSION['PersonalInfo']->getCity() }}">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputState">State</label>
-                            <select name="inputState" id="inputState" class="form-control">
+                            <select name="inputState" id="inputState" class="form-control" required>
                                 <option selected>Choose...</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -102,40 +106,46 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
-                            <input name="inputZip" type="text" class="form-control" id="inputZip">
+                            <input name="inputZip" type="text" class="form-control" id="inputZip" required
+                                   value="{{ $_SESSION['PersonalInfo']->getZip() }}">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="primary">Primary phone number</label>
-                            <input name="primary" type="tel" class="form-control" id="primary" placeholder="206 123 1234">
+                            <input name="primary" type="tel" class="form-control" id="primary" placeholder="206 123 1234"
+                            required value="{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="primary_time">Best time to call</label>
-                            <input name="primary_time" type="text" class="form-control" id="primary_time" placeholder="9AM">
+                            <input name="primary_time" type="text" class="form-control" id="primary_time" placeholder="9AM"
+                            required value="{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="alternate">Alternate phone number</label>
-                            <input name="alternate" type="tel" class="form-control" id="alternate" placeholder="206 123 1234">
+                            <input name="alternate" type="tel" class="form-control" id="alternate" placeholder="206 123 1234"
+                            required value="{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="alternate_time">Best time to call</label>
-                            <input name="alternate_time" type="text" class="form-control" id="alternate_time" placeholder="9AM">
+                            <input name="alternate_time" type="text" class="form-control" id="alternate_time" placeholder="9AM"
+                            required value="{{ $_SESSION['PersonalInfo']->getAlternateTime() }}">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="email">Email</label>
-                            <input name="email" type="email" class="form-control" id="email" placeholder="email@mail.com">
+                            <input name="email" type="email" class="form-control" id="email" placeholder="email@mail.com"
+                                   required value="{{ $_SESSION['PersonalInfo']->getEmail() }}">
                         </div>
                         <div class="form-group col-md-6">
                             <label>Best way to contact you?</label><br>
-                            <input type="radio" name="preference" value="phone"> Phone
-                            <input type="radio" name="preference" value="email"> Email
+                            <input type="radio" name="preference" value="phone" required> Phone
+                            <input type="radio" name="preference" value="email" required> Email
                         </div>
                     </div>
 
@@ -143,7 +153,8 @@
                         <div class="form-group col-md-6">
                             <label for="affiliateName">NAMI Affiliate: </label><br>
 
-                            <select id="affiliateName" class="form-control" name="affiliateName" onchange="showfield(this.options[this.selectedIndex].value)">
+                            <select id="affiliateName" class="form-control" name="affiliateName"
+                                    onchange="showfield(this.options[this.selectedIndex].value)" required>
                                 <option value="Select">- Select -</option>
                                 <option value="Affiliate 1">Affiliate 1</option>
                                 <option value="Affiliate 2">Affiliate 2</option>
@@ -160,12 +171,12 @@
                         <div class="form-group col-md-6">
                             <label for="emergency_name">Name</label>
                             <input name="emergency_name" type="text" class="form-control" id="emergency_name"
-                                   placeholder="Jane Doe">
+                                   placeholder="Jane Doe" required value="{{ $_SESSION['PersonalInfo']->getEmergencyName() }}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="emergency_phone">Phone</label><br>
                             <input name="emergency_phone" type="tel" class="form-control" id="emergency_phone"
-                                   placeholder="206 123 1234">
+                                   placeholder="206 123 1234" required value="{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}">
                         </div>
                     </div>
 

@@ -23,17 +23,11 @@ $f3 = Base::instance();
 
 //Establish connection to database
 
-//If the cart is not created yet, then initialize it
-/*
-if(!isset($_SESSION['user']))
-{
-    $_SESSION['user'] = new Guest();
-}
-*/
-
 //define a default route
 $f3->route('GET /', function()
 {
+    session_destroy();
+    session_start();
     $view = new Template();
     echo $view->render('views/FSGtrainingDescription.html');
 });
@@ -93,6 +87,13 @@ $f3->route('GET|POST /personal_information', function($f3)
             $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $affiliate, $member,
             $emergency_name, $emergency_phone);
         $f3->reroute('/additional_information');
+    }
+
+    if(!isset($_SESSION['PersonalInfo']))
+    {
+        $_SESSION['PersonalInfo'] = new PersonalInfo('','','','','','',
+            '', '', '', '', '', '', '', '',
+            '', '', '', '');
     }
 
    $view = new Template();
@@ -224,6 +225,12 @@ $f3->route('GET|POST /test', function()
 {
     $view = new Template();
     echo $view->render('views/FSGtrainingDescription.html');
+});
+
+$f3->route('GET|POST /confirmation', function()
+{
+    $view = new Template();
+    echo $view->render('views/confirmation.html');
 });
 
 //Run fat-free
