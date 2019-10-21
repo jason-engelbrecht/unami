@@ -182,12 +182,42 @@ $f3->route('GET|POST /long_answer', function($f3)
         $_SESSION['LongAnswers'] =  new LongAnswers($relativeMentalIllness, $heardAboutTraining, $convict,
             $whyFacilitator, $experience, $trained, $trainedText, $certified, $certifiedText, $coFacWhom, $coFacWhomText,
             $coFacWhere, $coFacWhereText);
-        $f3->reroute('/review');
+        $f3->reroute('/not_required');
     }
 
     $view = new Template();
     echo $view->render('views/longAnswer.html');
 });
+
+$f3->route('GET|POST /not_required', function($f3)
+{
+    if(!empty($_POST))
+    {
+        // get data from form
+        $heardAboutTraining = $_POST['heardAboutTraining'];
+        $trained = $_POST['trained'];
+        $trainedText = $_POST['trainedText'];
+        $certified = $_POST['certified'];
+        $certifiedText = $_POST['certifiedText'];
+
+        // add data to hive
+        $f3->set('heardAboutTraining', $heardAboutTraining);
+        $f3->set('trained', $trained);
+        $f3->set('trainedText', $trainedText);
+        $f3->set('certified', $certified);
+        $f3->set('certifiedText', $certifiedText);
+
+        // validate data
+
+        $_SESSION['LongAnswers'] =  new NotRequired( $heardAboutTraining, $trained, $trainedText, $certified,
+            $certifiedText);
+        $f3->reroute('/review');
+    }
+
+    $view = new Template();
+    echo $view->render('views/notRequiredQuestions.html');
+});
+
 
 $f3->route('GET|POST /review', function()
 {
