@@ -169,7 +169,7 @@ $f3->route('GET|POST /long_answer', function($f3)
 
         // validate data
 
-        $_SESSION['LongAnswers'] =  new LongAnswers($relativeMentalIllness, $convict, $whyFacilitator, $experience,
+        $_SESSION['LongAnswer'] =  new LongAnswers($relativeMentalIllness, $convict, $whyFacilitator, $experience,
             $coFacWhom, $coFacWhomText, $coFacWhere, $coFacWhereText);
         $f3->reroute('/not_required');
     }
