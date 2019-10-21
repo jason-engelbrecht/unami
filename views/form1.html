@@ -145,9 +145,9 @@
                         <div class="form-group col-md-6">
                             <label>Best way to contact you?</label><br>
                             <input type="radio" name="preference" value="phone" required
-                            <check if="{{$_SESSION['PersonalInfo'] === 'phone'}}">checked</check>> Phone
+                            <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'phone'}}">checked</check>> Phone
                             <input type="radio" name="preference" value="email" required
-                            <check if="{{$_SESSION['PersonalInfo'] === 'email'}}">checked</check>> Email
+                            <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'email'}}">checked</check>> Email
                         </div>
                     </div>
 
