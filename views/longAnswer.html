@@ -1,4 +1,5 @@
 <include href="views/includes/header.html"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <div class="container p-3">
     <div class="progress">
@@ -19,26 +20,39 @@
                             <p>1. Do you have a relative living with mental illness?</p>
                             <div class="form-check form-check-inline">
                                 <input name="relativeMentalIllness" class="form-check-input" type="radio"
-                                       id="inlineCheckbox11" value="yes">
+                                       id="show1" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox11">Yes</label>
+                              <div id="textbox1" style="display: none">
+                              Please explain why you selected "Yes"
+                              <br><textarea rows="4" cols="50"></textarea>
+                              </div>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input name="relativeMentalIllness" class="form-check-input" type="radio"
-                                       id="inlineCheckbox12" value="no">
+                                       id="hide1" value="no">
                                 <label class="form-check-label" for="inlineCheckbox12">No</label>
                             </div><br>
 
+                            <label for="exampleFormControlTextarea1" class="pt-5">2. How did you hear about this
+                                training class?</label>
+                            <small>*not required</small>
+                            <textarea name="heardAboutTraining" class="form-control" id="exampleFormControlTextarea1"
+                                      rows="3"></textarea>
                         </div>
 
                         <div class="form-group pt-5">
                             <p>3. Have you ever been convicted of a crime against another person including but not limited to: assault of any
                                 kind, harassment of any kind, or stalking?</p>
                             <div class="form-check form-check-inline">
-                                <input name="convict" class="form-check-input" type="radio" id="inlineCheckbox1" value="yes">
+                                <input name="convict" class="form-check-input" type="radio" id="show2" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+                              <div id="textbox2" style="display: none">
+                              Please explain why you selected "Yes"
+                              <br><textarea rows="4" cols="50"></textarea>
+                              </div>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input name="convict" class="form-check-input" type="radio" id="inlineCheckbox2" value="no">
+                                <input name="convict" class="form-check-input" type="radio" id="hide2" value="no">
                                 <label class="form-check-label" for="inlineCheckbox2">No</label>
                             </div>
                         </div>
@@ -50,29 +64,62 @@
                             <label for="exampleFormControlTextarea3" class="pt-5">5. What experience do you have in participating in a support group?</label>
                             <textarea name="experience" class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
 
-                            <p class="pt-5">8. Do you know with whom you want to Co-facilitate?</p>
+                            <p class="pt-5">6. Have you taken other NAMI classes or trainings? <small>*not required</small></p>
+
                             <div class="form-check form-check-inline">
-                                <input name="coFacWhom" class="form-check-input" type="radio" id="inlineCheckbox7" value="yes">
-                                <label class="form-check-label" for="inlineCheckbox7">Yes</label>
+                                <input name="trained" class="form-check-input" type="radio" id="show3" value="yes">
+                                <label class="form-check-label" for="inlineCheckbox3">Yes</label>
+                                <div id="textbox3" style="display: none">
+                                Please explain why you selected "Yes"
+                                <br><textarea rows="4" cols="50"></textarea>
+                                </div>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input name="coFacWhom" class="form-check-input" type="radio" id="inlineCheckbox8" value="no">
+                                <input name="trained" class="form-check-input" type="radio" id="hide3" value="no">
+                                <label class="form-check-label" for="inlineCheckbox4">No</label>
+                            </div><br>
+
+                            <p class="pt-5">7. Are you currently certified to teach/lead any other NAMI signature programs? <small>*not required</small></p>
+                            <div class="form-check form-check-inline">
+                                <input name="certified" class="form-check-input" type="radio" id="show4" value="yes">
+                                <label class="form-check-label" for="inlineCheckbox5">Yes</label>
+                                <div id="textbox4" style="display: none">
+                                If yes, please list all Signature Programs you are certified to lead:
+                                <br><textarea rows="4" cols="50"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name="certified" class="form-check-input" type="radio" id="hide4" value="no">
+                                <label class="form-check-label" for="inlineCheckbox6">No</label>
+                            </div>
+
+                            <p class="pt-5">8. Do you know with whom you want to Co-facilitate?</p>
+                            <div class="form-check form-check-inline">
+                                <input name="coFacWhom" class="form-check-input" type="radio" id="show5" value="yes">
+                                <label class="form-check-label" for="inlineCheckbox7">Yes</label>
+                                <div id="textbox5" style="display: none">
+                                If yes, who?
+                                <br><textarea rows="4" cols="50"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name="coFacWhom" class="form-check-input" type="radio" id="hide5" value="no">
                                 <label class="form-check-label" for="inlineCheckbox8">No</label>
                             </div><br>
-                            <label for="facilitator" class="pt-4">If yes, who? </label>
-                            <input name="coFacWhomText" class="form-control" type="text" placeholder="Default input" id="facilitator">
 
                             <p class="pt-5">9. Do you know where you want to Co-facilitate?</p>
                             <div class="form-check form-check-inline">
-                                <input name="coFacWhere" class="form-check-input" type="radio" id="inlineCheckbox9" value="yes">
+                                <input name="coFacWhere" class="form-check-input" type="radio" id="show6" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox9">Yes</label>
+                                <div id="textbox6" style="display: none">
+                                If yes, where?
+                                <br><textarea rows="4" cols="50"></textarea>
+                                </div>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input name="coFacWhere" class="form-check-input" type="radio" id="inlineCheckbox10" value="no">
+                                <input name="coFacWhere" class="form-check-input" type="radio" id="hide6" value="no">
                                 <label class="form-check-label" for="inlineCheckbox10">No</label>
                             </div><br>
-                            <label for="location" class="pt-4">If yes, where? </label>
-                            <input name="coFacWhereText" class="form-control" type="text" placeholder="Default input" id="location">
                         </div>
                     </div>
 
@@ -85,6 +132,63 @@
             </div>
         </div>
     </div>
+
 </div>
+<script>
+
+$(document).ready(function(){
+  $("#hide1").click(function(){
+    $("#textbox1").hide();
+  });
+  $("#show1").click(function(){
+    $("#textbox1").show();
+  });
+});
+
+$(document).ready(function(){
+  $("#hide2").click(function(){
+    $("#textbox2").hide();
+  });
+  $("#show2").click(function(){
+    $("#textbox2").show();
+  });
+});
+
+$(document).ready(function(){
+  $("#hide3").click(function(){
+    $("#textbox3").hide();
+  });
+  $("#show3").click(function(){
+    $("#textbox3").show();
+  });
+});
+
+$(document).ready(function(){
+  $("#hide4").click(function(){
+    $("#textbox4").hide();
+  });
+  $("#show4").click(function(){
+    $("#textbox4").show();
+  });
+});
+
+$(document).ready(function(){
+  $("#hide5").click(function(){
+    $("#textbox5").hide();
+  });
+  $("#show5").click(function(){
+    $("#textbox5").show();
+  });
+});
+
+$(document).ready(function(){
+  $("#hide6").click(function(){
+    $("#textbox6").hide();
+  });
+  $("#show6").click(function(){
+    $("#textbox6").show();
+  });
+});
+</script>
 
 <include href="views/includes/footer.html"/>
