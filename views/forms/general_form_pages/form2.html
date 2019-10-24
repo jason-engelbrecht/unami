@@ -22,22 +22,34 @@
                         <p>Do you have any accessibility needs, dietary restrictions
                             or other issues which need accommodation during training? </p>
 
-                        <label class="mr-3"><input type="radio" name="specialNeeds" value="yes"> Yes</label>
-                        <label><input type="radio" name="specialNeeds" value="no"> No</label>
+                        <label class="mr-3"><input type="radio" name="specialNeeds" value="yes" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() === 'yes' }}">checked</check>>
+                            Yes</label>
+                        <label><input type="radio" name="specialNeeds" value="no" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() === 'no' }}">checked</check>>
+                            No</label>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <p>Will you be bringing a service animal?</p>
-                        <label class="mr-3"><input type="radio" name="serviceAnimal" value="yes"> Yes</label>
-                        <label><input type="radio" name="serviceAnimal" value="no"> No</label>
+                        <label class="mr-3"><input type="radio" name="serviceAnimal" value="yes" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getServiceAnimal() === 'yes' }}">checked</check>>
+                            Yes</label>
+                        <label><input type="radio" name="serviceAnimal" value="no" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getServiceAnimal() === 'no' }}">checked</check>>
+                            No</label>
                     </div>
 
                     <div class="form-group col-md-6">
                         <p>Do you use a walker or wheelchair?</p>
-                        <label class="mr-3"><input type="radio" name="movementDisability" value="yes"> Yes</label>
-                        <label><input type="radio" name="movementDisability" value="no"> No</label>
+                        <label class="mr-3"><input type="radio" name="movementDisability" value="yes" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getMovementDisability() === 'yes' }}">
+                                checked</check>> Yes</label>
+                        <label><input type="radio" name="movementDisability" value="no" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getMovementDisability() === 'no' }}">
+                                checked</check>> No</label>
                     </div>
                 </div>
 
