@@ -221,7 +221,12 @@ $f3->route('GET|POST /review', function()
     echo $view->render('views/forms/general_form_pages/review.html');
 });
 
-$f3->route('GET|POST /performance_agreement', function() {
+$f3->route('GET|POST /performance_agreement', function($f3) {
+
+    if(!empty($_POST)) {
+        $f3->reroute('/confirmation');
+    }
+
     $view = new Template();
     echo $view->render('views/forms/general_form_pages/performanceAgreement.html');
 });
