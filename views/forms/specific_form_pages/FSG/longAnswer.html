@@ -16,76 +16,135 @@
             <div>
                 <form method="post" action="long_answer">
                     <div class="form-row">
+
+                        <!--Question 1-->
                         <div class="form-group">
                             <p>1. Do you have a relative living with mental illness?</p>
+
                             <div class="form-check form-check-inline">
                                 <input name="relativeMentalIllness" class="form-check-input" type="radio"
                                        id="show1" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox11">Yes</label>
-                              <div id="textbox1" style="display: none">
-                              Please explain why you selected "Yes"
-                              <br><textarea rows="4" cols="50"></textarea>
-                              </div>
                             </div>
+
                             <div class="form-check form-check-inline">
                                 <input name="relativeMentalIllness" class="form-check-input" type="radio"
                                        id="hide1" value="no">
                                 <label class="form-check-label" for="inlineCheckbox12">No</label>
                             </div><br>
+
+                            <div id="textbox1" style="display: none">
+                              Please explain why you selected "Yes"
+                              <br><textarea rows="4" cols="50"></textarea>
+                            </div>
+
+                        <!--Question 2-->
+                            <label for="exampleFormControlTextarea1" class="pt-5">2. How did you hear about this
+                                                            training class?</label>
+                                <small>*not required</small>
+                                <textarea name="heardAboutTraining" class="form-control" id="exampleFormControlTextarea1"
+                                          rows="3"></textarea>
                         </div>
 
+                        <!--Question 3-->
                         <div class="form-group pt-5">
                             <p>3. Have you ever been convicted of a crime against another person including but not limited to: assault of any
                                 kind, harassment of any kind, or stalking?</p>
+
                             <div class="form-check form-check-inline">
                                 <input name="convict" class="form-check-input" type="radio" id="show2" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox1">Yes</label>
-                              <div id="textbox2" style="display: none">
-                              Please explain why you selected "Yes"
-                              <br><textarea rows="4" cols="50"></textarea>
-                              </div>
                             </div>
+
                             <div class="form-check form-check-inline">
                                 <input name="convict" class="form-check-input" type="radio" id="hide2" value="no">
                                 <label class="form-check-label" for="inlineCheckbox2">No</label>
                             </div>
+
+                            <div id="textbox2" style="display: none">
+                              Please explain why you selected "Yes"
+                              <br><textarea rows="4" cols="50"></textarea>
+                            </div>
                         </div>
 
+                        <!--Question 4-->
                         <div class="form-group pt-5">
                             <label for="exampleFormControlTextarea2">4. Why do you want to be a NAMI Family Support Group Facilitator?</label>
                             <textarea name="whyFacilitator" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
 
+                        <!--Question 5-->
                             <label for="exampleFormControlTextarea3" class="pt-5">5. What experience do you have in participating in a support group?</label>
                             <textarea name="experience" class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
 
+                        <!--Question 6-->
+
+                            <p class="pt-5">6. Have you taken other NAMI classes or trainings? <small>*not required</small></p>
+                            <div class="form-check form-check-inline">
+                                <input name="trained" class="form-check-input" type="radio" id="show3" value="yes">
+                                <label class="form-check-label" for="inlineCheckbox3">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name="trained" class="form-check-input" type="radio" id="hide3" value="no">
+                                <label class="form-check-label" for="inlineCheckbox4">No</label>
+                            </div><br>
+
+                            <div id="textbox3" style="display: none">
+                            Please explain why you selected "Yes"
+                            <br><textarea rows="4" cols="50"></textarea>
+                            </div>
+
+                        <!--Question 7-->
+                            <p class="pt-5">7. Are you currently certified to teach/lead any other NAMI signature programs? <small>*not required</small></p>
+                            <div class="form-check form-check-inline">
+                                <input name="certified" class="form-check-input" type="radio" id="show4" value="yes">
+                                <label class="form-check-label" for="inlineCheckbox5">Yes</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input name="certified" class="form-check-input" type="radio" id="hide4" value="no">
+                                <label class="form-check-label" for="inlineCheckbox6">No</label>
+                            </div>
+
+                            <div id="textbox4" style="display: none">
+                            If yes, please list all Signature Programs you are certified to lead:
+                            <br><textarea rows="4" cols="50"></textarea>
+                            </div>
+
+                        <!--Question 8-->
                             <p class="pt-5">8. Do you know with whom you want to Co-facilitate?</p>
                             <div class="form-check form-check-inline">
                                 <input name="coFacWhom" class="form-check-input" type="radio" id="show5" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox7">Yes</label>
-                                <div id="textbox5" style="display: none">
-                                If yes, who?
-                                <br><textarea rows="4" cols="50"></textarea>
-                                </div>
                             </div>
+
                             <div class="form-check form-check-inline">
                                 <input name="coFacWhom" class="form-check-input" type="radio" id="hide5" value="no">
                                 <label class="form-check-label" for="inlineCheckbox8">No</label>
                             </div><br>
 
+                            <div id="textbox5" style="display: none">
+                            If yes, who?
+                            <br><textarea rows="4" cols="50"></textarea>
+                            </div>
+
+                            <!--Question 9-->
                             <p class="pt-5">9. Do you know where you want to Co-facilitate?</p>
                             <div class="form-check form-check-inline">
                                 <input name="coFacWhere" class="form-check-input" type="radio" id="show6" value="yes">
                                 <label class="form-check-label" for="inlineCheckbox9">Yes</label>
-                                <div id="textbox6" style="display: none">
-                                If yes, where?
-                                <br><textarea rows="4" cols="50"></textarea>
-                                </div>
                             </div>
+
                             <div class="form-check form-check-inline">
                                 <input name="coFacWhere" class="form-check-input" type="radio" id="hide6" value="no">
                                 <label class="form-check-label" for="inlineCheckbox10">No</label>
                             </div><br>
+
+                            <div id="textbox6" style="display: none">
+                            If yes, where?
+                            <br><textarea rows="4" cols="50"></textarea>
+                            </div>
                         </div>
+
                     </div>
 
                     <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
