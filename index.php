@@ -140,6 +140,12 @@ $f3->route('GET|POST /additional_information', function($f3)
         $f3->reroute('/long_answer');
     }
 
+    if(!isset($_SESSION['AdditionalInfo']))
+    {
+        $_SESSION['AdditionalInfo'] = new AdditionalInfo('','','','','','',
+            '', '', '', '', '', '');
+    }
+
     $view = new Template();
     echo $view->render('views/forms/general_form_pages/form2.html');
 });
