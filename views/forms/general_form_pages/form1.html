@@ -1,4 +1,4 @@
-<include href="views/includes/header.html"/>
+<include href="views/forms/includes/header.html"/>
 
 <div class="container p-3">
     <div class="progress" style="height: 20px">
@@ -198,7 +198,7 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-primary float-right" style="background-color: #0c499c !important;">Next
+                    <button type="submit" class="btn btn-primary float-right">Next
                         <i class="fas fa-arrow-right"></i></button>
                 </form>
             </div>
@@ -206,21 +206,5 @@
     </div>
 </div>
 
-<script>
-    var aff = document.getElementById("affiliateName");
-
-    function showfield(name)
-    {
-        if(name=='Other')
-        {
-            document.getElementById('div1').innerHTML='NAMI Affiliate Name: <input type="text" class="form-control" name="other" />';
-        }
-        else
-        {
-            document.getElementById('div1').innerHTML='';
-        }
-    }
-
-</script>
-
-<include href="views/includes/footer.html"/>
+<script src="views/forms/js/form1.js"></script>
+<include href="views/forms/includes/footer.html"/>

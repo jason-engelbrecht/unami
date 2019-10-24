@@ -29,7 +29,7 @@ $f3->route('GET /', function()
     session_destroy();
     session_start();
     $view = new Template();
-    echo $view->render('views/FSGtrainingDescription.html');
+    echo $view->render('views/forms/specific_form_pages/FSG/FSGtrainingDescription.html');
 });
 
 //portal route
@@ -97,7 +97,7 @@ $f3->route('GET|POST /personal_information', function($f3)
     }
 
    $view = new Template();
-   echo $view->render('views/form1.html');
+   echo $view->render('views/forms/general_form_pages/form1.html');
 });
 
 $f3->route('GET|POST /additional_information', function($f3)
@@ -141,7 +141,7 @@ $f3->route('GET|POST /additional_information', function($f3)
     }
 
     $view = new Template();
-    echo $view->render('views/form2.html');
+    echo $view->render('views/forms/general_form_pages/form2.html');
 });
 
 $f3->route('GET|POST /long_answer', function($f3)
@@ -176,7 +176,7 @@ $f3->route('GET|POST /long_answer', function($f3)
     }
 
     $view = new Template();
-    echo $view->render('views/longAnswer.html');
+    echo $view->render('views/forms/specific_form_pages/FSG/longAnswer.html');
 });
 
 $f3->route('GET|POST /not_required', function($f3)
@@ -205,32 +205,25 @@ $f3->route('GET|POST /not_required', function($f3)
     }
 
     $view = new Template();
-    echo $view->render('views/notRequiredQuestions.html');
+    echo $view->render('views/forms/general_form_pages/notRequiredQuestions.html');
 });
 
 
 $f3->route('GET|POST /review', function()
 {
     $view = new Template();
-    echo $view->render('views/review.html');
+    echo $view->render('views/forms/general_form_pages/review.html');
 });
 
 $f3->route('GET|POST /performance_agreement', function() {
     $view = new Template();
-    echo $view->render('views/performanceAgreement.html');
-});
-
-//test route
-$f3->route('GET|POST /test', function()
-{
-    $view = new Template();
-    echo $view->render('views/FSGtrainingDescription.html');
+    echo $view->render('views/forms/general_form_pages/performanceAgreement.html');
 });
 
 $f3->route('GET|POST /confirmation', function()
 {
     $view = new Template();
-    echo $view->render('views/confirmation.html');
+    echo $view->render('views/forms/general_form_pages/confirmation.html');
 });
 
 //Run fat-free

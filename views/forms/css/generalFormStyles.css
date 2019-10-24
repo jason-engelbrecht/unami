@@ -1,0 +1,17 @@
+/* General styles for all forms */
+
+/* nami color */
+.navbar {
+    background-color: #0c499c;
+}
+
+.btn-primary {
+    background-color: #0c499c;
+}
+
+/* uppercase, some padding, smaller font */
+.btn {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+}

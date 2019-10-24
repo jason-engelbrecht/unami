@@ -1,4 +1,4 @@
-<include href="views/includes/header.html"/>
+<include href="views/forms/includes/header.html"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <div class="container p-3">
@@ -32,12 +32,6 @@
                                        id="hide1" value="no">
                                 <label class="form-check-label" for="inlineCheckbox12">No</label>
                             </div><br>
-
-                            <label for="exampleFormControlTextarea1" class="pt-5">2. How did you hear about this
-                                training class?</label>
-                            <small>*not required</small>
-                            <textarea name="heardAboutTraining" class="form-control" id="exampleFormControlTextarea1"
-                                      rows="3"></textarea>
                         </div>
 
                         <div class="form-group pt-5">
@@ -63,35 +57,6 @@
 
                             <label for="exampleFormControlTextarea3" class="pt-5">5. What experience do you have in participating in a support group?</label>
                             <textarea name="experience" class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
-
-                            <p class="pt-5">6. Have you taken other NAMI classes or trainings? <small>*not required</small></p>
-
-                            <div class="form-check form-check-inline">
-                                <input name="trained" class="form-check-input" type="radio" id="show3" value="yes">
-                                <label class="form-check-label" for="inlineCheckbox3">Yes</label>
-                                <div id="textbox3" style="display: none">
-                                Please explain why you selected "Yes"
-                                <br><textarea rows="4" cols="50"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input name="trained" class="form-check-input" type="radio" id="hide3" value="no">
-                                <label class="form-check-label" for="inlineCheckbox4">No</label>
-                            </div><br>
-
-                            <p class="pt-5">7. Are you currently certified to teach/lead any other NAMI signature programs? <small>*not required</small></p>
-                            <div class="form-check form-check-inline">
-                                <input name="certified" class="form-check-input" type="radio" id="show4" value="yes">
-                                <label class="form-check-label" for="inlineCheckbox5">Yes</label>
-                                <div id="textbox4" style="display: none">
-                                If yes, please list all Signature Programs you are certified to lead:
-                                <br><textarea rows="4" cols="50"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input name="certified" class="form-check-input" type="radio" id="hide4" value="no">
-                                <label class="form-check-label" for="inlineCheckbox6">No</label>
-                            </div>
 
                             <p class="pt-5">8. Do you know with whom you want to Co-facilitate?</p>
                             <div class="form-check form-check-inline">
@@ -191,4 +156,4 @@ $(document).ready(function(){
 });
 </script>
 
-<include href="views/includes/footer.html"/>
+<include href="views/forms/includes/footer.html"/>
