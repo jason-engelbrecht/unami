@@ -6,7 +6,7 @@
 <div class="container p-3">
     <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 25%"
-             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
     </div>
 </div>
 
@@ -22,22 +22,34 @@
                         <p>Do you have any accessibility needs, dietary restrictions
                             or other issues which need accommodation during training? </p>
 
-                        <label class="mr-3"><input type="radio" name="specialNeeds" value="yes"> Yes</label>
-                        <label><input type="radio" name="specialNeeds" value="no"> No</label>
+                        <label class="mr-3"><input type="radio" name="specialNeeds" value="yes" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() === 'yes' }}">checked</check>>
+                            Yes</label>
+                        <label><input type="radio" name="specialNeeds" value="no" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() === 'no' }}">checked</check>>
+                            No</label>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <p>Will you be bringing a service animal?</p>
-                        <label class="mr-3"><input type="radio" name="serviceAnimal" value="yes"> Yes</label>
-                        <label><input type="radio" name="serviceAnimal" value="no"> No</label>
+                        <label class="mr-3"><input type="radio" name="serviceAnimal" value="yes" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getServiceAnimal() === 'yes' }}">checked</check>>
+                            Yes</label>
+                        <label><input type="radio" name="serviceAnimal" value="no" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getServiceAnimal() === 'no' }}">checked</check>>
+                            No</label>
                     </div>
 
                     <div class="form-group col-md-6">
                         <p>Do you use a walker or wheelchair?</p>
-                        <label class="mr-3"><input type="radio" name="movementDisability" value="yes"> Yes</label>
-                        <label><input type="radio" name="movementDisability" value="no"> No</label>
+                        <label class="mr-3"><input type="radio" name="movementDisability" value="yes" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getMovementDisability() === 'yes' }}">
+                                checked</check>> Yes</label>
+                        <label><input type="radio" name="movementDisability" value="no" required
+                            <check if="{{ $_SESSION['AdditionalInfo']->getMovementDisability() === 'no' }}">
+                                checked</check>> No</label>
                     </div>
                 </div>
 
@@ -51,59 +63,85 @@
 
                 <div class="form-row ml-3">
                     <div class="form-group col-md-12">
-                        <label><input type="checkbox" name="noAccommodations" value="yes"> I live within 1 hour
-                            driving distance of the training site and <u>will not need</u> accommodations</label>
+                        <p>I live within 1 hour driving distance of the training site and <u>will not need</u>
+                            accommodations</p>
+                        <label class="mr-3"><input type="radio" name="noAccommodations" value="yes" required id="hide1"
+                            <check if="{{$_SESSION['AdditionalInfo']->getNoAccommodations() === 'yes'}}">
+                                checked</check>> Yes</label>
+                        <label><input type="radio" name="noAccommodations" value="no" required id="show1"
+                            <check if="{{$_SESSION['AdditionalInfo']->getNoAccommodations() === 'no'}}">
+                                checked</check>> No</label>
                     </div>
                 </div>
 
-                <div class="form-row ml-3">
-                    <div class="form-group col-md-12">
-                        <label><input type="checkbox" name="needRoom" value="yes"> I will need housing. For
-                            the following nights:</label>
-                        <label><input type="checkbox" name="daysRooming" value="friday"> Friday</label>
-                        <label><input type="checkbox" name="daysRooming" value="saturday"> Saturday</label>
-                    </div>
-                </div>
-                <div class="row">
+                <div class="form-row ml-4 mb-3" id="singleRoom" style="display: none">
                     <div class="col-md-12">
-                        <p><i>NAMI-WA will try to accommodate Roommate requests: </i></p>
+                        <p>I would like a single room and understand I, the attendee, will be responsible for the
+                            additional amount and I will be billed by NAMI Washington 3 weeks after the training is
+                            complete.</p>
+                        <label class="mr-3"><input type="radio" name="singleRoom" value="yes" required id="hide2"
+                            <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() === 'yes'}}">
+                                checked</check>> Yes</label>
+                        <label class="mr-3"><input type="radio" name="singleRoom" value="no" required id="show2"
+                            <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() === 'no'}}">
+                                checked</check>> No</label>
                     </div>
                 </div>
 
-                <div class="form-row ml-3">
-                    <div class="form-group col-md-12">
-                        <label><input type="checkbox" name="roommate" value="yes"> Please assign roommate:</label>
+                <div class="ml-5" id="daysRooming" style="display: none">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <p>I will need housing for the following nights:</p>
+                            <label class="ml-3 mr-3"><input type="checkbox" name="daysRooming[]" value="friday"
+                                <check if="{{$_SESSION['AdditionalInfo']->containsDaysRooming('friday') }}">
+                                    checked</check>> Friday</label>
+                            <label class="mr-3"><input type="checkbox" name="daysRooming[]" value="saturday"
+                                <check if="{{$_SESSION['AdditionalInfo']->containsDaysRooming('saturday') }}">
+                                    checked</check>> Saturday</label>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label>What is your gender(identity or expression)?:
-                            <input type="text" name="gender" class="form-control"></label>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>I would like a room with(identity or expression)?:
-                            <input type="text" name="roommateGender" class="form-control"></label>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <!--tooltip-->
-                        <label><input type="checkbox" name="cpap" value="yes"> I use a C-Pap
-                        <a href="#" data-toggle="tooltip" title=
-                        "C-PAP stands for continuous positive airway pressure. The machines help people with sleep apnea breathe more easily and regularly every night while they are sleeping. "><i class="fa fa-question-circle-o"></i></a></label>
-                    </div>
-                    <div class="form-group col-md-6">
 
-                        <!--tooltip-->
-                        <label><input type="checkbox" name="cpapRoommate" value="yes"> I don't mind rooming with a C-PAP machine
-                         <a href="#" data-toggle="tooltip" title=
-                         "C-PAP stands for continuous positive airway pressure. The machines help people with sleep apnea breathe more easily and regularly every night while they are sleeping. "><i class="fa fa-question-circle-o"></i></a> user:</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><i>NAMI-WA will try to accommodate roommate requests: </i></p>
+                        </div>
+                    </div>
+
+                    <div class="form-row ml-3">
+                        <!--
+                        <div class="form-group col-md-12">
+                            <label><input type="checkbox" name="roommate" value="yes"> Please assign roommate:</label>
+                        </div>
+                        -->
+                        <div class="form-group col-md-6">
+                            <label>What is your gender(identity or expression)?:
+                                <input type="text" name="gender" class="form-control"
+                                       value="{{$_SESSION['AdditionalInfo']->getGender()}}"></label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>I would like a room with(identity or expression)?:
+                                <input type="text" name="roommateGender" class="form-control"
+                                       value="{{$_SESSION['AdditionalInfo']->getRoommateGender()}}"></label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <!--tooltip-->
+                            <label><input type="checkbox" name="cpap" value="yes"
+                                <check if="{{$_SESSION['AdditionalInfo']->getCpap() === 'yes'}}">checked</check>> I use a C-Pap
+                                <a href="#" data-toggle="tooltip" title=
+                                        "C-PAP stands for continuous positive airway pressure. The machines help people with sleep apnea breathe more easily and regularly every night while they are sleeping. "><i class="fa fa-question-circle-o"></i></a></label>
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            <!--tooltip-->
+                            <label><input type="checkbox" name="cpapRoommate" value="yes"
+                                <check if="{{$_SESSION['AdditionalInfo']->getCpapRoommate() === 'yes'}}">checked</check>> I don't mind rooming with a C-PAP machine
+                                <a href="#" data-toggle="tooltip" title=
+                                        "C-PAP stands for continuous positive airway pressure. The machines help people with sleep apnea breathe more easily and regularly every night while they are sleeping. "><i class="fa fa-question-circle-o"></i></a> user:</label>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <label><input type="checkbox" name="singleRoom" value="yes">
-                            I would like a single room and understand I, the attendee, will be responsible for the additional amount
-                            and I will be billed by NAMI Washington 3 weeks after the training is complete.</label>
-                    </div>
-                </div>
+
 
                 <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
             </form>
@@ -114,4 +152,50 @@
         </div>
     </div>
 </div>
+
 <include href="views/forms/includes/footer.html"/>
+
+<script>
+    $(document).ready(function()
+    {
+        let singleRoom = $("#singleRoom");
+        $("#hide1").click(function()
+        {
+            singleRoom.hide();
+        });
+
+        $("#show1").click(function()
+        {
+            singleRoom.show();
+        });
+
+        if(document.getElementById('show1').checked)
+        {
+            singleRoom.show();
+        }
+        if(document.getElementById('hide1').checked)
+        {
+            singleRoom.hide();
+        }
+
+        let daysRooming = $("#daysRooming");
+        $("#hide2").click(function()
+        {
+            daysRooming.hide();
+        });
+
+        $("#show2").click(function()
+        {
+            daysRooming.show();
+        });
+
+        if(document.getElementById('show2').checked)
+        {
+            daysRooming.show();
+        }
+        if(document.getElementById('hide2').checked)
+        {
+            daysRooming.hide();
+        }
+    });
+</script>

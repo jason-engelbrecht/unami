@@ -27,7 +27,7 @@ class AdditionalInfo
      * @param $_movementDisability String whether the applicant has a movement disability
      * @param $_noAccommodations String whether the applicant needs accommodations
      * @param $_needRoom String if the applicant needs a room
-     * @param $_daysRooming String the days the applicant is rooming
+     * @param $_daysRooming mixed the days the applicant is rooming
      * @param $_roommate String whether they want a roommate or not
      * @param $_gender String applicant's gender
      * @param $_roommateGender String the gender of whom they want to room with
@@ -99,6 +99,22 @@ class AdditionalInfo
     public function getDaysRooming()
     {
         return $this->_daysRooming;
+    }
+
+    /** A method to see if a day is needed for rooming
+     * @param $day String the day being looked for
+     * @return boolean if day is needed
+     */
+    public function containsDaysRooming($day)
+    {
+        foreach($this->_daysRooming as $value)
+        {
+            if($day == $value)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Getter for if they need a roommate

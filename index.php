@@ -118,6 +118,11 @@ $f3->route('GET|POST /additional_information', function($f3)
         $cpapRoommate = $_POST['cpapRoommate'];
         $singleRoom = $_POST['singleRoom'];
 
+        if(sizeof($daysRooming) == 0)
+        {
+            $daysRooming = array('1');
+        }
+
         // add data to hive
         $f3->set('specialNeeds', $specialNeeds);
         $f3->set('serviceAnimal', $serviceAnimal);
@@ -137,13 +142,16 @@ $f3->route('GET|POST /additional_information', function($f3)
         $_SESSION['AdditionalInfo'] = new AdditionalInfo($specialNeeds, $serviceAnimal, $movementDisability,
             $noAccommodations, $needRoom, $daysRooming, $roommate, $gender, $roommateGender, $cpap, $cpapRoommate,
             $singleRoom);
+
         $f3->reroute('/long_answer');
     }
 
     if(!isset($_SESSION['AdditionalInfo']))
     {
-        $_SESSION['AdditionalInfo'] = new AdditionalInfo('','','','','','',
-            '', '', '', '', '', '');
+        $dummyArray = array('1');
+        $_SESSION['AdditionalInfo'] = new AdditionalInfo('','','',
+            '','',$dummyArray, '', '', '',
+            '', '', '');
     }
 
     $view = new Template();
