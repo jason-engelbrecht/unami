@@ -164,7 +164,9 @@ $f3->route('GET|POST /long_answer', function($f3)
     {
         // get data from form
         $relativeMentalIllness = $_POST['relativeMentalIllness'];
+        $relativeMentalIllnessText = $_POST['relativeMentalIllnessText'];
         $convict = $_POST['convict'];
+        $convictText = $_POST['convictText'];
         $whyFacilitator = $_POST['whyFacilitator'];
         $experience = $_POST['experience'];
         $coFacWhom = $_POST['coFacWhom'];
@@ -174,7 +176,9 @@ $f3->route('GET|POST /long_answer', function($f3)
 
         // add data to hive
         $f3->set('relativeMentalIllness', $relativeMentalIllness);
+        $f3->set('relativeMentalIllnessText', $relativeMentalIllnessText);
         $f3->set('convict', $convict);
+        $f3->set('convictText', $convictText);
         $f3->set('whyFacilitator', $whyFacilitator);
         $f3->set('experience', $experience);
         $f3->set('coFacWhom', $coFacWhom);
@@ -184,9 +188,15 @@ $f3->route('GET|POST /long_answer', function($f3)
 
         // validate data
 
-        $_SESSION['LongAnswer'] =  new LongAnswers($relativeMentalIllness, $convict, $whyFacilitator, $experience,
-            $coFacWhom, $coFacWhomText, $coFacWhere, $coFacWhereText);
+        $_SESSION['LongAnswer'] =  new LongAnswers($relativeMentalIllness, $relativeMentalIllnessText, $convict,
+            $convictText, $whyFacilitator, $experience, $coFacWhom, $coFacWhomText, $coFacWhere, $coFacWhereText);
         $f3->reroute('/not_required');
+    }
+
+    if(!isset($_SESSION['LongAnswer']))
+    {
+        $_SESSION['LongAnswer'] = new LongAnswers('','','','',
+            '','', '', '', '', '');
     }
 
     $view = new Template();

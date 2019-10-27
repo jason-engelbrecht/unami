@@ -22,20 +22,24 @@
                             <p>1. Do you have a relative living with mental illness?</p>
 
                             <div class="form-check form-check-inline">
-                                <input name="relativeMentalIllness" class="form-check-input" type="radio"
-                                       id="show1" value="yes">
-                                <label class="form-check-label" for="inlineCheckbox11">Yes</label>
+                                <input name="relativeMentalIllness" class="form-check-input" type="radio" id="show1"
+                                       value="yes" required
+                                <check if="{{ $_SESSION['LongAnswer']->getRelativeMentalIllness() === 'yes' }}">
+                                    checked</check>>
+                                <label class="form-check-label" for="show1">Yes</label>
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input name="relativeMentalIllness" class="form-check-input" type="radio"
-                                       id="hide1" value="no">
-                                <label class="form-check-label" for="inlineCheckbox12">No</label>
+                                <input name="relativeMentalIllness" class="form-check-input" type="radio" id="hide1"
+                                       value="no" required
+                                <check if="{{ $_SESSION['LongAnswer']->getRelativeMentalIllness() === 'no' }}">
+                                    checked</check>>
+                                <label class="form-check-label" for="hide1">No</label>
                             </div><br>
 
-                            <div id="textbox1" style="display: none">
+                            <div class="form-row" id="textbox1" style="display: none">
                               Please explain why you selected "Yes"
-                              <br><textarea rows="4" cols="50"></textarea>
+                              <br><textarea class="form-control" rows="4" cols="50"></textarea>
                             </div>
 
                         <!--Question 2-->
