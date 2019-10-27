@@ -143,11 +143,11 @@
                                    required value="{{ $_SESSION['PersonalInfo']->getEmail() }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Best way to contact you?</label><br>
-                            <input type="radio" name="preference" value="phone" required
-                            <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'phone'}}">checked</check>> Phone
-                            <input type="radio" name="preference" value="email" required
-                            <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'email'}}">checked</check>> Email
+                            <p>Best way to contact you?</p>
+                            <label><input class="mt-1" type="radio" name="preference" value="phone" required
+                            <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'phone'}}">checked</check>> Phone</label>
+                            <label><input class="ml-3" type="radio" name="preference" value="email" required
+                            <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'email'}}">checked</check>> Email</label>
                         </div>
                     </div>
 
@@ -181,6 +181,18 @@
                             </select>
                         </div>
                         <div id="div1" class="form-group col-md-6 pt-2"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <p>Are you a NAMI member?</p>
+                            <label class="mt-1">
+                                <input required type="radio" name="member" value="yes">
+                             Yes</label>
+                            <label class="ml-3">
+                                <input required type="radio" name="member" value="no">
+                             No</label>
+                        </div>
                     </div>
 
                     Emergency contact: <br>
