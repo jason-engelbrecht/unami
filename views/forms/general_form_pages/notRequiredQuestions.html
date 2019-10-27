@@ -2,8 +2,8 @@
 
 <div class="container p-3">
     <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 50%"
-             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 60%"
+             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
     </div>
 </div>
 
@@ -25,39 +25,54 @@
                             training class?</label>
                         <small>*not required</small>
                         <textarea name="heardAboutTraining" class="form-control" id="heardAboutTraining"
-                                  rows="5"></textarea>
+                                  rows="5">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</textarea>
                     </div>
 
                     <!-- have you taken any other NAMI classes or trainings -->
                     <div class="my-5">
                         <p>2. Have you taken other NAMI classes or trainings? <small>*not required</small></p>
                         <div class="form-check form-check-inline">
-                            <input name="trained" class="form-check-input" type="radio" id="inlineCheckbox3" value="yes">
-                            <label class="form-check-label" for="inlineCheckbox3">Yes</label>
+                            <input name="trained" class="form-check-input" type="radio" id="show1" value="yes" required
+                            <check if="{{ $_SESSION['NotRequired']->getTrained() === 'yes' }}">
+                                checked</check>>
+                            <label class="form-check-label" for="show1">Yes</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input name="trained" class="form-check-input" type="radio" id="inlineCheckbox4" value="no">
-                            <label class="form-check-label" for="inlineCheckbox4">No</label>
+                            <input name="trained" class="form-check-input" type="radio" id="hide1" value="no" required
+                            <check if="{{ $_SESSION['NotRequired']->getTrained() === 'no' }}">
+                                checked</check>>
+                            <label class="form-check-label" for="hide1">No</label>
                         </div><br>
 
-                        <label for="exampleFormControlTextarea4">If yes, please list: </label>
-                        <textarea name="trainedText" class="form-control" id="exampleFormControlTextarea4" rows="5"></textarea>
-
+                        <div class="form-row mt-3" id="textbox1" style="display: none">
+                            <label for="textarea1">If yes, please list: </label>
+                            <textarea name="trainedText" class="form-control" id="textarea1" rows="5"
+                            >{{ $_SESSION['NotRequired']->getTrainedText() }}</textarea>
+                        </div>
                     </div>
 
                     <!-- are your certified to teach any other nami signature programs -->
                     <div class="my-5">
                         <p>3. Are you currently certified to teach/lead any other NAMI signature programs? <small>*not required</small></p>
                         <div class="form-check form-check-inline">
-                            <input name="certified" class="form-check-input" type="radio" id="inlineCheckbox5" value="yes">
-                            <label class="form-check-label" for="inlineCheckbox5">Yes</label>
+                            <input name="certified" class="form-check-input" type="radio" id="show2" value="yes" required
+                            <check if="{{ $_SESSION['NotRequired']->getCertified() === 'yes' }}">
+                                checked</check>>
+                            <label class="form-check-label" for="show2">Yes</label>
                         </div>
+
                         <div class="form-check form-check-inline">
-                            <input name="certified" class="form-check-input" type="radio" id="inlineCheckbox6" value="no">
-                            <label class="form-check-label" for="inlineCheckbox6">No</label>
+                            <input name="certified" class="form-check-input" type="radio" id="hide2" value="no" required
+                            <check if="{{ $_SESSION['NotRequired']->getCertified() === 'no' }}">
+                                checked</check>>
+                            <label class="form-check-label" for="hide2">No</label>
+                        </div><br>
+
+                        <div class="form-row mt-3" id="textbox2" style="display: none">
+                            <label for="textarea2">If yes, please list all Signature Programs you are certified to lead: </label>
+                            <textarea name="certifiedText" class="form-control" id="textarea2" rows="5"
+                            >{{ $_SESSION['NotRequired']->getCertifiedText() }}</textarea>
                         </div>
-                        <label for="exampleFormControlTextarea5">If yes, please list all Signature Programs you are certified to lead: </label>
-                        <textarea name="certifiedText" class="form-control" id="exampleFormControlTextarea5" rows="5"></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
@@ -76,3 +91,47 @@
 </div>
 <!-- container -->
 <include href="views/forms/includes/footer.html"/>
+
+<script>
+    $(document).ready(function()
+    {
+        //For revealing the textarea for the trained question
+        let trained = $("#textbox1");
+        $("#show1").click(function()
+        {
+            trained.show();
+        });
+        $("#hide1").click(function()
+        {
+            trained.hide();
+        });
+        if(document.getElementById('show1').checked)
+        {
+            trained.show();
+        }
+        if(document.getElementById('hide1').checked)
+        {
+            trained.hide();
+        }
+
+        //revealing the convict textarea
+        let certified = $("#textbox2");
+        $("#hide2").click(function()
+        {
+            certified.hide();
+        });
+        $("#show2").click(function()
+        {
+            certified.show();
+        });
+        if(document.getElementById('show2').checked)
+        {
+            certified.show();
+        }
+        if(document.getElementById('hide2').checked)
+        {
+            certified.hide();
+        }
+
+    });
+</script>

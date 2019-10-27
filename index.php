@@ -228,6 +228,12 @@ $f3->route('GET|POST /not_required', function($f3)
         $f3->reroute('/review');
     }
 
+    if(!isset($_SESSION['NotRequired']))
+    {
+        $_SESSION['NotRequired'] = new NotRequired('','','','',
+            '');
+    }
+
     $view = new Template();
     echo $view->render('views/forms/general_form_pages/notRequiredQuestions.html');
 });
