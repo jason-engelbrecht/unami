@@ -196,11 +196,14 @@ $f3->route('GET|POST /long_answer', function($f3)
         $f3->set('coFacWhere', $coFacWhere);
         $f3->set('coFacWhereText', $coFacWhereText);
 
-        // validate data
-
         $_SESSION['LongAnswer'] =  new LongAnswers($relativeMentalIllness, $relativeMentalIllnessText, $convict,
             $convictText, $whyFacilitator, $experience, $coFacWhom, $coFacWhomText, $coFacWhere, $coFacWhereText);
-        $f3->reroute('/not_required');
+
+        // validate data
+        if(validLongAnswersForm())
+        {
+            $f3->reroute('/not_required');
+        }
     }
 
     if(!isset($_SESSION['LongAnswer']))
