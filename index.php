@@ -16,7 +16,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 //Get validation functions
-//require_once ('model/validation.php');
+require_once ('model/validation.php');
 
 //Create an instance of the Base class
 $f3 = Base::instance();
@@ -137,13 +137,23 @@ $f3->route('GET|POST /additional_information', function($f3)
         $f3->set('cpapRoommate', $cpapRoommate);
         $f3->set('singleRoom', $singleRoom);
 
-        // validate data
-
         $_SESSION['AdditionalInfo'] = new AdditionalInfo($specialNeeds, $serviceAnimal, $movementDisability,
             $noAccommodations, $needRoom, $daysRooming, $roommate, $gender, $roommateGender, $cpap, $cpapRoommate,
             $singleRoom);
 
-        $f3->reroute('/long_answer');
+        // validate data
+        $valid = true;
+        if($singleRoom == 'no')
+        {
+           if(!validAccommodationsForm())
+           {
+               $valid = false;
+           }
+        }
+        if($valid)
+        {
+            $f3->reroute('/long_answer');
+        }
     }
 
     if(!isset($_SESSION['AdditionalInfo']))

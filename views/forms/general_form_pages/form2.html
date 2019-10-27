@@ -12,6 +12,18 @@
 
 <div class="container p-3 ">
 
+    <!-- Displays any errors with the input from the user -->
+    <check if="{{!empty(@errors)}}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
+                <h4><strong>Error:</strong> {{ @error }}</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </repeat>
+        </div>
+    </check>
+
     <div class="card shadow-sm bg-white rounded">
         <h5 class="card-header">Accommodations</h5>
         <div class="card-body m-3">
@@ -79,12 +91,14 @@
                         <p>I would like a single room and understand I, the attendee, will be responsible for the
                             additional amount and I will be billed by NAMI Washington 3 weeks after the training is
                             complete.</p>
-                        <label class="mr-3"><input type="radio" name="singleRoom" value="yes" required id="hide2"
+                        <label class="mr-3"><input type="radio" name="singleRoom" value="yes" id="hide2"
                             <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() === 'yes'}}">
-                                checked</check>> Yes</label>
-                        <label class="mr-3"><input type="radio" name="singleRoom" value="no" required id="show2"
+                                checked</check> <check if="{{$_SESSION['AdditionalInfo']->getNoAccommodations() === 'no'}}">
+                                required</check>> Yes</label>
+                        <label class="mr-3"><input type="radio" name="singleRoom" value="no" id="show2"
                             <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() === 'no'}}">
-                                checked</check>> No</label>
+                                checked</check> <check if="{{$_SESSION['AdditionalInfo']->getNoAccommodations() === 'no'}}">
+                                required</check>> No</label>
                     </div>
                 </div>
 
@@ -115,12 +129,12 @@
                         -->
                         <div class="form-group col-md-6">
                             <label>What is your gender(identity or expression)?:
-                                <input type="text" name="gender" class="form-control"
+                                <input type="text" name="gender" class="form-control" id="gender"
                                        value="{{$_SESSION['AdditionalInfo']->getGender()}}"></label>
                         </div>
                         <div class="form-group col-md-6">
                             <label>I would like a room with(identity or expression)?:
-                                <input type="text" name="roommateGender" class="form-control"
+                                <input type="text" name="roommateGender" class="form-control" id="roommateGender"
                                        value="{{$_SESSION['AdditionalInfo']->getRoommateGender()}}"></label>
                         </div>
                         <div class="form-group col-md-6">
@@ -158,44 +172,88 @@
 <script>
     $(document).ready(function()
     {
+        $('#show1').change(function ()
+        {
+            if(this.checked)
+            {
+                $('#show2').prop('required', true);
+                $('#hide2').prop('required', true);
+            }
+            else
+            {
+                $('#show2').prop('required', false);
+                $('#hide2').prop('required', false);
+            }
+        });
+
+        $('#show2').change(function ()
+        {
+            if(this.checked)
+            {
+                $('#gender').prop('required', true);
+                $('#roommateGender').prop('required', true);
+            }
+            else
+            {
+                $('#gender').prop('required', false);
+                $('#roommateGender').prop('required', false);
+            }
+        });
+
         let singleRoom = $("#singleRoom");
         $("#hide1").click(function()
         {
             singleRoom.hide();
+            $("#hide2").removeAttr('required');
+            $("#show2").removeAttr('required');
         });
 
         $("#show1").click(function()
         {
             singleRoom.show();
+            $("#hide2").attr('required');
+            $("#show2").attr('required');
         });
 
         if(document.getElementById('show1').checked)
         {
             singleRoom.show();
+            $("#hide2").attr('required');
+            $("#show2").attr('required');
         }
         if(document.getElementById('hide1').checked)
         {
             singleRoom.hide();
+            $("#hide2").removeAttr('required');
+            $("#show2").removeAttr('required');
         }
 
         let daysRooming = $("#daysRooming");
         $("#hide2").click(function()
         {
             daysRooming.hide();
+            $("#gender").removeAttr('required');
+            $("#roommateGender").removeAttr('required');
         });
 
         $("#show2").click(function()
         {
             daysRooming.show();
+            $("#gender").attr('required');
+            $("#roommateGender").attr('required');
         });
 
         if(document.getElementById('show2').checked)
         {
             daysRooming.show();
+            $("#gender").attr('required');
+            $("#roommateGender").attr('required');
         }
         if(document.getElementById('hide2').checked)
         {
             daysRooming.hide();
+            $("#gender").removeAttr('required');
+            $("#roommateGender").removeAttr('required');
         }
     });
 </script>
