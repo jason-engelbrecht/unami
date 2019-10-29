@@ -277,7 +277,10 @@ $f3->route('GET|POST /not_required', function($f3)
 
         $_SESSION['NotRequired'] =  new NotRequired($heardAboutTraining, $trained, $trainedText, $certified,
             $certifiedText);
-        $f3->reroute('/review');
+        if(validNotRequiredForm())
+        {
+            $f3->reroute('/review');
+        }
     }
 
     if(!isset($_SESSION['NotRequired']))
