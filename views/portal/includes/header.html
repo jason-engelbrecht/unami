@@ -31,7 +31,7 @@
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #0c499c">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
             <div class="sidebar-brand-icon ">
                 <i class="fas fa-home"></i>
             </div>
@@ -42,8 +42,18 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+        <li
+        <check if="{{ @page == 'dashboard' }}">
+            <true>
+                class="nav-item sidebar-buttons active"
+            </true>
+            <false>
+                class="nav-item sidebar-buttons"
+            </false>
+        </check>>
+
+
+            <a class="nav-link" href="dashboard">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -56,36 +66,54 @@
             Applications
         </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <!-- applicants -->
+        <!-- active -->
+        <li
+        <check if="{{ @page == 'active' }}">
+            <true>
+                class="nav-item sidebar-buttons active"
+            </true>
+            <false>
+                class="nav-item sidebar-buttons"
+            </false>
+        </check>>
+
+            <a class="nav-link" href="active">
                 <i class="fas fa-users"></i>
                 <span>Active</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="example_pages/buttons.html">Buttons</a>
-                    <a class="collapse-item" href="example_pages/cards.html">Cards</a>
-                </div>
-            </div>
         </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <!-- waitlist -->
+        <li <check if="{{ @page == 'waitlist' }}">
+                <true>
+                    class="nav-item sidebar-buttons active"
+                </true>
+                <false>
+                    class="nav-item sidebar-buttons"
+                </false>
+            </check>>
+
+            <a class="nav-link" href="waitlist">
+                <i class="fas fa-stopwatch"></i>
+                <span>Waitlist</span>
+            </a>
+        </li>
+
+        <!-- archive -->
+        <li <check if="{{ @page == 'archive' }}">
+                <true>
+                    class="nav-item sidebar-buttons active"
+                </true>
+                <false>
+                    class="nav-item sidebar-buttons"
+                </false>
+            </check>>
+
+            <a class="nav-link" href="archive">
                 <i class="fas fa-archive"></i>
                 <span>Archive</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="example_pages/utilities-color.html">Colors</a>
-                    <a class="collapse-item" href="example_pages/utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="example_pages/utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="example_pages/utilities-other.html">Other</a>
-                </div>
-            </div>
         </li>
 
         <!-- Divider -->
@@ -93,48 +121,29 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Other Things
+            Other
         </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>This</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" href="example_pages/login.html">Login</a>
-                    <a class="collapse-item" href="example_pages/register.html">Register</a>
-                    <a class="collapse-item" href="example_pages/forgot-password.html">Forgot Password</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="example_pages/404.html">404 Page</a>
-                    <a class="collapse-item" href="example_pages/blank.html">Blank Page</a>
-                </div>
-            </div>
-        </li>
+        <!-- affiliates -->
+        <li <check if="{{ @page == 'affiliates' }}">
+                <true>
+                    class="nav-item sidebar-buttons active"
+                </true>
+                <false>
+                    class="nav-item sidebar-buttons"
+                </false>
+            </check>>
 
-        <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="example_pages/charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>That</span></a>
-        </li>
-
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="example_pages/tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Those</span></a>
+            <a class="nav-link" href="affiliates">
+                <i class="fas fa-building"></i>
+                <span>Affiliates</span></a>
         </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
+        <div class="text-center d-none d-md-inline mt-3">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
 
@@ -155,76 +164,13 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- Topbar Search -->
-                <!--<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>-->
-
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
-
-                    <!-- Nav Item - Alerts -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell fa-fw"></i>
-                            <!-- Counter - Alerts -->
-                            <span class="badge badge-danger badge-counter">3+</span>
-                        </a>
-                        <!-- Dropdown - Alerts -->
-                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                            <h6 class="dropdown-header">
-                                Alerts Center
-                            </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-primary">
-                                        <i class="fas fa-file-alt text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">December 12, 2019</div>
-                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-success">
-                                        <i class="fas fa-donate text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">December 7, 2019</div>
-                                    $290.29 has been deposited into your account!
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-warning">
-                                        <i class="fas fa-exclamation-triangle text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">December 2, 2019</div>
-                                    Spending Alert: We've noticed unusually high spending for your account.
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                        </div>
-                    </li>
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">John Doe</span>
                             <i class="fas fa-user-circle fa-lg"></i>
                         </a>
                         <!-- Dropdown - User Information -->
@@ -245,3 +191,56 @@
 
             </nav>
             <!-- End of Topbar -->
+
+            <!-- notifications - if need to add -->
+            <!-- Nav Item - Alerts -->
+            <!--<li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell fa-fw"></i>
+                    &lt;!&ndash; Counter - Alerts &ndash;&gt;
+                    <span class="badge badge-danger badge-counter">3+</span>
+                </a>
+                &lt;!&ndash; Dropdown - Alerts &ndash;&gt;
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in" aria-labelledby="alertsDropdown">
+                    <h6 class="dropdown-header">
+                        Alerts Center
+                    </h6>
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-file-alt text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="small text-gray-500">December 12, 2019</div>
+                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                        </div>
+                    </a>
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-success">
+                                <i class="fas fa-donate text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="small text-gray-500">December 7, 2019</div>
+                            $290.29 has been deposited into your account!
+                        </div>
+                    </a>
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-warning">
+                                <i class="fas fa-exclamation-triangle text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="small text-gray-500">December 2, 2019</div>
+                            Spending Alert: We've noticed unusually high spending for your account.
+                        </div>
+                    </a>
+                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                </div>
+            </li>
+
+            <div class="topbar-divider d-none d-sm-block"></div>-->
+

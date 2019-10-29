@@ -32,13 +32,6 @@ $f3->route('GET /', function()
     echo $view->render('views/forms/specific_form_pages/FSG/FSGtrainingDescription.html');
 });
 
-//portal route
-$f3->route('GET /admin', function()
-{
-    $view = new Template();
-    echo $view->render('views/portal/index.html');
-});
-
 $f3->route('GET|POST /personal_information', function($f3)
 {
     if(!empty($_POST))
@@ -272,6 +265,53 @@ $f3->route('GET|POST /confirmation', function()
 {
     $view = new Template();
     echo $view->render('views/forms/general_form_pages/confirmation.html');
+});
+
+///////////////////////////////////////////portal///////////////////////////////////////////////////////////////////////
+
+//dashboard
+$f3->route('GET /dashboard', function($f3)
+{
+    $f3->set('page', 'dashboard');
+
+    $view = new Template();
+    echo $view->render('views/portal/dashboard.html');
+});
+
+//active
+$f3->route('GET /active', function($f3)
+{
+    $f3->set('page', 'active');
+
+    $view = new Template();
+    echo $view->render('views/portal/applications/active.html');
+});
+
+//waitlist
+$f3->route('GET /waitlist', function($f3)
+{
+    $f3->set('page', 'waitlist');
+
+    $view = new Template();
+    echo $view->render('views/portal/applications/waitlist.html');
+});
+
+//archive
+$f3->route('GET /archive', function($f3)
+{
+    $f3->set('page', 'archive');
+
+    $view = new Template();
+    echo $view->render('views/portal/applications/archive.html');
+});
+
+//affiliates
+$f3->route('GET /affiliates', function($f3)
+{
+    $f3->set('page', 'affiliates');
+
+    $view = new Template();
+    echo $view->render('views/portal/other/affiliates.html');
 });
 
 //Run fat-free
