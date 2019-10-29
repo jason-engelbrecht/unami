@@ -33,10 +33,10 @@ $f3->route('GET /', function()
 });
 
 //portal route
-$f3->route('GET /portal', function()
+$f3->route('GET /admin', function()
 {
     $view = new Template();
-    echo $view->render('portal/index.html');
+    echo $view->render('views/portal/index.html');
 });
 
 $f3->route('GET|POST /personal_information', function($f3)
