@@ -83,6 +83,7 @@ $f3->route('GET|POST /personal_information', function($f3)
         $_SESSION['PersonalInfo'] = new PersonalInfo($first, $last, $pronouns, $address, $address2, $city, $state, $zip,
             $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $affiliate, $member,
             $emergency_name, $emergency_phone);
+
         $f3->reroute('/additional_information');
     }
 

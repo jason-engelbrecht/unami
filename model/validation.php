@@ -5,7 +5,6 @@
  * @copyright 10/27/2019
  */
 
-
 /**
  * used to validate the personal info form
  * @return bool if everything was valid or not
