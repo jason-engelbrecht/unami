@@ -24,8 +24,10 @@ $f3 = Base::instance();
 //Establish connection to database
 
 //define a default route
-$f3->route('GET /', function()
+$f3->route('GET /', function($f3)
 {
+    $f3->set('page_title', 'Start');
+
     session_destroy();
     session_start();
     $view = new Template();
@@ -34,6 +36,8 @@ $f3->route('GET /', function()
 
 $f3->route('GET|POST /personal_information', function($f3)
 {
+    $f3->set('page_title', 'Personal information');
+
     if(!empty($_POST))
     {
         // get data from form
@@ -95,6 +99,8 @@ $f3->route('GET|POST /personal_information', function($f3)
 
 $f3->route('GET|POST /additional_information', function($f3)
 {
+    $f3->set('page_title', 'Accommodations');
+
     if(!empty($_POST))
     {
         // get data from form
@@ -163,6 +169,8 @@ $f3->route('GET|POST /additional_information', function($f3)
 
 $f3->route('GET|POST /long_answer', function($f3)
 {
+    $f3->set('page_title', 'Long Answer');
+
     if(!empty($_POST))
     {
         // get data from form
@@ -211,6 +219,8 @@ $f3->route('GET|POST /long_answer', function($f3)
 
 $f3->route('GET|POST /not_required', function($f3)
 {
+    $f3->set('page_title', 'Other Questions');
+
     if(!empty($_POST))
     {
         // get data from form
@@ -245,13 +255,16 @@ $f3->route('GET|POST /not_required', function($f3)
 });
 
 
-$f3->route('GET|POST /review', function()
+$f3->route('GET|POST /review', function($f3)
 {
+    $f3->set('page_title', 'Review');
+
     $view = new Template();
     echo $view->render('views/forms/general_form_pages/review.html');
 });
 
 $f3->route('GET|POST /performance_agreement', function($f3) {
+    $f3->set('page_title', 'Performance Agreement');
 
     if(!empty($_POST)) {
         $f3->reroute('/confirmation');
@@ -261,8 +274,10 @@ $f3->route('GET|POST /performance_agreement', function($f3) {
     echo $view->render('views/forms/general_form_pages/performanceAgreement.html');
 });
 
-$f3->route('GET|POST /confirmation', function()
+$f3->route('GET|POST /confirmation', function($f3)
 {
+    $f3->set('page_title', 'Application Submitted');
+
     $view = new Template();
     echo $view->render('views/forms/general_form_pages/confirmation.html');
 });
@@ -273,6 +288,7 @@ $f3->route('GET|POST /confirmation', function()
 $f3->route('GET /dashboard', function($f3)
 {
     $f3->set('page', 'dashboard');
+    $f3->set('page_title', 'Dashboard');
 
     $view = new Template();
     echo $view->render('views/portal/dashboard.html');
@@ -282,6 +298,7 @@ $f3->route('GET /dashboard', function($f3)
 $f3->route('GET /active', function($f3)
 {
     $f3->set('page', 'active');
+    $f3->set('page_title', 'Active Applicants');
 
     $view = new Template();
     echo $view->render('views/portal/applications/active.html');
@@ -291,6 +308,7 @@ $f3->route('GET /active', function($f3)
 $f3->route('GET /waitlist', function($f3)
 {
     $f3->set('page', 'waitlist');
+    $f3->set('page_title', 'Waitlisted Applicants');
 
     $view = new Template();
     echo $view->render('views/portal/applications/waitlist.html');
@@ -300,6 +318,7 @@ $f3->route('GET /waitlist', function($f3)
 $f3->route('GET /archive', function($f3)
 {
     $f3->set('page', 'archive');
+    $f3->set('page_title', 'Archived Applicants');
 
     $view = new Template();
     echo $view->render('views/portal/applications/archive.html');
@@ -309,6 +328,7 @@ $f3->route('GET /archive', function($f3)
 $f3->route('GET /affiliates', function($f3)
 {
     $f3->set('page', 'affiliates');
+    $f3->set('page_title', 'Affiliates');
 
     $view = new Template();
     echo $view->render('views/portal/other/affiliates.html');
