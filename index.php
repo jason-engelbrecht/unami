@@ -285,6 +285,36 @@ $f3->route('GET|POST /confirmation', function($f3)
 
 ///////////////////////////////////////////portal///////////////////////////////////////////////////////////////////////
 
+//login
+$f3->route('GET /login', function($f3)
+{
+    $f3->set('page', 'dashboard');
+    $f3->set('page_title', 'Dashboard');
+
+    $view = new Template();
+    echo $view->render('views/portal/account/login.html');
+});
+
+//forgot password
+$f3->route('GET /forgot-password', function($f3)
+{
+    $f3->set('page', 'dashboard');
+    $f3->set('page_title', 'Dashboard');
+
+    $view = new Template();
+    echo $view->render('views/portal/account/forgot-password.html');
+});
+
+//create account
+$f3->route('GET /register', function($f3)
+{
+    $f3->set('page', 'dashboard');
+    $f3->set('page_title', 'Dashboard');
+
+    $view = new Template();
+    echo $view->render('views/portal/account/register.html');
+});
+
 //dashboard
 $f3->route('GET /dashboard', function($f3)
 {
