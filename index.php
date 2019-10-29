@@ -23,6 +23,23 @@ $f3 = Base::instance();
 
 //Establish connection to database
 
+// Array of states
+$f3->set('states', array('Alabama','Alaska','Arizona','Arkansas','California',
+    'Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia',
+    'Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana',
+    'Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri',
+    'Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York',
+    'North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island',
+    'South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington',
+    'West Virginia','Wisconsin','Wyoming'));
+
+// Array of NAMI Affiliates
+$f3->set('affiliates', array('NAMI Chelan-Douglas', 'NAMI Clallam County', 'NAMI Eastside', 'NAMI Jefferson County',
+    'NAMI Kitsap County', 'NAMI Lewis County', 'NAMI Pierce County', 'NAMI Seattle', 'NAMI Skagit',
+    'NAMI Snohomish County', 'NAMI South King County', 'NAMI Southwest Washington', 'NAMI Spokane',
+    'NAMI Thurston-Mason', 'NAMI Tri-Cities', 'NAMI Walla Walla', 'NAMI Washington Coast',
+    'NAMI Whatcom', 'Yakima'));
+
 //define a default route
 $f3->route('GET /', function($f3)
 {
@@ -37,6 +54,24 @@ $f3->route('GET /', function($f3)
 $f3->route('GET|POST /personal_information', function($f3)
 {
     $f3->set('page_title', 'Personal information');
+
+    // Check state
+    if($_POST['state'] == 'none') {
+        define('STATE', 'Unselected');
+    }
+    else {
+        define('STATE', $_POST['state']);
+        $_SESSION['state'] = $_POST['state'];
+    }
+
+    // Check affiliate
+    if($_POST['affiliate'] == 'select') {
+        define('AFFILIATE', 'Unselected');
+    }
+    else {
+        define('AFFILIATE', $_POST['affiliate']);
+        $_SESSION['affiliate'] = $_POST['affiliate'];
+    }
 
     if(!empty($_POST))
     {
