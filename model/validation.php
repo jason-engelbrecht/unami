@@ -128,6 +128,36 @@ function validLongAnswersForm()
 }
 
 /**
+ * Used to check if they should fill something out on the not required.
+ *
+ */
+function validNotRequiredForm()
+{
+    global $f3;
+    $isValid = true;
+
+    if($f3->get('trained') == 'yes')
+    {
+        if (!validRequiredTextarea($f3->get('trainedText')))
+        {
+            $isValid = false;
+            $f3->set("errors['trained']", "Please type about your training");
+        }
+    }
+
+    if($f3->get('certified') == 'yes')
+    {
+        if (!validRequiredTextarea($f3->get('certifiedText')))
+        {
+            $isValid = false;
+            $f3->set("errors['certified']", "Please type about your certifications");
+        }
+    }
+
+    return $isValid;
+}
+
+/**
  * Checks if the days rooming given was valid
  * @param array the days the applicant is staying
  * @return bool if the name was valid
