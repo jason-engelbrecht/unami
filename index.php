@@ -121,8 +121,8 @@ $f3->route('GET|POST /personal_information', function($f3)
             '', '', '', '', '', '', '');
     }
 
-   $view = new Template();
-   echo $view->render('views/forms/general_form_pages/form1.html');
+    $view = new Template();
+    echo $view->render('views/forms/general_form_pages/form1.html');
 });
 
 $f3->route('GET|POST /additional_information', function($f3)
@@ -187,16 +187,13 @@ $f3->route('GET|POST /additional_information', function($f3)
             $noAccommodations, $needRoom, $daysRooming, $roommate, $gender, $roommateGender, $cpap, $cpapRoommate,
             $singleRoom);
 
-        // validate data
-        $valid = true;
-        if($singleRoom == 'no')
+        if($_POST['goBack'] = 'goBack')
         {
-           if(!validAccommodationsForm())
-           {
-               $valid = false;
-           }
+            $f3->reroute('/personal_information');
         }
-        if($valid)
+
+        // validate data
+        if(!validAccommodationsForm())
         {
             $f3->reroute('/long_answer');
         }
@@ -267,6 +264,11 @@ $f3->route('GET|POST /long_answer', function($f3)
         $_SESSION['LongAnswer'] =  new LongAnswers($relativeMentalIllness, $relativeMentalIllnessText, $convict,
             $convictText, $whyFacilitator, $experience, $coFacWhom, $coFacWhomText, $coFacWhere, $coFacWhereText);
 
+        if($_POST['goBack'] = 'goBack')
+        {
+            $f3->reroute('/additional_information');
+        }
+
         // validate data
         if(validLongAnswersForm())
         {
@@ -318,6 +320,12 @@ $f3->route('GET|POST /not_required', function($f3)
 
         $_SESSION['NotRequired'] =  new NotRequired($heardAboutTraining, $trained, $trainedText, $certified,
             $certifiedText);
+
+        if($_POST['goBack'] = 'goBack')
+        {
+            $f3->reroute('/long_answer');
+        }
+
         if(validNotRequiredForm())
         {
             $f3->reroute('/review');
