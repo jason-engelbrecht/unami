@@ -122,22 +122,28 @@ function validAccommodationsForm()
     global $f3;
     $isValid = true;
 
-    if (!alphabetical($f3->get('gender')))
+    if($f3->get('noAccommodations') == 'no')
     {
-        $isValid = false;
-        $f3->set("errors['gender']", "Please enter a gender");
-    }
+        if($f3->get('singleRoom') == 'no')
+        {
+            if (!alphabetical($f3->get('gender')))
+            {
+                $isValid = false;
+                $f3->set("errors['gender']", "Please enter a gender");
+            }
 
-    if (!alphabetical($f3->get('roommateGender')))
-    {
-        $isValid = false;
-        $f3->set("errors['roommateGender']", "Please enter a gender for your roommate");
-    }
+            if (!alphabetical($f3->get('roommateGender')))
+            {
+                $isValid = false;
+                $f3->set("errors['roommateGender']", "Please enter a gender for your roommate");
+            }
 
-    if (!validDaysRooming($f3->get('daysRooming')))
-    {
-        $isValid = false;
-        $f3->set("errors['daysRooming']", "Please select at least 1 day to room");
+            if (!validDaysRooming($f3->get('daysRooming')))
+            {
+                $isValid = false;
+                $f3->set("errors['daysRooming']", "Please select at least 1 day to room");
+            }
+        }
     }
 
     return $isValid;

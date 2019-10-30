@@ -150,6 +150,23 @@ $f3->route('GET|POST /additional_information', function($f3)
             $daysRooming = array('1');
         }
 
+        if($noAccommodations == 'yes')
+        {
+            $singleRoom = 'N/A';
+            $roommate = 'N/A';
+            $roommateGender = 'N/A';
+            $cpap = 'N/A';
+            $cpapRoommate = 'N/A';
+        }
+
+        if($singleRoom == 'yes')
+        {
+            $roommate = 'N/A';
+            $roommateGender = 'N/A';
+            $cpap = 'N/A';
+            $cpapRoommate = 'N/A';
+        }
+
         // add data to hive
         $f3->set('specialNeeds', $specialNeeds);
         $f3->set('serviceAnimal', $serviceAnimal);
