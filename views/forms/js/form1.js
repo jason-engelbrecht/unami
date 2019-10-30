@@ -4,7 +4,12 @@ function showfield(name)
 {
     if(name=='Other')
     {
-        document.getElementById('div1').innerHTML='NAMI Affiliate Name: <input type="text" class="form-control" name="other" />';
+        document.getElementById('div1').innerHTML=
+            '                    <div class="form-row justify-content-end">\n' +
+            '                        <div class="form-group col-md-4">\n' +
+            '                            <input type="text" class="form-control" name="other" id="other" placeholder="Affiliate Name"/>\n' +
+            '                        </div>\n' +
+            '                    </div>';
     }
     else
     {

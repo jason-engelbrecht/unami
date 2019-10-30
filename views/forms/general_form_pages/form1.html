@@ -10,74 +10,111 @@
 <div class="container p-3 ">
 
     <div class="card shadow-sm bg-white rounded">
-        <h5 class="card-header">Personal Information</h5>
+        <h4 class="card-header">Personal Information</h4>
         <div class="card-body m-3">
             <div>
                 <form method="post" action="personal_information">
+
+                    <!-- name & pronoun -->
                     <div class="form-row">
                         <div class="form-group col-md-5">
-                            <label for="first">First name</label>
+                            <h4 class="lead mb-0"><label for="first">First Name</label></h4>
                             <input name="first" type="text" class="form-control" id="first" placeholder="John" required
                                    value="{{ $_SESSION['PersonalInfo']->getFname() }}">
                         </div>
                         <div class="form-group col-md-5">
-                            <label for="last">Last name</label>
+                            <h4 class="lead mb-0"><label for="last">Last name</label></h4>
                             <input name="last" type="text" class="form-control" id="last" placeholder="Doe" required
                                    value="{{ $_SESSION['PersonalInfo']->getLname() }}">
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="pronouns">Pronouns</label>
+                            <h4 class="lead mb-0"><label for="pronouns">Pronouns</label></h4>
                             <input name="pronouns" type="text" class="form-control" id="pronouns" placeholder="She/He" required
                                    value="{{ $_SESSION['PersonalInfo']->getPronouns() }}">
                         </div>
                     </div>
+                    <!-- name & pronoun -->
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="dob">Date of Birth</label>
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <input name="dob" type="text" class="form-control" id="dob" placeholder="DD" required>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <input name="dob" type="text" class="form-control" id="month" placeholder="MM" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <input name="dob" type="text" class="form-control" id="year" placeholder="YYYY" required>
+                    <!-- DOB, member, affiliate -->
+                    <div class="mb-2">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h4 class="lead">Date of Birth</h4>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <input name="day" type="text" class="form-control" id="day" placeholder="DD" required>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <input name="month" type="text" class="form-control" id="month" placeholder="MM" required>
+                                    </div>
+                                    <div class="form-group col-md-5">
+                                        <input name="year" type="text" class="form-control" id="year" placeholder="YYYY" required>
+                                    </div>
                                 </div>
                             </div>
 
-                        </div>
+                            <div class="form-group col-md-4">
+                                <h4 class="lead">Are you a NAMI member?</h4>
+                                <label class="mt-1">
+                                    <input required type="radio" name="member" value="yes">
+                                    Yes</label>
+                                <label class="ml-3">
+                                    <input required type="radio" name="member" value="no">
+                                    No</label>
+                                <a href="#" class="ml-5" data-toggle="tooltip" title="If you're not already a member, you will need to register before your training"
+                                ><i class="fas fa-info-circle text-primary"></i></a>
+                            </div>
 
-                        <div class="form-group col-md-6 pl-5">
-                            <p>Are you a NAMI member?</p>
-                            <label class="mt-1">
-                                <input required type="radio" name="member" value="yes">
-                                Yes</label>
-                            <label class="ml-3">
-                                <input required type="radio" name="member" value="no">
-                                No</label>
+                            <div class="form-group col-md-4 pb-0 mb-0">
+                                <h4 class="lead mb-0"><label for="affiliateName">NAMI Affiliate: </label></h4>
+
+                                <select id="affiliateName" class="form-control" name="affiliate"
+                                        onchange="showfield(this.options[this.selectedIndex].value)">
+                                    <option value="select">- Select -</option>
+                                    <repeat group="{{ @affiliates }}" value="{{ @affiliate }}">
+                                        <option value="{{ @affiliate }}"
+                                        <check if="{{isset(@SESSION.affiliate) && @SESSION.affiliate == @affiliate }}">
+                                            selected="selected"
+                                        </check>>
+                                        {{ @affiliate }}
+                                        </option>
+                                    </repeat>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
                         </div>
+                        <!-- DOB, member, affiliate -->
+
+                        <div id="div1"></div>
+                        <!-- other affiliate -->
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputAddress">Address</label>
-                        <input name="inputAddress" type="text" class="form-control" id="inputAddress"
-                               placeholder="1234 Main St" required value="{{ $_SESSION['PersonalInfo']->getAddress() }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputAddress2">Address 2</label>
-                        <input name="inputaddress2" type="text" class="form-control" id="inputAddress2"
-                               placeholder="Apartment, studio, or floor" value="{{ $_SESSION['PersonalInfo']->getAddress2() }}">
-                    </div>
+                    <!-- address & city -->
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
+                        <div class="form-group col-md-8">
+                            <h4 class="lead mb-0"><label for="inputAddress">Address</label></h4>
+                            <input name="inputAddress" type="text" class="form-control" id="inputAddress"
+                                   placeholder="1234 Main St" required value="{{ $_SESSION['PersonalInfo']->getAddress() }}">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <h4 class="lead mb-0"><label for="inputCity">City</label></h4>
                             <input name="inputCity" type="text" class="form-control" id="inputCity" required
                                    value="{{ $_SESSION['PersonalInfo']->getCity() }}">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
+                    </div>
+                    <!-- address & city -->
+
+                    <!-- address2, state, zip -->
+                    <div class="form-row mb-4">
+                        <div class="form-group col-md-7">
+                            <h4 class="lead mb-0"><label for="inputAddress2">Address 2</label></h4>
+                            <input name="inputaddress2" type="text" class="form-control" id="inputAddress2"
+                                   placeholder="Apartment, studio, or floor" value="{{ $_SESSION['PersonalInfo']->getAddress2() }}">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <h4 class="lead mb-0"><label for="inputState">State</label></h4>
                             <select name="inputState" id="inputState" class="form-control">
                                 <option selected value="none">Choose...</option>
                                 <repeat group="{{ @states }}" value="{{ @state }}">
@@ -90,88 +127,76 @@
                                 </repeat>
                             </select>
                         </div>
+
                         <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
+                            <h4 class="lead mb-0"><label for="inputZip">Zip</label></h4>
                             <input name="inputZip" type="text" class="form-control" id="inputZip" required
                                    value="{{ $_SESSION['PersonalInfo']->getZip() }}">
                         </div>
                     </div>
+                    <!-- address2, state, zip -->
 
-                    <div class="form-row">
+                    <!-- primary phone  -->
+                    <div class="form-row pt-2">
                         <div class="form-group col-md-6">
-                            <label for="primary">Primary phone number</label>
+                            <h4 class="lead mb-0"><label for="primary">Primary phone number</label></h4>
                             <input name="primary" type="tel" class="form-control" id="primary" placeholder="206 123 1234"
                             required value="{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="primary_time">Best time to call</label>
+                            <h4 class="lead mb-0"><label for="primary_time">Best time to call</label></h4>
                             <input name="primary_time" type="text" class="form-control" id="primary_time" placeholder="9AM"
                             required value="{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}">
                         </div>
                     </div>
+                    <!-- primary phone  -->
+
+                    <!-- alternate phone  -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="alternate">Alternate phone number</label>
+                            <h4 class="lead mb-0"><label for="alternate">Alternate phone number</label></h4>
                             <input name="alternate" type="tel" class="form-control" id="alternate" placeholder="206 123 1234"
                             required value="{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="alternate_time">Best time to call</label>
+                            <h4 class="lead mb-0"><label for="alternate_time">Best time to call</label></h4>
                             <input name="alternate_time" type="text" class="form-control" id="alternate_time" placeholder="9AM"
                             required value="{{ $_SESSION['PersonalInfo']->getAlternateTime() }}">
                         </div>
                     </div>
+                    <!-- alternate phone -->
 
-                    <div class="form-row">
+                    <!-- best way to contact & email -->
+                    <div class="form-row mb-4">
                         <div class="form-group col-md-6">
-                            <label for="email">Email</label>
+                            <h4 class="lead mb-0"><label for="email">Email</label></h4>
                             <input name="email" type="email" class="form-control" id="email" placeholder="email@mail.com"
                                    required value="{{ $_SESSION['PersonalInfo']->getEmail() }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <p>Best way to contact you?</p>
-                            <label><input class="mt-1" type="radio" name="preference" value="phone" required
+                            <p class="lead mb-2">Best way to contact you?</p>
+                            <label><input class="mt-1 ml-1" type="radio" name="preference" value="phone" required
                             <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'phone'}}">checked</check>> Phone</label>
                             <label><input class="ml-3" type="radio" name="preference" value="email" required
                             <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'email'}}">checked</check>> Email</label>
                         </div>
                     </div>
+                    <!-- best way to contact & email -->
 
-                    <div class="form-row">
+                    <!-- emergency contact -->
+                    <div class="form-row mb-4">
                         <div class="form-group col-md-6">
-                            <label for="affiliateName">NAMI Affiliate: </label><br>
-
-                            <select id="affiliateName" class="form-control" name="affiliate"
-                                    onchange="showfield(this.options[this.selectedIndex].value)">
-                                <option value="select">- Select -</option>
-                                <repeat group="{{ @affiliates }}" value="{{ @affiliate }}">
-                                    <option value="{{ @affiliate }}"
-                                    <check if="{{isset(@SESSION.affiliate) && @SESSION.affiliate == @affiliate }}">
-                                        selected="selected"
-                                    </check>>
-                                    {{ @affiliate }}
-                                    </option>
-                                </repeat>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div id="div1" class="form-group col-md-6 pt-2"></div>
-                    </div>
-
-                    Emergency contact: <br>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="emergency_name">Name</label>
+                            <h4 class="lead mb-0"><label for="emergency_name">Emergency Contact Name</label></h4>
                             <input name="emergency_name" type="text" class="form-control" id="emergency_name"
                                    placeholder="Jane Doe" required value="{{ $_SESSION['PersonalInfo']->getEmergencyName() }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="emergency_phone">Phone</label><br>
+                            <h4 class="lead mb-0"><label for="emergency_phone">Emergency Contact Phone</label></h4>
                             <input name="emergency_phone" type="tel" class="form-control" id="emergency_phone"
                                    placeholder="206 123 1234" required value="{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}">
                         </div>
                     </div>
-
+                    <!-- emergency contact -->
 
                     <button type="submit" class="btn btn-primary float-right">Next
                         <i class="fas fa-arrow-right"></i></button>

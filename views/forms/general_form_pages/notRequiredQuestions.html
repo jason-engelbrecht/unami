@@ -24,26 +24,27 @@
 
     <!-- card -->
     <div class="card shadow-sm bg-white rounded">
-        <h5 class="card-header">Further Questions</h5>
+        <h4 class="card-header">Additional Questions</h4>
 
         <!-- card body -->
         <div class="card-body m-3">
             <!-- form -->
             <div>
                 <form method="post" action="not_required">
+                    <h6 class=" float-right">*These questions are not required</h6>
+
 
                     <!-- how did you hear about this training -->
                     <div class="mb-5">
-                        <label for="heardAboutTraining">1. How did you hear about this
-                            training class?</label>
-                        <small>*not required</small>
+                        <h4 class="lead mb-0"><label for="heardAboutTraining">1. How did you hear about this
+                            training class?</label></h4>
                         <textarea name="heardAboutTraining" class="form-control" id="heardAboutTraining"
                                   rows="5">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</textarea>
                     </div>
 
                     <!-- have you taken any other NAMI classes or trainings -->
                     <div class="my-5">
-                        <p>2. Have you taken other NAMI classes or trainings? <small>*not required</small></p>
+                        <p class="lead">2. Have you taken other NAMI classes or trainings? </p>
                         <div class="form-check form-check-inline">
                             <input name="trained" class="form-check-input" type="radio" id="show1" value="yes" required
                             <check if="{{ $_SESSION['NotRequired']->getTrained() === 'yes' }}">
@@ -66,7 +67,7 @@
 
                     <!-- are your certified to teach any other nami signature programs -->
                     <div class="my-5">
-                        <p>3. Are you currently certified to teach/lead any other NAMI signature programs? <small>*not required</small></p>
+                        <p class="lead">3. Are you currently certified to teach/lead any other NAMI signature programs? </p>
                         <div class="form-check form-check-inline">
                             <input name="certified" class="form-check-input" type="radio" id="show2" value="yes" required
                             <check if="{{ $_SESSION['NotRequired']->getCertified() === 'yes' }}">

@@ -113,13 +113,16 @@ $f3->route('GET|POST /personal_information', function($f3)
         $f3->set('emergency_name', $emergency_name);
         $f3->set('emergency_phone', $emergency_phone);
 
-        // validate data
 
         $_SESSION['PersonalInfo'] = new PersonalInfo($first, $last, $pronouns, $address, $address2, $city, $state, $zip,
             $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $affiliate, $member,
             $emergency_name, $emergency_phone);
 
-        $f3->reroute('/additional_information');
+        // validate data
+        if(validLongAnswersForm())
+        {
+            $f3->reroute('/additional_information');
+        }
     }
 
     if(!isset($_SESSION['PersonalInfo']))
