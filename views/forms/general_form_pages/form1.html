@@ -8,6 +8,17 @@
 </div>
 
 <div class="container p-3 ">
+    <!-- Displays any errors with the input from the user -->
+    <check if="{{!empty(@errors)}}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
+                <h4><strong>Error:</strong> {{ @error }}</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </repeat>
+        </div>
+    </check>
 
     <div class="card shadow-sm bg-white rounded">
         <h4 class="card-header">Personal Information</h4>
@@ -18,7 +29,7 @@
                     <!-- name & pronoun -->
                     <div class="form-row">
                         <div class="form-group col-md-5">
-                            <h4 class="lead mb-0"><label for="first">First Name</label></h4>
+                            <h4 class="lead mb-0"><label for="first">First name</label></h4>
                             <input name="first" type="text" class="form-control" id="first" placeholder="John" required
                                    value="{{ $_SESSION['PersonalInfo']->getFname() }}">
                         </div>
@@ -70,7 +81,7 @@
 
                                 <select id="affiliateName" class="form-control" name="affiliate"
                                         onchange="showfield(this.options[this.selectedIndex].value)">
-                                    <option value="select">- Select -</option>
+                                    <option value="none">- Select -</option>
                                     <repeat group="{{ @affiliates }}" value="{{ @affiliate }}">
                                         <option value="{{ @affiliate }}"
                                         <check if="{{isset(@SESSION.affiliate) && @SESSION.affiliate == @affiliate }}">
@@ -92,7 +103,7 @@
                     <!-- address & city -->
                     <div class="form-row">
                         <div class="form-group col-md-8">
-                            <h4 class="lead mb-0"><label for="inputAddress">Address</label></h4>
+                            <h4 class="lead mb-0"><label for="inputAddress">Street Address</label></h4>
                             <input name="inputAddress" type="text" class="form-control" id="inputAddress"
                                    placeholder="1234 Main St" required value="{{ $_SESSION['PersonalInfo']->getAddress() }}">
                         </div>
@@ -116,7 +127,7 @@
                         <div class="form-group col-md-3">
                             <h4 class="lead mb-0"><label for="inputState">State</label></h4>
                             <select name="inputState" id="inputState" class="form-control">
-                                <option selected value="none">Choose...</option>
+                                <option selected value="none">- Select -</option>
                                 <repeat group="{{ @states }}" value="{{ @state }}">
                                     <option value="{{ @state }}"
                                     <check if="{{isset(@SESSION.state) && @SESSION.state == @state }}">
@@ -156,12 +167,12 @@
                         <div class="form-group col-md-6">
                             <h4 class="lead mb-0"><label for="alternate">Alternate phone number</label></h4>
                             <input name="alternate" type="tel" class="form-control" id="alternate" placeholder="206 123 1234"
-                            required value="{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}">
+                             value="{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}">
                         </div>
                         <div class="form-group col-md-6">
                             <h4 class="lead mb-0"><label for="alternate_time">Best time to call</label></h4>
                             <input name="alternate_time" type="text" class="form-control" id="alternate_time" placeholder="9AM"
-                            required value="{{ $_SESSION['PersonalInfo']->getAlternateTime() }}">
+                             value="{{ $_SESSION['PersonalInfo']->getAlternateTime() }}">
                         </div>
                     </div>
                     <!-- alternate phone -->
@@ -186,12 +197,12 @@
                     <!-- emergency contact -->
                     <div class="form-row mb-4">
                         <div class="form-group col-md-6">
-                            <h4 class="lead mb-0"><label for="emergency_name">Emergency Contact Name</label></h4>
+                            <h4 class="lead mb-0"><label for="emergency_name">Emergency contact name</label></h4>
                             <input name="emergency_name" type="text" class="form-control" id="emergency_name"
                                    placeholder="Jane Doe" required value="{{ $_SESSION['PersonalInfo']->getEmergencyName() }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <h4 class="lead mb-0"><label for="emergency_phone">Emergency Contact Phone</label></h4>
+                            <h4 class="lead mb-0"><label for="emergency_phone">Emergency contact phone</label></h4>
                             <input name="emergency_phone" type="tel" class="form-control" id="emergency_phone"
                                    placeholder="206 123 1234" required value="{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}">
                         </div>

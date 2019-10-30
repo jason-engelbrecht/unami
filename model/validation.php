@@ -14,28 +14,100 @@ function validPersonalInfoForm()
     global $f3;
     $isValid = true;
 
-    if (!validName($f3->get('fname')))
+    if (!alphabetical($f3->get('fname')))
     {
         $isValid = false;
         $f3->set("errors['fname']", "Please enter a valid first name");
     }
 
-    if (!validName($f3->get('lname')))
+    if (!alphabetical($f3->get('lname')))
     {
         $isValid = false;
         $f3->set("errors['lname']", "Please enter a valid last name");
     }
 
-    if (!validAddress($f3->get('address')))
+    if (!alphabetical($f3->get('pronouns')))
     {
         $isValid = false;
-        $f3->set("errors['address']", "Please enter your address");
+        $f3->set("errors['pronouns']", "Please enter a valid pronoun");
     }
 
-    if (!validEmail($f3->get('email')))
+    if (!numeric($f3->get('dateOfBirth')))
+    {
+        $isValid = false;
+        $f3->set("errors['dateOfBirth']", "Please enter your date of birth in the format DD/MM/YYY");
+    }
+
+    if (!alphabetical($f3->get('member')))
+    {
+        $isValid = false;
+        $f3->set("errors['lname']", "Please enter a valid member selection");
+    }
+
+    if (empty($f3->get('affiliate') || $f3->get('affiliate') == 'none'))
+    {
+        $isValid = false;
+        $f3->set("errors['affiliate']", "Please enter a valid affiliate");
+    }
+
+    if (empty($f3->get('address')))
+    {
+        $isValid = false;
+        $f3->set("errors['address']", "Please enter your street address");
+    }
+
+    if (!numeric($f3->get('city')))
+    {
+        $isValid = false;
+        $f3->set("errors['city']", "Please enter a valid city");
+    }
+
+    if (empty($f3->get('state')) || $f3->get('state') == 'none')
+    {
+        $isValid = false;
+        $f3->set("errors['state']", "Please enter a valid state");
+    }
+
+    if (!numeric($f3->get('zip')))
+    {
+        $isValid = false;
+        $f3->set("errors['zip']", "Please enter a valid zip");
+    }
+
+    if (empty($f3->get('primary_phone')))
+    {
+        $isValid = false;
+        $f3->set("errors['primary_phone']", "Please enter a phone number");
+    }
+
+    if (empty($f3->get('primary_time')))
+    {
+        $isValid = false;
+        $f3->set("errors['primary_time']", "Please enter a time to call");
+    }
+
+    /*if (!validEmail($f3->get('email')))
     {
         $isValid = false;
         $f3->set("errors['email']", "Please enter a valid email address");
+    }*/
+
+    if (!alphabetical($f3->get('preference')))
+    {
+        $isValid = false;
+        $f3->set("errors['preference']", "Please choose a best way to contact you");
+    }
+
+    if (!alphabetical($f3->get('emergency_name')))
+    {
+        $isValid = false;
+        $f3->set("errors['emergency_name']", "Please choose a best way to contact you");
+    }
+
+    if (empty($f3->get('emergency_phone')))
+    {
+        $isValid = false;
+        $f3->set("errors['emergency_phone']", "Please enter your emergency contacts phone number");
     }
 
     return $isValid;
@@ -50,13 +122,13 @@ function validAccommodationsForm()
     global $f3;
     $isValid = true;
 
-    if (!validName($f3->get('gender')))
+    if (!numeric($f3->get('gender')))
     {
         $isValid = false;
         $f3->set("errors['gender']", "Please enter a gender");
     }
 
-    if (!validName($f3->get('roommateGender')))
+    if (!numeric($f3->get('roommateGender')))
     {
         $isValid = false;
         $f3->set("errors['roommateGender']", "Please enter a gender for your roommate");
@@ -174,22 +246,22 @@ function validRequiredTextarea($textarea)
 
 /**
  * Checks if the name given was valid
- * @param String $name the name given
+ * @param String $value the value given
  * @return bool if the name was valid
  */
-function validName($name)
+function alphabetical($value)
 {
-    return !empty($name) && ctype_alpha($name);
+    return !empty($value) && ctype_alpha($value);
 }
 
 /**
- * Checks if the address is empty
- * @param String $address the address given
- * @return bool if the address was valid
+ * Checks if the name given was valid
+ * @param String $value the value given
+ * @return bool if the name was valid
  */
-function validAddress($address)
+function numeric($value)
 {
-    return !empty($address);
+    return !empty($value) && ctype_digit($value);
 }
 
 /**

@@ -55,30 +55,13 @@ $f3->route('GET|POST /personal_information', function($f3)
 {
     $f3->set('page_title', 'Personal information');
 
-    // Check state
-    if($_POST['state'] == 'none') {
-        define('STATE', 'Unselected');
-    }
-    else {
-        define('STATE', $_POST['state']);
-        $_SESSION['state'] = $_POST['state'];
-    }
-
-    // Check affiliate
-    if($_POST['affiliate'] == 'select') {
-        define('AFFILIATE', 'Unselected');
-    }
-    else {
-        define('AFFILIATE', $_POST['affiliate']);
-        $_SESSION['affiliate'] = $_POST['affiliate'];
-    }
-
     if(!empty($_POST))
     {
         // get data from form
         $first = $_POST['first'];
         $last = $_POST['last'];
         $pronouns = $_POST['pronouns'];
+        $dateOfBirth = $_POST['day'] . "/" . $_POST['month'] . "/" . $_POST['year'];
         $address = $_POST['inputAddress'];
         $address2 = $_POST['inputAddress2'];
         $city = $_POST['inputCity'];
@@ -99,6 +82,9 @@ $f3->route('GET|POST /personal_information', function($f3)
         $f3->set('fname', $first);
         $f3->set('lname', $last);
         $f3->set('pronouns', $pronouns);
+        $f3->set('dateOfBirth', $dateOfBirth);
+        $f3->set('member', $member);
+        $f3->set('affiliate', $affiliate);
         $f3->set('address', $address);
         $f3->set('address2', $address2);
         $f3->set('city', $city);
@@ -108,8 +94,8 @@ $f3->route('GET|POST /personal_information', function($f3)
         $f3->set('primary_time', $primaryTime);
         $f3->set('alternate_phone', $alternatePhone);
         $f3->set('alternate_time', $alternateTime);
-        $f3->set('affiliate', $affiliate);
-        $f3->set('member', $member);
+        $f3->set('email', $email);
+        $f3->set('preference', $preference);
         $f3->set('emergency_name', $emergency_name);
         $f3->set('emergency_phone', $emergency_phone);
 
@@ -118,8 +104,11 @@ $f3->route('GET|POST /personal_information', function($f3)
             $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $affiliate, $member,
             $emergency_name, $emergency_phone);
 
+        $_SESSION['state'] = $_POST['state'];
+        $_SESSION['affiliate'] = $_POST['affiliate'];
+
         // validate data
-        if(validLongAnswersForm())
+        if(validPersonalInfoForm())
         {
             $f3->reroute('/additional_information');
         }
