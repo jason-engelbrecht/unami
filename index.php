@@ -461,7 +461,7 @@ $f3->route('GET /trainings', function($f3)
 
 $f3->route('GET /unit_testing', function() {
     $view = new Template();
-    echo $view->render('model/testing/validationTesting.php');
+    echo $view->render('model/unit_testing/validationTesting.php');
 });
 
 //Run fat-free

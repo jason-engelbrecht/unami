@@ -35,7 +35,7 @@ function validPersonalInfoForm()
     if (!validDOB($f3->get('dateOfBirth')))
     {
         $isValid = false;
-        $f3->set("errors['dateOfBirth']", "Please enter your date of birth in the format DD/MM/YYY");
+        $f3->set("errors['dateOfBirth']", "Please enter your date of birth in the format MM/DD/YYY");
     }
 
     if (!alphabetical($f3->get('member')))
@@ -44,7 +44,7 @@ function validPersonalInfoForm()
         $f3->set("errors['member']", "Please enter a valid member selection");
     }
 
-    if (empty($f3->get('affiliate') || $f3->get('affiliate') == 'none'))
+    if (empty($f3->get('affiliate')) || $f3->get('affiliate') == 'none')
     {
         $isValid = false;
         $f3->set("errors['affiliate']", "Please enter a valid affiliate");
@@ -53,7 +53,7 @@ function validPersonalInfoForm()
     if (empty($f3->get('address')))
     {
         $isValid = false;
-        $f3->set("errors['address']", "Please enter your street address");
+        $f3->set("errors['address']", "Please enter a valid street address");
     }
 
     if (!alphabetical($f3->get('city')))
@@ -74,16 +74,22 @@ function validPersonalInfoForm()
         $f3->set("errors['zip']", "Please enter a valid zip");
     }
 
-    if (empty($f3->get('primary_phone')))
+    if (!numeric($f3->get('primary_phone')))
     {
         $isValid = false;
-        $f3->set("errors['primary_phone']", "Please enter a phone number");
+        $f3->set("errors['primary_phone']", "Please enter a valid primary phone number");
+    }
+
+    if (!numeric($f3->get('alternate_phone') && !empty($f3->get('alternate_phone'))))
+    {
+        $isValid = false;
+        $f3->set("errors['primary_phone']", "Please enter a valid alternate phone number");
     }
 
     if (empty($f3->get('primary_time')))
     {
         $isValid = false;
-        $f3->set("errors['primary_time']", "Please enter a time to call");
+        $f3->set("errors['primary_time']", "Please enter a primary time to call");
     }
 
     if (!validEmail($f3->get('email')))
@@ -101,13 +107,13 @@ function validPersonalInfoForm()
     if (!alphabetical($f3->get('emergency_name')))
     {
         $isValid = false;
-        $f3->set("errors['emergency_name']", "Please give an emergency contact");
+        $f3->set("errors['emergency_name']", "Please enter a valid emergency contact");
     }
 
-    if (empty($f3->get('emergency_phone')))
+    if (!numeric($f3->get('emergency_phone')))
     {
         $isValid = false;
-        $f3->set("errors['emergency_phone']", "Please enter your emergency contacts phone number");
+        $f3->set("errors['emergency_phone']", "Please enter a valid emergency contact phone number");
     }
 
     return $isValid;
@@ -297,7 +303,7 @@ function validRequiredTextarea($textarea)
  */
 function alphabetical($value)
 {
-    return !empty($value) && ctype_alpha(str_replace(array(' ', "'", '-', '.'), '', $value));
+    return !empty($value) && ctype_alpha(str_replace(array(' ', "'", '-', '.', '/', ','), '', $value));
 }
 
 /**
@@ -307,7 +313,7 @@ function alphabetical($value)
  */
 function numeric($value)
 {
-    return !empty($value) && ctype_digit($value);
+    return !empty($value) && ctype_digit(str_replace(array('-', '(', ')', ' '), '', $value));
 }
 
 /**
