@@ -326,8 +326,7 @@ $f3->route('GET|POST /confirmation', function($f3)
 //login
 $f3->route('GET /login', function($f3)
 {
-    $f3->set('page', 'dashboard');
-    $f3->set('page_title', 'Dashboard');
+    $f3->set('page_title', 'Login');
 
     $view = new Template();
     echo $view->render('views/portal/account/login.html');
@@ -336,8 +335,7 @@ $f3->route('GET /login', function($f3)
 //forgot password
 $f3->route('GET /forgot-password', function($f3)
 {
-    $f3->set('page', 'dashboard');
-    $f3->set('page_title', 'Dashboard');
+    $f3->set('page_title', 'Forgot Password');
 
     $view = new Template();
     echo $view->render('views/portal/account/forgot-password.html');
@@ -346,8 +344,7 @@ $f3->route('GET /forgot-password', function($f3)
 //create account
 $f3->route('GET /register', function($f3)
 {
-    $f3->set('page', 'dashboard');
-    $f3->set('page_title', 'Dashboard');
+    $f3->set('page_title', 'Create Account');
 
     $view = new Template();
     echo $view->render('views/portal/account/register.html');
@@ -401,6 +398,16 @@ $f3->route('GET /affiliates', function($f3)
 
     $view = new Template();
     echo $view->render('views/portal/other/affiliates.html');
+});
+
+//trainings
+$f3->route('GET /trainings', function($f3)
+{
+    $f3->set('page', 'trainings');
+    $f3->set('page_title', 'Trainings');
+
+    $view = new Template();
+    echo $view->render('views/portal/other/trainings.html');
 });
 
 //Run fat-free

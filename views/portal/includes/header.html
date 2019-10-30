@@ -143,6 +143,21 @@
                 <span>Affiliates</span></a>
         </li>
 
+        <!-- trainings -->
+        <li <check if="{{ @page == 'trainings' }}">
+        <true>
+            class="nav-item sidebar-buttons active"
+        </true>
+        <false>
+            class="nav-item sidebar-buttons"
+        </false>
+    </check>>
+
+        <a class="nav-link" href="trainings">
+            <i class="far fa-calendar-alt"></i>
+            <span>Trainings</span></a>
+        </li>
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
