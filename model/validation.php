@@ -32,7 +32,7 @@ function validPersonalInfoForm()
         $f3->set("errors['pronouns']", "Please enter a valid pronoun");
     }
 
-    if (!numeric($f3->get('dateOfBirth')))
+    if (!validDOB($f3->get('dateOfBirth')))
     {
         $isValid = false;
         $f3->set("errors['dateOfBirth']", "Please enter your date of birth in the format DD/MM/YYY");
@@ -41,7 +41,7 @@ function validPersonalInfoForm()
     if (!alphabetical($f3->get('member')))
     {
         $isValid = false;
-        $f3->set("errors['lname']", "Please enter a valid member selection");
+        $f3->set("errors['member']", "Please enter a valid member selection");
     }
 
     if (empty($f3->get('affiliate') || $f3->get('affiliate') == 'none'))
@@ -56,7 +56,7 @@ function validPersonalInfoForm()
         $f3->set("errors['address']", "Please enter your street address");
     }
 
-    if (!numeric($f3->get('city')))
+    if (!alphabetical($f3->get('city')))
     {
         $isValid = false;
         $f3->set("errors['city']", "Please enter a valid city");
@@ -92,16 +92,16 @@ function validPersonalInfoForm()
         $f3->set("errors['email']", "Please enter a valid email address");
     }*/
 
-    if (!alphabetical($f3->get('preference')))
+    if ($f3->get('preference') != 'phone' && $f3->get('preference') != 'email')
     {
         $isValid = false;
         $f3->set("errors['preference']", "Please choose a best way to contact you");
     }
 
-    if (!alphabetical($f3->get('emergency_name')))
+    if (!validEmergencyContact($f3->get('emergency_name')))
     {
         $isValid = false;
-        $f3->set("errors['emergency_name']", "Please choose a best way to contact you");
+        $f3->set("errors['emergency_name']", "Please give an emergency contact");
     }
 
     if (empty($f3->get('emergency_phone')))
@@ -122,13 +122,13 @@ function validAccommodationsForm()
     global $f3;
     $isValid = true;
 
-    if (!numeric($f3->get('gender')))
+    if (!alphabetical($f3->get('gender')))
     {
         $isValid = false;
         $f3->set("errors['gender']", "Please enter a gender");
     }
 
-    if (!numeric($f3->get('roommateGender')))
+    if (!alphabetical($f3->get('roommateGender')))
     {
         $isValid = false;
         $f3->set("errors['roommateGender']", "Please enter a gender for your roommate");
@@ -229,6 +229,19 @@ function validNotRequiredForm()
     return $isValid;
 }
 
+function validDOB($dob)
+{
+    $nums = explode("/", $dob);
+    foreach ($nums as $datePiece)
+    {
+        if(!numeric($datePiece))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 /**
  * Checks if the days rooming given was valid
  * @param array the days the applicant is staying
@@ -245,7 +258,7 @@ function validRequiredTextarea($textarea)
 }
 
 /**
- * Checks if the name given was valid
+ * Checks if the String given was valid
  * @param String $value the value given
  * @return bool if the name was valid
  */
@@ -254,8 +267,13 @@ function alphabetical($value)
     return !empty($value) && ctype_alpha($value);
 }
 
+function validEmergencyContact($emergency)
+{
+    return !empty($emergency) && ctype_alpha(str_replace(array(' ', "'", '-'), '', $emergency));
+}
+
 /**
- * Checks if the name given was valid
+ * Checks if the number given was valid
  * @param String $value the value given
  * @return bool if the name was valid
  */
