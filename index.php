@@ -118,7 +118,7 @@ $f3->route('GET|POST /personal_information', function($f3)
     {
         $_SESSION['PersonalInfo'] = new PersonalInfo('','','','','','',
             '', '', '', '', '', '', '', '',
-            '', '', '', '');
+            '', '', '', '', '', '', '');
     }
 
    $view = new Template();
@@ -147,13 +147,14 @@ $f3->route('GET|POST /additional_information', function($f3)
 
         if(sizeof($daysRooming) == 0)
         {
-            $daysRooming = array('1');
+            $daysRooming = array('N/A');
         }
 
         if($noAccommodations == 'yes')
         {
             $singleRoom = 'N/A';
             $roommate = 'N/A';
+            $gender = 'N/A';
             $roommateGender = 'N/A';
             $cpap = 'N/A';
             $cpapRoommate = 'N/A';
@@ -162,6 +163,7 @@ $f3->route('GET|POST /additional_information', function($f3)
         if($singleRoom == 'yes')
         {
             $roommate = 'N/A';
+            $gender = 'N/A';
             $roommateGender = 'N/A';
             $cpap = 'N/A';
             $cpapRoommate = 'N/A';
@@ -230,6 +232,26 @@ $f3->route('GET|POST /long_answer', function($f3)
         $coFacWhere = $_POST['coFacWhere'];
         $coFacWhereText = $_POST['coFacWhereText'];
 
+        if($relativeMentalIllness == 'no')
+        {
+            $relativeMentalIllnessText = 'N/A';
+        }
+
+        if($convict == 'no')
+        {
+            $convictText = 'N/A';
+        }
+
+        if($coFacWhom == 'no')
+        {
+            $coFacWhomText = 'N/A';
+        }
+
+        if($coFacWhere == 'no')
+        {
+            $coFacWhereText = 'N/A';
+        }
+
         // add data to hive
         $f3->set('relativeMentalIllness', $relativeMentalIllness);
         $f3->set('relativeMentalIllnessText', $relativeMentalIllnessText);
@@ -274,6 +296,16 @@ $f3->route('GET|POST /not_required', function($f3)
         $trainedText = $_POST['trainedText'];
         $certified = $_POST['certified'];
         $certifiedText = $_POST['certifiedText'];
+
+        if($trained == 'no')
+        {
+            $trainedText = 'N/A';
+        }
+
+        if($certified == 'no')
+        {
+            $certifiedText = 'N/A';
+        }
 
         // add data to hive
         $f3->set('heardAboutTraining', $heardAboutTraining);

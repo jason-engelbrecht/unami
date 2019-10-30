@@ -255,7 +255,7 @@ function validDOB($dob)
  */
 function validDaysRooming($days)
 {
-    return $days[0] != '1';
+    return $days[0] != 'N/A';
 }
 
 function validRequiredTextarea($textarea)
