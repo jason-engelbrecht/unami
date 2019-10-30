@@ -102,9 +102,9 @@ $f3->route('GET|POST /personal_information', function($f3)
 
         $_SESSION['PersonalInfo'] = new PersonalInfo($first, $last, $pronouns, $address, $address2, $city, $state, $zip,
             $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $affiliate, $member,
-            $emergency_name, $emergency_phone);
+            $emergency_name, $emergency_phone, $_POST['day'], $_POST['month'], $_POST['year']);
 
-        $_SESSION['state'] = $_POST['state'];
+        $_SESSION['state'] = $_POST['inputState'];
         $_SESSION['affiliate'] = $_POST['affiliate'];
 
         // validate data

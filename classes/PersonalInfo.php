@@ -24,6 +24,9 @@ class PersonalInfo
     private $_member;
     private $_emergency_name;
     private $_emergency_phone;
+    private $_dobDay;
+    private $_dobMonth;
+    private $_dobYear;
     /**
      * PersonalInfo constructor.
      * @param $_fname String first name of applicant
@@ -44,10 +47,13 @@ class PersonalInfo
      * @param $_member String if they are a member or nor
      * @param $_emergency_name String the name of their emergency contact
      * @param $_emergency_phone String the phone of their emergency contact
+     * @param $_dobDay String the day of the user's dob
+     * @param $_dobMonth String the month of the user's dob
+     * @param $_dobYear String the year of the user's dob
      */
     public function __construct($_fname, $_lname, $_pronouns, $_address, $_address2, $_city, $_state, $_zip,
                                 $_primaryPhone, $_primaryTime, $_alternatePhone, $_alternateTime, $_email, $_preference,
-                                $_affiliate, $_member, $_emergency_name, $_emergency_phone)
+                                $_affiliate, $_member, $_emergency_name, $_emergency_phone, $_dobDay, $_dobMonth, $_dobYear)
     {
         $this->_fname = $_fname;
         $this->_lname = $_lname;
@@ -67,6 +73,9 @@ class PersonalInfo
         $this->_member = $_member;
         $this->_emergency_name = $_emergency_name;
         $this->_emergency_phone = $_emergency_phone;
+        $this->_dobDay = $_dobDay;
+        $this->_dobMonth = $_dobMonth;
+        $this->_dobYear = $_dobYear;
     }
     /** Getter for the first name
      * @return mixed first name
@@ -193,5 +202,29 @@ class PersonalInfo
     public function getEmergencyPhone()
     {
         return $this->_emergency_phone;
+    }
+
+    /** Gets the day of the DOB
+     * @return String the day
+     */
+    public function getDobDay()
+    {
+        return $this->_dobDay;
+    }
+
+    /** Gets the month of the DOB
+     * @return String the month
+     */
+    public function getDobMonth()
+    {
+        return $this->_dobMonth;
+    }
+
+    /** Gets the year of the DOB
+     * @return String the year
+     */
+    public function getDobYear()
+    {
+        return $this->_dobYear;
     }
 }

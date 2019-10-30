@@ -54,15 +54,15 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <input name="day" type="text" class="form-control" id="day" placeholder="DD"
-                                               required maxlength="2">
+                                               required maxlength="2" value="{{$_SESSION['PersonalInfo']->getDobDay()}}">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <input name="month" type="text" class="form-control" id="month" placeholder="MM"
-                                               required maxlength="2">
+                                               required maxlength="2" value="{{$_SESSION['PersonalInfo']->getDobMonth()}}">
                                     </div>
                                     <div class="form-group col-md-5">
                                         <input name="year" type="text" class="form-control" id="year" placeholder="YYYY"
-                                               required maxlength="4">
+                                               required maxlength="4" value="{{$_SESSION['PersonalInfo']->getDobYear()}}">
                                     </div>
                                 </div>
                             </div>
@@ -70,10 +70,12 @@
                             <div class="form-group col-md-4">
                                 <h4 class="lead">Are you a NAMI member?</h4>
                                 <label class="mt-1">
-                                    <input required type="radio" name="member" value="yes">
+                                    <input required type="radio" name="member" value="yes"
+                                    <check if="{{$_SESSION['PersonalInfo']->getMember() === 'yes'}}">checked</check>>
                                     Yes</label>
                                 <label class="ml-3">
-                                    <input required type="radio" name="member" value="no">
+                                    <input required type="radio" name="member" value="no"
+                                    <check if="{{$_SESSION['PersonalInfo']->getMember() === 'no'}}">checked</check>>
                                     No</label>
                                 <a href="#" class="ml-5" data-toggle="tooltip" title="If you're not already a member, you will need to register before your training"
                                 ><i class="fas fa-info-circle text-primary"></i></a>
