@@ -53,12 +53,12 @@
                                 <h4 class="lead">Date of Birth</h4>
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
-                                        <input name="day" type="text" class="form-control" id="day" placeholder="DD"
-                                               required maxlength="2" value="{{$_SESSION['PersonalInfo']->getDobDay()}}">
-                                    </div>
-                                    <div class="form-group col-md-3">
                                         <input name="month" type="text" class="form-control" id="month" placeholder="MM"
                                                required maxlength="2" value="{{$_SESSION['PersonalInfo']->getDobMonth()}}">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <input name="day" type="text" class="form-control" id="day" placeholder="DD"
+                                               required maxlength="2" value="{{$_SESSION['PersonalInfo']->getDobDay()}}">
                                     </div>
                                     <div class="form-group col-md-5">
                                         <input name="year" type="text" class="form-control" id="year" placeholder="YYYY"

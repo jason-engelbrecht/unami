@@ -86,11 +86,11 @@ function validPersonalInfoForm()
         $f3->set("errors['primary_time']", "Please enter a time to call");
     }
 
-    /*if (!validEmail($f3->get('email')))
+    if (!validEmail($f3->get('email')))
     {
         $isValid = false;
         $f3->set("errors['email']", "Please enter a valid email address");
-    }*/
+    }
 
     if ($f3->get('preference') != 'phone' && $f3->get('preference') != 'email')
     {
@@ -98,7 +98,7 @@ function validPersonalInfoForm()
         $f3->set("errors['preference']", "Please choose a best way to contact you");
     }
 
-    if (!validEmergencyContact($f3->get('emergency_name')))
+    if (!alphabetical($f3->get('emergency_name')))
     {
         $isValid = false;
         $f3->set("errors['emergency_name']", "Please give an emergency contact");
@@ -149,6 +149,9 @@ function validAccommodationsForm()
     return $isValid;
 }
 
+/** Checks if the long answer form is valid
+ * @return bool if the long answers is valid
+ */
 function validLongAnswersForm()
 {
     global $f3;
@@ -205,9 +208,8 @@ function validLongAnswersForm()
     return $isValid;
 }
 
-/**
- * Used to check if they should fill something out on the not required.
- *
+/** Checks if the not required form is valid
+ * @return bool if the not required form is valid
  */
 function validNotRequiredForm()
 {
@@ -235,6 +237,10 @@ function validNotRequiredForm()
     return $isValid;
 }
 
+/** Checks if the Date of Birth is valid
+ * @param $dob String Date of Birth
+ * @return bool if its valid
+ */
 function validDOB($dob)
 {
     $nums = explode("/", $dob);
@@ -244,6 +250,23 @@ function validDOB($dob)
         {
             return false;
         }
+    }
+    //check month is valid
+    if($nums[0] < 1 || $nums[0] > 12)
+    {
+        return false;
+    }
+
+    //check if days are valid
+    if($nums[1] < 1 || $nums[1] > 31)
+    {
+        return false;
+    }
+
+    //check if year is valid
+    if($nums[2] < 1920 || $nums[2] > 2020)
+    {
+        return false;
     }
     return true;
 }
@@ -258,6 +281,10 @@ function validDaysRooming($days)
     return $days[0] != 'N/A';
 }
 
+/** Checks if the applicant wrote something
+ * @param $textarea String if something is written
+ * @return bool if the textarea
+ */
 function validRequiredTextarea($textarea)
 {
     return !empty($textarea) && $textarea != "";
@@ -270,12 +297,7 @@ function validRequiredTextarea($textarea)
  */
 function alphabetical($value)
 {
-    return !empty($value) && ctype_alpha($value);
-}
-
-function validEmergencyContact($emergency)
-{
-    return !empty($emergency) && ctype_alpha(str_replace(array(' ', "'", '-'), '', $emergency));
+    return !empty($value) && ctype_alpha(str_replace(array(' ', "'", '-', '.'), '', $value));
 }
 
 /**
@@ -289,43 +311,20 @@ function numeric($value)
 }
 
 /**
- * Checks if password was valid
- * @param String $password the password given
- * @return bool if the password was 7 characters or longer
- */
-function validPassword($password)
-{
-    return !empty($password) && strlen($password) >= 7;
-}
-
-/**
  * Checks if the email is valid
  * @param String $email the email given
  * @return bool if the email was valid ot not
  */
 function validEmail($email)
 {
-    global $db;
-    $emailValid = $db->checkEmail($email);
+    //global $db;
+    //$emailValid = $db->checkEmail($email);
+    /**
     if (empty($emailValid))
     {
-        return !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL);
     }
     return false;
-}
+     * */
 
-/**
- * Checks if the passwords given match
- * @param String $pass the first password
- * @param String $pass1 the second password
- * @return bool if the passwords match
- */
-function validSamePass($pass, $pass1)
-{
-    if(!empty($pass) == !empty($pass1))
-    {
-        return $pass == $pass1;
-    }
-    return false;
+    return !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL);
 }
-

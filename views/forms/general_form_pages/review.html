@@ -18,15 +18,15 @@
         <div class="card-body m-3">
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>First Name: </strong></h6>
+                    <h6 class="lead">First Name: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getFname() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Last Name: </strong></h6>
+                    <h6 class="lead">Last Name: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getLname() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
-                    <h6 class="lead"><strong>Pronouns: </strong></h6>
+                    <h6 class="lead">Pronouns: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPronouns() }}</p>
                 </div>
             </div>
@@ -35,15 +35,15 @@
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Address 1: </strong></h6>
+                    <h6 class="lead">Address 1: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Address 2: </strong></h6>
+                    <h6 class="lead">Address 2: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress2() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
-                    <h6 class="lead"><strong>Date of Birth: </strong></h6>
+                    <h6 class="lead">Date of Birth: </h6>
                     <p>{{ $_SESSION['PersonalInfo']->getDobDay() .'/'.  $_SESSION['PersonalInfo']->getDobMonth() .'/'.
                         $_SESSION['PersonalInfo']->getDobYear()}}</p>
                 </div>
@@ -53,15 +53,15 @@
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>City: </strong></h6>
+                    <h6 class="lead">City: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getCity() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>State: </strong></h6>
+                    <h6 class="lead">State: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getState() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
-                    <h6 class="lead"><strong>Zip: </strong></h6>
+                    <h6 class="lead">Zip: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getZip() }}</p>
                 </div>
             </div>
@@ -70,11 +70,11 @@
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Primary Phone Number: </strong></h6>
+                    <h6 class="lead">Primary Phone Number: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Best time to call: </strong></h6>
+                    <h6 class="lead">Best time to call: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</p>
                 </div>
             </div>
@@ -83,11 +83,11 @@
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Alternate Phone Number: </strong></h6>
+                    <h6 class="lead">Alternate Phone Number: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Best time to call: </strong></h6>
+                    <h6 class="lead">Best time to call: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternateTime() }}</p>
                 </div>
             </div>
@@ -96,11 +96,11 @@
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Email: </strong></h6>
+                    <h6 class="lead">Email: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmail() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Email or Phone: </strong></h6>
+                    <h6 class="lead">Email or Phone: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPreference() }}</p>
                 </div>
             </div>
@@ -109,11 +109,11 @@
 
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Affiliate: </strong></h6>
+                    <h6 class="lead">Affiliate: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAffiliate() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>NAMI member: </strong></h6>
+                    <h6 class="lead">NAMI member: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getMember() }}</p>
                 </div>
             </div>
@@ -122,11 +122,11 @@
 
             <div class="row mt-3 mx-3">
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Emergency Contact Name: </strong></h6>
+                    <h6 class="lead">Emergency Contact Name: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyName() }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
-                    <h6 class="lead"><strong>Emergency Contact Phone Number: </strong></h6>
+                    <h6 class="lead">Emergency Contact Phone Number: </h6>
                     <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}</p>
                 </div>
             </div>
@@ -143,15 +143,15 @@
         <div class="card-body m-3">
             <div class="row m-3">
                 <div class="col-md-4 pl-0">
-                    <h6 class="lead"><strong>Special Needs: </strong></h6>
+                    <h6 class="lead">Special Needs: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() }}</p>
                 </div>
                 <div class="col-md-4 pl-0">
-                    <h6 class="lead"><strong>Bringing a Service Animal: </strong></h6>
+                    <h6 class="lead">Bringing a Service Animal: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getServiceAnimal() }}</p>
                 </div>
                 <div class="col-md-4 pl-0">
-                    <h6 class="lead"><strong>Walker or Wheelchair used: </strong></h6>
+                    <h6 class="lead">Walker or Wheelchair used: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getMovementDisability() }}</p>
                 </div>
             </div>
@@ -160,11 +160,11 @@
 
             <div class="row m-3">
                 <div class="col-md-6 pl-0">
-                    <h6 class="lead"><strong>Live within 1 hour of training: </strong></h6>
+                    <h6 class="lead">Live within 1 hour of training: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getNoAccommodations() }}</p>
                 </div>
                 <div class="col-md-6 pl-0">
-                    <h6 class="lead"><strong>Did you want to pay extra for a single room: </strong></h6>
+                    <h6 class="lead">Did you want to pay extra for a single room: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSingleRoom() }}</p>
                 </div>
             </div>
@@ -172,30 +172,30 @@
             <hr>
 
             <div class="row m-3">
-                <h6 class="lead"><strong>Rooming Information: </strong></h6>
+                <h6 class="lead">Rooming Information: </h6>
             </div>
             <div class="row m-3">
                 <div class="col-md-4 pl-0">
-                    <h6 class="lead"><strong>Your Gender: </strong></h6>
+                    <h6 class="lead">Your Gender: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getGender() }}</p>
                 </div>
                 <div class="col-md-4 pl-0">
-                    <h6 class="lead"><strong>Want to Room With: </strong></h6>
+                    <h6 class="lead">Want to Room With: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getRoommateGender() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
-                    <h6 class="lead"><strong>Use a CPAP: </strong></h6>
+                    <h6 class="lead">Use a CPAP: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpap() }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
-                    <h6 class="lead"><strong>Room with a CPAP User: </strong></h6>
+                    <h6 class="lead">Room with a CPAP User: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}</p>
                 </div>
             </div>
 
             <div class="row mt-3 mx-3">
                 <div class="col-md-12 pl-0">
-                    <h6 class="lead"><strong>Need Housing for these nights: </strong></h6>
+                    <h6 class="lead">Need Housing for these nights: </h6>
                     <p class="pl-2">
                         <repeat group="{{ $_SESSION['AdditionalInfo']->getDaysRooming() }}" value="{{@day}}">
                             {{ @day .' '}}
@@ -216,11 +216,11 @@
         <div class="card-body m-3">
             <div class="row m-3">
                 <div class="col-md-3 pl-0">
-                    <h6 class="lead"><strong>Relative with Mental Illness: </strong></h6>
+                    <h6 class="lead">Relative with Mental Illness: </h6>
                     <p class="pl-2">{{ $_SESSION['LongAnswer']->getRelativeMentalIllness() }}</p>
                 </div>
                 <div class="col-md-9 pl-0">
-                    <h6 class="lead"><strong>Relative with Mental Illness Response: </strong></h6>
+                    <h6 class="lead">Relative with Mental Illness Response: </h6>
                     <p class="pl-2">{{ $_SESSION['LongAnswer']->getRelativeMentalIllnessText() }}</p>
                 </div>
             </div>
@@ -229,11 +229,11 @@
 
             <div class="row m-3">
                 <div class="col-md-3 pl-0">
-                    <h6 class="lead"><strong>Convicted of a Crime: </strong></h6>
+                    <h6 class="lead">Convicted of a Crime: </h6>
                     <p class="pl-2">{{ $_SESSION['LongAnswer']->getConvict() }}</p>
                 </div>
                 <div class="col-md-9 pl-0">
-                    <h6 class="lead"><strong>Convicted of a Crime Response: </strong></h6>
+                    <h6 class="lead">Convicted of a Crime Response: </h6>
                     <p class="pl-2">{{ $_SESSION['LongAnswer']->getConvictText() }}</p>
                 </div>
             </div>
@@ -242,7 +242,7 @@
 
             <div class="row m-3">
                 <div class="col-md-12 pl-0">
-                    <h6 class="lead"><strong>Why you want to be a NAMI Family Support Group Facilitator: </strong></h6>
+                    <h6 class="lead">Why you want to be a NAMI Family Support Group Facilitator: </h6>
                     <p class="pl-2">{{ $_SESSION['LongAnswer']->getWhyFacilitator() }}</p>
                 </div>
             </div>
@@ -251,7 +251,7 @@
 
             <div class="row m-3">
                 <div class="col-md-12 pl-0">
-                    <h6 class="lead"><strong>Experience in Support Group Participation: </strong></h6>
+                    <h6 class="lead">Experience in Support Group Participation: </h6>
                     <p class="pl-2">{{ $_SESSION['LongAnswer']->getExperience() }}</p>
                 </div>
             </div>
@@ -260,11 +260,11 @@
 
             <div class="row mx-3 mt-3">
                 <div class="col-md-6 pl-0">
-                    <h6 class="lead"><strong>Who you want to Co-facilitate with: </strong></h6>
+                    <h6 class="lead">Who you want to Co-facilitate with: </h6>
                     <p class="pl-2">{{ $_SESSION['LongAnswer']->getCoFacWhomText() }}</p>
                 </div>
                 <div class="col-md-6 pl-0">
-                    <h6 class="lead"><strong>Where you want to Co-facilitate : </strong></h6>
+                    <h6 class="lead">Where you want to Co-facilitate : </h6>
                     <p class="pl-2">{{ $_SESSION['LongAnswer']->getCoFacWhereText() }}</p>
                 </div>
             </div>
@@ -281,7 +281,7 @@
         <div class="card-body m-3">
             <div class="row m-3">
                 <div class="col-md-12 pl-0">
-                    <h6 class="lead"><strong>How did you hear about this training class: </strong></h6>
+                    <h6 class="lead">How did you hear about this training class: </h6>
                     <p class="pl-2">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</p>
                 </div>
             </div>
@@ -290,11 +290,11 @@
 
             <div class="row m-3">
                 <div class="col-md-3 pl-0">
-                    <h6 class="lead"><strong>Have you Taken Other Classes: </strong></h6>
+                    <h6 class="lead">Have you Taken Other Classes: </h6>
                     <p class="pl-2">{{ $_SESSION['NotRequired']->getTrained() }}</p>
                 </div>
                 <div class="col-md-9 pl-0">
-                    <h6 class="lead"><strong>Which Classes you Took: </strong></h6>
+                    <h6 class="lead">Which Classes you Took: </h6>
                     <p class="pl-2">{{ $_SESSION['NotRequired']->getTrainedText() }}</p>
                 </div>
             </div>
@@ -303,11 +303,11 @@
 
             <div class="row m-3">
                 <div class="col-md-3 pl-0">
-                    <h6 class="lead"><strong>Can you Teach any Classes: </strong></h6>
+                    <h6 class="lead">Can you Teach any Classes: </h6>
                     <p class="pl-2">{{ $_SESSION['NotRequired']->getCertified() }}</p>
                 </div>
                 <div class="col-md-9 pl-0">
-                    <h6 class="lead"><strong>Which Classes you can Teach: </strong></h6>
+                    <h6 class="lead">Which Classes you can Teach: </h6>
                     <p class="pl-2">{{ $_SESSION['NotRequired']->getCertifiedText() }}</p>
                 </div>
             </div>

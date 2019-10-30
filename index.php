@@ -61,7 +61,7 @@ $f3->route('GET|POST /personal_information', function($f3)
         $first = $_POST['first'];
         $last = $_POST['last'];
         $pronouns = $_POST['pronouns'];
-        $dateOfBirth = $_POST['day'] . "/" . $_POST['month'] . "/" . $_POST['year'];
+        $dateOfBirth = $_POST['month'] . "/" . $_POST['day'] . "/" . $_POST['year'];
         $address = $_POST['inputAddress'];
         $address2 = $_POST['inputAddress2'];
         $city = $_POST['inputCity'];
@@ -449,6 +449,11 @@ $f3->route('GET /trainings', function($f3)
 
     $view = new Template();
     echo $view->render('views/portal/other/trainings.html');
+});
+
+$f3->route('GET /unit_testing', function() {
+    $view = new Template();
+    echo $view->render('model/testing/validationTesting.php');
 });
 
 //Run fat-free
