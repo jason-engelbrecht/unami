@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+
     let singleRoom = $("#singleRoom");
     let daysRooming = $("#daysRooming");
 

@@ -187,13 +187,15 @@ $f3->route('GET|POST /additional_information', function($f3)
             $noAccommodations, $needRoom, $daysRooming, $roommate, $gender, $roommateGender, $cpap, $cpapRoommate,
             $singleRoom);
 
+        /*
         if($_POST['goBack'] = 'goBack')
         {
             $f3->reroute('/personal_information');
         }
+        */
 
         // validate data
-        if(!validAccommodationsForm())
+        if(validAccommodationsForm())
         {
             $f3->reroute('/long_answer');
         }
@@ -201,7 +203,7 @@ $f3->route('GET|POST /additional_information', function($f3)
 
     if(!isset($_SESSION['AdditionalInfo']))
     {
-        $dummyArray = array('1');
+        $dummyArray = array('N/A');
         $_SESSION['AdditionalInfo'] = new AdditionalInfo('','','',
             '','',$dummyArray, '', '', '',
             '', '', '');
@@ -264,10 +266,12 @@ $f3->route('GET|POST /long_answer', function($f3)
         $_SESSION['LongAnswer'] =  new LongAnswers($relativeMentalIllness, $relativeMentalIllnessText, $convict,
             $convictText, $whyFacilitator, $experience, $coFacWhom, $coFacWhomText, $coFacWhere, $coFacWhereText);
 
+        /*
         if($_POST['goBack'] = 'goBack')
         {
             $f3->reroute('/additional_information');
         }
+        */
 
         // validate data
         if(validLongAnswersForm())
@@ -321,10 +325,12 @@ $f3->route('GET|POST /not_required', function($f3)
         $_SESSION['NotRequired'] =  new NotRequired($heardAboutTraining, $trained, $trainedText, $certified,
             $certifiedText);
 
+        /*
         if($_POST['goBack'] = 'goBack')
         {
             $f3->reroute('/long_answer');
         }
+        */
 
         if(validNotRequiredForm())
         {
