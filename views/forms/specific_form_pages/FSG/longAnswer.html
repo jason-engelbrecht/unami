@@ -62,7 +62,7 @@
 
                         <!--Question 3-->
                         <div class="form-group pt-5">
-                            <p>3. Have you ever been convicted of a crime against another person including but not limited to: assault of any
+                            <p>2. Have you ever been convicted of a crime against another person including but not limited to: assault of any
                                 kind, harassment of any kind, or stalking?</p>
 
                             <div class="form-check form-check-inline">
@@ -89,13 +89,13 @@
 
                         <!--Question 4-->
                         <div class="form-group pt-5">
-                            <label for="exampleFormControlTextarea2">4. Why do you want to be a NAMI Family Support
+                            <label for="exampleFormControlTextarea2">3. Why do you want to be a NAMI Family Support
                                 Group Facilitator?</label>
                             <textarea name="whyFacilitator" class="form-control" id="exampleFormControlTextarea2" rows="3"
                             >{{ $_SESSION['LongAnswer']->getWhyFacilitator() }}</textarea>
 
                             <!--Question 5-->
-                            <label for="exampleFormControlTextarea3" class="pt-5">5. What experience do you have in
+                            <label for="exampleFormControlTextarea3" class="pt-5">4. What experience do you have in
                                 participating in a support group?</label>
                             <textarea name="experience" class="form-control" id="exampleFormControlTextarea3" rows="3"
                             >{{ $_SESSION['LongAnswer']->getExperience() }}</textarea>
@@ -107,7 +107,7 @@
 
 
                             <!--Question 8-->
-                            <p class="pt-5">8. Do you know with whom you want to Co-facilitate?</p>
+                            <p class="pt-5">5. Do you know with whom you want to Co-facilitate?</p>
                             <div class="form-check form-check-inline">
                                 <input name="coFacWhom" class="form-check-input" type="radio" id="show3" value="yes" required
                                 <check if="{{ $_SESSION['LongAnswer']->getCoFacWhom() === 'yes' }}">
@@ -130,7 +130,7 @@
                             </div>
 
                             <!--Question 9-->
-                            <p class="pt-5">9. Do you know where you want to Co-facilitate?</p>
+                            <p class="pt-5">6. Do you know where you want to Co-facilitate?</p>
                             <div class="form-check form-check-inline">
                                 <input name="coFacWhere" class="form-check-input" type="radio" id="show4" value="yes" required
                                 <check if="{{ $_SESSION['LongAnswer']->getCoFacWhere() === 'yes' }}">
