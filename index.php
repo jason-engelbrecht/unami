@@ -22,6 +22,7 @@ require_once ('model/validation.php');
 $f3 = Base::instance();
 
 //Establish connection to database
+$db = new Database();
 
 // Array of states
 $f3->set('states', array('Alabama','Alaska','Arizona','Arkansas','California',
