@@ -22,7 +22,7 @@ require_once ('model/validation.php');
 $f3 = Base::instance();
 
 //Establish connection to database
-$db = new Database();
+$db = new UnamiDatabase();
 
 // Array of states
 $f3->set('states', array('Alabama','Alaska','Arizona','Arkansas','California',
@@ -45,6 +45,8 @@ $f3->set('affiliates', array('NAMI Chelan-Douglas', 'NAMI Clallam County', 'NAMI
 $f3->route('GET /', function($f3)
 {
     $f3->set('page_title', 'Start');
+    global $db;
+    $db->addApplicant('', '', '');
 
     session_destroy();
     session_start();
