@@ -128,9 +128,9 @@ function validAccommodationsForm()
     global $f3;
     $isValid = true;
 
-    if($f3->get('noAccommodations') == 'no')
+    if($f3->get('needAccommodations') == 'true')
     {
-        if($f3->get('singleRoom') == 'no')
+        if($f3->get('singleRoom') == 'true')
         {
             if (!alphabetical($f3->get('gender')))
             {

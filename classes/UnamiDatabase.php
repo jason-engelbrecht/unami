@@ -91,6 +91,11 @@ class UnamiDatabase
         }
     }
 
+    /**
+     * @param $personalInfo PersonalInfo
+     * @param $accommodations AdditionalInfo
+     * @param $notRequired NotRequired
+     */
     function addApplicant($personalInfo, $accommodations, $notRequired)
     {
         //prepare SQL statement
@@ -114,8 +119,14 @@ class UnamiDatabase
 
         $lastID = $this->_dbh->lastInsertId();
         $this->addPersonalInfo($personalInfo, $lastID);
+        $this->addAccommodations($accommodations, $lastID);
+        $this->addNotRequired($notRequired, $lastID);
     }
 
+    /**
+     * @param $personalInfo PersonalInfo
+     * @param $ID int
+     */
     function addPersonalInfo($personalInfo, $ID)
     {
         // prepare sql statement
@@ -164,7 +175,7 @@ class UnamiDatabase
         $statement->bindParam(':lname', $lname, PDO::PARAM_STR);
         $statement->bindParam(':pronouns', $pronouns, PDO::PARAM_STR);
         $statement->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
-        $statement->bindParam(':NAMI_member', $NAMI_member);
+        $statement->bindParam(':NAMI_member', $NAMI_member, PDO::PARAM_BOOL);
         $statement->bindParam(':NAMI_affiliate', $NAMI_affiliate, PDO::PARAM_STR);
         $statement->bindParam(':address', $address, PDO::PARAM_STR);
         $statement->bindParam(':city', $city, PDO::PARAM_STR);
@@ -179,6 +190,83 @@ class UnamiDatabase
         $statement->bindParam(':preference', $preference, PDO::PARAM_STR);
         $statement->bindParam(':emergency_name', $emergency_name, PDO::PARAM_STR);
         $statement->bindParam(':emergency_phone', $emergency_phone, PDO::PARAM_STR);
+
+        // execute insert into users
+        $statement->execute();
+    }
+
+    /**
+     * @param $accommodations AdditionalInfo
+     * @param $ID int
+     */
+    function addAccommodations($accommodations, $ID)
+    {
+        // prepare sql statement
+        $sql = "INSERT INTO users(applicant_id, special_needs, service_animal, mobility_need, need_rooming, single_room, 
+                  days_rooming, gender, roommate_gender, cpap_user, roommate_cpap)
+        VALUES (:applicant_id, :special_needs, :service_animal, :mobility_need, :need_rooming, :single_room, 
+                  :days_rooming, :gender, :roommate_gender, :cpap_user, :roommate_cpap)";
+
+        // save prepared statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // assign values
+        $applicant_id = $ID;
+        $special_needs = $accommodations->getSpecialNeeds();
+        $service_animal = $accommodations->getServiceAnimal();
+        $mobility_need = $accommodations->getMovementDisability();
+        $need_rooming = $accommodations->getNeedAccommodations();
+        $single_room = $accommodations->getSingleRoom();
+
+        $daysAsString = '';
+        foreach ($accommodations->getDaysRooming() as $day)
+        {
+            $daysAsString += $day;
+        }
+        $days_rooming = $daysAsString;
+        $gender = $accommodations->getGender();
+        $roommate_gender = $accommodations->getRoommateGender();
+        $cpap_user = $accommodations->getCpap();
+        $roommateCpap = $accommodations->getCpapRoommate();
+
+        // bind params
+        $statement->bindParam(':applicant_id', $applicant_id, PDO::PARAM_INT);
+        $statement->bindParam(':special_needs', $special_needs, PDO::PARAM_BOOL);
+        $statement->bindParam(':service_animal', $service_animal, PDO::PARAM_BOOL);
+        $statement->bindParam(':mobility_need', $mobility_need, PDO::PARAM_BOOL);
+        $statement->bindParam(':need_rooming', $need_rooming, PDO::PARAM_BOOL);
+        $statement->bindParam(':single_room', $single_room, PDO::PARAM_BOOL);
+        $statement->bindParam(':days_rooming', $days_rooming, PDO::PARAM_STR);
+        $statement->bindParam(':gender', $gender, PDO::PARAM_STR);
+        $statement->bindParam(':roommate_gender', $roommate_gender, PDO::PARAM_STR);
+        $statement->bindParam(':cpap_user', $cpap_user, PDO::PARAM_BOOL);
+        $statement->bindParam(':roommate_cpap', $roommateCpap, PDO::PARAM_BOOL);
+
+        // execute insert into users
+        $statement->execute();
+    }
+
+    /**
+     * @param $notRequired NotRequired
+     * @param $ID int
+     */
+    function addNotRequired($notRequired, $ID)
+    {
+        // prepare sql statement
+        $sql = "INSERT INTO users(applicant_id, )
+        VALUES (:applicant_id, :special_needs, :service_animal, :mobility_need, :need_rooming, :single_room, 
+                  :days_rooming, :gender, :roommate_gender, :cpap_user, :roommate_cpap)";
+
+        // save prepared statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // assign values
+        $applicant_id = $ID;
+
+
+        // bind params
+        $statement->bindParam(':applicant_id', $applicant_id, PDO::PARAM_INT);
+        
 
         // execute insert into users
         $statement->execute();

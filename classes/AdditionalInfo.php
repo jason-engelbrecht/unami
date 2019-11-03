@@ -10,7 +10,7 @@ class AdditionalInfo
     private $_specialNeeds;
     private $_serviceAnimal;
     private $_movementDisability;
-    private $_noAccommodations;
+    private $_needAccommodations;
     private $_needRoom;
     private $_daysRooming;
     private $_roommate;
@@ -25,7 +25,7 @@ class AdditionalInfo
      * @param $_specialNeeds String whether the applicant has special needs
      * @param $_serviceAnimal String whether the applicant has a service animal
      * @param $_movementDisability String whether the applicant has a movement disability
-     * @param $_noAccommodations String whether the applicant needs accommodations
+     * @param $_needAccommodations String whether the applicant needs accommodations
      * @param $_needRoom String if the applicant needs a room
      * @param $_daysRooming mixed the days the applicant is rooming
      * @param $_roommate String whether they want a roommate or not
@@ -35,14 +35,14 @@ class AdditionalInfo
      * @param $_cpapRoommate String if they mind sleeping with a cpap user
      * @param $_singleRoom String if they want to pay for a single room
      */
-    public function __construct($_specialNeeds, $_serviceAnimal, $_movementDisability, $_noAccommodations, $_needRoom,
+    public function __construct($_specialNeeds, $_serviceAnimal, $_movementDisability, $_needAccommodations, $_needRoom,
                                 $_daysRooming, $_roommate, $_gender, $_roommateGender, $_cpap, $_cpapRoommate,
                                 $_singleRoom)
     {
         $this->_specialNeeds = $_specialNeeds;
         $this->_serviceAnimal = $_serviceAnimal;
         $this->_movementDisability = $_movementDisability;
-        $this->_noAccommodations = $_noAccommodations;
+        $this->_needAccommodations = $_needAccommodations;
         $this->_needRoom = $_needRoom;
         $this->_daysRooming = $_daysRooming;
         $this->_roommate = $_roommate;
@@ -80,9 +80,9 @@ class AdditionalInfo
     /** Getter if they don't need accommodations
      * @return mixed no need for accommodations
      */
-    public function getNoAccommodations()
+    public function getNeedAccommodations()
     {
-        return $this->_noAccommodations;
+        return $this->_needAccommodations;
     }
 
     /** Getter for if they need a room or not

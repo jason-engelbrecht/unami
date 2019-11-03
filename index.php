@@ -45,8 +45,6 @@ $f3->set('affiliates', array('NAMI Chelan-Douglas', 'NAMI Clallam County', 'NAMI
 $f3->route('GET /', function($f3)
 {
     $f3->set('page_title', 'Start');
-    global $db;
-    $db->addApplicant('', '', '');
 
     session_destroy();
     session_start();
@@ -138,7 +136,7 @@ $f3->route('GET|POST /additional_information', function($f3)
         $specialNeeds = $_POST['specialNeeds'];
         $serviceAnimal = $_POST['serviceAnimal'];
         $movementDisability = $_POST['movementDisability'];
-        $noAccommodations = $_POST['noAccommodations'];
+        $needAccommodations = $_POST['needAccommodations'];
         $needRoom = $_POST['needRoom'];
         $daysRooming = $_POST['daysRooming'];
         $roommate = $_POST['roommate'];
@@ -153,30 +151,30 @@ $f3->route('GET|POST /additional_information', function($f3)
             $daysRooming = array('N/A');
         }
 
-        if($noAccommodations == 'yes')
+        if($needAccommodations == 'false')
         {
-            $singleRoom = 'N/A';
+            $singleRoom = 'false';
             $roommate = 'N/A';
             $gender = 'N/A';
             $roommateGender = 'N/A';
-            $cpap = 'N/A';
-            $cpapRoommate = 'N/A';
+            $cpap = 'false';
+            $cpapRoommate = 'false';
         }
 
-        if($singleRoom == 'yes')
+        if($singleRoom == 'true')
         {
             $roommate = 'N/A';
             $gender = 'N/A';
             $roommateGender = 'N/A';
-            $cpap = 'N/A';
-            $cpapRoommate = 'N/A';
+            $cpap = 'false';
+            $cpapRoommate = 'false';
         }
 
         // add data to hive
         $f3->set('specialNeeds', $specialNeeds);
         $f3->set('serviceAnimal', $serviceAnimal);
         $f3->set('movementDisability', $movementDisability);
-        $f3->set('noAccommodations', $noAccommodations);
+        $f3->set('needAccommodations', $needAccommodations);
         $f3->set('needRoom', $needRoom);
         $f3->set('daysRooming', $daysRooming);
         $f3->set('roommate', $roommate);
@@ -187,7 +185,7 @@ $f3->route('GET|POST /additional_information', function($f3)
         $f3->set('singleRoom', $singleRoom);
 
         $_SESSION['AdditionalInfo'] = new AdditionalInfo($specialNeeds, $serviceAnimal, $movementDisability,
-            $noAccommodations, $needRoom, $daysRooming, $roommate, $gender, $roommateGender, $cpap, $cpapRoommate,
+            $needAccommodations, $needRoom, $daysRooming, $roommate, $gender, $roommateGender, $cpap, $cpapRoommate,
             $singleRoom);
 
         /*
@@ -373,6 +371,9 @@ $f3->route('GET|POST /performance_agreement', function($f3) {
 
 $f3->route('GET|POST /confirmation', function($f3)
 {
+    global $db;
+    $db->addApplicant($_SESSION['PersonalInfo'], $_SESSION['AdditionalInfo'], $_SESSION['NotRequired']);
+
     $f3->set('page_title', 'Application Submitted');
 
     $view = new Template();
