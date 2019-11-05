@@ -58,13 +58,13 @@ CREATE TABLE adminUser
 	lname VARCHAR(70) NOT NULL,
 	email VARCHAR(254) NOT NULL,
     password VARCHAR(255) NOT NULL
-)
+);
 
 CREATE TABLE app_type
 (
     app_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     app_type VARCHAR(100) NOT NULL
-)
+);
 
 CREATE TABLE affiliates
 (
@@ -72,7 +72,31 @@ CREATE TABLE affiliates
     name VARCHAR(200) NOT NULL,
     phone VARCHAR(30) NOT NULL,
     email VARCHAR(254) NOT NULL
-)
+);
+
+INSERT INTO affiliates(name)
+ VALUES
+('NAMI Chelan-Douglas'),
+('NAMI Clallam County'),
+('NAMI Eastside'),
+('NAMI Jefferson County'),
+('NAMI Kitsap County'),
+('NAMI Lewis County'),
+('NAMI Pierce County'),
+('NAMI Seattle'),
+('NAMI Skagit'),
+('NAMI Snohomish County'),
+('NAMI South King County'),
+('NAMI Southwest Washington'),
+('NAMI Spokane'),
+('NAMI Thurston-Mason'),
+('NAMI Tri-Cities'),
+('NAMI Walla Walla'),
+('NAMI Washington Coast'),
+('NAMI Whatcom'),
+('NAMI Yakima');
+
+INSERT INTO app_type(app_type) VALUES('Family Support Group');
 
  */
 
@@ -298,14 +322,14 @@ class UnamiDatabase
     function getAffiliates()
     {
         //define query
-        $query = "SELECT name FROM affiliates";
+        $query = "SELECT name, affiliate_id FROM affiliates";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
 
         $statement->execute();
 
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
     }

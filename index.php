@@ -41,6 +41,8 @@ $f3->set('affiliates', array('NAMI Chelan-Douglas', 'NAMI Clallam County', 'NAMI
     'NAMI Thurston-Mason', 'NAMI Tri-Cities', 'NAMI Walla Walla', 'NAMI Washington Coast',
     'NAMI Whatcom', 'Yakima'));
 
+$f3->set('affiliates', $db->getAffiliates());
+
 //SwiftMailer testing
 $f3->route('GET /mailer', function(){
    if(class_exists('Swift'))
