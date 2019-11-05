@@ -241,4 +241,25 @@ class UnamiDatabase
 
         return $this->_dbh->lastInsertId();
     }
+
+    function getAdminPassword($email) {
+        //define query
+        $query = "SELECT password, fname, lname 
+                  FROM adminUser
+                  WHERE email = :email";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameter
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+
+        //execute
+        $statement->execute();
+
+        //get result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 }

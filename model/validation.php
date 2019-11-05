@@ -337,6 +337,30 @@ function validEmail($email)
 
 //////////////////admin portal validation////////////////////////////
 
+function validAccount($fname, $lname, $email, $password, $passwordRepeat) {
+
+    $isValid = true;
+
+    if(!validAdminName($fname)) {
+        $isValid = false;
+    }
+
+    if(!validAdminName($lname)) {
+        $isValid = false;
+    }
+
+    if(!validAdminEmail($email)) {
+        $isValid = false;
+    }
+
+    if(!validPassword($password, $passwordRepeat)) {
+        $isValid = false;
+    }
+
+    return $isValid;
+}
+
+
 function validPassword($password, $passwordRepeat) {
     global $f3;
 
@@ -351,7 +375,6 @@ function validPassword($password, $passwordRepeat) {
         return false;
     }
 
-
     //if password is good, check for matching
     if(!($password === $passwordRepeat)) {
         $f3->set("adminErrors['passwordMatch']", "Your passwords do not match");
@@ -364,7 +387,7 @@ function validPassword($password, $passwordRepeat) {
 function validAdminEmail($email) {
     global $f3;
 
-    if(empty($email) || filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $f3->set("adminErrors['email']", "Please enter a valid email");
         return false;
     }
@@ -372,7 +395,7 @@ function validAdminEmail($email) {
     return true;
 }
 
-function validName($name) {
+function validAdminName($name) {
     global $f3;
 
     if(!alphabetical($name)) {

@@ -396,12 +396,42 @@ $f3->route('GET|POST /confirmation', function($f3)
 });
 
 ///////////////////////////////////////////portal///////////////////////////////////////////////////////////////////////
-
 //login
 $f3->route('GET|POST /login', function($f3)
 {
     $f3->set('page_title', 'Login');
     global $db;
+
+    if(!empty($_POST)) {
+
+        //get email and password
+        $email = $_POST['loginEmail'];
+        $password = $_POST['loginPassword'];
+
+        //get user password with email
+        $adminUser = $db->getAdminPassword($email);
+
+        //sticky email
+        $_SESSION['adminEmail'] = $email;
+
+        //verify correct password entered
+        if(password_verify($password, $adminUser['password'])) {
+
+            //set logged in to 1 - and set name
+            $_SESSION['loggedIn'] = 1;
+            $_SESSION['adminFname'] = $adminUser['fname'];
+            $_SESSION['adminLname'] = $adminUser['lname'];
+
+            //get rid of
+            unset($_SESSION['adminEmail']);
+
+            //go to dashboard
+            $f3->reroute('/dashboard');
+        }
+        else {
+            $f3->set('loginError', 'Email and password do not match');
+        }
+    }
 
     $view = new Template();
     echo $view->render('views/portal/account/login.html');
@@ -415,8 +445,6 @@ $f3->route('GET /forgot-password', function($f3)
     $view = new Template();
     echo $view->render('views/portal/account/forgot-password.html');
 });
-
-
 
 //create account
 $f3->route('GET|POST /register', function($f3)
@@ -434,10 +462,7 @@ $f3->route('GET|POST /register', function($f3)
         $passwordRepeat = $_POST['adminPasswordRepeat'];
 
         //validate
-        if( validName($fname) &&
-            validName($lname) &&
-            validEmail($email) &&
-            validPassword($password, $passwordRepeat))
+        if(validAccount($fname, $lname, $email, $password, $passwordRepeat))
         {
             //insert into db - go to login
             $db->insertAdminUser($fname, $lname, $email, $password);
@@ -449,11 +474,13 @@ $f3->route('GET|POST /register', function($f3)
     echo $view->render('views/portal/account/register.html');
 });
 
-
-
 //dashboard
 $f3->route('GET /dashboard', function($f3)
 {
+    if($_SESSION['loggedIn'] !== 1) {
+        $f3->reroute('/login');
+    }
+
     $f3->set('page', 'dashboard');
     $f3->set('page_title', 'Dashboard');
 
@@ -464,6 +491,10 @@ $f3->route('GET /dashboard', function($f3)
 //active
 $f3->route('GET /active', function($f3)
 {
+    if($_SESSION['loggedIn'] !== 1) {
+        $f3->reroute('/login');
+    }
+
     $f3->set('page', 'active');
     $f3->set('page_title', 'Active Applicants');
 
@@ -474,6 +505,10 @@ $f3->route('GET /active', function($f3)
 //waitlist
 $f3->route('GET /waitlist', function($f3)
 {
+    if($_SESSION['loggedIn'] !== 1) {
+        $f3->reroute('/login');
+    }
+
     $f3->set('page', 'waitlist');
     $f3->set('page_title', 'Waitlisted Applicants');
 
@@ -484,6 +519,10 @@ $f3->route('GET /waitlist', function($f3)
 //archive
 $f3->route('GET /archive', function($f3)
 {
+    if($_SESSION['loggedIn'] !== 1) {
+        $f3->reroute('/login');
+    }
+
     $f3->set('page', 'archive');
     $f3->set('page_title', 'Archived Applicants');
 
@@ -494,6 +533,10 @@ $f3->route('GET /archive', function($f3)
 //affiliates
 $f3->route('GET /affiliates', function($f3)
 {
+    if($_SESSION['loggedIn'] !== 1) {
+        $f3->reroute('/login');
+    }
+
     $f3->set('page', 'affiliates');
     $f3->set('page_title', 'Affiliates');
 
@@ -504,6 +547,10 @@ $f3->route('GET /affiliates', function($f3)
 //trainings
 $f3->route('GET /trainings', function($f3)
 {
+    if($_SESSION['loggedIn'] !== 1) {
+        $f3->reroute('/login');
+    }
+
     $f3->set('page', 'trainings');
     $f3->set('page_title', 'Trainings');
 
@@ -511,6 +558,9 @@ $f3->route('GET /trainings', function($f3)
     echo $view->render('views/portal/other/trainings.html');
 });
 
+
+
+//testing
 $f3->route('GET /unit_testing', function() {
     $view = new Template();
     echo $view->render('model/unit_testing/validationTesting.php');

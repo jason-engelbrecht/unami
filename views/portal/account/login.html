@@ -17,25 +17,35 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">NAMI WA Admin Portal</h1>
                   </div>
-                  <form class="user" method="post">
+
+                  <form class="user" method="post" action="login">
                     <div class="form-group">
                       <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                             aria-describedby="emailHelp" name="loginEmail" placeholder="Enter Email Address...">
+                             aria-describedby="emailHelp" name="loginEmail" placeholder="Enter Email Address..." required
+                             value="{{ @SESSION.adminEmail }}">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" required
                              placeholder="Password" name="loginPassword">
                     </div>
+
+                    <div class="row justify-content-center text-danger">
+                      <check if="{{ isset(@loginError) }}">
+                        <p>{{ @loginError }}</p>
+                      </check>
+                    </div>
+
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                    <button type="submit" class="btn btn-primary btn-user btn-block" name="loginSubmit">
                       Login
                     </button>
                   </form>
+
                   <hr>
                   <div class="text-center">
                     <a class="small" href="forgot-password">Forgot Password?</a>
