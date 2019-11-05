@@ -39,6 +39,15 @@ CREATE TABLE applicants
 	other_classes MEDIUMTEXT,
 	certified MEDIUMTEXT
 );
+
+CREATE TABLE adminUser
+(
+	admin_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    fname VARCHAR(60) NOT NULL,
+	lname VARCHAR(70) NOT NULL,
+	email VARCHAR(254) NOT NULL,
+    password VARCHAR(255) NOT NULL
+)
  */
 $user = $_SERVER['USER'];
 require "/home/$user/config_UNAMI.php";
@@ -71,6 +80,7 @@ class UnamiDatabase
             // Instantiate a db object
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
             $this->_dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //echo 'connected';
         } catch (PDOException $e) {
             //echo $e->getMessage();
         }
@@ -204,4 +214,31 @@ class UnamiDatabase
 
         $lastID = $this->_dbh->lastInsertId();
     }
+
+    function insertAdminUser($fname, $lname, $email, $password) {
+
+        //hash password
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        //define query
+        $query = 'INSERT INTO adminUser
+                  (fname, lname, email, password)
+                  VALUES
+                  (:fname, :lname, :email, :password)';
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameters
+        $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
+        $statement->bindParam(':lname', $lname, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':password', $password, PDO::PARAM_STR);
+
+        //execute statement
+        $statement->execute();
+
+        return $this->_dbh->lastInsertId();
+    }
+
 }

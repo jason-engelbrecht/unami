@@ -415,14 +415,40 @@ $f3->route('GET /forgot-password', function($f3)
     echo $view->render('views/portal/account/forgot-password.html');
 });
 
+
+
 //create account
-$f3->route('GET /register', function($f3)
+$f3->route('GET|POST /register', function($f3)
 {
     $f3->set('page_title', 'Create Account');
+    global $db;
+
+    //form submission
+    if(!empty($_POST)) {
+        //get post data
+        $fname = $_POST['adminFname'];
+        $lname = $_POST['adminLname'];
+        $email = $_POST['adminEmail'];
+        $password = $_POST['adminPassword'];
+        $passwordRepeat = $_POST['adminPasswordRepeat'];
+
+        //validate
+        if( validName($fname) &&
+            validName($lname) &&
+            validEmail($email) &&
+            validPassword($password, $passwordRepeat))
+        {
+            //insert into db - go to login
+            $db->insertAdminUser($fname, $lname, $email, $password);
+            $f3->reroute('/login');
+        }
+    }
 
     $view = new Template();
     echo $view->render('views/portal/account/register.html');
 });
+
+
 
 //dashboard
 $f3->route('GET /dashboard', function($f3)
