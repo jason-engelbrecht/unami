@@ -40,7 +40,6 @@ CREATE TABLE applicants
 	certified MEDIUMTEXT
 );
 
-<<<<<<< HEAD
 CREATE TABLE adminUser
 (
 	admin_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -49,17 +48,8 @@ CREATE TABLE adminUser
 	email VARCHAR(254) NOT NULL,
     password VARCHAR(255) NOT NULL
 )
-=======
-CREATE TABLE state_workers
-(
-    user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    email VARCHAR(254) NOT NULL,
-    fname VARCHAR(60) NOT NULL,
-	lname VARCHAR(70) NOT NULL,
-    password VARCHAR(128) NOT NULL
-);
->>>>>>> dc61ca8026856f936d5e1857acc15a4cf3d958cf
  */
+
 $user = $_SERVER['USER'];
 require "/home/$user/config_UNAMI.php";
 
@@ -226,7 +216,6 @@ class UnamiDatabase
         $lastID = $this->_dbh->lastInsertId();
     }
 
-<<<<<<< HEAD
     function insertAdminUser($fname, $lname, $email, $password) {
 
         //hash password
@@ -252,28 +241,4 @@ class UnamiDatabase
 
         return $this->_dbh->lastInsertId();
     }
-
-=======
-    function stateWorkerLogin($email, $password)
-    {
-        // prepare SQL statement
-        $sql = "SELECT (user_id) FROM state_workers WHERE email = :email AND password = :password";
-
-        // save prepared statement
-        $statement = $this->_dbh->prepare($sql);
-
-        // assign values
-
-        // bind params
-        $statement->bindParam(':email', $email, PDO::PARAM_STR);
-        $statement->bindParam(':password', $password, PDO::PARAM_STR);
-
-        // execute insert into users
-        $statement->execute();
-
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return $row['user_id'];
-    }
->>>>>>> dc61ca8026856f936d5e1857acc15a4cf3d958cf
 }
