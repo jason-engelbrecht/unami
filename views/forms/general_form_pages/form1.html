@@ -152,7 +152,8 @@
                     </div>
                     <!-- address2, state, zip -->
 
-                    <!-- primary phone  -->
+                    <!-- primary phone   -->
+
                     <div class="form-row pt-2">
                         <div class="form-group col-md-6">
                             <h4 class="lead mb-0"><label for="primary">Primary phone number</label></h4>
@@ -212,6 +213,7 @@
                                    placeholder="206 123 1234" required value="{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}">
                         </div>
                     </div>
+                    <p>dadqwdqw</p>
                     <!-- emergency contact -->
 
                     <button type="submit" class="btn btn-primary float-right">Next
@@ -221,6 +223,35 @@
         </div>
     </div>
 </div>
+
+<input type="text" id="phoneNumber"/>
+<script>
+function phoneFormat(input){
+        // Strip all characters from the input except digits
+        input = input.replace(/\D/g,'');
+
+        // Trim the remaining input to ten characters, to preserve phone number format
+        input = input.substring(0,10);
+
+        // Based upon the length of the string, we add formatting as necessary
+        var size = input.length;
+        if(size == 0){
+                input = input;
+        }else if(size < 4){
+                input = '('+input;
+        }else if(size < 7){
+                input = '('+input.substring(0,3)+') '+input.substring(3,6);
+        }else{
+                input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
+        }
+        return input;
+}
+document.getElementById('phoneNumber').addEventListener('keyup',function(evt){
+        var phoneNumber = document.getElementById('phoneNumber');
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        phoneNumber.value = phoneFormat(phoneNumber.value);
+});
+</script>
 
 <script src="views/forms/js/form1.js"></script>
 <include href="views/forms/includes/footer.html"/>
