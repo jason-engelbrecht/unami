@@ -1,17 +1,25 @@
 <?php /** @noinspection SqlResolve */
 /* SQL STATEMENTS USED
+//status:   0 is denied,
+            1 is submitted,
+            2 is approved,
+            3 is complete
 
+//category: 0 is archive,
+            1 is active,
+            2 is waitlist
 CREATE TABLE applicants
 (
 	applicant_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	date_submitted VARCHAR(10) NOT NULL,
-	app_status VARCHAR(50) NOT NULL,
+	app_status INT NOT NULL,
+    category INT NOT NULL,
     fname VARCHAR(60) NOT NULL,
 	lname VARCHAR(70) NOT NULL,
 	pronouns VARCHAR(50) NOT NULL,
 	birthdate VARCHAR(10) NOT NULL,
 	NAMI_member boolean NOT NULL,
-	NAMI_affiliate VARCHAR(50) NOT NULL,
+	NAMI_affiliate VARCHAR(50) FOREIGN KEY NOT NULL,
 	address VARCHAR(70) NOT NULL,
 	city VARCHAR(70) NOT NULL,
 	address2 VARCHAR(70),
@@ -95,7 +103,7 @@ class UnamiDatabase
     function addApplicant($personalInfo, $accommodations, $notRequired)
     {
         //prepare SQL statement
-        $sql = "INSERT INTO applicants(date_submitted, app_status, fname, lname, pronouns, birthdate, NAMI_member, 
+        $sql = "INSERT INTO applicants(date_submitted, app_status, category, fname, lname, pronouns, birthdate, NAMI_member, 
                 NAMI_affiliate, address, city, address2, state, zip, primary_phone, primary_time, alternate_phone, 
                 alternate_time, email, preference, emergency_name, emergency_phone, special_needs, service_animal, 
                 mobility_need, need_rooming, single_room, days_rooming, gender, roommate_gender, cpap_user, 
@@ -113,7 +121,8 @@ class UnamiDatabase
         // assign values
         $rawDate = getdate();
         $date = $rawDate['mon'] . '/' . $rawDate['mday'] . '/' . $rawDate['year'];
-        $status = "submitted";
+        $status = 1;
+        $category = 1;
 
         //personal info
         $fname = $personalInfo->getFname();
@@ -170,7 +179,8 @@ class UnamiDatabase
 
         // bind params
         $statement->bindParam(':date_submitted', $date, PDO::PARAM_STR);
-        $statement->bindParam(':app_status', $status, PDO::PARAM_STR);
+        $statement->bindParam(':app_status', $status, PDO::PARAM_INT);
+        $statement->bindParam(':category', $category, PDO::PARAM_INT);
 
         //personal info
         $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
@@ -213,7 +223,7 @@ class UnamiDatabase
         // execute insert into users
         $statement->execute();
 
-        $lastID = $this->_dbh->lastInsertId();
+        //$lastID = $this->_dbh->lastInsertId();
     }
 
     function insertAdminUser($fname, $lname, $email, $password) {
