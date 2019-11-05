@@ -334,3 +334,74 @@ function validEmail($email)
 
     return !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL);
 }
+
+//////////////////admin portal validation////////////////////////////
+
+function validAccount($fname, $lname, $email, $password, $passwordRepeat) {
+
+    $isValid = true;
+
+    if(!validAdminName($fname)) {
+        $isValid = false;
+    }
+
+    if(!validAdminName($lname)) {
+        $isValid = false;
+    }
+
+    if(!validAdminEmail($email)) {
+        $isValid = false;
+    }
+
+    if(!validPassword($password, $passwordRepeat)) {
+        $isValid = false;
+    }
+
+    return $isValid;
+}
+
+
+function validPassword($password, $passwordRepeat) {
+    global $f3;
+
+    //regexes
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+
+    //make sure password has uppercase, lowercase, number and is between 8 and 20 character
+    if(!$uppercase || !$lowercase || !$number || (strlen($password) < 8 && strlen($password) > 20)) {
+        $f3->set("adminErrors['passwordSpec']", "Please enter a password following the recommendations");
+        return false;
+    }
+
+    //if password is good, check for matching
+    if(!($password === $passwordRepeat)) {
+        $f3->set("adminErrors['passwordMatch']", "Your passwords do not match");
+        return false;
+    }
+
+    return true;
+}
+
+function validAdminEmail($email) {
+    global $f3;
+
+    if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $f3->set("adminErrors['email']", "Please enter a valid email");
+        return false;
+    }
+
+    return true;
+}
+
+function validAdminName($name) {
+    global $f3;
+
+    if(!alphabetical($name)) {
+        $f3->set("adminErrors['name']", "Please enter a valid name");
+        return false;
+    }
+
+    return true;
+}

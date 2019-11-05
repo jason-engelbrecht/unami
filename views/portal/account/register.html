@@ -11,32 +11,67 @@
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                <h1 class="h4 text-gray-900 mb-4">Create an Admin Account!</h1>
               </div>
-              <form class="user">
+
+              <form class="user" action="register" method="post">
+                <!-- name -->
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+                    <input type="text" class="form-control form-control-user" id="adminFname" name="adminFname" placeholder="First Name" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
+                    <input type="text" class="form-control form-control-user" id="adminLname" name="adminLname" placeholder="Last Name" required>
                   </div>
                 </div>
+                <!-- name error messages -->
+                <div class="row justify-content-center text-danger">
+                  <check if="{{ isset(@adminErrors['name']) }}">
+                    <p>{{ @adminErrors['name'] }}</p>
+                  </check>
+                </div>
+                <!-- name -->
+
+                <!-- email -->
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
+                  <input type="email" class="form-control form-control-user" id="adminEmail" name="adminEmail" placeholder="Email Address" required>
                 </div>
-                <div class="form-group row">
+                <!-- email error messages -->
+                <div class="row justify-content-center text-danger">
+                  <check if="{{ isset(@adminErrors['email']) }}">
+                    <p>{{ @adminErrors['email'] }}</p>
+                  </check>
+                </div>
+                <!-- email -->
+
+                <!-- password -->
+                <div class="form-group row  mb-0">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                    <input type="password" class="form-control form-control-user" id="adminPassword" name="adminPassword" placeholder="Password" maxlength="20" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
+                    <input type="password" class="form-control form-control-user" id="adminPasswordRepeat" name="adminPasswordRepeat" placeholder="Repeat Password" maxlength="20" required>
                   </div>
                 </div>
-                <a href="#" class="btn btn-primary btn-user btn-block">
+                <!-- password validation mess -->
+                <div class="row justify-content-center text-danger">
+                  <check if="{{ isset(@adminErrors['passwordSpec']) }}">
+                    <p>{{ @adminErrors['passwordSpec'] }}</p>
+                  </check>
+                  <check if="{{ isset(@adminErrors['passwordMatch']) }}">
+                    <p>{{ @adminErrors['passwordMatch'] }}</p>
+                  </check>
+                </div>
+                <div class="small row justify-content-center my-1">
+                  <p class="">*Passwords must be at least 8 characters, contain an upper-case letter and a number</p>
+                </div>
+                <!-- password -->
+
+                <button class="btn btn-primary btn-user btn-block" type="submit" name="adminRegisterSubmit">
                   Register Account
-                </a>
+                </button>
               </form>
+
               <hr>
               <div class="text-center">
                 <a class="small" href="forgot-password">Forgot Password?</a>
