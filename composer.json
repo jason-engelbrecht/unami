@@ -20,7 +20,8 @@
 
   ],
   "require": {
-    "bcosca/fatfree-core": "dev-master"
+    "bcosca/fatfree-core": "dev-master",
+    "swiftmailer/swiftmailer": "^6.0"
   },
 
   "autoload": {
