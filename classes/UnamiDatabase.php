@@ -20,7 +20,7 @@ CREATE TABLE applicants
 	pronouns VARCHAR(50) NOT NULL,
 	birthdate VARCHAR(10) NOT NULL,
 	NAMI_member boolean NOT NULL,
-	NAMI_affiliate VARCHAR(50) FOREIGN KEY NOT NULL,
+	affiliate VARCHAR(50) NOT NULL,
 	address VARCHAR(70) NOT NULL,
 	city VARCHAR(70) NOT NULL,
 	address2 VARCHAR(70),
@@ -68,7 +68,7 @@ CREATE TABLE app_type
 
 CREATE TABLE affiliates
 (
-    affiliate_id AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    affiliate_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
     phone VARCHAR(30) NOT NULL,
     email VARCHAR(254) NOT NULL
@@ -122,12 +122,12 @@ class UnamiDatabase
     {
         //prepare SQL statement
         $sql = "INSERT INTO applicants(date_submitted, app_status, category, app_type, fname, lname, pronouns, birthdate, NAMI_member, 
-                NAMI_affiliate, address, city, address2, state, zip, primary_phone, primary_time, alternate_phone, 
+                affiliate, address, city, address2, state, zip, primary_phone, primary_time, alternate_phone, 
                 alternate_time, email, preference, emergency_name, emergency_phone, special_needs, service_animal, 
                 mobility_need, need_rooming, single_room, days_rooming, gender, roommate_gender, cpap_user, 
                 roommate_cpap, heard_about_training, other_classes, certified) 
                 VALUES (:date_submitted, :app_status, :category, :app_type, :fname, :lname, :pronouns, :birthdate, :NAMI_member, 
-                :NAMI_affiliate, :address, :city, :address2, :state, :zip, :primary_phone, :primary_time, 
+                :affiliate, :address, :city, :address2, :state, :zip, :primary_phone, :primary_time, 
                 :alternate_phone, :alternate_time, :email, :preference, :emergency_name, :emergency_phone, 
                 :special_needs, :service_animal, :mobility_need, :need_rooming, :single_room, :days_rooming, 
                 :gender, :roommate_gender, :cpap_user, :roommate_cpap, :heard_about_training, :other_classes, 
@@ -210,7 +210,7 @@ class UnamiDatabase
         $statement->bindParam(':pronouns', $pronouns, PDO::PARAM_STR);
         $statement->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
         $statement->bindParam(':NAMI_member', $NAMI_member, PDO::PARAM_BOOL);
-        $statement->bindParam(':NAMI_affiliate', $NAMI_affiliate, PDO::PARAM_STR);
+        $statement->bindParam(':affiliate', $NAMI_affiliate, PDO::PARAM_STR);
         $statement->bindParam(':address', $address, PDO::PARAM_STR);
         $statement->bindParam(':city', $city, PDO::PARAM_STR);
         $statement->bindParam(':address2', $address2, PDO::PARAM_STR);
