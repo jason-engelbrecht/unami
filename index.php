@@ -398,9 +398,20 @@ $f3->route('GET|POST /confirmation', function($f3)
 ///////////////////////////////////////////portal///////////////////////////////////////////////////////////////////////
 
 //login
-$f3->route('GET /login', function($f3)
+$f3->route('GET|POST /login', function($f3)
 {
     $f3->set('page_title', 'Login');
+    global $db;
+
+    if(!empty($_POST))
+    {
+        $_SESSION['userID'] = $db->stateWorkerLogin($_POST['email'], $_POST['password']);
+
+        if(is_numeric($_SESSION['userID']))
+        {
+            $f3->reroute('/dashboard');
+        }
+    }
 
     $view = new Template();
     echo $view->render('views/portal/account/login.html');
