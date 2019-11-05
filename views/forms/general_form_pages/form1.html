@@ -88,7 +88,7 @@
                                         onchange="showfield(this.options[this.selectedIndex].value)">
                                     <option value="none">- Select -</option>
                                     <repeat group="{{ @affiliates }}" value="{{ @affiliate }}">
-                                        <option value="{{ @affiliate }}"
+                                        <option value="{{ array_search(@affiliate, @affiliates)+1 }}"
                                         <check if="{{isset(@SESSION.affiliate) && @SESSION.affiliate == @affiliate }}">
                                             selected="selected"
                                         </check>>

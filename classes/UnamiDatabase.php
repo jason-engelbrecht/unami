@@ -14,6 +14,7 @@ CREATE TABLE applicants
 	date_submitted VARCHAR(10) NOT NULL,
 	app_status INT NOT NULL,
     category INT NOT NULL,
+    app_type INT NOT NULL,
     fname VARCHAR(60) NOT NULL,
 	lname VARCHAR(70) NOT NULL,
 	pronouns VARCHAR(50) NOT NULL,
@@ -45,7 +46,9 @@ CREATE TABLE applicants
 	roommate_cpap boolean DEFAULT false,
 	heard_about_training MEDIUMTEXT,
 	other_classes MEDIUMTEXT,
-	certified MEDIUMTEXT
+	certified MEDIUMTEXT,
+    FOREIGN KEY(app_type) references app_type(app_id),
+    FOREIGN KEY(affiliate) references affiliates(affiliate_id)
 );
 
 CREATE TABLE adminUser
@@ -56,6 +59,21 @@ CREATE TABLE adminUser
 	email VARCHAR(254) NOT NULL,
     password VARCHAR(255) NOT NULL
 )
+
+CREATE TABLE app_type
+(
+    app_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    app_type VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE affiliates
+(
+    affiliate_id AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    email VARCHAR(254) NOT NULL
+)
+
  */
 
 $user = $_SERVER['USER'];
@@ -103,12 +121,12 @@ class UnamiDatabase
     function addApplicant($personalInfo, $accommodations, $notRequired)
     {
         //prepare SQL statement
-        $sql = "INSERT INTO applicants(date_submitted, app_status, category, fname, lname, pronouns, birthdate, NAMI_member, 
+        $sql = "INSERT INTO applicants(date_submitted, app_status, category, app_type, fname, lname, pronouns, birthdate, NAMI_member, 
                 NAMI_affiliate, address, city, address2, state, zip, primary_phone, primary_time, alternate_phone, 
                 alternate_time, email, preference, emergency_name, emergency_phone, special_needs, service_animal, 
                 mobility_need, need_rooming, single_room, days_rooming, gender, roommate_gender, cpap_user, 
                 roommate_cpap, heard_about_training, other_classes, certified) 
-                VALUES (:date_submitted, :app_status, :fname, :lname, :pronouns, :birthdate, :NAMI_member, 
+                VALUES (:date_submitted, :app_status, :category, :app_type, :fname, :lname, :pronouns, :birthdate, :NAMI_member, 
                 :NAMI_affiliate, :address, :city, :address2, :state, :zip, :primary_phone, :primary_time, 
                 :alternate_phone, :alternate_time, :email, :preference, :emergency_name, :emergency_phone, 
                 :special_needs, :service_animal, :mobility_need, :need_rooming, :single_room, :days_rooming, 
@@ -123,6 +141,7 @@ class UnamiDatabase
         $date = $rawDate['mon'] . '/' . $rawDate['mday'] . '/' . $rawDate['year'];
         $status = 1;
         $category = 1;
+        $app_type = 1;
 
         //personal info
         $fname = $personalInfo->getFname();
@@ -134,6 +153,8 @@ class UnamiDatabase
         } else {
             $NAMI_member = false;
         }
+
+        //Have to change to use foreign key: it does
         $NAMI_affiliate = $personalInfo->getAffiliate();
         $address = $personalInfo->getAddress();
         $city = $personalInfo->getCity();
@@ -181,6 +202,7 @@ class UnamiDatabase
         $statement->bindParam(':date_submitted', $date, PDO::PARAM_STR);
         $statement->bindParam(':app_status', $status, PDO::PARAM_INT);
         $statement->bindParam(':category', $category, PDO::PARAM_INT);
+        $statement->bindParam(':app_type', $app_type, PDO::PARAM_INT);
 
         //personal info
         $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
@@ -268,6 +290,21 @@ class UnamiDatabase
         $statement->execute();
 
         //get result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    function getAffiliates()
+    {
+        //define query
+        $query = "SELECT name FROM affiliates";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $result;
