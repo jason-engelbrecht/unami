@@ -39,6 +39,15 @@ CREATE TABLE applicants
 	other_classes MEDIUMTEXT,
 	certified MEDIUMTEXT
 );
+
+CREATE TABLE state_workers
+(
+    user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    email VARCHAR(254) NOT NULL,
+    fname VARCHAR(60) NOT NULL,
+	lname VARCHAR(70) NOT NULL,
+    password VARCHAR(128) NOT NULL
+);
  */
 $user = $_SERVER['USER'];
 require "/home/$user/config_UNAMI.php";
@@ -203,5 +212,27 @@ class UnamiDatabase
         $statement->execute();
 
         $lastID = $this->_dbh->lastInsertId();
+    }
+
+    function stateWorkerLogin($email, $password)
+    {
+        // prepare SQL statement
+        $sql = "SELECT (user_id) FROM state_workers WHERE email = :email AND password = :password";
+
+        // save prepared statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // assign values
+
+        // bind params
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':password', $password, PDO::PARAM_STR);
+
+        // execute insert into users
+        $statement->execute();
+
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $row['user_id'];
     }
 }
