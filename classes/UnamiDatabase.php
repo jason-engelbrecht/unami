@@ -380,4 +380,49 @@ class UnamiDatabase
 
         return $result;
     }
+
+    /**
+     * Get all active applicants (active = 1)
+     *
+     */
+    function getActiveApplicants() {
+        $active = 1;
+
+        //define query
+        $query = "SELECT * 
+                  FROM applicants
+                  WHERE category = :category";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameter
+        $statement->bindParam(':category', $active, PDO::PARAM_STR);
+
+        //execute
+        $statement->execute();
+
+        //get result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Get all waitlisted applicants (waitlist = 2)
+     *
+     */
+    function getWaitlistedApplicants() {
+
+    }
+
+    /**
+     * Get all archived applicants (archive = 3)
+     *
+     */
+    function getArchivedApplicants() {
+
+    }
+
+
 }
