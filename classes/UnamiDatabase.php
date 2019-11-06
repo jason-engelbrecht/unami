@@ -272,6 +272,15 @@ class UnamiDatabase
         //$lastID = $this->_dbh->lastInsertId();
     }
 
+    /**
+     * Inserts a new admin user
+     *
+     * @param $fname
+     * @param $lname
+     * @param $email
+     * @param $password
+     * @return mixed
+     */
     function insertAdminUser($fname, $lname, $email, $password) {
 
         //hash password
@@ -298,6 +307,12 @@ class UnamiDatabase
         return $this->_dbh->lastInsertId();
     }
 
+    /**
+     * Gets the password associated with an admin account by email
+     *
+     * @param $email
+     * @return mixed
+     */
     function getAdminPassword($email) {
         //define query
         $query = "SELECT password, fname, lname 
@@ -319,6 +334,38 @@ class UnamiDatabase
         return $result;
     }
 
+    /**
+     * Check if email exists in table
+     *
+     * @param $email
+     * @return mixed
+     */
+    function getAdminEmail($email) {
+        //define query
+        $query = "SELECT email 
+                  FROM adminUser
+                  WHERE email = :email";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameter
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+
+        //execute
+        $statement->execute();
+
+        //get result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Gets all affiliates
+     *
+     * @return mixed
+     */
     function getAffiliates()
     {
         //define query
