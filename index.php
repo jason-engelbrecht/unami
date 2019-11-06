@@ -404,6 +404,9 @@ $f3->route('GET|POST /login', function($f3)
     $f3->set('page_title', 'Login');
     global $db;
 
+    //for logout/just in case
+    $_SESSION['loggedIn'] = 0;
+
     if(!empty($_POST)) {
 
         //get email and password
