@@ -469,6 +469,9 @@ $f3->route('GET|POST /register', function($f3)
         //validate
         if(validAccount($fname, $lname, $email, $password, $passwordRepeat))
         {
+            //prefill email for login
+            $_SESSION['adminEmail'] = $email;
+
             //insert into db - go to login
             $db->insertAdminUser($fname, $lname, $email, $password);
             $f3->reroute('/login');
