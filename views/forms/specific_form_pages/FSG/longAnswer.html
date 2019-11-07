@@ -2,7 +2,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <div class="container p-3">
-    <div class="progress">
+    <h5>Progress</h5>
+    <div class="progress border"  style="height: 20px">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 40%"
              aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
     </div>
@@ -23,17 +24,22 @@
     </check>
 
     <div class="card shadow-sm bg-white rounded">
-        <h5 class="card-header">Long Answer Questions</h5>
+        <h4 class="card-header">Family Support Group Questions</h4>
         <div class="card-body m-3">
             <div>
+
+                <h6 class="mb-5 text-primary font-weight-bold">
+                    <i class="fas fa-star-of-life"></i> All fields are required
+                </h6>
+
                 <form method="post" action="long_answer">
                     <div class="form-row">
 
                         <!--Question 1-->
                         <div class="form-group">
-                            <p>1. Do you have a relative living with mental illness?</p>
+                            <h5 class="mb-3">Do you have a relative living with mental illness?</h5>
 
-                            <div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline ml-2">
                                 <input name="relativeMentalIllness" class="form-check-input" type="radio" id="show1"
                                        value="yes" required
                                 <check if="{{ $_SESSION['LongAnswer']->getRelativeMentalIllness() === 'yes' }}">
@@ -49,7 +55,7 @@
                                 <label class="form-check-label" for="hide1">No</label>
                             </div><br>
 
-                            <div class="form-row mt-3" id="textbox1" style="display: none">
+                            <div class="form-row mt-3 ml-2" id="textbox1" style="display: none">
                                 <label>Please explain why you selected "Yes"
                                     <br><textarea class="form-control" rows="4" cols="50" name="relativeMentalIllnessText"
                                     >{{ $_SESSION['LongAnswer']->getRelativeMentalIllnessText() }}</textarea>
@@ -62,10 +68,10 @@
 
                         <!--Question 3-->
                         <div class="form-group pt-5">
-                            <p>2. Have you ever been convicted of a crime against another person including but not limited to: assault of any
-                                kind, harassment of any kind, or stalking?</p>
+                            <h5 class="mb-3">Have you ever been convicted of a crime against another person including but not limited to: assault of any
+                                kind, harassment of any kind, or stalking?</h5>
 
-                            <div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline ml-2">
                                 <input name="convict" class="form-check-input" type="radio" id="show2" value="yes" required
                                 <check if="{{ $_SESSION['LongAnswer']->getConvict() === 'yes' }}">
                                     checked</check>>
@@ -79,7 +85,7 @@
                                 <label class="form-check-label" for="hide2">No</label>
                             </div><br>
 
-                            <div class="form-row mt-3" id="textbox2" style="display: none">
+                            <div class="form-row mt-3 ml-2" id="textbox2" style="display: none">
                                 <label>Please explain why you selected "Yes"
                                     <br><textarea class="form-control" rows="4" cols="50" name="convictText"
                                     >{{ $_SESSION['LongAnswer']->getConvictText() }}</textarea>
@@ -89,15 +95,15 @@
 
                         <!--Question 4-->
                         <div class="form-group pt-5">
-                            <label for="exampleFormControlTextarea2">3. Why do you want to be a NAMI Family Support
-                                Group Facilitator?</label>
-                            <textarea name="whyFacilitator" class="form-control" id="exampleFormControlTextarea2" rows="3"
+                            <h5><label for="exampleFormControlTextarea2">Why do you want to be a NAMI Family Support
+                                Group Facilitator?</label></h5>
+                            <textarea name="whyFacilitator" class="form-control" id="exampleFormControlTextarea2" rows="4"
                             >{{ $_SESSION['LongAnswer']->getWhyFacilitator() }}</textarea>
 
                             <!--Question 5-->
-                            <label for="exampleFormControlTextarea3" class="pt-5">4. What experience do you have in
-                                participating in a support group?</label>
-                            <textarea name="experience" class="form-control" id="exampleFormControlTextarea3" rows="3"
+                            <h5><label for="exampleFormControlTextarea3" class="pt-5 mt-3">What experience do you have in
+                                participating in a support group?</label></h5>
+                            <textarea name="experience" class="form-control" id="exampleFormControlTextarea3" rows="4"
                             >{{ $_SESSION['LongAnswer']->getExperience() }}</textarea>
 
                             <!--Question 6-->
@@ -107,9 +113,9 @@
 
 
                             <!--Question 8-->
-                            <p class="pt-5">5. Do you know with whom you want to Co-facilitate?</p>
+                            <h5 class="pt-5 mt-3 mb-3">Do you know with whom you want to Co-facilitate?</h5>
                             <div class="form-check form-check-inline">
-                                <input name="coFacWhom" class="form-check-input" type="radio" id="show3" value="yes" required
+                                <input name="coFacWhom" class="form-check-input ml-2" type="radio" id="show3" value="yes" required
                                 <check if="{{ $_SESSION['LongAnswer']->getCoFacWhom() === 'yes' }}">
                                     checked</check>>
                                 <label class="form-check-label" for="show3">Yes</label>
@@ -122,7 +128,7 @@
                                 <label class="form-check-label" for="hide3">No</label>
                             </div><br>
 
-                            <div class="form-row mt-3" id="textbox3" style="display: none">
+                            <div class="form-row mt-3 ml-2" id="textbox3" style="display: none">
                                 <label>If yes, who?
                                     <br><textarea class="form-control" rows="4" cols="50" name="coFacWhomText"
                                     >{{ $_SESSION['LongAnswer']->getCoFacWhomText() }}</textarea>
@@ -130,26 +136,28 @@
                             </div>
 
                             <!--Question 9-->
-                            <p class="pt-5">6. Do you know where you want to Co-facilitate?</p>
-                            <div class="form-check form-check-inline">
-                                <input name="coFacWhere" class="form-check-input" type="radio" id="show4" value="yes" required
-                                <check if="{{ $_SESSION['LongAnswer']->getCoFacWhere() === 'yes' }}">
-                                    checked</check>>
-                                <label class="form-check-label" for="show4">Yes</label>
-                            </div>
+                            <div class="mb-5">
+                                <h5 class="pt-5 mb-3">Do you know where you want to Co-facilitate?</h5>
+                                <div class="form-check form-check-inline">
+                                    <input name="coFacWhere" class="form-check-input ml-2" type="radio" id="show4" value="yes" required
+                                    <check if="{{ $_SESSION['LongAnswer']->getCoFacWhere() === 'yes' }}">
+                                        checked</check>>
+                                    <label class="form-check-label" for="show4">Yes</label>
+                                </div>
 
-                            <div class="form-check form-check-inline">
-                                <input name="coFacWhere" class="form-check-input" type="radio" id="hide4" value="no" required
-                                <check if="{{ $_SESSION['LongAnswer']->getCoFacWhere() === 'no' }}">
-                                    checked</check>>
-                                <label class="form-check-label" for="hide4">No</label>
-                            </div><br>
+                                <div class="form-check form-check-inline">
+                                    <input name="coFacWhere" class="form-check-input" type="radio" id="hide4" value="no" required
+                                    <check if="{{ $_SESSION['LongAnswer']->getCoFacWhere() === 'no' }}">
+                                        checked</check>>
+                                    <label class="form-check-label" for="hide4">No</label>
+                                </div><br>
 
-                            <div class="form-row mt-3" id="textbox4" style="display: none">
-                                <label>If yes, where?
-                                    <br><textarea class="form-control" rows="4" cols="50" name="coFacWhereText"
-                                    >{{ $_SESSION['LongAnswer']->getCoFacWhereText() }}</textarea>
-                                </label>
+                                <div class="form-row mt-3 ml-2" id="textbox4" style="display: none">
+                                    <label>If yes, where?
+                                        <br><textarea class="form-control" rows="4" cols="50" name="coFacWhereText"
+                                        >{{ $_SESSION['LongAnswer']->getCoFacWhereText() }}</textarea>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 

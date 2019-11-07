@@ -41,6 +41,8 @@ $f3->set('affiliates', array('NAMI Chelan-Douglas', 'NAMI Clallam County', 'NAMI
     'NAMI Thurston-Mason', 'NAMI Tri-Cities', 'NAMI Walla Walla', 'NAMI Washington Coast',
     'NAMI Whatcom', 'Yakima'));
 
+$f3->set('affiliates', $db->getAffiliates());
+
 //SwiftMailer testing
 $f3->route('GET /mailer', function(){
    if(class_exists('Swift'))
@@ -402,6 +404,9 @@ $f3->route('GET|POST /login', function($f3)
     $f3->set('page_title', 'Login');
     global $db;
 
+    //for logout/just in case
+    $_SESSION['loggedIn'] = 0;
+
     if(!empty($_POST)) {
 
         //get email and password
@@ -464,6 +469,9 @@ $f3->route('GET|POST /register', function($f3)
         //validate
         if(validAccount($fname, $lname, $email, $password, $passwordRepeat))
         {
+            //prefill email for login
+            $_SESSION['adminEmail'] = $email;
+
             //insert into db - go to login
             $db->insertAdminUser($fname, $lname, $email, $password);
             $f3->reroute('/login');

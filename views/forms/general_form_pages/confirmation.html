@@ -1,25 +1,14 @@
 <include href="views/forms/includes/header.html"/>
-<!--<div class="container text-center w-25">
-    <div class="card">
-        <img src="images/dog.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Your Application Has Been Submitted!</h5>
-            <p class="card-text">Thank you "name" for filling out the application. Your local affiliate will be in touch with you shortly.</p>
-            <a href="#" class="btn btn-primary">Back To NAMI</a>
-        </div>
-    </div>
-</div>-->
 
 <div class="container p-3">
-    <div class="progress">
+    <h5>Progress</h5>
+    <div class="progress border"  style="height: 20px">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
              style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Done!</div>
     </div>
 </div>
 
-<div class="container py-5">
-
-
+<div class="container pb-5 pt-3">
 
     <div class="card mx-auto bg-white shadow-sm" style="max-width: 800px;">
         <div class="row no-gutters">
@@ -28,7 +17,7 @@
             </div>
             <div class="col-md-6 my-auto text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Your Application Has Been Submitted!</h5>
+                    <h5 class="card-title font-weight-bold">Your Application Has Been Submitted!</h5>
                     <p class="card-text">Thank you, {{ $_SESSION['PersonalInfo']->getFname()}} {{ $_SESSION['PersonalInfo']->getLname()}},
                         for filling out the application. We have sent a confirmation email to: {{ $_SESSION['PersonalInfo']->getEmail()}}.
                         Your local affiliate will be in touch with you shortly.</p>

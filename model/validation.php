@@ -337,6 +337,16 @@ function validEmail($email)
 
 //////////////////admin portal validation////////////////////////////
 
+/**
+ * Check if admin create account input is all valid
+ *
+ * @param $fname
+ * @param $lname
+ * @param $email
+ * @param $password
+ * @param $passwordRepeat
+ * @return bool
+ */
 function validAccount($fname, $lname, $email, $password, $passwordRepeat) {
 
     $isValid = true;
@@ -360,7 +370,13 @@ function validAccount($fname, $lname, $email, $password, $passwordRepeat) {
     return $isValid;
 }
 
-
+/**
+ * Check for valid admin password
+ *
+ * @param $password
+ * @param $passwordRepeat
+ * @return bool
+ */
 function validPassword($password, $passwordRepeat) {
     global $f3;
 
@@ -384,17 +400,36 @@ function validPassword($password, $passwordRepeat) {
     return true;
 }
 
+/**
+ * Check for valid admin email
+ *
+ * @param $email
+ * @return bool
+ */
 function validAdminEmail($email) {
     global $f3;
+    global $db;
 
     if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $f3->set("adminErrors['email']", "Please enter a valid email");
         return false;
     }
 
+    //check if email is already in use
+    if($db->getAdminEmail($email) != false) {
+        $f3->set("adminErrors['email']", "This email is already in use");
+        return false;
+    }
+
     return true;
 }
 
+/**
+ * Check for valid admin name
+ *
+ * @param $name
+ * @return bool
+ */
 function validAdminName($name) {
     global $f3;
 

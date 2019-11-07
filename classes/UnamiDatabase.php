@@ -1,17 +1,26 @@
 <?php /** @noinspection SqlResolve */
 /* SQL STATEMENTS USED
+//status:   0 is denied,
+            1 is submitted,
+            2 is approved,
+            3 is complete
 
+//category: 0 is archive,
+            1 is active,
+            2 is waitlist
 CREATE TABLE applicants
 (
 	applicant_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	date_submitted VARCHAR(10) NOT NULL,
-	app_status VARCHAR(50) NOT NULL,
+	app_status INT NOT NULL,
+    category INT NOT NULL,
+    app_type INT NOT NULL,
     fname VARCHAR(60) NOT NULL,
 	lname VARCHAR(70) NOT NULL,
 	pronouns VARCHAR(50) NOT NULL,
 	birthdate VARCHAR(10) NOT NULL,
 	NAMI_member boolean NOT NULL,
-	NAMI_affiliate VARCHAR(50) NOT NULL,
+	affiliate VARCHAR(50) NOT NULL,
 	address VARCHAR(70) NOT NULL,
 	city VARCHAR(70) NOT NULL,
 	address2 VARCHAR(70),
@@ -37,7 +46,9 @@ CREATE TABLE applicants
 	roommate_cpap boolean DEFAULT false,
 	heard_about_training MEDIUMTEXT,
 	other_classes MEDIUMTEXT,
-	certified MEDIUMTEXT
+	certified MEDIUMTEXT,
+    FOREIGN KEY(app_type) references app_type(app_id),
+    FOREIGN KEY(affiliate) references affiliates(affiliate_id)
 );
 
 CREATE TABLE adminUser
@@ -47,7 +58,46 @@ CREATE TABLE adminUser
 	lname VARCHAR(70) NOT NULL,
 	email VARCHAR(254) NOT NULL,
     password VARCHAR(255) NOT NULL
-)
+);
+
+CREATE TABLE app_type
+(
+    app_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    app_type VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE affiliates
+(
+    affiliate_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    email VARCHAR(254) NOT NULL
+);
+
+INSERT INTO affiliates(name)
+ VALUES
+('NAMI Chelan-Douglas'),
+('NAMI Clallam County'),
+('NAMI Eastside'),
+('NAMI Jefferson County'),
+('NAMI Kitsap County'),
+('NAMI Lewis County'),
+('NAMI Pierce County'),
+('NAMI Seattle'),
+('NAMI Skagit'),
+('NAMI Snohomish County'),
+('NAMI South King County'),
+('NAMI Southwest Washington'),
+('NAMI Spokane'),
+('NAMI Thurston-Mason'),
+('NAMI Tri-Cities'),
+('NAMI Walla Walla'),
+('NAMI Washington Coast'),
+('NAMI Whatcom'),
+('NAMI Yakima');
+
+INSERT INTO app_type(app_type) VALUES('Family Support Group');
+
  */
 
 $user = $_SERVER['USER'];
@@ -95,13 +145,13 @@ class UnamiDatabase
     function addApplicant($personalInfo, $accommodations, $notRequired)
     {
         //prepare SQL statement
-        $sql = "INSERT INTO applicants(date_submitted, app_status, fname, lname, pronouns, birthdate, NAMI_member, 
-                NAMI_affiliate, address, city, address2, state, zip, primary_phone, primary_time, alternate_phone, 
+        $sql = "INSERT INTO applicants(date_submitted, app_status, category, app_type, fname, lname, pronouns, birthdate, NAMI_member, 
+                affiliate, address, city, address2, state, zip, primary_phone, primary_time, alternate_phone, 
                 alternate_time, email, preference, emergency_name, emergency_phone, special_needs, service_animal, 
                 mobility_need, need_rooming, single_room, days_rooming, gender, roommate_gender, cpap_user, 
                 roommate_cpap, heard_about_training, other_classes, certified) 
-                VALUES (:date_submitted, :app_status, :fname, :lname, :pronouns, :birthdate, :NAMI_member, 
-                :NAMI_affiliate, :address, :city, :address2, :state, :zip, :primary_phone, :primary_time, 
+                VALUES (:date_submitted, :app_status, :category, :app_type, :fname, :lname, :pronouns, :birthdate, :NAMI_member, 
+                :affiliate, :address, :city, :address2, :state, :zip, :primary_phone, :primary_time, 
                 :alternate_phone, :alternate_time, :email, :preference, :emergency_name, :emergency_phone, 
                 :special_needs, :service_animal, :mobility_need, :need_rooming, :single_room, :days_rooming, 
                 :gender, :roommate_gender, :cpap_user, :roommate_cpap, :heard_about_training, :other_classes, 
@@ -113,7 +163,9 @@ class UnamiDatabase
         // assign values
         $rawDate = getdate();
         $date = $rawDate['mon'] . '/' . $rawDate['mday'] . '/' . $rawDate['year'];
-        $status = "submitted";
+        $status = 1;
+        $category = 1;
+        $app_type = 1;
 
         //personal info
         $fname = $personalInfo->getFname();
@@ -125,6 +177,8 @@ class UnamiDatabase
         } else {
             $NAMI_member = false;
         }
+
+        //Have to change to use foreign key: it does
         $NAMI_affiliate = $personalInfo->getAffiliate();
         $address = $personalInfo->getAddress();
         $city = $personalInfo->getCity();
@@ -170,7 +224,9 @@ class UnamiDatabase
 
         // bind params
         $statement->bindParam(':date_submitted', $date, PDO::PARAM_STR);
-        $statement->bindParam(':app_status', $status, PDO::PARAM_STR);
+        $statement->bindParam(':app_status', $status, PDO::PARAM_INT);
+        $statement->bindParam(':category', $category, PDO::PARAM_INT);
+        $statement->bindParam(':app_type', $app_type, PDO::PARAM_INT);
 
         //personal info
         $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
@@ -178,7 +234,7 @@ class UnamiDatabase
         $statement->bindParam(':pronouns', $pronouns, PDO::PARAM_STR);
         $statement->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
         $statement->bindParam(':NAMI_member', $NAMI_member, PDO::PARAM_BOOL);
-        $statement->bindParam(':NAMI_affiliate', $NAMI_affiliate, PDO::PARAM_STR);
+        $statement->bindParam(':affiliate', $NAMI_affiliate, PDO::PARAM_STR);
         $statement->bindParam(':address', $address, PDO::PARAM_STR);
         $statement->bindParam(':city', $city, PDO::PARAM_STR);
         $statement->bindParam(':address2', $address2, PDO::PARAM_STR);
@@ -213,9 +269,18 @@ class UnamiDatabase
         // execute insert into users
         $statement->execute();
 
-        $lastID = $this->_dbh->lastInsertId();
+        //$lastID = $this->_dbh->lastInsertId();
     }
 
+    /**
+     * Inserts a new admin user
+     *
+     * @param $fname
+     * @param $lname
+     * @param $email
+     * @param $password
+     * @return mixed
+     */
     function insertAdminUser($fname, $lname, $email, $password) {
 
         //hash password
@@ -242,6 +307,12 @@ class UnamiDatabase
         return $this->_dbh->lastInsertId();
     }
 
+    /**
+     * Gets the password associated with an admin account by email
+     *
+     * @param $email
+     * @return mixed
+     */
     function getAdminPassword($email) {
         //define query
         $query = "SELECT password, fname, lname 
@@ -262,4 +333,96 @@ class UnamiDatabase
 
         return $result;
     }
+
+    /**
+     * Check if email exists in table
+     *
+     * @param $email
+     * @return mixed
+     */
+    function getAdminEmail($email) {
+        //define query
+        $query = "SELECT email 
+                  FROM adminUser
+                  WHERE email = :email";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameter
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+
+        //execute
+        $statement->execute();
+
+        //get result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Gets all affiliates
+     *
+     * @return mixed
+     */
+    function getAffiliates()
+    {
+        //define query
+        $query = "SELECT name, affiliate_id FROM affiliates";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Get all active applicants (active = 1)
+     *
+     */
+    function getActiveApplicants() {
+        $active = 1;
+
+        //define query
+        $query = "SELECT * 
+                  FROM applicants
+                  WHERE category = :category";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameter
+        $statement->bindParam(':category', $active, PDO::PARAM_STR);
+
+        //execute
+        $statement->execute();
+
+        //get result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Get all waitlisted applicants (waitlist = 2)
+     *
+     */
+    function getWaitlistedApplicants() {
+
+    }
+
+    /**
+     * Get all archived applicants (archive = 3)
+     *
+     */
+    function getArchivedApplicants() {
+
+    }
+
+
 }
