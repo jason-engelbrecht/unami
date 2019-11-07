@@ -1,5 +1,9 @@
 /* General styles for all forms */
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 /* nami color */
 .navbar {
     background-color: #0c499c;
@@ -19,4 +23,21 @@
 #namiLogo {
     width: 75%;
     height: 75%;
+}
+
+.questions {
+    color: black;
+}
+
+.questions:hover {
+    color: gray !important;
+    text-decoration: none;
+}
+
+.questions:active {
+    color: gray !important;
+}
+
+.text-primary {
+    color: #0c499c !important;
 }
