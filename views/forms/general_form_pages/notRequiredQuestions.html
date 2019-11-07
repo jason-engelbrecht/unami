@@ -1,7 +1,8 @@
 <include href="views/forms/includes/header.html"/>
 
 <div class="container p-3">
-    <div class="progress">
+    <h5>Progress</h5>
+    <div class="progress border"  style="height: 20px">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 60%"
              aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
     </div>
@@ -28,24 +29,32 @@
 
         <!-- card body -->
         <div class="card-body m-3">
+
+            <h6 class="pb-4 text-primary font-weight-bold">
+                <i class="fas fa-star-of-life"></i> These fields are not required
+            </h6>
+
             <!-- form -->
             <div>
                 <form method="post" action="not_required">
-                    <h6 class=" float-right">*These questions are not required</h6>
-
 
                     <!-- how did you hear about this training -->
                     <div class="mb-5">
-                        <h4 class="lead mb-0"><label for="heardAboutTraining">1. How did you hear about this
-                            training class?</label></h4>
-                        <textarea name="heardAboutTraining" class="form-control" id="heardAboutTraining"
-                                  rows="5">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</textarea>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5 class="mb-0"><label for="heardAboutTraining">How did you hear about this
+                                    training class?</label></h5>
+                                <textarea name="heardAboutTraining" class="form-control" id="heardAboutTraining"
+                                          rows="4" cols="50">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</textarea>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- have you taken any other NAMI classes or trainings -->
                     <div class="my-5">
-                        <p class="lead">2. Have you taken other NAMI classes or trainings? </p>
-                        <div class="form-check form-check-inline">
+                        <h5 class="mb-3">Have you taken other NAMI classes or trainings? </h5>
+                        <div class="form-check form-check-inline ml-2">
                             <input name="trained" class="form-check-input" type="radio" id="show1" value="yes" required
                             <check if="{{ $_SESSION['NotRequired']->getTrained() === 'yes' }}">
                                 checked</check>>
@@ -58,7 +67,7 @@
                             <label class="form-check-label" for="hide1">No</label>
                         </div><br>
 
-                        <div class="form-row mt-3" id="textbox1" style="display: none">
+                        <div class="form-row mt-3 ml-2" id="textbox1" style="display: none">
                             <label for="textarea1">If yes, please list: </label>
                             <textarea name="trainedText" class="form-control" id="textarea1" rows="5"
                             >{{ $_SESSION['NotRequired']->getTrainedText() }}</textarea>
@@ -67,8 +76,8 @@
 
                     <!-- are your certified to teach any other nami signature programs -->
                     <div class="my-5">
-                        <p class="lead">3. Are you currently certified to teach/lead any other NAMI signature programs? </p>
-                        <div class="form-check form-check-inline">
+                        <h5 class="lead mb-3">Are you currently certified to teach/lead any other NAMI signature programs? </h5>
+                        <div class="form-check form-check-inline ml-2">
                             <input name="certified" class="form-check-input" type="radio" id="show2" value="yes" required
                             <check if="{{ $_SESSION['NotRequired']->getCertified() === 'yes' }}">
                                 checked</check>>
@@ -82,7 +91,7 @@
                             <label class="form-check-label" for="hide2">No</label>
                         </div><br>
 
-                        <div class="form-row mt-3" id="textbox2" style="display: none">
+                        <div class="form-row mt-3 ml-2" id="textbox2" style="display: none">
                             <label for="textarea2">If yes, please list all Signature Programs you are certified to lead: </label>
                             <textarea name="certifiedText" class="form-control" id="textarea2" rows="5"
                             >{{ $_SESSION['NotRequired']->getCertifiedText() }}</textarea>

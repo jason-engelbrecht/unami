@@ -1,7 +1,8 @@
 <include href="views/forms/includes/header.html"/>
 
 <div class="container p-3">
-    <div class="progress">
+    <h5>Progress</h5>
+    <div class="progress border"  style="height: 20px">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
              style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">Almost done!</div>
     </div>
@@ -13,41 +14,48 @@
         <h4 class="card-header">Performance Agreement</h4>
         <div class="card-body m-3">
             <div>
+                <h6 class="pb-4 text-primary font-weight-bold">
+                    <i class="fas fa-star-of-life"></i> Please read through and check all fields
+                </h6>
+
                 <form action="performance_agreement" method="post">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck1">
                         <label class="form-check-label" for="defaultCheck1">
                             I am a current NAMI member – If not, you will be required to join NAMI by application deadline to attend the
                             training.
                         </label>
                     </div>
-
+                    <hr>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck2">
                         <label class="form-check-label" for="defaultCheck2">
                             I am willing to be trained and to abide by the NAMI Family Support Group model, and agree to stay for the
                             entire training.
                         </label>
                     </div>
+                    <hr>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck3">
                         <label class="form-check-label" for="defaultCheck3">
                             I will commit to arriving at the training on time, and to completing each day of this training (Sat 8:30am – 6:00
                             pm, Sun 8:30 am – 6:00 pm).
                         </label>
                     </div>
+                    <hr>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck4">
                         <label class="form-check-label" for="defaultCheck4">
                             I understand that if I do not stay for the entire training, I will not receive a certificate of completion and would
                             have to re-take the entire class in order to receive a certificate of completion.
                         </label>
                     </div>
+                    <hr>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck5">
                         <label class="form-check-label" for="defaultCheck5">
                             <strong>I understand that even if I complete the entire training, I am not guaranteed being awarded the certificate of
                                 completion that indicates that I am a certified NAMI Family Support Group facilitator. That is, I understated
@@ -55,68 +63,75 @@
                                 the skills necessary to be an effective Family Support Group facilitator.</strong>
                         </label>
                     </div>
+                    <hr>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck6">
                         <label class="form-check-label" for="defaultCheck6">
                             I agree to be a volunteer co-facilitator for a Family Support Group for a minimum of two years to help meet the
                             needs of my Affiliate.
                         </label>
                     </div>
+                    <hr>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck7">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck7">
                         <label class="form-check-label" for="defaultCheck7">
                             I understand that Family Support Groups are not intended to recommend or endorse specific medications or
                             therapies, but instead to empower, encourage, and support group members.
                         </label>
                     </div>
+                    <hr>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck8">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck8">
                         <label class="form-check-label" for="defaultCheck8">
                             I will maintain confidentiality of group members and will provide only grouped participant data when meeting
                             NAMI National Education data reporting requirements.
                         </label>
                     </div>
+                    <hr>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck9">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck9">
                         <label class="form-check-label" for="defaultCheck9">
                             I will communicate promptly with the NAMI Washington state office, as requested or required, and will submit
                             all forms and data to the state and national offices, as required by a Family Support Group facilitator.
                         </label>
                     </div>
+                    <hr>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck10">
                         <label class="form-check-label" for="defaultCheck10">
                             I will work to identify potential Family Support Group facilitator-candidates who participate in my groups, so
                             that my local affiliate will be able to educate more family members in my community.
                         </label>
                     </div>
+                    <hr>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck11">
+                        <input class="form-check-input" required type="checkbox" value="" id="defaultCheck11">
                         <label class="form-check-label" for="defaultCheck11">
                             I will regularly encourage my group participants to become NAMI members so that my local affiliate and NAMI
                             Washington can continue to offer support and education to members of my community.
                         </label>
                     </div><br>
 
-                    <div>
+                    <div class="my-3">
                         <p class="font-weight-bolder" style="text-align: center; color: red">Note: Applicants will be contacted for a brief telephone interview prior to being accepted into the training.</p>
                     </div>
 
-                    <div class="form-row mb-4">
+                    <div class="form-row mb-5 mt-4">
                         <div class="form-group col-md-7">
                             <h4 class="lead mb-0"><label for="signature">Signature:</label></h4>
-                            <input type="text" class="form-control" id="signature" placeholder="Type your full name" name="signature">
+                            <input disabled type="text" class="form-control" id="signature" placeholder="Type your full name" name="signature"
+                                   value="{{ @SESSION.PersonalInfo->getFname() }} {{ @SESSION.PersonalInfo->getLname() }}">
                         </div>
 
                         <div class="form-group col-md-5">
                             <h4 class="lead mb-0"><label for="date">Date</label></h4>
-                            <input type="text" class="form-control" id="date">
+                            <input type="text" class="form-control" id="date" disabled>
 
                         </div>
                     </div>
@@ -140,7 +155,7 @@
 <script>
     $(document).ready( function() {
         var now = new Date();
-        var today = (now.getMonth() + 1) + '-' + now.getDate() + '-' + now.getFullYear();
+        var today = (now.getMonth() + 1) + '/' + now.getDate() + '/' + now.getFullYear();
         $('#date').val(today);
     });
 </script>

@@ -1,7 +1,8 @@
 <include href="views/forms/includes/header.html"/>
 
 <div class="container p-3">
-    <div class="progress" style="height: 20px">
+    <h5>Progress</h5>
+    <div class="progress border" style="height: 20px">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-dark" role="progressbar"
              style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"> 0%</div>
     </div>
@@ -12,7 +13,7 @@
     <check if="{{!empty(@errors)}}">
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
-                <h4><strong>Error:</strong> {{ @error }}</h4>
+                <h5><strong>Error:</strong> {{ @error }}</h5>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -24,23 +25,28 @@
         <h4 class="card-header">Personal Information</h4>
         <div class="card-body m-3">
             <div>
+
+                <h6 class="pb-4 text-primary font-weight-bold">
+                    <i class="fas fa-star-of-life"></i> All fields are required unless otherwise marked by the <i class="far fa-check-circle fa-sm"></i> symbol
+                </h6>
+
                 <form method="post" action="personal_information">
 
                     <!-- name & pronoun -->
                     <div class="form-row">
                         <div class="form-group col-md-5">
-                            <h4 class="lead mb-0"><label for="first">First name</label></h4>
-                            <input name="first" type="text" class="form-control" id="first" placeholder="John" required
+                            <h5 class="mb-0"><label for="first">First name</label></h5>
+                            <input name="first" type="text" class="form-control" id="first" required
                                    value="{{ $_SESSION['PersonalInfo']->getFname() }}">
                         </div>
                         <div class="form-group col-md-5">
-                            <h4 class="lead mb-0"><label for="last">Last name</label></h4>
-                            <input name="last" type="text" class="form-control" id="last" placeholder="Doe" required
+                            <h5 class="mb-0"><label for="last">Last name</label></h5>
+                            <input name="last" type="text" class="form-control" id="last" required
                                    value="{{ $_SESSION['PersonalInfo']->getLname() }}">
                         </div>
                         <div class="form-group col-md-2">
-                            <h4 class="lead mb-0"><label for="pronouns">Pronouns</label></h4>
-                            <input name="pronouns" type="text" class="form-control" id="pronouns" placeholder="She/He" required
+                            <h5 class="mb-0"><label for="pronouns">Pronouns</label></h5>
+                            <input name="pronouns" type="text" class="form-control" id="pronouns" placeholder="he, she, they" required
                                    value="{{ $_SESSION['PersonalInfo']->getPronouns() }}">
                         </div>
                     </div>
@@ -50,7 +56,7 @@
                     <div class="mb-2">
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <h4 class="lead">Date of Birth</h4>
+                                <h4 class="lead">Date of Birth</h5>
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <input name="month" type="text" class="form-control" id="month" placeholder="MM"
@@ -68,7 +74,7 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <h4 class="lead">Are you a NAMI member?</h4>
+                                <h4 class="lead">Are you a NAMI member?</h5>
                                 <label class="mt-1">
                                     <input required type="radio" name="member" value="yes"
                                     <check if="{{$_SESSION['PersonalInfo']->getMember() === 'yes'}}">checked</check>>
@@ -82,7 +88,7 @@
                             </div>
 
                             <div class="form-group col-md-4 pb-0 mb-0">
-                                <h4 class="lead mb-0"><label for="affiliateName">NAMI Affiliate: </label></h4>
+                                <h5 class="mb-0"><label for="affiliateName">NAMI Affiliate: </label></h5>
 
                                 <select id="affiliateName" class="form-control" name="affiliate"
                                         onchange="showfield(this.options[this.selectedIndex].value)">
@@ -108,13 +114,13 @@
                     <!-- address & city -->
                     <div class="form-row">
                         <div class="form-group col-md-8">
-                            <h4 class="lead mb-0"><label for="inputAddress">Street Address</label></h4>
+                            <h5 class="mb-0"><label for="inputAddress">Street Address</label></h5>
                             <input name="inputAddress" type="text" class="form-control" id="inputAddress"
                                    placeholder="1234 Main St" required value="{{ $_SESSION['PersonalInfo']->getAddress() }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <h4 class="lead mb-0"><label for="inputCity">City</label></h4>
+                            <h5 class="mb-0"><label for="inputCity">City</label></h5>
                             <input name="inputCity" type="text" class="form-control" id="inputCity" required
                                    value="{{ $_SESSION['PersonalInfo']->getCity() }}">
                         </div>
@@ -124,13 +130,13 @@
                     <!-- address2, state, zip -->
                     <div class="form-row mb-4">
                         <div class="form-group col-md-7">
-                            <h4 class="lead mb-0"><label for="inputAddress2">Address 2</label></h4>
+                            <h5 class="mb-0"><label for="inputAddress2">Address 2</label></h5>
                             <input name="inputaddress2" type="text" class="form-control" id="inputAddress2"
                                    placeholder="Apartment, studio, or floor" value="{{ $_SESSION['PersonalInfo']->getAddress2() }}">
                         </div>
 
                         <div class="form-group col-md-3">
-                            <h4 class="lead mb-0"><label for="inputState">State</label></h4>
+                            <h5 class="mb-0"><label for="inputState">State</label></h5>
                             <select name="inputState" id="inputState" class="form-control">
                                 <option selected value="none">- Select -</option>
                                 <repeat group="{{ @states }}" value="{{ @state }}">
@@ -145,7 +151,7 @@
                         </div>
 
                         <div class="form-group col-md-2">
-                            <h4 class="lead mb-0"><label for="inputZip">Zip</label></h4>
+                            <h5 class="mb-0"><label for="inputZip">Zip</label></h5>
                             <input name="inputZip" type="text" class="form-control" id="inputZip" required
                                    value="{{ $_SESSION['PersonalInfo']->getZip() }}">
                         </div>
@@ -156,13 +162,13 @@
 
                     <div class="form-row pt-2">
                         <div class="form-group col-md-6">
-                            <h4 class="lead mb-0"><label for="primary">Primary phone number</label></h4>
-                            <input name="primary" type="tel" class="form-control" id="primary" placeholder="206 123 1234"
+                            <h5 class="mb-0"><label for="primary">Primary phone number</label></h5>
+                            <input name="primary" type="tel" class="form-control" id="primary" placeholder="253 474 2189"
                             required value="{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <h4 class="lead mb-0"><label for="primary_time">Best time to call</label></h4>
-                            <input name="primary_time" type="text" class="form-control" id="primary_time" placeholder="9AM"
+                            <h5 class="mb-0"><label for="primary_time">Best time to call</label></h5>
+                            <input name="primary_time" type="text" class="form-control" id="primary_time" placeholder="Days of Week - Times of Day"
                             required value="{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}">
                         </div>
                     </div>
@@ -171,13 +177,13 @@
                     <!-- alternate phone  -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <h4 class="lead mb-0"><label for="alternate">Alternate phone number</label></h4>
-                            <input name="alternate" type="tel" class="form-control" id="alternate" placeholder="206 123 1234"
+                            <h5 class="mb-0"><label for="alternate">Alternate phone number <i class="far fa-check-circle fa-xs text-primary"></i></label></h5>
+                            <input name="alternate" type="tel" class="form-control" id="alternate" placeholder="253 847 3020"
                              value="{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <h4 class="lead mb-0"><label for="alternate_time">Best time to call</label></h4>
-                            <input name="alternate_time" type="text" class="form-control" id="alternate_time" placeholder="9AM"
+                            <h5 class="mb-0"><label for="alternate_time">Best time to call <i class="far fa-check-circle fa-xs text-primary"></i></label></h5>
+                            <input name="alternate_time" type="text" class="form-control" id="alternate_time" placeholder="Days of Week - Times of Day"
                              value="{{ $_SESSION['PersonalInfo']->getAlternateTime() }}">
                         </div>
                     </div>
@@ -186,7 +192,7 @@
                     <!-- best way to contact & email -->
                     <div class="form-row mb-4">
                         <div class="form-group col-md-6">
-                            <h4 class="lead mb-0"><label for="email">Email</label></h4>
+                            <h5 class="mb-0"><label for="email">Email</label></h5>
                             <input name="email" type="email" class="form-control" id="email" placeholder="email@mail.com"
                                    required value="{{ $_SESSION['PersonalInfo']->getEmail() }}">
                         </div>
@@ -203,12 +209,12 @@
                     <!-- emergency contact -->
                     <div class="form-row mb-4">
                         <div class="form-group col-md-6">
-                            <h4 class="lead mb-0"><label for="emergency_name">Emergency contact name</label></h4>
+                            <h5 class="mb-0"><label for="emergency_name">Emergency contact name</label></h5>
                             <input name="emergency_name" type="text" class="form-control" id="emergency_name"
-                                   placeholder="Jane Doe" required value="{{ $_SESSION['PersonalInfo']->getEmergencyName() }}">
+                                   placeholder="First and Last" required value="{{ $_SESSION['PersonalInfo']->getEmergencyName() }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <h4 class="lead mb-0"><label for="emergency_phone">Emergency contact phone</label></h4>
+                            <h5 class="mb-0"><label for="emergency_phone">Emergency contact phone</label></h5>
                             <input name="emergency_phone" type="tel" class="form-control" id="emergency_phone"
                                    placeholder="206 123 1234" required value="{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}">
                         </div>
