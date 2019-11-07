@@ -292,11 +292,47 @@ function alternatePhoneFormat(input)
         }
         return input;
 }
-document.getElementById('primary').addEventListener('keyup',function(evt)
+document.getElementById('alternate').addEventListener('keyup',function(evt)
 {
         var alternate = document.getElementById('alternate');
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         alternate.value = alternatePhoneFormat(alternate.value);
+});
+
+    <!--Alternate phone-->
+function emergencyPhoneFormat(input)
+{
+        // Strip all characters from the input except digits
+        input = input.replace(/\D/g,'');
+
+        // Trim the remaining input to ten characters, to preserve phone number format
+        input = input.substring(0,10);
+
+        // Based upon the length of the string, we add formatting as necessary
+        var size = input.length;
+        if(size == 0)
+        {
+                input = input;
+        }
+        else if(size < 4)
+        {
+                input = '('+input;
+        }
+        else if(size < 7)
+        {
+                input = '('+input.substring(0,3)+') '+input.substring(3,6);
+        }
+        else
+        {
+                input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
+        }
+        return input;
+}
+document.getElementById('emergency_phone').addEventListener('keyup',function(evt)
+{
+        var emergency_phone = document.getElementById('emergency_phone');
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        emergency_phone.value = emergencyPhoneFormat(emergency_phone.value);
 });
 
 </script>
