@@ -3,6 +3,40 @@
 //Require autoload file
 require_once('vendor/autoload.php');
 
+
+/*********swift-mailer*********/
+if(isset($_POST['sendmail'])) {
+    require_once 'vendor/autoload.php';
+    require_once 'credential.php';
+
+// Create the Transport
+    $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587,'tls'))
+        ->setUsername(EMAIL)
+        ->setPassword(PASS)
+    ;
+
+// Create the Mailer using your created Transport
+    $mailer = new Swift_Mailer($transport);
+
+// Create a message
+    $message = (new Swift_Message($_POST['subject']))
+        ->setFrom([EMAIL => 'Thank you for your application'])
+        ->setTo([$_POST['email']])
+        ->setBody($_POST['message'])
+    ;
+
+// Send the message
+   if($mailer->send($message))
+    {
+        echo "Mail Send";
+    }
+   else
+   {
+       echo "Failed to send";
+   }
+}
+/*********swift-mailer*********/
+
 session_start();
 
 /*
@@ -40,8 +74,6 @@ $f3->set('affiliates', array('NAMI Chelan-Douglas', 'NAMI Clallam County', 'NAMI
     'NAMI Snohomish County', 'NAMI South King County', 'NAMI Southwest Washington', 'NAMI Spokane',
     'NAMI Thurston-Mason', 'NAMI Tri-Cities', 'NAMI Walla Walla', 'NAMI Washington Coast',
     'NAMI Whatcom', 'Yakima'));
-
-$f3->set('affiliates', $db->getAffiliates());
 
 //SwiftMailer testing
 $f3->route('GET /mailer', function(){
@@ -404,9 +436,6 @@ $f3->route('GET|POST /login', function($f3)
     $f3->set('page_title', 'Login');
     global $db;
 
-    //for logout/just in case
-    $_SESSION['loggedIn'] = 0;
-
     if(!empty($_POST)) {
 
         //get email and password
@@ -469,9 +498,6 @@ $f3->route('GET|POST /register', function($f3)
         //validate
         if(validAccount($fname, $lname, $email, $password, $passwordRepeat))
         {
-            //prefill email for login
-            $_SESSION['adminEmail'] = $email;
-
             //insert into db - go to login
             $db->insertAdminUser($fname, $lname, $email, $password);
             $f3->reroute('/login');
