@@ -1,0 +1,163 @@
+<include href="views/forms/includes/header.html"/>
+
+<div class="container p-3">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+             style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">Almost done!</div>
+    </div>
+</div>
+
+<div class="container p-3 ">
+
+    <div class="card shadow-sm bg-white rounded">
+        <h4 class="card-header">Performance Agreement</h4>
+        <div class="card-body m-3">
+            <div>
+                <form action="performance_agreement" method="post">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            I am a current NAMI member – If not, you will be required to join NAMI to attend the training
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <label class="form-check-label" for="defaultCheck2">
+                            I am willing and able to complete this intensive 1-day training and to abide by the
+                            NAMI program model.
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                        <label class="form-check-label" for="defaultCheck3">
+                            I understand that the online training could take 6-8 hours to complete and is required
+                            before attending training.
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                        <label class="form-check-label" for="defaultCheck4">
+                            <strong>I will complete the online training by the end of the day, Friday, January 18, 2019.</strong>
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                        <label class="form-check-label" for="defaultCheck5">
+                            I will commit to arriving at the training on time, and to completing the entire day of
+                            this training (Sat 9am – 5pm.)
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                        <label class="form-check-label" for="defaultCheck6">
+                            I understand that if I do not stay for the entire training I will not receive a certificate
+                            of completion and would have to re-take the entire class in order to receive a certificate
+                            of completion.
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck7">
+                        <label class="form-check-label" for="defaultCheck7">
+                            <strong>I understand that I could complete the entire training, and that my skills will
+                                be evaluated by the Trainer(s), and they will decide if I have the skills to be an ETS
+                                Presenter.</strong>
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck8">
+                        <label class="form-check-label" for="defaultCheck8">
+                            I understand that ETS Presentations are not intended to recommend or endorse specific
+                            medications or therapies, but instead to educate and empower educational leaders.
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck9">
+                        <label class="form-check-label" for="defaultCheck9">
+                            I will stay in contact with my NAMI Affiliate and provide presentation data to NAMI
+                            Washington and NAMI National’s Education data reporting requirements.
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
+                        <label class="form-check-label" for="defaultCheck10">
+                            I agree to be a presenter for Ending the Silence for a minimum of two (2) years to help
+                            meet the needs of my Affiliate.
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck11">
+                        <label class="form-check-label" for="defaultCheck11">
+                            I will communicate promptly with the NAMI Washington state office, as requested or required,
+                            and will submit all forms and data to the state and national offices, as required by an
+                            Ending the Silence Presenter.
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck12">
+                        <label class="form-check-label" for="defaultCheck12">
+                            I will work to identify potential Ending the Silence presenter-candidates who participate
+                            in my groups, so that my local affiliate will be able to educate more members in my
+                            community.
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck13">
+                        <label class="form-check-label" for="defaultCheck13">
+                            I will regularly encourage my group participants to become NAMI members so that my local
+                            affiliate and NAMI Washington can continue to offer support and education to members of my
+                            community.
+                        </label>
+                    </div><br>
+
+                    <div>
+                        <p class="font-weight-bolder" style="text-align: center; color: red">Note: Applicants will be contacted for a brief telephone interview prior to being accepted into the training.</p>
+                    </div>
+
+                    <div class="form-row mb-4">
+                        <div class="form-group col-md-7">
+                            <h4 class="lead mb-0"><label for="signature">Signature:</label></h4>
+                            <input type="text" class="form-control" id="signature" placeholder="Type your full name" name="signature">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <h4 class="lead mb-0"><label for="date">Date</label></h4>
+                            <input type="text" class="form-control" id="date">
+
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+
+
+                </form>
+                <form method="get" action="review">
+                    <button type="submit" class="btn btn-primary float-left"><i class="fas fa-arrow-left"></i> Back</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<include href="views/forms/includes/footer.html"/>
+
+<script>
+    $(document).ready( function() {
+        var now = new Date();
+        var today = (now.getMonth() + 1) + '-' + now.getDate() + '-' + now.getFullYear();
+        $('#date').val(today);
+    });
+</script>
