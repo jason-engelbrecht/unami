@@ -439,5 +439,113 @@ class UnamiDatabase
 
     }
 
+    /**
+     * Counts number of active applications
+     *
+     * @return mixed
+     */
+    function countActive() {
+        //define query
+        $query = "SELECT COUNT(category) AS Active
+                  FROM applicants
+                  WHERE category = 1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Counts number of submitted active applications
+     *
+     * @return mixed
+     */
+    function countSubmitted() {
+        //define query
+        $query = "SELECT COUNT(app_status) AS Submitted
+                  FROM applicants
+                  WHERE app_status = 1
+                  AND category = 1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Counts number of approved active applications
+     *
+     * @return mixed
+     */
+    function countApproved() {
+        //define query
+        $query = "SELECT COUNT(app_status) AS Approved
+                  FROM applicants
+                  WHERE app_status = 2
+                  AND category = 1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Counts number of denied active applications
+     *
+     * @return mixed
+     */
+    function countDenied() {
+        //define query
+        $query = "SELECT COUNT(app_status) AS Denied
+                  FROM applicants
+                  WHERE app_status = 0
+                  AND category = 1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Counts number of complete active applications
+     *
+     * @return mixed
+     */
+    function countComplete() {
+        //define query
+        $query = "SELECT COUNT(app_status) AS Complete
+                  FROM applicants
+                  WHERE app_status = 3
+                  AND category = 1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 
 }

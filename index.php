@@ -541,8 +541,19 @@ $f3->route('GET /active', function($f3)
         $f3->reroute('/login');
     }
 
+    global $db;
     $f3->set('page', 'active');
     $f3->set('page_title', 'Active Applicants');
+
+    //get all active applicants
+    $f3->set('ActiveApplicants', $db->getActiveApplicants());
+
+    //get various metrics
+    $f3->set('active', $db->countActive());
+    $f3->set('submitted', $db->countSubmitted());
+    $f3->set('approved', $db->countApproved());
+    $f3->set('denied', $db->countDenied());
+    $f3->set('complete', $db->countComplete());
 
     $view = new Template();
     echo $view->render('views/portal/applications/active.html');
