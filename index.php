@@ -69,11 +69,13 @@ $f3->set('states', array('Alabama','Alaska','Arizona','Arkansas','California',
     'West Virginia','Wisconsin','Wyoming'));
 
 // Array of NAMI Affiliates
-$f3->set('affiliates', array('NAMI Chelan-Douglas', 'NAMI Clallam County', 'NAMI Eastside', 'NAMI Jefferson County',
+/*$f3->set('affiliates', array('NAMI Chelan-Douglas', 'NAMI Clallam County', 'NAMI Eastside', 'NAMI Jefferson County',
     'NAMI Kitsap County', 'NAMI Lewis County', 'NAMI Pierce County', 'NAMI Seattle', 'NAMI Skagit',
     'NAMI Snohomish County', 'NAMI South King County', 'NAMI Southwest Washington', 'NAMI Spokane',
     'NAMI Thurston-Mason', 'NAMI Tri-Cities', 'NAMI Walla Walla', 'NAMI Washington Coast',
-    'NAMI Whatcom', 'Yakima'));
+    'NAMI Whatcom', 'Yakima'));*/
+
+$f3->set('affiliates', $db->getAffiliates());
 
 //SwiftMailer testing
 $f3->route('GET /mailer', function(){
@@ -436,6 +438,9 @@ $f3->route('GET|POST /login', function($f3)
     $f3->set('page_title', 'Login');
     global $db;
 
+    //for logout/just in case
+    $_SESSION['loggedIn'] = 0;
+
     if(!empty($_POST)) {
 
         //get email and password
@@ -495,9 +500,16 @@ $f3->route('GET|POST /register', function($f3)
         $password = $_POST['adminPassword'];
         $passwordRepeat = $_POST['adminPasswordRepeat'];
 
+        $f3->set('adminFname', $fname);
+        $f3->set('adminLname', $lname);
+        $f3->set('adminEmail', $email);
+
         //validate
         if(validAccount($fname, $lname, $email, $password, $passwordRepeat))
         {
+            //prefill email for login
+            $_SESSION['adminEmail'] = $email;
+
             //insert into db - go to login
             $db->insertAdminUser($fname, $lname, $email, $password);
             $f3->reroute('/login');
