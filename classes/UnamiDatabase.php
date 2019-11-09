@@ -386,12 +386,27 @@ class UnamiDatabase
      *
      */
     function getActiveApplicants() {
+        //active is 1
         $active = 1;
 
+        //affiliate->affiliates table
+        //app_type->app_type table
+        //applicant_id for viewing full and editing
         //define query
-        $query = "SELECT * 
-                  FROM applicants
-                  WHERE category = :category";
+        $query = "SELECT 
+                  applicant_id AS ID, 
+                  app_status AS AppStatus, 
+                  CONCAT(fname, ' ', lname) AS Name, 
+                  affiliates.name AS Affiliate, 
+                  app_type.app_type AS Training, 
+                  applicants.email AS Email, 
+                  date_submitted AS DateSubmitted
+                  FROM applicants 
+                  INNER JOIN affiliates ON applicants.affiliate = affiliates.affiliate_id
+                  INNER JOIN app_type ON applicants.app_type = app_type.app_id
+                  WHERE category = :category
+                  AND applicants.affiliate = affiliates.affiliate_id
+                  AND applicants.app_type = app_type.app_id";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
@@ -403,7 +418,7 @@ class UnamiDatabase
         $statement->execute();
 
         //get result
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
     }

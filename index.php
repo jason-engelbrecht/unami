@@ -97,7 +97,7 @@ $f3->route('GET /', function($f3)
 {
     $f3->set('page_title', 'Start');
 
-    session_destroy();
+    //session_destroy();//cant use
     session_start();
     $view = new Template();
     echo $view->render('views/forms/specific_form_pages/FSG/FSGtrainingDescription.html');
