@@ -274,6 +274,8 @@ class UnamiDatabase
     }
 
     /**
+     * Gets the applicant for review
+     *
      * @param $appId int
      * @return mixed the array for the applicant
      */
@@ -296,6 +298,8 @@ class UnamiDatabase
     }
 
     /**
+     * Gets the affiliate's email
+     *
      * @param $affiliateId int
      * @return mixed
      */
@@ -318,6 +322,8 @@ class UnamiDatabase
     }
 
     /**
+     * Gets the Affiliate's name
+     *
      * @param $affiliateId int
      * @return mixed The name of the affiliate
      */
@@ -337,6 +343,27 @@ class UnamiDatabase
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $result['name'];
+    }
+
+    /**
+     * Updates the status of the applicant
+     *
+     * @param $status int the new status (look for what each int mean at the top)
+     * @param $appId int the id of the applicant being updated
+     */
+    function updateApplicantStatus($status, $appId)
+    {
+        //define query
+        $query = "UPDATE applicants SET app_status = :status WHERE applicant_id = :applicant_id";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameters
+        $statement->bindParam(':status', $status, PDO::PARAM_INT);
+        $statement->bindParam(':applicant_id', $appId, PDO::PARAM_INT);
+
+        $statement->execute();
     }
 
     /**

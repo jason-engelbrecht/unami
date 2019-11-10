@@ -414,10 +414,27 @@ $f3->route('GET|POST /confirmation', function($f3)
 
 $f3->route('GET|POST /affiliate_review', function($f3)
 {
+    $f3->set('page_title', 'Application Approve/Deny');
+
     global $db;
     $applicant = $db->getApplicant($_GET['appId']);
 
-    echo $applicant['fname'];
+    //if app is already approve/deny, no need to show it
+    if($applicant['app_status'] != 1)
+    {
+        $f3->reroute('/');
+    }
+
+    $f3->set('applicant', $applicant);
+    $f3->set('affiliate', $db->getAffiliateName($applicant['affiliate']));
+
+    if(!empty($_POST))
+    {
+        $db->updateApplicantStatus($_POST['newStatus'], $_GET['appId']);
+
+        //need to make a thank you page
+        $f3->reroute('/');
+    }
 
     $view = new Template();
     echo $view->render('views/affiliate/affiliateReview.html');

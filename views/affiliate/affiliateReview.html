@@ -1,34 +1,27 @@
 <include href="views/forms/includes/header.html"/>
 
 <div class="container p-3">
-    <h5>Progress</h5>
-    <div class="progress border"  style="height: 20px">
-        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
-             style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">Review Your Information</div>
-    </div>
+    <h1>Application for: {{ @applicant['fname'].' '.@applicant['lname'] }}</h1>
 </div>
 
 <div class="container p-3">
     <div class="card mb-3 shadow-sm bg-white rounded">
         <div class="card-header">
             <h4 class="float-left">Personal Information</h4>
-            <form action="personal_information">
-                <button type="submit" class="btn btn-primary float-right">Edit</button>
-            </form>
         </div>
         <div class="card-body m-3">
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">First Name: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getFname() }}</p>
+                    <p class="pl-2">{{ @applicant['fname'] }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Last Name: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getLname() }}</p>
+                    <p class="pl-2">{{ @applicant['lname'] }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6 class="lead">Pronouns: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPronouns() }}</p>
+                    <p class="pl-2">{{ @applicant['pronouns'] }}</p>
                 </div>
             </div>
 
@@ -37,16 +30,15 @@
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Address 1: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress() }}</p>
+                    <p class="pl-2">{{ @applicant['address'] }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Address 2: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress2() }}</p>
+                    <p class="pl-2">{{ @applicant['address2'] }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6 class="lead">Date of Birth: </h6>
-                    <p>{{ $_SESSION['PersonalInfo']->getDobDay() .'/'.  $_SESSION['PersonalInfo']->getDobMonth() .'/'.
-                        $_SESSION['PersonalInfo']->getDobYear()}}</p>
+                    <p class="pl-2">{{ @applicant['birthdate'] }}</p>
                 </div>
             </div>
 
@@ -55,15 +47,15 @@
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">City: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getCity() }}</p>
+                    <p class="pl-2">{{ @applicant['city'] }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">State: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getState() }}</p>
+                    <p class="pl-2">{{ @applicant['state'] }}</p>
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6 class="lead">Zip: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getZip() }}</p>
+                    <p class="pl-2">{{ @applicant['zip'] }}</p>
                 </div>
             </div>
 
@@ -72,11 +64,11 @@
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Primary Phone Number: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}</p>
+                    <p class="pl-2">{{ @applicant['primary_phone'] }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Best time to call: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</p>
+                    <p class="pl-2">{{ @applicant['primary_time'] }}</p>
                 </div>
             </div>
 
@@ -85,11 +77,11 @@
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Alternate Phone Number: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}</p>
+                    <p class="pl-2">{{ @applicant['alternate_phone'] }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Best time to call: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternateTime() }}</p>
+                    <p class="pl-2">{{ @applicant['alternate_time'] }}</p>
                 </div>
             </div>
 
@@ -98,11 +90,11 @@
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Email: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmail() }}</p>
+                    <p class="pl-2">{{ @applicant['email'] }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Email or Phone: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPreference() }}</p>
+                    <p class="pl-2">{{ @applicant['preference'] }}</p>
                 </div>
             </div>
 
@@ -111,11 +103,16 @@
             <div class="row m-3">
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Affiliate: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAffiliate() }}</p>
+                    <p class="pl-2">{{ @affiliate }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">NAMI member: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getMember() }}</p>
+                    <check if="{{ @applicant['NAMI_member'] == 1 }}">
+                        <p class="pl-2">Already a NAMI member</p>
+                    </check>
+                    <check if="{{ @applicant['NAMI_member'] != 1 }}">
+                        <p class="pl-2">Needs to become a NAMI member</p>
+                    </check>
                 </div>
             </div>
 
@@ -124,11 +121,11 @@
             <div class="row mt-3 mx-3">
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Emergency Contact Name: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyName() }}</p>
+                    <p class="pl-2">{{ @applicant['emergency_name'] }}</p>
                 </div>
                 <div class="col-md-5 pl-0">
                     <h6 class="lead">Emergency Contact Phone Number: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}</p>
+                    <p class="pl-2">{{ @applicant['emergency_phone'] }}</p>
                 </div>
             </div>
         </div>
@@ -137,23 +134,37 @@
     <div class="card mb-3 shadow-sm bg-white rounded">
         <div class="card-header">
             <h4 class="float-left">Accommodations</h4>
-            <form action="additional_information">
-                <button type="submit" class="btn btn-primary float-right">Edit</button>
-            </form>
         </div>
         <div class="card-body m-3">
             <div class="row m-3">
                 <div class="col-md-4 pl-0">
                     <h6 class="lead">Special Needs: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() }}</p>
+                    <check if="{{ @applicant['special_needs'] == 1 }}">
+                        <p class="pl-2">Has special needs</p>
+                    </check>
+                    <check if="{{ @applicant['special_needs'] != 1 }}">
+                        <p class="pl-2">No special needs</p>
+                    </check>
                 </div>
+
                 <div class="col-md-4 pl-0">
                     <h6 class="lead">Bringing a Service Animal: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getServiceAnimal() }}</p>
+                    <check if="{{ @applicant['service_animal'] == 1 }}">
+                        <p class="pl-2">Has service animal</p>
+                    </check>
+                    <check if="{{ @applicant['service_animal'] != 1 }}">
+                        <p class="pl-2">No service animal</p>
+                    </check>
                 </div>
+
                 <div class="col-md-4 pl-0">
                     <h6 class="lead">Walker or Wheelchair used: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getMovementDisability() }}</p>
+                    <check if="{{ @applicant['mobility_need'] == 1 }}">
+                        <p class="pl-2">Has a mobility disability</p>
+                    </check>
+                    <check if="{{ @applicant['mobility_need'] != 1 }}">
+                        <p class="pl-2">No mobility disability</p>
+                    </check>
                 </div>
             </div>
 
@@ -162,154 +173,98 @@
             <div class="row m-3">
                 <div class="col-md-6 pl-0">
                     <h6 class="lead">Live within 1 hour of training: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() }}</p>
+                    <check if="{{ @applicant['need_rooming'] == 1 }}">
+                        <p class="pl-2">Room is needed</p>
+                    </check>
+                    <check if="{{ @applicant['need_rooming'] != 1 }}">
+                        <p class="pl-2">Room is not needed</p>
+                    </check>
                 </div>
-                <div class="col-md-6 pl-0">
-                    <h6 class="lead">Did you want to pay extra for a single room: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSingleRoom() }}</p>
-                </div>
+                <check if="{{ @applicant['need_rooming'] == 1}}">
+                    <div class="col-md-6 pl-0">
+                        <h6 class="lead">Did they want to pay extra for a single room: </h6>
+                        <check if="{{ @applicant['single_room'] == 1 }}">
+                            <p class="pl-2">Single room wanted</p>
+                        </check>
+                        <check if="{{ @applicant['single_room'] != 1 }}">
+                            <p class="pl-2">Single room not wanted</p>
+                        </check>
+                    </div>
+                </check>
             </div>
 
-            <hr>
+            <check if="{{ @applicant['single_room'] != 1 && @applicant['need_rooming'] == 1 }}">
+                <hr>
 
-            <div class="row m-3">
-                <h6 class="lead">Rooming Information: </h6>
-            </div>
-            <div class="row m-3">
-                <div class="col-md-4 pl-0">
-                    <h6 class="lead">Your Gender: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getGender() }}</p>
+                <div class="row m-3">
+                    <h6 class="lead">Rooming Information: </h6>
                 </div>
-                <div class="col-md-4 pl-0">
-                    <h6 class="lead">Want to Room With: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getRoommateGender() }}</p>
+                <div class="row m-3">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="lead">Their Gender: </h6>
+                        <p class="pl-2">{{ @applicant['gender'] }}</p>
+                    </div>
+                    <div class="col-md-4 pl-0">
+                        <h6 class="lead">Want to Room With: </h6>
+                        <p class="pl-2">{{ @applicant['roommate_gender'] }}</p>
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <h6 class="lead">Use a CPAP: </h6>
+                        <check if="{{ @applicant['cpap_user'] == 1 }}">
+                            <p class="pl-2">Applicant uses a CPAP</p>
+                        </check>
+                        <check if="{{ @applicant['cpap_user'] != 1 }}">
+                            <p class="pl-2">Applicant doesn't use a CPAP</p>
+                        </check>
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <h6 class="lead">Room with a CPAP User: </h6>
+                        <check if="{{ @applicant['roommate_cpap'] == 1 }}">
+                            <p class="pl-2">Fine with a CPAP using roommate</p>
+                        </check>
+                        <check if="{{ @applicant['roommate_cpap'] != 1 }}">
+                            <p class="pl-2">Doesn't want a CPAP using roommate</p>
+                        </check>
+                    </div>
                 </div>
-                <div class="col-md-2 pl-0">
-                    <h6 class="lead">Use a CPAP: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpap() }}</p>
-                </div>
-                <div class="col-md-2 pl-0">
-                    <h6 class="lead">Room with a CPAP User: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}</p>
-                </div>
-            </div>
 
-            <div class="row mt-3 mx-3">
-                <div class="col-md-12 pl-0">
-                    <h6 class="lead">Need Housing for these nights: </h6>
-                    <p class="pl-2">
-                        <repeat group="{{ $_SESSION['AdditionalInfo']->getDaysRooming() }}" value="{{@day}}">
-                            {{ @day .' '}}
-                        </repeat>
-                    </p>
+                <div class="row mt-3 mx-3">
+                    <div class="col-md-12 pl-0">
+                        <h6 class="lead">Need Housing for these nights: </h6>
+                        <p class="pl-2">{{ @applicant['days_rooming'] }}</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card mb-3 shadow-sm bg-white rounded">
-        <div class="card-header">
-            <h4 class="float-left">Long Answer Questions</h4>
-            <form action="long_answer">
-                <button type="submit" class="btn btn-primary float-right">Edit</button>
-            </form>
-        </div>
-        <div class="card-body m-3">
-            <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6 class="lead">Relative with Mental Illness: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getRelativeMentalIllness() }}</p>
-                </div>
-                <div class="col-md-9 pl-0">
-                    <h6 class="lead">Relative with Mental Illness Response: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getRelativeMentalIllnessText() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6 class="lead">Convicted of a Crime: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getConvict() }}</p>
-                </div>
-                <div class="col-md-9 pl-0">
-                    <h6 class="lead">Convicted of a Crime Response: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getConvictText() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-12 pl-0">
-                    <h6 class="lead">Why you want to be a NAMI Family Support Group Facilitator: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getWhyFacilitator() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-12 pl-0">
-                    <h6 class="lead">Experience in Support Group Participation: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getExperience() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row mx-3 mt-3">
-                <div class="col-md-6 pl-0">
-                    <h6 class="lead">Who you want to Co-facilitate with: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getCoFacWhomText() }}</p>
-                </div>
-                <div class="col-md-6 pl-0">
-                    <h6 class="lead">Where you want to Co-facilitate : </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getCoFacWhereText() }}</p>
-                </div>
-            </div>
+            </check>
         </div>
     </div>
 
     <div class="card mb-3 shadow-sm bg-white rounded">
         <div class="card-header">
             <h4 class="float-left">Additional Questions</h4>
-            <form action="not_required">
-                <button type="submit" class="btn btn-primary float-right">Edit</button>
-            </form>
         </div>
         <div class="card-body m-3">
             <div class="row m-3">
                 <div class="col-md-12 pl-0">
-                    <h6 class="lead">How did you hear about this training class: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</p>
+                    <h6 class="lead">How did they hear about this training class: </h6>
+                    <p class="pl-2">What they wrote: {{ @applicant['heard_about_training'] }}</p>
                 </div>
             </div>
 
             <hr>
 
             <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6 class="lead">Have you Taken Other Classes: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getTrained() }}</p>
-                </div>
                 <div class="col-md-9 pl-0">
-                    <h6 class="lead">Which Classes you Took: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getTrainedText() }}</p>
+                    <h6 class="lead">Other Classes Applicant Took: </h6>
+                    <p class="pl-2">{{ @applicant['other_classes'] }}</p>
                 </div>
             </div>
 
             <hr>
 
             <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6 class="lead">Can you Teach any Classes: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getCertified() }}</p>
-                </div>
                 <div class="col-md-9 pl-0">
-                    <h6 class="lead">Which Classes you can Teach: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getCertifiedText() }}</p>
+                    <h6 class="lead">Which Classes can they Teach: </h6>
+                    <p class="pl-2">{{ @applicant['certified'] }}</p>
                 </div>
             </div>
         </div>
@@ -318,14 +273,14 @@
     <div class="card py-2 shadow-sm bg-white rounded">
         <div class="card-body">
             <form method="post">
-                <label>Deny
-                    <input hidden type="text" value="denied">
+                <label hidden>Deny
+                    <input hidden name="newStatus" type="text" value="0">
                 </label>
                 <button type="submit" class="btn btn-danger float-left">Deny</button>
             </form>
             <form method="post">
-                <label>Approve
-                    <input hidden type="text" value="approved">
+                <label hidden>Approve
+                    <input hidden name="newStatus" type="text" value="2">
                 </label>
                 <button type="submit" class="btn btn-success float-right">Approve</button>
             </form>

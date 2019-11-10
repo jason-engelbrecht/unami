@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-md-2 pl-0">
                     <h6 class="lead">Date of Birth: </h6>
-                    <p>{{ $_SESSION['PersonalInfo']->getDobDay() .'/'.  $_SESSION['PersonalInfo']->getDobMonth() .'/'.
+                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getDobDay() .'/'.  $_SESSION['PersonalInfo']->getDobMonth() .'/'.
                         $_SESSION['PersonalInfo']->getDobYear()}}</p>
                 </div>
             </div>
@@ -188,7 +188,8 @@
                 </check>
             </div>
 
-            <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == false }}">
+            <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == false &&
+                          $_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
                 <hr>
 
                 <div class="row m-3">
