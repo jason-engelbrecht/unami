@@ -162,50 +162,62 @@
             <div class="row m-3">
                 <div class="col-md-6 pl-0">
                     <h6 class="lead">Live within 1 hour of training: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() }}</p>
+                    <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
+                        <p class="pl-2">Room is needed</p>
+                    </check>
+                    <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == false }}">
+                        <p class="pl-2">Room is not needed</p>
+                    </check>
                 </div>
-                <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() }}">
+                <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == true}}">
                     <div class="col-md-6 pl-0">
                         <h6 class="lead">Did you want to pay extra for a single room: </h6>
-                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSingleRoom() }}</p>
+                        <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() == true }}">
+                            <p class="pl-2">Single room wanted</p>
+                        </check>
+                        <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() == false }}">
+                            <p class="pl-2">Single room not wanted</p>
+                        </check>
                     </div>
                 </check>
             </div>
 
-            <hr>
+            <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == false }}">
+                <hr>
 
-            <div class="row m-3">
-                <h6 class="lead">Rooming Information: </h6>
-            </div>
-            <div class="row m-3">
-                <div class="col-md-4 pl-0">
-                    <h6 class="lead">Your Gender: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getGender() }}</p>
+                <div class="row m-3">
+                    <h6 class="lead">Rooming Information: </h6>
                 </div>
-                <div class="col-md-4 pl-0">
-                    <h6 class="lead">Want to Room With: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getRoommateGender() }}</p>
+                <div class="row m-3">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="lead">Your Gender: </h6>
+                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getGender() }}</p>
+                    </div>
+                    <div class="col-md-4 pl-0">
+                        <h6 class="lead">Want to Room With: </h6>
+                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getRoommateGender() }}</p>
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <h6 class="lead">Use a CPAP: </h6>
+                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpap() }}</p>
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <h6 class="lead">Room with a CPAP User: </h6>
+                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}</p>
+                    </div>
                 </div>
-                <div class="col-md-2 pl-0">
-                    <h6 class="lead">Use a CPAP: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpap() }}</p>
-                </div>
-                <div class="col-md-2 pl-0">
-                    <h6 class="lead">Room with a CPAP User: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}</p>
-                </div>
-            </div>
 
-            <div class="row mt-3 mx-3">
-                <div class="col-md-12 pl-0">
-                    <h6 class="lead">Need Housing for these nights: </h6>
-                    <p class="pl-2">
-                        <repeat group="{{ $_SESSION['AdditionalInfo']->getDaysRooming() }}" value="{{@day}}">
-                            {{ @day .' '}}
-                        </repeat>
-                    </p>
+                <div class="row mt-3 mx-3">
+                    <div class="col-md-12 pl-0">
+                        <h6 class="lead">Need Housing for these nights: </h6>
+                        <p class="pl-2">
+                            <repeat group="{{ $_SESSION['AdditionalInfo']->getDaysRooming() }}" value="{{@day}}">
+                                {{ @day .' '}}
+                            </repeat>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </check>
         </div>
     </div>
 
