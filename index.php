@@ -68,36 +68,14 @@ $f3->set('states', array('Alabama','Alaska','Arizona','Arkansas','California',
     'South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington',
     'West Virginia','Wisconsin','Wyoming'));
 
-// Array of NAMI Affiliates
-/*$f3->set('affiliates', array('NAMI Chelan-Douglas', 'NAMI Clallam County', 'NAMI Eastside', 'NAMI Jefferson County',
-    'NAMI Kitsap County', 'NAMI Lewis County', 'NAMI Pierce County', 'NAMI Seattle', 'NAMI Skagit',
-    'NAMI Snohomish County', 'NAMI South King County', 'NAMI Southwest Washington', 'NAMI Spokane',
-    'NAMI Thurston-Mason', 'NAMI Tri-Cities', 'NAMI Walla Walla', 'NAMI Washington Coast',
-    'NAMI Whatcom', 'Yakima'));*/
-
 $f3->set('affiliates', $db->getAffiliates());
-
-//SwiftMailer testing
-$f3->route('GET /mailer', function(){
-   if(class_exists('Swift'))
-   {
-       echo 'Good to go';
-   }
-   else
-   {
-       echo 'Error';
-   }
-
-    $view = new Template();
-    echo $view->render('model/message.php');
-});
 
 //define a default route
 $f3->route('GET /', function($f3)
 {
     $f3->set('page_title', 'Start');
 
-    //session_destroy();//cant use
+    session_destroy();
     session_start();
     $view = new Template();
     echo $view->render('views/forms/specific_form_pages/FSG/FSGtrainingDescription.html');
@@ -409,7 +387,8 @@ $f3->route('GET|POST /review', function($f3)
     echo $view->render('views/forms/general_form_pages/review.html');
 });
 
-$f3->route('GET|POST /performance_agreement', function($f3) {
+$f3->route('GET|POST /performance_agreement', function($f3)
+{
     $f3->set('page_title', 'Performance Agreement');
 
     if(!empty($_POST)) {
@@ -423,12 +402,26 @@ $f3->route('GET|POST /performance_agreement', function($f3) {
 $f3->route('GET|POST /confirmation', function($f3)
 {
     global $db;
-    $db->addApplicant($_SESSION['PersonalInfo'], $_SESSION['AdditionalInfo'], $_SESSION['NotRequired']);
+    $lastId = $db->addApplicant($_SESSION['PersonalInfo'], $_SESSION['AdditionalInfo'],
+        $_SESSION['NotRequired']);
+
+    Emailer::sendAffiliateEmail($lastId, $_SESSION['PersonalInfo'], $db);
 
     $f3->set('page_title', 'Application Submitted');
 
     $view = new Template();
     echo $view->render('views/forms/general_form_pages/confirmation.html');
+});
+
+$f3->route('GET|POST /affiliate_review', function($f3)
+{
+    global $db;
+    $applicant = $db->getApplicant($_GET['appId']);
+
+    echo $applicant['fname'];
+
+    $view = new Template();
+    echo $view->render('views/affiliate/affiliateReview.html');
 });
 
 ///////////////////////////////////////////portal///////////////////////////////////////////////////////////////////////

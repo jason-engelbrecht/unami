@@ -56,7 +56,7 @@
                     <div class="mb-2">
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <h4 class="lead">Date of Birth</h5>
+                                <h4 class="lead">Date of Birth</h4>
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <input name="month" type="text" class="form-control" id="month" placeholder="MM"
@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <h4 class="lead">Are you a NAMI member?</h5>
+                                <h4 class="lead">Are you a NAMI member?</h4>
                                 <label class="mt-1">
                                     <input required type="radio" name="member" value="yes"
                                     <check if="{{$_SESSION['PersonalInfo']->getMember() === 'yes'}}">checked</check>>
@@ -95,7 +95,8 @@
                                     <option value="none">- Select -</option>
                                     <repeat group="{{ @affiliates }}" value="{{ @affiliate }}">
                                         <option value="{{ @affiliate['affiliate_id'] }}"
-                                        <check if="{{isset(@SESSION.affiliate) && @SESSION.affiliate == @affiliate['name'] }}">
+                                        <check if="{{isset(@SESSION.affiliate) &&
+                                        @SESSION.affiliate == @affiliate['affiliate_id'] }}">
                                             selected="selected"
                                         </check>>
                                         {{ @affiliate['name'] }}

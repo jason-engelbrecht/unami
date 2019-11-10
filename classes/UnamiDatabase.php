@@ -141,6 +141,7 @@ class UnamiDatabase
      * @param $personalInfo PersonalInfo
      * @param $accommodations AdditionalInfo
      * @param $notRequired NotRequired
+     * @return int the id of the last applicant
      */
     function addApplicant($personalInfo, $accommodations, $notRequired)
     {
@@ -269,7 +270,73 @@ class UnamiDatabase
         // execute insert into users
         $statement->execute();
 
-        //$lastID = $this->_dbh->lastInsertId();
+        return $this->_dbh->lastInsertId();
+    }
+
+    /**
+     * @param $appId int
+     * @return mixed the array for the applicant
+     */
+    function getApplicant($appId)
+    {
+        //define query
+        $query = "SELECT * FROM applicants WHERE applicant_id = :applicant_id";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameters
+        $statement->bindParam(':applicant_id', $appId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * @param $affiliateId int
+     * @return mixed
+     */
+    function getAffiliateEmail($affiliateId)
+    {
+        //define query
+        $query = "SELECT email FROM affiliates WHERE affiliate_id = :affiliate_id";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameters
+        $statement->bindParam(':affiliate_id', $affiliateId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result['email'];
+    }
+
+    /**
+     * @param $affiliateId int
+     * @return mixed The name of the affiliate
+     */
+    function getAffiliateName($affiliateId)
+    {
+        //define query
+        $query = "SELECT name FROM affiliates WHERE affiliate_id = :affiliate_id";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameters
+        $statement->bindParam(':affiliate_id', $affiliateId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result['name'];
     }
 
     /**

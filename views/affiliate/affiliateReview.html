@@ -164,12 +164,10 @@
                     <h6 class="lead">Live within 1 hour of training: </h6>
                     <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() }}</p>
                 </div>
-                <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() }}">
-                    <div class="col-md-6 pl-0">
-                        <h6 class="lead">Did you want to pay extra for a single room: </h6>
-                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSingleRoom() }}</p>
-                    </div>
-                </check>
+                <div class="col-md-6 pl-0">
+                    <h6 class="lead">Did you want to pay extra for a single room: </h6>
+                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSingleRoom() }}</p>
+                </div>
             </div>
 
             <hr>
@@ -319,11 +317,17 @@
 
     <div class="card py-2 shadow-sm bg-white rounded">
         <div class="card-body">
-            <form method="get" action="not_required">
-                <button type="submit" class="btn btn-primary float-left"><i class="fas fa-arrow-left"></i> Back</button>
+            <form method="post">
+                <label>Deny
+                    <input hidden type="text" value="denied">
+                </label>
+                <button type="submit" class="btn btn-danger float-left">Deny</button>
             </form>
-            <form method="get" action="performance_agreement">
-                <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
+            <form method="post">
+                <label>Approve
+                    <input hidden type="text" value="approved">
+                </label>
+                <button type="submit" class="btn btn-success float-right">Approve</button>
             </form>
         </div>
     </div>
