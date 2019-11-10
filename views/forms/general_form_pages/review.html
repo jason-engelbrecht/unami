@@ -11,8 +11,11 @@
 <div class="container p-3">
     <div class="card mb-3 shadow-sm bg-white rounded">
         <div class="card-header">
-            <h4 class="float-left">Personal Information</h4>
-            <form action="personal_information">
+            <h4 class="float-left pt-2">Personal Information</h4>
+            <form action="personal_information" method="get">
+                <label hidden>Go back to personal info
+                    <input hidden name="fromReview" value="true">
+                </label>
                 <button type="submit" class="btn btn-primary float-right">Edit</button>
             </form>
         </div>
@@ -136,8 +139,11 @@
 
     <div class="card mb-3 shadow-sm bg-white rounded">
         <div class="card-header">
-            <h4 class="float-left">Accommodations</h4>
-            <form action="additional_information">
+            <h4 class="float-left pt-2">Accommodations</h4>
+            <form action="additional_information" method="get">
+                <label hidden>Go back to accommodations
+                    <input hidden name="fromReview" value="true">
+                </label>
                 <button type="submit" class="btn btn-primary float-right">Edit</button>
             </form>
         </div>
@@ -223,8 +229,11 @@
 
     <div class="card mb-3 shadow-sm bg-white rounded">
         <div class="card-header">
-            <h4 class="float-left">Long Answer Questions</h4>
-            <form action="long_answer">
+            <h4 class="float-left pt-2">Long Answer Questions</h4>
+            <form action="long_answer" method="get">
+                <label hidden>Go back to long answer
+                    <input hidden name="fromReview" value="true">
+                </label>
                 <button type="submit" class="btn btn-primary float-right">Edit</button>
             </form>
         </div>
@@ -288,8 +297,11 @@
 
     <div class="card mb-3 shadow-sm bg-white rounded">
         <div class="card-header">
-            <h4 class="float-left">Additional Questions</h4>
-            <form action="not_required">
+            <h4 class="float-left pt-2">Additional Questions</h4>
+            <form action="not_required" method="get">
+                <label hidden>Go back to not required
+                    <input hidden name="fromReview" value="true">
+                </label>
                 <button type="submit" class="btn btn-primary float-right">Edit</button>
             </form>
         </div>

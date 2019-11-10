@@ -129,7 +129,6 @@ $f3->route('GET|POST /personal_information', function($f3)
         $f3->set('emergency_name', $emergency_name);
         $f3->set('emergency_phone', $emergency_phone);
 
-
         $_SESSION['PersonalInfo'] = new PersonalInfo($first, $last, $pronouns, $address, $address2, $city, $state, $zip,
             $primaryPhone, $primaryTime, $alternatePhone, $alternateTime, $email, $preference, $affiliate, $member,
             $emergency_name, $emergency_phone, $_POST['day'], $_POST['month'], $_POST['year']);

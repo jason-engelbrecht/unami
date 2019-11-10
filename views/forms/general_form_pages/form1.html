@@ -22,7 +22,15 @@
     </check>
 
     <div class="card shadow-sm bg-white rounded">
-        <h4 class="card-header">Personal Information</h4>
+        <div class="card-header">
+            <h4 class="float-left pt-2">Personal Information</h4>
+            <check if="{{ $_GET['fromReview'] == true }}">
+                <form method="get" action="review">
+                    <button type="submit" class="btn btn-primary float-right">Go Back to Review</button>
+                </form>
+            </check>
+        </div>
+
         <div class="card-body m-3">
             <div>
 

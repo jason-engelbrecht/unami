@@ -25,7 +25,15 @@
 
     <!-- card -->
     <div class="card shadow-sm bg-white rounded">
-        <h4 class="card-header">Additional Questions</h4>
+
+        <div class="card-header">
+            <h4 class="float-left pt-2">Additional Questions</h4>
+            <check if="{{ $_GET['fromReview'] == true }}">
+                <form method="get" action="review">
+                    <button type="submit" class="btn btn-primary float-right">Go Back to Review</button>
+                </form>
+            </check>
+        </div>
 
         <!-- card body -->
         <div class="card-body m-3">
