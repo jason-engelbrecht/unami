@@ -431,6 +431,7 @@ $f3->route('GET|POST /affiliate_review', function($f3)
     if(!empty($_POST))
     {
         $db->updateApplicantStatus($_POST['newStatus'], $_GET['appId']);
+        $db->insertAffiliateNotes($_GET['appId'], $_POST['affiliateNotes']);
 
         //need to make a thank you page
         $f3->reroute('/');

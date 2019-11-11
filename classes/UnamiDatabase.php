@@ -74,6 +74,14 @@ CREATE TABLE affiliates
     email VARCHAR(254) NOT NULL
 );
 
+CREATE TABLE notes
+(
+    applicant_id INT NOT NULL,
+    affiliate_notes MEDIUMTEXT,
+    state_notes MEDIUMTEXT,
+    FOREIGN KEY(applicant_id) references applicants(applicant_id)
+);
+
 INSERT INTO affiliates(name)
  VALUES
 ('NAMI Chelan-Douglas'),
@@ -642,4 +650,19 @@ class UnamiDatabase
         return $result;
     }
 
+    /**
+     * @param $appId int applicants id
+     * @param $notes String notes written by affiliate
+     */
+    function insertAffiliateNotes($appId, $notes)
+    {
+        $query = "INSERT INTO notes(applicant_id, affiliate_notes) VALUES (:applicant_id, :affiliate_notes)";
+
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->bindParam(':applicant_id', $appId, PDO::PARAM_INT);
+        $statement->bindParam(':affiliate_notes', $notes, PDO::PARAM_STR);
+
+        $statement->execute();
+    }
 }
