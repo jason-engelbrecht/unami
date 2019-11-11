@@ -422,7 +422,7 @@ $f3->route('GET|POST /affiliate_review', function($f3)
     //if app is already approve/deny, no need to show it
     if($applicant['app_status'] != 1)
     {
-        $f3->reroute('/');
+        $f3->reroute('/application_reviewed');
     }
 
     $f3->set('applicant', $applicant);
@@ -434,11 +434,27 @@ $f3->route('GET|POST /affiliate_review', function($f3)
         $db->insertAffiliateNotes($_GET['appId'], $_POST['affiliateNotes']);
 
         //need to make a thank you page
-        $f3->reroute('/');
+        $f3->reroute('/affiliate_confirmation');
     }
 
     $view = new Template();
     echo $view->render('views/affiliate/affiliateReview.html');
+});
+
+$f3->route('GET|POST /affiliate_confirmation', function($f3)
+{
+    $f3->set('page_title', 'Thank you!');
+
+    $view = new Template();
+    echo $view->render('views/affiliate/thankyouConfirmation.html');
+});
+
+$f3->route('GET /application_reviewed', function($f3)
+{
+    $f3->set('page_title', 'Already reviewed');
+
+    $view = new Template();
+    echo $view->render('views/affiliate/alreadyReviewed.html');
 });
 
 ///////////////////////////////////////////portal///////////////////////////////////////////////////////////////////////
