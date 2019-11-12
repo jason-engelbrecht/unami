@@ -30,7 +30,7 @@
             <h4 class="float-left pt-2">Additional Questions</h4>
             <check if="{{ $_GET['fromReview'] == true }}">
                 <form method="get" action="review">
-                    <button type="submit" class="btn btn-primary float-right">Go Back to Review</button>
+                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-redo-alt"></i> Back to Review</button>
                 </form>
             </check>
         </div>
@@ -76,9 +76,11 @@
                         </div><br>
 
                         <div class="form-row mt-3 ml-2" id="textbox1" style="display: none">
-                            <label for="textarea1">If yes, please list: </label>
-                            <textarea name="trainedText" class="form-control" id="textarea1" rows="5"
-                            >{{ $_SESSION['NotRequired']->getTrainedText() }}</textarea>
+                            <div class="col-md-7">
+                                <label for="textarea1">If yes, please list: </label>
+                                <textarea name="trainedText" class="form-control" id="textarea1" rows="5"
+                                >{{ $_SESSION['NotRequired']->getTrainedText() }}</textarea>
+                            </div>
                         </div>
                     </div>
 
@@ -100,9 +102,11 @@
                         </div><br>
 
                         <div class="form-row mt-3 ml-2" id="textbox2" style="display: none">
-                            <label for="textarea2">If yes, please list all Signature Programs you are certified to lead: </label>
-                            <textarea name="certifiedText" class="form-control" id="textarea2" rows="5"
-                            >{{ $_SESSION['NotRequired']->getCertifiedText() }}</textarea>
+                            <div class="col-md-7">
+                                <label for="textarea2">If yes, please list all Signature Programs you are certified to lead: </label>
+                                <textarea name="certifiedText" class="form-control" id="textarea2" rows="5"
+                                >{{ $_SESSION['NotRequired']->getCertifiedText() }}</textarea>
+                            </div>
                         </div>
                     </div>
 

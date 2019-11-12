@@ -80,7 +80,7 @@ function validPersonalInfoForm()
         $f3->set("errors['primary_phone']", "Please enter a valid primary phone number");
     }
 
-    if (!numeric($f3->get('alternate_phone') && !empty($f3->get('alternate_phone'))))
+    if ((!numeric($f3->get('alternate_phone')) && ($f3->get('alternate_phone') != ' ')))
     {
         $isValid = false;
         $f3->set("errors['primary_phone']", "Please enter a valid alternate phone number");

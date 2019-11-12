@@ -4,356 +4,304 @@
     <h5>Progress</h5>
     <div class="progress border"  style="height: 20px">
         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
-             style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">Review Your Information</div>
+             style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
     </div>
 </div>
 
 <div class="container p-3">
     <div class="card mb-3 shadow-sm bg-white rounded">
         <div class="card-header">
-            <h4 class="float-left pt-2">Personal Information</h4>
-            <form action="personal_information" method="get">
-                <label hidden>Go back to personal info
-                    <input hidden name="fromReview" value="true">
-                </label>
-                <button type="submit" class="btn btn-primary float-right">Edit</button>
-            </form>
+            <h4>Review your Information</h4>
         </div>
         <div class="card-body m-3">
-            <div class="row m-3">
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">First Name: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getFname() }}</p>
-                </div>
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Last Name: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getLname() }}</p>
-                </div>
-                <div class="col-md-2 pl-0">
-                    <h6 class="lead">Pronouns: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPronouns() }}</p>
-                </div>
-            </div>
 
-            <hr>
+            <!-- personal information -->
+            <div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5 class="font-weight-bold d-inline">Personal Information</h5>
+                        <form action="personal_information" method="get" class="d-inline">
+                            <label hidden>Go back to personal info
+                                <input hidden name="fromReview" value="true">
+                            </label>
+                            <button type="submit" class="btn btn-link"><i class="fas fa-edit fa-lg" style="margin-bottom: 10px;"></i></button>
+                        </form>
+                        <hr class="mt-0">
+                    </div>
+                </div>
 
-            <div class="row m-3">
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Address 1: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress() }}</p>
-                </div>
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Address 2: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAddress2() }}</p>
-                </div>
-                <div class="col-md-2 pl-0">
-                    <h6 class="lead">Date of Birth: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getDobDay() .'/'.  $_SESSION['PersonalInfo']->getDobMonth() .'/'.
-                        $_SESSION['PersonalInfo']->getDobYear()}}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">City: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getCity() }}</p>
-                </div>
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">State: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getState() }}</p>
-                </div>
-                <div class="col-md-2 pl-0">
-                    <h6 class="lead">Zip: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getZip() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Primary Phone Number: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}</p>
-                </div>
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Best time to call: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Alternate Phone Number: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}</p>
-                </div>
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Best time to call: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAlternateTime() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Email: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmail() }}</p>
-                </div>
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Email or Phone: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getPreference() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Affiliate: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getAffiliate() }}</p>
-                </div>
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">NAMI member: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getMember() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row mt-3 mx-3">
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Emergency Contact Name: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyName() }}</p>
-                </div>
-                <div class="col-md-5 pl-0">
-                    <h6 class="lead">Emergency Contact Phone Number: </h6>
-                    <p class="pl-2">{{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card mb-3 shadow-sm bg-white rounded">
-        <div class="card-header">
-            <h4 class="float-left pt-2">Accommodations</h4>
-            <form action="additional_information" method="get">
-                <label hidden>Go back to accommodations
-                    <input hidden name="fromReview" value="true">
-                </label>
-                <button type="submit" class="btn btn-primary float-right">Edit</button>
-            </form>
-        </div>
-        <div class="card-body m-3">
-            <div class="row m-3">
-                <div class="col-md-4 pl-0">
-                    <h6 class="lead">Special Needs: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() }}</p>
-                </div>
-                <div class="col-md-4 pl-0">
-                    <h6 class="lead">Bringing a Service Animal: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getServiceAnimal() }}</p>
-                </div>
-                <div class="col-md-4 pl-0">
-                    <h6 class="lead">Walker or Wheelchair used: </h6>
-                    <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getMovementDisability() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-6 pl-0">
-                    <h6 class="lead">Live within 1 hour of training: </h6>
-                    <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
-                        <p class="pl-2">Room is needed</p>
-                    </check>
-                    <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == false }}">
-                        <p class="pl-2">Room is not needed</p>
-                    </check>
-                </div>
-                <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == true}}">
+                <!-- name, pronouns -->
+                <div class="row m-1 mb-2">
                     <div class="col-md-6 pl-0">
-                        <h6 class="lead">Did you want to pay extra for a single room: </h6>
-                        <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() == true }}">
-                            <p class="pl-2">Single room wanted</p>
+                        <h6 class="pl-2"><span class="font-weight-bold">Name:</span> {{ $_SESSION['PersonalInfo']->getFname() }} {{ $_SESSION['PersonalInfo']->getLname() }}
+                            <span class="font-weight-bold ml-5">Pronouns:</span> {{ $_SESSION['PersonalInfo']->getPronouns() }}</h6>
+                    </div>
+                </div>
+
+                <!-- dob -->
+                <div class="row m-1 mb-2">
+                    <div class="col-md-6 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Date of Birth:</span> {{ $_SESSION['PersonalInfo']->getDobMonth() .'/'.  $_SESSION['PersonalInfo']->getDobDay() .'/'.
+                            $_SESSION['PersonalInfo']->getDobYear()}}</h6>
+                    </div>
+                </div>
+
+                <!-- address -->
+                <div class="row m-1 mb-2">
+                    <div class="col-md-12 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Address:</span>
+                            {{ $_SESSION['PersonalInfo']->getAddress() }} {{ $_SESSION['PersonalInfo']->getAddress2() }}
+                            {{ $_SESSION['PersonalInfo']->getCity() }}, {{ $_SESSION['PersonalInfo']->getState() }} {{ $_SESSION['PersonalInfo']->getZip() }}
+                        </h6>
+                    </div>
+                </div>
+
+                <!-- nami stuff -->
+                <div class="row m-1 mb-2">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Affiliate:</span> {{ @affiliates[$_SESSION['PersonalInfo']->getAffiliate() + 1]['name'] }}</h6>
+                    </div>
+                    <div class="col-md-6 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">NAMI Member:</span> {{ $_SESSION['PersonalInfo']->getMember() }}</h6>
+                    </div>
+                </div>
+
+                <!-- primary phone -->
+                <div class="row m-1 mb-2">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Primary Phone:</span> {{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}</h6>
+                    </div>
+                    <div class="col-md-6 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call:</span> {{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</h6>
+                    </div>
+                </div>
+
+                <!-- alternate phone -->
+                <check if="{{ @SESSION.alternatePhone == 1 }}">
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-4 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Alternate Phone:</span> {{ $_SESSION['PersonalInfo']->getAlternatePhone() }}</h6>
+                        </div>
+                        <div class="col-md-6 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call:</span> {{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</h6>
+                        </div>
+                    </div>
+                </check>
+
+                <!-- email and best way to contact -->
+                <div class="row m-1 mb-2">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Email:</span> {{ $_SESSION['PersonalInfo']->getEmail() }}</h6>
+                    </div>
+                    <div class="col-md-6 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Best Way to Contact:</span> {{ $_SESSION['PersonalInfo']->getPreference() }}</h6>
+                    </div>
+                </div>
+
+                <!-- emergency contact -->
+                <div class="row m-1 mb-2">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Emergency Contact Name</span> {{ $_SESSION['PersonalInfo']->getEmergencyName() }}</h6>
+                    </div>
+                    <div class="col-md-6 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Phone:</span> {{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- end personal information -->
+
+            <!-- accomodations -->
+            <div>
+                <div class="row mt-5">
+                    <div class="col-md-8">
+                        <h5 class="font-weight-bold d-inline">Accommodations</h5>
+                        <form action="additional_information" method="get" class="d-inline">
+                            <label hidden>Go back to accommodations
+                                <input hidden name="fromReview" value="true">
+                            </label>
+                            <button type="submit" class="btn btn-link"><i class="fas fa-edit fa-lg" style="margin-bottom: 10px;"></i></button>
+                        </form>
+                        <hr class="mt-0">
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-2">
+                    <div class="col-md-10 pl-0">
+                        <h6 class="pl-2 pb-2"><span class="font-weight-bold">Special Needs: </span> {{ $_SESSION['AdditionalInfo']->getSpecialNeeds() }}</h6>
+                        <h6 class="pl-2 pb-2"><span class="font-weight-bold">Bringing a Service Animal: </span> {{ $_SESSION['AdditionalInfo']->getServiceAnimal() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Walker or Wheelchair used: </span> {{ $_SESSION['AdditionalInfo']->getMovementDisability() }}</h6>
+                    </div>
+                </div>
+
+                <div class="row m-1">
+                    <div class="col-md-10 pl-0">
+                        <h6 class="pl-2 pb-2"><span class="font-weight-bold">Live within 1 hour of training: </span>
+                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
+                                Room is needed
+                            </check>
+                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == false }}">
+                                Room is not needed
+                            </check>
+                        </h6>
+
+                        <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == true}}">
+                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Single room: </span>
+                                <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() == true }}">
+                                    Wanted
+                                </check>
+                                <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() == false }}">
+                                    Not wanted
+                                </check>
+                            </h6>
                         </check>
-                        <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() == false }}">
-                            <p class="pl-2">Single room not wanted</p>
-                        </check>
+                    </div>
+                </div>
+
+                <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == false &&
+                              $_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
+                    <hr>
+
+                    <div class="row m-1 mb-2">
+                        <h6 class="lead">Rooming Information: </h6>
+                    </div>
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-4 pl-0">
+                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Your Gender: </span> {{ $_SESSION['AdditionalInfo']->getGender() }}</h6>
+                        </div>
+                        <div class="col-md-4 pl-0">
+                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Want to Room With: </span> {{ $_SESSION['AdditionalInfo']->getRoommateGender() }}</h6>
+                        </div>
+                        <div class="col-md-2 pl-0">
+                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Use a CPAP: </span> {{ $_SESSION['AdditionalInfo']->getCpap() }}</h6>
+                        </div>
+                        <div class="col-md-2 pl-0">
+                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Room with a CPAP User: </span> {{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}</h6>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 mx-3">
+                        <div class="col-md-12 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Need Housing for These Nights: </span>
+                                <repeat group="{{ $_SESSION['AdditionalInfo']->getDaysRooming() }}" value="{{@day}}">
+                                    {{ @day .' '}}
+                                </repeat>
+                            </h6>
+                        </div>
                     </div>
                 </check>
             </div>
+            <!-- end accommodations -->
 
-            <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == false &&
-                          $_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
-                <hr>
-
-                <div class="row m-3">
-                    <h6 class="lead">Rooming Information: </h6>
-                </div>
-                <div class="row m-3">
-                    <div class="col-md-4 pl-0">
-                        <h6 class="lead">Your Gender: </h6>
-                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getGender() }}</p>
-                    </div>
-                    <div class="col-md-4 pl-0">
-                        <h6 class="lead">Want to Room With: </h6>
-                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getRoommateGender() }}</p>
-                    </div>
-                    <div class="col-md-2 pl-0">
-                        <h6 class="lead">Use a CPAP: </h6>
-                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpap() }}</p>
-                    </div>
-                    <div class="col-md-2 pl-0">
-                        <h6 class="lead">Room with a CPAP User: </h6>
-                        <p class="pl-2">{{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}</p>
+            <!-- long answer -->
+            <div>
+                <div class="row mt-5">
+                    <div class="col-md-8">
+                        <h5 class="font-weight-bold d-inline">Long Answer Questions</h5>
+                        <form action="long_answer" method="get" class="d-inline">
+                            <label hidden>Go back to long answer
+                                <input hidden name="fromReview" value="true">
+                            </label>
+                            <button type="submit" class="btn btn-link"><i class="fas fa-edit fa-lg" style="margin-bottom: 10px;"></i></button>
+                        </form>
+                        <hr class="mt-0">
                     </div>
                 </div>
 
-                <div class="row mt-3 mx-3">
+                <div class="row m-1 mb-2">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Relative with Mental Illness:</span> {{ $_SESSION['LongAnswer']->getRelativeMentalIllness() }}</h6>
+                    </div>
+                    <div class="col-md-6 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Response:</span> {{ $_SESSION['LongAnswer']->getRelativeMentalIllnessText() }}</h6>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-2">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Convicted of a Crime:</span> {{ $_SESSION['LongAnswer']->getConvict() }}</h6>
+                    </div>
+                    <div class="col-md-6 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Response:</span> {{ $_SESSION['LongAnswer']->getConvictText() }}</h6>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-2">
                     <div class="col-md-12 pl-0">
-                        <h6 class="lead">Need Housing for these nights: </h6>
-                        <p class="pl-2">
-                            <repeat group="{{ $_SESSION['AdditionalInfo']->getDaysRooming() }}" value="{{@day}}">
-                                {{ @day .' '}}
-                            </repeat>
-                        </p>
+                        <h6 class="pl-2"><span class="font-weight-bold">Why you want to be a NAMI Family Support Group Facilitator:</span> {{ $_SESSION['LongAnswer']->getWhyFacilitator() }}</h6>
                     </div>
                 </div>
-            </check>
-        </div>
-    </div>
 
-    <div class="card mb-3 shadow-sm bg-white rounded">
-        <div class="card-header">
-            <h4 class="float-left pt-2">Long Answer Questions</h4>
-            <form action="long_answer" method="get">
-                <label hidden>Go back to long answer
-                    <input hidden name="fromReview" value="true">
-                </label>
-                <button type="submit" class="btn btn-primary float-right">Edit</button>
-            </form>
-        </div>
-        <div class="card-body m-3">
-            <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6 class="lead">Relative with Mental Illness: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getRelativeMentalIllness() }}</p>
+                <div class="row m-1 mb-2">
+                    <div class="col-md-12 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Experience in Support Group Participation:</span> {{ $_SESSION['LongAnswer']->getExperience() }}</h6>
+                    </div>
                 </div>
-                <div class="col-md-9 pl-0">
-                    <h6 class="lead">Relative with Mental Illness Response: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getRelativeMentalIllnessText() }}</p>
+
+                <div class="row m-1 mb-2">
+                    <div class="col-md-12 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Who you want to Co-facilitate with:</span> {{ $_SESSION['LongAnswer']->getCoFacWhomText() }}</h6>
+                    </div>
+                </div>
+
+                <div class="row m-1 mb-2">
+                    <div class="col-md-12 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Where you want to Co-facilitate:</span> {{ $_SESSION['LongAnswer']->getCoFacWhereText() }}</h6>
+                    </div>
                 </div>
             </div>
+            <!-- end long answer -->
 
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6 class="lead">Convicted of a Crime: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getConvict() }}</p>
+            <div class="pb-4">
+                <div class="row mt-5">
+                    <div class="col-md-8">
+                        <h5 class="font-weight-bold d-inline">Additional Questions</h5>
+                        <form action="not_required" method="get" class="d-inline">
+                            <label hidden>Go back to additional questions
+                                <input hidden name="fromReview" value="true">
+                            </label>
+                            <button type="submit" class="btn btn-link"><i class="fas fa-edit fa-lg" style="margin-bottom: 10px;"></i></button>
+                        </form>
+                        <hr class="mt-0">
+                    </div>
                 </div>
-                <div class="col-md-9 pl-0">
-                    <h6 class="lead">Convicted of a Crime Response: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getConvictText() }}</p>
+
+                <div class="row m-1 mb-2">
+                    <div class="col-md-12 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">How did you hear about this training class:</span> {{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</h6>
+                    </div>
                 </div>
-            </div>
 
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-12 pl-0">
-                    <h6 class="lead">Why you want to be a NAMI Family Support Group Facilitator: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getWhyFacilitator() }}</p>
+                <div class="row m-1 mb-2">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Have you Taken Other Classes:</span> {{ $_SESSION['NotRequired']->getTrained() }}</h6>
+                    </div>
+                    <div class="col-md-6 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Which Classes you Took:</span> {{ $_SESSION['NotRequired']->getTrainedText() }}</h6>
+                    </div>
                 </div>
-            </div>
 
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-12 pl-0">
-                    <h6 class="lead">Experience in Support Group Participation: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getExperience() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row mx-3 mt-3">
-                <div class="col-md-6 pl-0">
-                    <h6 class="lead">Who you want to Co-facilitate with: </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getCoFacWhomText() }}</p>
-                </div>
-                <div class="col-md-6 pl-0">
-                    <h6 class="lead">Where you want to Co-facilitate : </h6>
-                    <p class="pl-2">{{ $_SESSION['LongAnswer']->getCoFacWhereText() }}</p>
+                <div class="row m-1 mb-2">
+                    <div class="col-md-4 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Can you Teach any Classes:</span> {{ $_SESSION['NotRequired']->getCertified() }}</h6>
+                    </div>
+                    <div class="col-md-6 pl-0">
+                        <h6 class="pl-2"><span class="font-weight-bold">Which Classes you can Teach:</span> {{ $_SESSION['NotRequired']->getCertifiedText() }}</h6>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <!-- end not required -->
 
-    <div class="card mb-3 shadow-sm bg-white rounded">
-        <div class="card-header">
-            <h4 class="float-left pt-2">Additional Questions</h4>
-            <form action="not_required" method="get">
-                <label hidden>Go back to not required
-                    <input hidden name="fromReview" value="true">
-                </label>
-                <button type="submit" class="btn btn-primary float-right">Edit</button>
-            </form>
-        </div>
-        <div class="card-body m-3">
-            <div class="row m-3">
-                <div class="col-md-12 pl-0">
-                    <h6 class="lead">How did you hear about this training class: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6 class="lead">Have you Taken Other Classes: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getTrained() }}</p>
-                </div>
-                <div class="col-md-9 pl-0">
-                    <h6 class="lead">Which Classes you Took: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getTrainedText() }}</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row m-3">
-                <div class="col-md-3 pl-0">
-                    <h6 class="lead">Can you Teach any Classes: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getCertified() }}</p>
-                </div>
-                <div class="col-md-9 pl-0">
-                    <h6 class="lead">Which Classes you can Teach: </h6>
-                    <p class="pl-2">{{ $_SESSION['NotRequired']->getCertifiedText() }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card py-2 shadow-sm bg-white rounded">
-        <div class="card-body">
-            <form method="get" action="not_required">
+            <form method="get" action="not_required" class="mt-5">
                 <button type="submit" class="btn btn-primary float-left"><i class="fas fa-arrow-left"></i> Back</button>
             </form>
             <form method="get" action="performance_agreement">
                 <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
             </form>
         </div>
+        <!-- end card body -->
     </div>
-
-
+    <!-- end card -->
 </div>
+<!-- end container -->
 
 <include href="views/forms/includes/footer.html"/>

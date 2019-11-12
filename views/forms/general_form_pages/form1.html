@@ -26,7 +26,7 @@
             <h4 class="float-left pt-2">Personal Information</h4>
             <check if="{{ $_GET['fromReview'] == true }}">
                 <form method="get" action="review">
-                    <button type="submit" class="btn btn-primary float-right">Go Back to Review</button>
+                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-redo-alt"></i> Back to Review</button>
                 </form>
             </check>
         </div>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group col-md-2">
                             <h5 class="mb-0"><label for="pronouns">Pronouns</label></h5>
-                            <input name="pronouns" type="text" class="form-control" id="pronouns" placeholder="he, she, they" required
+                            <input name="pronouns" type="text" class="form-control" id="pronouns" placeholder="he, she, they, etc." required
                                    value="{{ $_SESSION['PersonalInfo']->getPronouns() }}">
                         </div>
                     </div>

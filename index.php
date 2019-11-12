@@ -99,7 +99,16 @@ $f3->route('GET|POST /personal_information', function($f3)
         $zip = $_POST['inputZip'];
         $primaryPhone = $_POST['primary'];
         $primaryTime = $_POST['primary_time'];
-        $alternatePhone = $_POST['alternate'];
+
+        if(!empty($_POST['alternate'])) {
+            $alternatePhone = $_POST['alternate'];
+            $_SESSION['alternatePhone'] = 1;
+        }
+        else {
+            $alternatePhone = " ";
+            $_SESSION['alternatePhone'] = 0;
+        }
+
         $alternateTime = $_POST['alternate_time'];
         $email = $_POST['email'];
         $preference = $_POST['preference'];
