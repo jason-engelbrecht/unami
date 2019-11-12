@@ -87,6 +87,7 @@ $f3->route('GET|POST /personal_information', function($f3)
 
     if(!empty($_POST))
     {
+
         // get data from form
         $first = $_POST['first'];
         $last = $_POST['last'];
@@ -148,6 +149,7 @@ $f3->route('GET|POST /personal_information', function($f3)
         // validate data
         if(validPersonalInfoForm())
         {
+            $_SESSION['applicationStarted'] = 1;
             $f3->reroute('/additional_information');
         }
     }
@@ -165,6 +167,10 @@ $f3->route('GET|POST /personal_information', function($f3)
 
 $f3->route('GET|POST /additional_information', function($f3)
 {
+    if($_SESSION['applicationStarted'] != 1) {
+        $f3->reroute('/');
+    }
+
     $f3->set('page_title', 'Accommodations');
 
     if(!empty($_POST))
@@ -255,6 +261,10 @@ $f3->route('GET|POST /long_answer', function($f3)
 {
     $f3->set('page_title', 'Long Answer');
 
+    if($_SESSION['applicationStarted'] != 1) {
+        $f3->reroute('/');
+    }
+
     if(!empty($_POST))
     {
         // get data from form
@@ -330,7 +340,11 @@ $f3->route('GET|POST /long_answer', function($f3)
 
 $f3->route('GET|POST /not_required', function($f3)
 {
-    $f3->set('page_title', 'Other Questions');
+    $f3->set('page_title', 'Additional Questions');
+
+    if($_SESSION['applicationStarted'] != 1) {
+        $f3->reroute('/');
+    }
 
     if(!empty($_POST))
     {
@@ -389,6 +403,10 @@ $f3->route('GET|POST /not_required', function($f3)
 
 $f3->route('GET|POST /review', function($f3)
 {
+    if($_SESSION['applicationStarted'] != 1) {
+        $f3->reroute('/');
+    }
+
     $f3->set('page_title', 'Review');
 
     $view = new Template();
@@ -397,6 +415,10 @@ $f3->route('GET|POST /review', function($f3)
 
 $f3->route('GET|POST /performance_agreement', function($f3)
 {
+    if($_SESSION['applicationStarted'] != 1) {
+        $f3->reroute('/');
+    }
+
     $f3->set('page_title', 'Performance Agreement');
 
     if(!empty($_POST)) {
@@ -409,6 +431,10 @@ $f3->route('GET|POST /performance_agreement', function($f3)
 
 $f3->route('GET|POST /confirmation', function($f3)
 {
+    if($_SESSION['applicationStarted'] != 1) {
+        $f3->reroute('/');
+    }
+
     global $db;
     $lastId = $db->addApplicant($_SESSION['PersonalInfo'], $_SESSION['AdditionalInfo'],
         $_SESSION['NotRequired']);

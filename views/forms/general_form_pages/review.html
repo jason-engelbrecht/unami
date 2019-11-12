@@ -83,7 +83,7 @@
                             <h6 class="pl-2"><span class="font-weight-bold">Alternate Phone:</span> {{ $_SESSION['PersonalInfo']->getAlternatePhone() }}</h6>
                         </div>
                         <div class="col-md-6 pl-0">
-                            <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call:</span> {{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</h6>
+                            <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call:</span> {{ $_SESSION['PersonalInfo']->getAlternateTime() }}</h6>
                         </div>
                     </div>
                 </check>
@@ -127,9 +127,21 @@
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-10 pl-0">
-                        <h6 class="pl-2 pb-2"><span class="font-weight-bold">Special Needs: </span> {{ $_SESSION['AdditionalInfo']->getSpecialNeeds() }}</h6>
-                        <h6 class="pl-2 pb-2"><span class="font-weight-bold">Bringing a Service Animal: </span> {{ $_SESSION['AdditionalInfo']->getServiceAnimal() }}</h6>
-                        <h6 class="pl-2"><span class="font-weight-bold">Walker or Wheelchair used: </span> {{ $_SESSION['AdditionalInfo']->getMovementDisability() }}</h6>
+                        <h6 class="pl-2 pb-2"><span class="font-weight-bold">Special Needs: </span>
+                            <check if="{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() == true }}">
+                                <true>yes</true><false>no</false>
+                            </check>
+                        </h6>
+                        <h6 class="pl-2 pb-2"><span class="font-weight-bold">Bringing a Service Animal: </span>
+                            <check if="{{ $_SESSION['AdditionalInfo']->getServiceAnimal() == true }}">
+                                <true>yes</true><false>no</false>
+                            </check>
+                        </h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Walker or Wheelchair used: </span>
+                            <check if="{{ $_SESSION['AdditionalInfo']->getMovementDisability() == false }}">
+                                <true>yes</true><false>no</false>
+                            </check>
+                        </h6>
                     </div>
                 </div>
 
@@ -137,51 +149,52 @@
                     <div class="col-md-10 pl-0">
                         <h6 class="pl-2 pb-2"><span class="font-weight-bold">Live within 1 hour of training: </span>
                             <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
-                                Room is needed
+                                No, a room is needed
                             </check>
                             <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == false }}">
-                                Room is not needed
+                                Yes, a room is not needed
                             </check>
                         </h6>
 
                         <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == true}}">
                             <h6 class="pl-2 pb-2"><span class="font-weight-bold">Single room: </span>
                                 <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() == true }}">
-                                    Wanted
+                                    yes
                                 </check>
                                 <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() == false }}">
-                                    Not wanted
+                                    no
                                 </check>
                             </h6>
                         </check>
                     </div>
                 </div>
 
-                <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == false &&
-                              $_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
-                    <hr>
+                <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == false }}">
 
                     <div class="row m-1 mb-2">
-                        <h6 class="lead">Rooming Information: </h6>
+                        <h6 class="pl-2"><span class="font-weight-bold text-primary">Rooming Information</span></h6>
                     </div>
+
                     <div class="row m-1 mb-2">
-                        <div class="col-md-4 pl-0">
-                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Your Gender: </span> {{ $_SESSION['AdditionalInfo']->getGender() }}</h6>
-                        </div>
-                        <div class="col-md-4 pl-0">
-                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Want to Room With: </span> {{ $_SESSION['AdditionalInfo']->getRoommateGender() }}</h6>
-                        </div>
-                        <div class="col-md-2 pl-0">
-                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Use a CPAP: </span> {{ $_SESSION['AdditionalInfo']->getCpap() }}</h6>
-                        </div>
-                        <div class="col-md-2 pl-0">
-                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Room with a CPAP User: </span> {{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}</h6>
+                        <div class="col-md-10 pl-0">
+                            <h6 class="pl-2">
+                                <span class="font-weight-bold">Your Gender: </span> {{ $_SESSION['AdditionalInfo']->getGender() }}
+                                <span class="font-weight-bold ml-3">Want to Room With: </span> {{ $_SESSION['AdditionalInfo']->getRoommateGender() }}
+                            </h6>
                         </div>
                     </div>
 
-                    <div class="row mt-3 mx-3">
-                        <div class="col-md-12 pl-0">
-                            <h6 class="pl-2"><span class="font-weight-bold">Need Housing for These Nights: </span>
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-10 pl-0">
+                            <h6 class="pl-2">
+                                <span class="font-weight-bold">Use a CPAP: </span> {{ $_SESSION['AdditionalInfo']->getCpap() }}
+                                <span class="font-weight-bold ml-4">Room with a CPAP User: </span> {{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}
+                            </h6>
+                        </div>
+
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-10 ml-0 pl-1">
+                            <h6 class=""><span class="font-weight-bold">Need Housing for These Nights: </span>
                                 <repeat group="{{ $_SESSION['AdditionalInfo']->getDaysRooming() }}" value="{{@day}}">
                                     {{ @day .' '}}
                                 </repeat>
@@ -209,43 +222,63 @@
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-4 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Relative with Mental Illness:</span> {{ $_SESSION['LongAnswer']->getRelativeMentalIllness() }}</h6>
+                        <h6 class="pl-2">
+                            <span class="font-weight-bold">Relative with Mental Illness:</span>
+                            {{ $_SESSION['LongAnswer']->getRelativeMentalIllness() }}
+                        </h6>
                     </div>
                     <div class="col-md-6 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Response:</span> {{ $_SESSION['LongAnswer']->getRelativeMentalIllnessText() }}</h6>
+                        <h6 class="pl-2">
+                            <span class="font-weight-bold">Response: </span><br>
+                            {{ $_SESSION['LongAnswer']->getRelativeMentalIllnessText() }}
+                        </h6>
                     </div>
                 </div>
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-4 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Convicted of a Crime:</span> {{ $_SESSION['LongAnswer']->getConvict() }}</h6>
+                        <h6 class="pl-2">
+                            <span class="font-weight-bold">Convicted of a Crime: </span>
+                            {{ $_SESSION['LongAnswer']->getConvict() }}
+                        </h6>
                     </div>
                     <div class="col-md-6 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Response:</span> {{ $_SESSION['LongAnswer']->getConvictText() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Response: </span><br>
+                            {{ $_SESSION['LongAnswer']->getConvictText() }}
+                        </h6>
                     </div>
                 </div>
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-12 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Why you want to be a NAMI Family Support Group Facilitator:</span> {{ $_SESSION['LongAnswer']->getWhyFacilitator() }}</h6>
+                        <h6 class="pl-2">
+                            <span class="font-weight-bold">Why you want to be a NAMI Family Support Group Facilitator:</span><br>
+                            {{ $_SESSION['LongAnswer']->getWhyFacilitator() }}
+                        </h6>
                     </div>
                 </div>
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-12 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Experience in Support Group Participation:</span> {{ $_SESSION['LongAnswer']->getExperience() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Experience in Support Group Participation:</span><br>
+                            {{ $_SESSION['LongAnswer']->getExperience() }}
+                        </h6>
                     </div>
                 </div>
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-12 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Who you want to Co-facilitate with:</span> {{ $_SESSION['LongAnswer']->getCoFacWhomText() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Who you want to Co-facilitate with: </span>
+                            {{ $_SESSION['LongAnswer']->getCoFacWhomText() }}
+                        </h6>
                     </div>
                 </div>
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-12 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Where you want to Co-facilitate:</span> {{ $_SESSION['LongAnswer']->getCoFacWhereText() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Where you want to Co-facilitate: </span>
+                            {{ $_SESSION['LongAnswer']->getCoFacWhereText() }}
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -267,25 +300,35 @@
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-12 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">How did you hear about this training class:</span> {{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">How did you hear about this training class: </span>
+                            {{ $_SESSION['NotRequired']->getHeardAboutTraining() }}
+                        </h6>
                     </div>
                 </div>
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-4 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Have you Taken Other Classes:</span> {{ $_SESSION['NotRequired']->getTrained() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Have you Taken Other Classes:</span>
+                            {{ $_SESSION['NotRequired']->getTrained() }}
+                        </h6>
                     </div>
                     <div class="col-md-6 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Which Classes you Took:</span> {{ $_SESSION['NotRequired']->getTrainedText() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Which Classes you Took: </span>
+                            {{ $_SESSION['NotRequired']->getTrainedText() }}
+                        </h6>
                     </div>
                 </div>
 
                 <div class="row m-1 mb-2">
                     <div class="col-md-4 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Can you Teach any Classes:</span> {{ $_SESSION['NotRequired']->getCertified() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Can you Teach any Classes: </span>
+                            {{ $_SESSION['NotRequired']->getCertified() }}
+                        </h6>
                     </div>
                     <div class="col-md-6 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Which Classes you can Teach:</span> {{ $_SESSION['NotRequired']->getCertifiedText() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Which Classes you can Teach: </span>
+                            {{ $_SESSION['NotRequired']->getCertifiedText() }}
+                        </h6>
                     </div>
                 </div>
             </div>
