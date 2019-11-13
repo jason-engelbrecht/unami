@@ -109,7 +109,7 @@ INSERT INTO app_type(app_type) VALUES('Family Support Group');
  */
 
 $user = $_SERVER['USER'];
-require "/home/$user/config_UNAMI.php";
+require "/home2/$user/config_UNAMI.php";
 
 /**
  * Class Database
