@@ -588,6 +588,20 @@ $f3->route('GET /dashboard', function($f3)
         $f3->reroute('/login');
     }
 
+    //get metrics
+    global $db;
+    $active = 1;
+
+    $numActive = $db->countApplicants($active);
+    $numComplete = $db->countComplete();
+    $numApproved = $db->countApproved();
+    $numDenied = $db->countDenied();
+
+    $f3->set('numActive', $numActive);
+    $f3->set('numComplete', $numComplete);
+    $f3->set('numApproved', $numApproved);
+    $f3->set('numDenied', $numDenied);
+
     $f3->set('page', 'dashboard');
     $f3->set('page_title', 'Dashboard');
 
@@ -747,8 +761,6 @@ $f3->route('GET /trainings', function($f3)
     $view = new Template();
     echo $view->render('views/portal/other/trainings.html');
 });
-
-
 
 //testing
 $f3->route('GET /unit_testing', function() {
