@@ -43,4 +43,29 @@ class Emailer
             echo $e->getMessage();
         }
     }
+
+    static function sendConfirmationEmail($personalInfo,$db)
+    {
+        $body = 'Thank you for sending your application';
+        $toEmail = $db->$personalInfo->getEmail();
+
+        try {
+            $message = (new Swift_Message('UNAMI application'))
+                ->setFrom(['_mainaccount@tluu9.greenriverdev.com' => 'DO-NOT-REPLY'])
+                ->setTo([$toEmail => 'Trang Luu'])
+                ->setBody($body);
+
+            $transport = (new Swift_SmtpTransport('mail.tluu9.greenriverdev.com', 25))
+                ->setUsername('trangluu@tluu9.greenriverdev.com')
+                ->setPassword('xEu)2mm-V4Yz');
+            $mailer = new Swift_Mailer($transport);
+
+            $result = $mailer->send($message);
+        }
+        catch (Exception $e)
+        {
+            echo $e->getMessage();
+        }
+
+    }
 }
