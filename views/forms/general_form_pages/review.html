@@ -128,17 +128,17 @@
                 <div class="row m-1 mb-2">
                     <div class="col-md-10 pl-0">
                         <h6 class="pl-2 pb-2"><span class="font-weight-bold">Special Needs: </span>
-                            <check if="{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() == 1 }}">
+                            <check if="{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() == 'true' }}">
                                 <true>yes</true><false>no</false>
                             </check>
                         </h6>
                         <h6 class="pl-2 pb-2"><span class="font-weight-bold">Bringing a Service Animal: </span>
-                            <check if="{{ $_SESSION['AdditionalInfo']->getServiceAnimal() == 1 }}">
+                            <check if="{{ $_SESSION['AdditionalInfo']->getServiceAnimal() == 'true' }}">
                                 <true>yes</true><false>no</false>
                             </check>
                         </h6>
                         <h6 class="pl-2"><span class="font-weight-bold">Walker or Wheelchair used: </span>
-                            <check if="{{ $_SESSION['AdditionalInfo']->getMovementDisability() == 1 }}">
+                            <check if="{{ $_SESSION['AdditionalInfo']->getMovementDisability() == 'true' }}">
                                 <true>yes</true><false>no</false>
                             </check>
                         </h6>
@@ -147,18 +147,18 @@
 
                 <div class="row m-1">
                     <div class="col-md-10 pl-0">
-                        <h6 class="pl-2 pb-2"><span class="font-weight-bold">Live within 1 hour of training: </span>
-                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 1 }}">
+                        <h6 class="pl-2 pb-2"><span class="font-weight-bold">Need rooming during training: </span>
+                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 'true' }}">
                                 Yes, a room is needed
                             </check>
-                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 0 }}">
+                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 'false' }}">
                                 No, a room is not needed
                             </check>
                         </h6>
 
-                        <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == 1 }}">
+                        <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == 'true' }}">
                             <h6 class="pl-2 pb-2"><span class="font-weight-bold">I want to pay for a Single room: </span>
-                                <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == 1 }}">
+                                <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == 'true' }}">
                                     <true>
                                         yes
                                     </true>
@@ -172,8 +172,8 @@
                     </div>
                 </div>
 
-                <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == 1
-                && $_SESSION['AdditionalInfo']->getSingleRoom() == 0}}">
+                <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == 'true'
+                && $_SESSION['AdditionalInfo']->getSingleRoom() == 'false'}}">
 
                     <div class="row m-1 mb-2">
                         <h6 class="pl-2"><span class="font-weight-bold text-primary">Rooming Information</span></h6>
@@ -195,10 +195,11 @@
                                 <span class="font-weight-bold ml-4">Room with a CPAP User: </span> {{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}
                             </h6>
                         </div>
+                    </div>
 
                     <div class="row m-1 mb-2">
-                        <div class="col-md-10 ml-0 pl-1">
-                            <h6 class=""><span class="font-weight-bold">Need Housing for These Nights: </span>
+                        <div class="col-md-10 ml-0 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Need Housing for These Nights: </span>
                                 <repeat group="{{ $_SESSION['AdditionalInfo']->getDaysRooming() }}" value="{{@day}}">
                                     {{ @day .' '}}
                                 </repeat>

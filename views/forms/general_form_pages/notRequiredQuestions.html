@@ -11,117 +11,118 @@
 <!-- container -->
 <div class="container p-3 ">
 
-    <!-- Displays any errors with the input from the user -->
-    <check if="{{!empty(@errors)}}">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
-                <h4><strong>Error:</strong> {{ @error }}</h4>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </repeat>
-        </div>
-    </check>
-
-    <!-- card -->
-    <div class="card shadow-sm bg-white rounded">
-
-        <div class="card-header">
-            <h4 class="float-left pt-2"><i class="fas fa-question-circle mr-1 text-primary"></i> Additional Questions</h4>
-            <check if="{{ $_GET['fromReview'] == true }}">
-                <form method="get" action="review">
-                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-redo-alt"></i> Back to Review</button>
-                </form>
-            </check>
-        </div>
-
-        <!-- card body -->
-        <div class="card-body m-3">
-
-            <h6 class="pb-4 text-primary font-weight-bold">
-                <i class="fas fa-star-of-life"></i> These fields are not required
-            </h6>
-
-            <!-- form -->
-            <div>
-                <form method="post" action="not_required">
-
-                    <!-- how did you hear about this training -->
-                    <div class="mb-5">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <h5 class="mb-0"><label for="heardAboutTraining">How did you hear about this
-                                    training class?</label></h5>
-                                <textarea name="heardAboutTraining" class="form-control" id="heardAboutTraining"
-                                          rows="4" cols="50">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</textarea>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- have you taken any other NAMI classes or trainings -->
-                    <div class="my-5">
-                        <h5 class="mb-3">Have you taken other NAMI classes or trainings? </h5>
-                        <div class="form-check form-check-inline ml-2">
-                            <input name="trained" class="form-check-input" type="radio" id="show1" value="yes" required
-                            <check if="{{ $_SESSION['NotRequired']->getTrained() === 'yes' }}">
-                                checked</check>>
-                            <label class="form-check-label" for="show1">Yes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input name="trained" class="form-check-input" type="radio" id="hide1" value="no" required
-                            <check if="{{ $_SESSION['NotRequired']->getTrained() === 'no' }}">
-                                checked</check>>
-                            <label class="form-check-label" for="hide1">No</label>
-                        </div><br>
-
-                        <div class="form-row mt-3 ml-2" id="textbox1" style="display: none">
-                            <div class="col-md-7">
-                                <label for="textarea1">If yes, please list: </label>
-                                <textarea name="trainedText" class="form-control" id="textarea1" rows="5"
-                                >{{ $_SESSION['NotRequired']->getTrainedText() }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- are your certified to teach any other nami signature programs -->
-                    <div class="my-5">
-                        <h5 class="lead mb-3">Are you currently certified to teach/lead any other NAMI signature programs? </h5>
-                        <div class="form-check form-check-inline ml-2">
-                            <input name="certified" class="form-check-input" type="radio" id="show2" value="yes" required
-                            <check if="{{ $_SESSION['NotRequired']->getCertified() === 'yes' }}">
-                                checked</check>>
-                            <label class="form-check-label" for="show2">Yes</label>
-                        </div>
-
-                        <div class="form-check form-check-inline">
-                            <input name="certified" class="form-check-input" type="radio" id="hide2" value="no" required
-                            <check if="{{ $_SESSION['NotRequired']->getCertified() === 'no' }}">
-                                checked</check>>
-                            <label class="form-check-label" for="hide2">No</label>
-                        </div><br>
-
-                        <div class="form-row mt-3 ml-2" id="textbox2" style="display: none">
-                            <div class="col-md-7">
-                                <label for="textarea2">If yes, please list all Signature Programs you are certified to lead: </label>
-                                <textarea name="certifiedText" class="form-control" id="textarea2" rows="5"
-                                >{{ $_SESSION['NotRequired']->getCertifiedText() }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
-                </form>
-                <form action="long_answer" method="get">
-                    <button type="submit" name="goBack" value="goBack" class="btn btn-primary float-left">
-                        <i class="fas fa-arrow-left"></i> Back</button>
-                </form>
-
+    <form method="post">
+        <!-- Displays any errors with the input from the user -->
+        <check if="{{!empty(@errors)}}">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
+                    <h4><strong>Error:</strong> {{ @error }}</h4>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </repeat>
             </div>
-            <!-- form -->
+        </check>
+
+        <!-- card -->
+        <div class="card shadow-sm bg-white rounded">
+
+            <div class="card-header">
+                <h4 class="float-left pt-2"><i class="fas fa-question-circle mr-1 text-primary"></i> Additional Questions</h4>
+                <check if="{{ $_GET['fromReview'] == true }}">
+                    <button type="submit" class="btn btn-primary float-right" name="goToReview" value="true">
+                        <i class="fas fa-redo-alt"></i> Back to Review</button>
+                </check>
+            </div>
+
+            <!-- card body -->
+            <div class="card-body m-3">
+
+                <h6 class="pb-4 text-primary font-weight-bold">
+                    <i class="fas fa-star-of-life"></i> These fields are not required
+                </h6>
+
+                <!-- form -->
+                <div>
+                    <form method="post" action="not_required">
+
+                        <!-- how did you hear about this training -->
+                        <div class="mb-5">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <h5 class="mb-0"><label for="heardAboutTraining">How did you hear about this
+                                        training class?</label></h5>
+                                    <textarea name="heardAboutTraining" class="form-control" id="heardAboutTraining"
+                                              rows="4" cols="50">{{ $_SESSION['NotRequired']->getHeardAboutTraining() }}</textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- have you taken any other NAMI classes or trainings -->
+                        <div class="my-5">
+                            <h5 class="mb-3">Have you taken other NAMI classes or trainings? </h5>
+                            <div class="form-check form-check-inline ml-2">
+                                <input name="trained" class="form-check-input" type="radio" id="show1" value="yes" required
+                                <check if="{{ $_SESSION['NotRequired']->getTrained() === 'yes' }}">
+                                    checked</check>>
+                                <label class="form-check-label" for="show1">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name="trained" class="form-check-input" type="radio" id="hide1" value="no" required
+                                <check if="{{ $_SESSION['NotRequired']->getTrained() === 'no' }}">
+                                    checked</check>>
+                                <label class="form-check-label" for="hide1">No</label>
+                            </div><br>
+
+                            <div class="form-row mt-3 ml-2" id="textbox1" style="display: none">
+                                <div class="col-md-7">
+                                    <label for="textarea1">If yes, please list: </label>
+                                    <textarea name="trainedText" class="form-control" id="textarea1" rows="5"
+                                    >{{ $_SESSION['NotRequired']->getTrainedText() }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- are your certified to teach any other nami signature programs -->
+                        <div class="my-5">
+                            <h5 class="lead mb-3">Are you currently certified to teach/lead any other NAMI signature programs? </h5>
+                            <div class="form-check form-check-inline ml-2">
+                                <input name="certified" class="form-check-input" type="radio" id="show2" value="yes" required
+                                <check if="{{ $_SESSION['NotRequired']->getCertified() === 'yes' }}">
+                                    checked</check>>
+                                <label class="form-check-label" for="show2">Yes</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input name="certified" class="form-check-input" type="radio" id="hide2" value="no" required
+                                <check if="{{ $_SESSION['NotRequired']->getCertified() === 'no' }}">
+                                    checked</check>>
+                                <label class="form-check-label" for="hide2">No</label>
+                            </div><br>
+
+                            <div class="form-row mt-3 ml-2" id="textbox2" style="display: none">
+                                <div class="col-md-7">
+                                    <label for="textarea2">If yes, please list all Signature Programs you are certified to lead: </label>
+                                    <textarea name="certifiedText" class="form-control" id="textarea2" rows="5"
+                                    >{{ $_SESSION['NotRequired']->getCertifiedText() }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
+                    </form>
+                    <form action="long_answer" method="get">
+                        <button type="submit" name="goBack" value="goBack" class="btn btn-primary float-left">
+                            <i class="fas fa-arrow-left"></i> Back</button>
+                    </form>
+
+                </div>
+                <!-- form -->
+            </div>
+            <!-- card body -->
         </div>
-        <!-- card body -->
-    </div>
+    </form>
     <!-- card -->
 </div>
 <!-- container -->
