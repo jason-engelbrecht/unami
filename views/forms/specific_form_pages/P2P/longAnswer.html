@@ -1,0 +1,180 @@
+<include href="views/forms/includes/header.html"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<div class="container p-3">
+    <h5>Progress</h5>
+    <div class="progress border"  style="height: 20px">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 40%"
+             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
+    </div>
+</div>
+
+<div class="container p-3 ">
+
+    <!-- Displays any errors with the input from the user -->
+    <check if="{{!empty(@errors)}}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
+                <h4><strong>Error:</strong> {{ @error }}</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </repeat>
+        </div>
+    </check>
+
+    <div class="card shadow-sm bg-white rounded">
+
+        <div class="card-header">
+            <h4 class="float-left pt-2"><i class="fas fa-question-circle text-primary mr-1"></i> Peer-to-Peer Questions</h4>
+            <check if="{{ $_GET['fromReview'] == true }}">
+                <form method="get" action="review">
+                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-redo-alt"></i> Back to Review</button>
+                </form>
+            </check>
+        </div>
+
+        <div class="card-body m-3">
+            <div>
+
+                <h6 class="mb-5 text-primary font-weight-bold">
+                    <i class="fas fa-star-of-life"></i> All fields are required
+                </h6>
+
+                <form method="post" action="long_answer">
+                    <div class="form-row">
+
+                        <!--Question 1-->
+                        <div class="form-group">
+                            <div class="mb-5">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h5 class="mb-0"><label for="heardAboutTraining">How did you hear about this
+                                            training class?</label></h5>
+                                        <textarea name="heardAboutTraining" class="form-control" id="heardAboutTraining"
+                                                  rows="4" cols="50"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group pt-5">
+                                <h5 class="mb-3">Have you ever been convicted of a crime against another person including but not limited to: assault of any
+                                    kind, harassment of any kind, or stalking?</h5>
+
+                                <div class="form-check form-check-inline ml-2">
+                                    <input name="convict" class="form-check-input" type="radio" id="show2" value="yes" required
+                                    <label class="form-check-label" for="show2">Yes</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input name="convict" class="form-check-input" type="radio" id="hide2" value="no" required
+                                    <label class="form-check-label" for="hide2">No</label>
+                                </div><br>
+
+                                <div class="form-row mt-3 ml-2" id="textarea1" style="display: none">
+                                    <label>Please explain why you selected "Yes"
+                                        <br><textarea class="form-control" rows="4" cols="50" name="convictText"
+                                        ></textarea>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--Question 2-->
+
+
+                            <div class="form-group pt-5">
+                                <h5 class="mb-3">Have you taken other NAMI classes or trainings?</h5>
+
+                                <div class="form-check form-check-inline ml-2">
+                                    <input name="classes" class="form-check-input" type="radio" id="classesYes" value="yes" required
+                                    <label class="form-check-label" for="show2">Yes</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input name="classes" class="form-check-input" type="radio" id="classesNo" value="no" required
+                                    <label class="form-check-label" for="hide2">No</label>
+                                </div><br>
+
+                                <div class="form-row mt-3 ml-2" id="textarea2" style="display: none">
+                                    <label>Please explain why you selected "Yes"
+                                        <br><textarea class="form-control" rows="4" cols="50" name="convictText"
+                                        ></textarea>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!--Question 3-->
+
+                        <div class="form-group pt-5">
+                            <h5 class="mb-3">Are you a currently certified to teach/lead any other NAMI Signature Programs?  </h5>
+
+                            <div class="form-check form-check-inline ml-2">
+                                <input name="classes" class="form-check-input" type="radio" id="certifiedYes" value="yes" required
+                                <label class="form-check-label" for="show2">Yes</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input name="classes" class="form-check-input" type="radio" id="certifiedNo" value="no" required
+                                <label class="form-check-label" for="hide2">No</label>
+                            </div><br>
+
+                            <div class="form-row mt-3 ml-2" id="textarea3" style="display: none">
+                                <label>Please explain why you selected "Yes"
+                                    <br><textarea class="form-control" rows="4" cols="50" name="convictText"
+                                    ></textarea>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!--Question 4-->
+                        <div class="form-group pt-5">
+                            <h5><label for="exampleFormControlTextarea2">Why do you want to be a Peer-to-Peer leader?</label></h5>
+                            <textarea name="whyFacilitator" class="form-control" id="exampleFormControlTextarea2" rows="4"
+                            ></textarea>
+
+                            <!--Question 5-->
+                            <h5><label for="exampleFormControlTextarea3" class="pt-5 mt-3">How do you define or describe
+                                mental health recovery?</label></h5>
+                            <textarea name="define" class="form-control" id="exampleFormControlTextarea3" rows="4"
+                            ></textarea>
+
+                            <!--Question 6-->
+
+                            <h5><label for="exampleFormControlTextarea3" class="pt-5 mt-3">Why do you feel you are
+                                ready to “give back” to others through Peer-to-Peer? </label></h5>
+                            <textarea name="give" class="form-control" id="exampleFormControlTextarea4" rows="4"
+                            ></textarea>
+
+                            <!--Question 7-->
+
+
+                            <!--Question 8-->
+
+                            <!--Question 9-->
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary float-right">Next <i class="fas fa-arrow-right"></i></button>
+                </form>
+
+                <form action="additional_information" method="get">
+                    <button type="submit" name="goBack" value="goBack" class="btn btn-primary float-left">
+                        <i class="fas fa-arrow-left"></i> Back</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="views/forms/js/longAnswersScript.js"></script>
+
+<include href="views/forms/includes/footer.html"/>

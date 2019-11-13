@@ -809,11 +809,27 @@ $f3->route('GET /test_P2PtrainingDescription', function() {
     echo $view->render('views/forms/specific_form_pages/P2P/P2PtrainingDescription.html');
 });
 
-// test route for ETS performance agreement
+// test route for P2P performance agreement
 $f3->route('GET /test_P2PperformanceAgreement', function() {
     $view = new Template();
 
     echo $view->render('views/forms/specific_form_pages/P2P/performanceAgreement.html');
+});
+
+// test route for ETS long answer
+$f3->route('GET /test_ETSlongAnswer', function() {
+    $view = new Template();
+
+    echo $view->render('views/forms/specific_form_pages/ETS/longAnswer.html');
+});
+
+// test route for P2P long answer
+$f3->route('GET /test_P2PlongAnswer', function() {
+
+
+    $view = new Template();
+
+    echo $view->render('views/forms/specific_form_pages/P2P/longAnswer.html');
 });
 
 //Run fat-free
