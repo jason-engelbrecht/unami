@@ -10,35 +10,36 @@
 
 <div class="container p-3 ">
     <!-- Displays any errors with the input from the user -->
-    <check if="{{!empty(@errors)}}">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
-                <h5><strong>Error:</strong> {{ @error }}</h5>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </repeat>
-        </div>
-    </check>
+    <form method="post" action="personal_information">
+        <check if="{{!empty(@errors)}}">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <repeat group=" {{ @errors }}" key="{{ @key }}" value="{{ @error}}">
+                    <h5><strong>Error:</strong> {{ @error }}</h5>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </repeat>
+            </div>
+        </check>
 
-    <div class="card shadow-sm bg-white rounded">
-        <div class="card-header">
-            <h4 class="float-left pt-2"><i class="fas fa-user-circle text-primary mr-1"></i> Personal Information</h4>
-            <check if="{{ $_GET['fromReview'] == true }}">
-                <form method="get" action="review">
-                    <button type="submit" class="btn btn-primary float-right"><i class="fas fa-redo-alt"></i> Back to Review</button>
-                </form>
-            </check>
-        </div>
+        <div class="card shadow-sm bg-white rounded">
 
-        <div class="card-body m-3">
-            <div>
+            <div class="card-header">
+                <h4 class="float-left pt-2"><i class="fas fa-user-circle text-primary mr-1"></i> Personal Information</h4>
+                <check if="{{ $_GET['fromReview'] == true }}">
+                    <button type="submit" class="btn btn-primary float-right" name="goToReview" value="true">
+                        <i class="fas fa-redo-alt"></i> Back to Review</button>
+                </check>
+            </div>
 
-                <h6 class="pb-4 text-primary font-weight-bold">
-                    <i class="fas fa-star-of-life"></i> All fields are required unless otherwise marked by the <i class="far fa-check-circle fa-sm"></i> symbol
-                </h6>
+            <div class="card-body m-3">
+                <div>
 
-                <form method="post" action="personal_information">
+                    <h6 class="pb-4 text-primary font-weight-bold">
+                        <i class="fas fa-star-of-life"></i> All fields are required unless otherwise marked by the <i class="far fa-check-circle fa-sm"></i> symbol
+                    </h6>
+
+
 
                     <!-- name & pronoun -->
                     <div class="form-row">
@@ -173,12 +174,12 @@
                         <div class="form-group col-md-6">
                             <h5 class="mb-0"><label for="primary">Primary phone number</label></h5>
                             <input name="primary" type="tel" class="form-control" id="primary" placeholder="253 474 2189"
-                            required value="{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}">
+                                   required value="{{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}">
                         </div>
                         <div class="form-group col-md-6">
                             <h5 class="mb-0"><label for="primary_time">Best time to call</label></h5>
                             <input name="primary_time" type="text" class="form-control" id="primary_time" placeholder="Days of Week - Times of Day"
-                            required value="{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}">
+                                   required value="{{ $_SESSION['PersonalInfo']->getPrimaryTime() }}">
                         </div>
                     </div>
                     <!-- primary phone  -->
@@ -188,12 +189,12 @@
                         <div class="form-group col-md-6">
                             <h5 class="mb-0"><label for="alternate">Alternate phone number <i class="far fa-check-circle fa-xs text-primary"></i></label></h5>
                             <input name="alternate" type="tel" class="form-control" id="alternate" placeholder="253 847 3020"
-                             value="{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}">
+                                   value="{{ $_SESSION['PersonalInfo']->getAlternatePhone() }}">
                         </div>
                         <div class="form-group col-md-6">
                             <h5 class="mb-0"><label for="alternate_time">Best time to call <i class="far fa-check-circle fa-xs text-primary"></i></label></h5>
                             <input name="alternate_time" type="text" class="form-control" id="alternate_time" placeholder="Days of Week - Times of Day"
-                             value="{{ $_SESSION['PersonalInfo']->getAlternateTime() }}">
+                                   value="{{ $_SESSION['PersonalInfo']->getAlternateTime() }}">
                         </div>
                     </div>
                     <!-- alternate phone -->
@@ -208,9 +209,9 @@
                         <div class="form-group col-md-6">
                             <p class="lead mb-2">Best way to contact you?</p>
                             <label><input class="mt-1 ml-1" type="radio" name="preference" value="phone" required
-                            <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'phone'}}">checked</check>> Phone</label>
+                                <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'phone'}}">checked</check>> Phone</label>
                             <label><input class="ml-3" type="radio" name="preference" value="email" required
-                            <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'email'}}">checked</check>> Email</label>
+                                <check if="{{$_SESSION['PersonalInfo']->getPreference() === 'email'}}">checked</check>> Email</label>
                         </div>
                     </div>
                     <!-- best way to contact & email -->
@@ -232,19 +233,20 @@
 
                     <button type="submit" class="btn btn-primary float-right">Next
                         <i class="fas fa-arrow-right"></i></button>
-                </form>
+
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
 
 
 <!--Js formatted phone-->
-    <!--Primary phone-->
+<!--Primary phone-->
 <script>
-function primaryPhoneFormat(input)
-{
+    function primaryPhoneFormat(input)
+    {
         // Strip all characters from the input except digits
         input = input.replace(/\D/g,'');
 
@@ -255,32 +257,32 @@ function primaryPhoneFormat(input)
         var size = input.length;
         if(size == 0)
         {
-                input = input;
+            input = input;
         }
         else if(size < 4)
         {
-                input = '('+input;
+            input = '('+input;
         }
         else if(size < 7)
         {
-                input = '('+input.substring(0,3)+') '+input.substring(3,6);
+            input = '('+input.substring(0,3)+') '+input.substring(3,6);
         }
         else
         {
-                input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
+            input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
         }
         return input;
-}
-document.getElementById('primary').addEventListener('keyup',function(evt)
-{
+    }
+    document.getElementById('primary').addEventListener('keyup',function(evt)
+    {
         var primary = document.getElementById('primary');
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         primary.value = primaryPhoneFormat(primary.value);
-});
+    });
 
     <!--Alternate phone-->
-function alternatePhoneFormat(input)
-{
+    function alternatePhoneFormat(input)
+    {
         // Strip all characters from the input except digits
         input = input.replace(/\D/g,'');
 
@@ -291,32 +293,32 @@ function alternatePhoneFormat(input)
         var size = input.length;
         if(size == 0)
         {
-                input = input;
+            input = input;
         }
         else if(size < 4)
         {
-                input = '('+input;
+            input = '('+input;
         }
         else if(size < 7)
         {
-                input = '('+input.substring(0,3)+') '+input.substring(3,6);
+            input = '('+input.substring(0,3)+') '+input.substring(3,6);
         }
         else
         {
-                input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
+            input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
         }
         return input;
-}
-document.getElementById('alternate').addEventListener('keyup',function(evt)
-{
+    }
+    document.getElementById('alternate').addEventListener('keyup',function(evt)
+    {
         var alternate = document.getElementById('alternate');
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         alternate.value = alternatePhoneFormat(alternate.value);
-});
+    });
 
     <!--Alternate phone-->
-function emergencyPhoneFormat(input)
-{
+    function emergencyPhoneFormat(input)
+    {
         // Strip all characters from the input except digits
         input = input.replace(/\D/g,'');
 
@@ -327,28 +329,28 @@ function emergencyPhoneFormat(input)
         var size = input.length;
         if(size == 0)
         {
-                input = input;
+            input = input;
         }
         else if(size < 4)
         {
-                input = '('+input;
+            input = '('+input;
         }
         else if(size < 7)
         {
-                input = '('+input.substring(0,3)+') '+input.substring(3,6);
+            input = '('+input.substring(0,3)+') '+input.substring(3,6);
         }
         else
         {
-                input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
+            input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
         }
         return input;
-}
-document.getElementById('emergency_phone').addEventListener('keyup',function(evt)
-{
+    }
+    document.getElementById('emergency_phone').addEventListener('keyup',function(evt)
+    {
         var emergency_phone = document.getElementById('emergency_phone');
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         emergency_phone.value = emergencyPhoneFormat(emergency_phone.value);
-});
+    });
 
 </script>
 

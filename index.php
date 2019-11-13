@@ -150,6 +150,12 @@ $f3->route('GET|POST /personal_information', function($f3)
         if(validPersonalInfoForm())
         {
             $_SESSION['applicationStarted'] = 1;
+
+            if($_POST['goToReview'] == true)
+            {
+                $f3->reroute('/review');
+            }
+
             $f3->reroute('/additional_information');
         }
     }
