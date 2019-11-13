@@ -44,10 +44,10 @@ class Emailer
         }
     }
 
-    static function sendConfirmationEmail($personalInfo,$db)
+    static function sendConfirmationEmail($personalInfo)
     {
         $body = 'Thank you for sending your application';
-        $toEmail = $db->$personalInfo->getEmail();
+        $toEmail = $personalInfo->getEmail();
 
         try {
             $message = (new Swift_Message('UNAMI application'))

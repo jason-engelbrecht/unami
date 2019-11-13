@@ -449,6 +449,7 @@ $f3->route('GET|POST /confirmation', function($f3)
         $_SESSION['NotRequired']);
 
     Emailer::sendAffiliateEmail($lastId, $_SESSION['PersonalInfo'], $db);
+    Emailer::sendConfirmationEmail($_SESSION['PersonalInfo']);
 
     $f3->set('page_title', 'Application Submitted');
 
