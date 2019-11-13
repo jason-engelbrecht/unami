@@ -247,6 +247,11 @@ $f3->route('GET|POST /additional_information', function($f3)
         // validate data
         if(validAccommodationsForm())
         {
+            if($_POST['goToReview'] == true)
+            {
+                $f3->reroute('/review');
+            }
+
             $f3->reroute('/long_answer');
         }
     }
@@ -330,6 +335,11 @@ $f3->route('GET|POST /long_answer', function($f3)
         // validate data
         if(validLongAnswersForm())
         {
+            if($_POST['goToReview'] == true)
+            {
+                $f3->reroute('/review');
+            }
+
             $f3->reroute('/not_required');
         }
     }
