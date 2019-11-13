@@ -403,11 +403,14 @@ $f3->route('GET|POST /not_required', function($f3)
 
 $f3->route('GET|POST /review', function($f3)
 {
+    global $db;
+
     if($_SESSION['applicationStarted'] != 1) {
         $f3->reroute('/');
     }
 
     $f3->set('page_title', 'Review');
+    $f3->set('affiliateName', $db->getAffiliateName($_SESSION['PersonalInfo']->getAffiliate()));
 
     $view = new Template();
     echo $view->render('views/forms/general_form_pages/review.html');

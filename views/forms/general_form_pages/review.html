@@ -59,7 +59,7 @@
                 <!-- nami stuff -->
                 <div class="row m-1 mb-2">
                     <div class="col-md-4 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Affiliate:</span> {{ @affiliates[$_SESSION['PersonalInfo']->getAffiliate() + 1]['name'] }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Affiliate:</span> {{ @affiliateName }}</h6>
                     </div>
                     <div class="col-md-6 pl-0">
                         <h6 class="pl-2"><span class="font-weight-bold">NAMI Member:</span> {{ $_SESSION['PersonalInfo']->getMember() }}</h6>
@@ -128,17 +128,17 @@
                 <div class="row m-1 mb-2">
                     <div class="col-md-10 pl-0">
                         <h6 class="pl-2 pb-2"><span class="font-weight-bold">Special Needs: </span>
-                            <check if="{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() == true }}">
+                            <check if="{{ $_SESSION['AdditionalInfo']->getSpecialNeeds() == 1 }}">
                                 <true>yes</true><false>no</false>
                             </check>
                         </h6>
                         <h6 class="pl-2 pb-2"><span class="font-weight-bold">Bringing a Service Animal: </span>
-                            <check if="{{ $_SESSION['AdditionalInfo']->getServiceAnimal() == true }}">
+                            <check if="{{ $_SESSION['AdditionalInfo']->getServiceAnimal() == 1 }}">
                                 <true>yes</true><false>no</false>
                             </check>
                         </h6>
                         <h6 class="pl-2"><span class="font-weight-bold">Walker or Wheelchair used: </span>
-                            <check if="{{ $_SESSION['AdditionalInfo']->getMovementDisability() == false }}">
+                            <check if="{{ $_SESSION['AdditionalInfo']->getMovementDisability() == 1 }}">
                                 <true>yes</true><false>no</false>
                             </check>
                         </h6>
@@ -148,17 +148,17 @@
                 <div class="row m-1">
                     <div class="col-md-10 pl-0">
                         <h6 class="pl-2 pb-2"><span class="font-weight-bold">Live within 1 hour of training: </span>
-                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
+                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 1 }}">
                                 Yes, a room is not needed
                             </check>
-                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == false }}">
+                            <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 0 }}">
                                 No, a room is needed
                             </check>
                         </h6>
 
-                        <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == true }}">
+                        <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == 1 }}">
                             <h6 class="pl-2 pb-2"><span class="font-weight-bold">I want to pay for a Single room: </span>
-                                <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == true }}">
+                                <check if="{{ $_SESSION['AdditionalInfo']->getSingleRoom() == 1 }}">
                                     <true>
                                         yes
                                     </true>
@@ -172,7 +172,8 @@
                     </div>
                 </div>
 
-                <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == true && $_SESSION['AdditionalInfo']->getSingleRoom() == false}}">
+                <check if="{{ $_SESSION['AdditionalInfo']->getNeedAccommodations() == 1
+                && $_SESSION['AdditionalInfo']->getSingleRoom() == 0}}">
 
                     <div class="row m-1 mb-2">
                         <h6 class="pl-2"><span class="font-weight-bold text-primary">Rooming Information</span></h6>
