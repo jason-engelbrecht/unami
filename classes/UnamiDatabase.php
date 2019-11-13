@@ -108,8 +108,9 @@ INSERT INTO app_type(app_type) VALUES('Family Support Group');
 
  */
 
+
 $user = $_SERVER['USER'];
-require "/home2/$user/config_UNAMI.php";
+require "/home/$user/config_UNAMI.php";
 
 /**
  * Class Database
@@ -471,7 +472,7 @@ class UnamiDatabase
     function getAffiliates()
     {
         //define query
-        $query = "SELECT name, affiliate_id, phone, email FROM affiliates";
+        $query = "SELECT name, affiliate_id FROM affiliates";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
@@ -484,32 +485,12 @@ class UnamiDatabase
     }
 
     /**
-     * Counts number of affiliates
+     * Get all active applicants (active = 1)
      *
-     * @return mixed
      */
-    function countAffiliates() {
-        //define query
-        $query = "SELECT COUNT(affiliate_id) AS NumAffiliates
-                  FROM affiliates";
-
-        //prepare statement
-        $statement = $this->_dbh->prepare($query);
-
-        $statement->execute();
-
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return $result;
-    }
-
-    /**
-     * Get applicants based on category: active, waitlist, archive
-     *
-     * @param $category: active = 1, waitlist = 2, archive = 0
-     * @return mixed
-     */
-    function getApplicants($category) {
+    function getActiveApplicants() {
+        //active is 1
+        $active = 1;
 
         //affiliate->affiliates table
         //app_type->app_type table
@@ -522,8 +503,7 @@ class UnamiDatabase
                   affiliates.name AS Affiliate, 
                   app_type.app_type AS Training, 
                   applicants.email AS Email, 
-                  date_submitted AS DateSubmitted,
-                  category AS Category
+                  date_submitted AS DateSubmitted
                   FROM applicants 
                   INNER JOIN affiliates ON applicants.affiliate = affiliates.affiliate_id
                   INNER JOIN app_type ON applicants.app_type = app_type.app_id
@@ -535,7 +515,7 @@ class UnamiDatabase
         $statement = $this->_dbh->prepare($query);
 
         //bind parameter
-        $statement->bindParam(':category', $category, PDO::PARAM_STR);
+        $statement->bindParam(':category', $active, PDO::PARAM_STR);
 
         //execute
         $statement->execute();
@@ -547,21 +527,34 @@ class UnamiDatabase
     }
 
     /**
-     * Counts number of applications
+     * Get all waitlisted applicants (waitlist = 2)
      *
-     * @param $category: active = 1, waitlist = 2, archive = 0
+     */
+    function getWaitlistedApplicants() {
+
+    }
+
+    /**
+     * Get all archived applicants (archive = 3)
+     *
+     */
+    function getArchivedApplicants() {
+
+    }
+
+    /**
+     * Counts number of active applications
+     *
      * @return mixed
      */
-    function countApplicants($category) {
+    function countActive() {
         //define query
-        $query = "SELECT COUNT(category) AS NumApplicants
+        $query = "SELECT COUNT(category) AS Active
                   FROM applicants
-                  WHERE category = :category";
+                  WHERE category = 1";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
-
-        $statement->bindParam(':category', $category, PDO::PARAM_STR);
 
         $statement->execute();
 
@@ -659,37 +652,9 @@ class UnamiDatabase
     }
 
     /**
-     * Update applicant category or status
-     *
-     * @param $id
-     * @param $category
-     * @param $status
-     */
-    function updateApplicant($id, $category, $status)
-    {
-        //define query
-        $query = "UPDATE applicants 
-                  SET 
-                  app_status = :status,
-                  category = :category
-                  WHERE applicant_id = :id
-                  LIMIT 1";
-
-        //prepare statement
-        $statement = $this->_dbh->prepare($query);
-
-        //bind parameters
-        $statement->bindParam(':category', $category, PDO::PARAM_INT);
-        $statement->bindParam(':status', $status, PDO::PARAM_INT);
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-
-        $statement->execute();
-    }
-
-    /**
      * @param $appId int applicants id
      * @param $notes String notes written by affiliate
-     */
+     **/
     function insertAffiliateNotes($appId, $notes)
     {
         $query = "INSERT INTO notes(applicant_id, affiliate_notes) VALUES (:applicant_id, :affiliate_notes)";
@@ -700,5 +665,6 @@ class UnamiDatabase
         $statement->bindParam(':affiliate_notes', $notes, PDO::PARAM_STR);
 
         $statement->execute();
+
     }
 }
