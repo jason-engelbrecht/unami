@@ -69,10 +69,10 @@
                 <!-- primary phone -->
                 <div class="row m-1 mb-2">
                     <div class="col-md-4 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Primary Phone:</span> {{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Primary Phone: </span> {{ $_SESSION['PersonalInfo']->getPrimaryPhone() }}</h6>
                     </div>
                     <div class="col-md-6 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call:</span> {{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call: </span> {{ $_SESSION['PersonalInfo']->getPrimaryTime() }}</h6>
                     </div>
                 </div>
 
@@ -80,10 +80,10 @@
                 <check if="{{ @SESSION.alternatePhone == 1 }}">
                     <div class="row m-1 mb-2">
                         <div class="col-md-4 pl-0">
-                            <h6 class="pl-2"><span class="font-weight-bold">Alternate Phone:</span> {{ $_SESSION['PersonalInfo']->getAlternatePhone() }}</h6>
+                            <h6 class="pl-2"><span class="font-weight-bold">Alternate Phone: </span> {{ $_SESSION['PersonalInfo']->getAlternatePhone() }}</h6>
                         </div>
                         <div class="col-md-6 pl-0">
-                            <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call:</span> {{ $_SESSION['PersonalInfo']->getAlternateTime() }}</h6>
+                            <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call: </span> {{ $_SESSION['PersonalInfo']->getAlternateTime() }}</h6>
                         </div>
                     </div>
                 </check>
@@ -91,20 +91,20 @@
                 <!-- email and best way to contact -->
                 <div class="row m-1 mb-2">
                     <div class="col-md-4 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Email:</span> {{ $_SESSION['PersonalInfo']->getEmail() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Email: </span> {{ $_SESSION['PersonalInfo']->getEmail() }}</h6>
                     </div>
                     <div class="col-md-6 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Best Way to Contact:</span> {{ $_SESSION['PersonalInfo']->getPreference() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Best Way to Contact: </span> {{ $_SESSION['PersonalInfo']->getPreference() }}</h6>
                     </div>
                 </div>
 
                 <!-- emergency contact -->
                 <div class="row m-1 mb-2">
                     <div class="col-md-4 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Emergency Contact Name</span> {{ $_SESSION['PersonalInfo']->getEmergencyName() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Emergency Contact Name: </span> {{ $_SESSION['PersonalInfo']->getEmergencyName() }}</h6>
                     </div>
                     <div class="col-md-6 pl-0">
-                        <h6 class="pl-2"><span class="font-weight-bold">Phone:</span> {{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}</h6>
+                        <h6 class="pl-2"><span class="font-weight-bold">Phone: </span> {{ $_SESSION['PersonalInfo']->getEmergencyPhone() }}</h6>
                     </div>
                 </div>
             </div>
@@ -191,8 +191,16 @@
                     <div class="row m-1 mb-2">
                         <div class="col-md-10 pl-0">
                             <h6 class="pl-2">
-                                <span class="font-weight-bold">Use a CPAP: </span> {{ $_SESSION['AdditionalInfo']->getCpap() }}
-                                <span class="font-weight-bold ml-4">Room with a CPAP User: </span> {{ $_SESSION['AdditionalInfo']->getCpapRoommate() }}
+                                <span class="font-weight-bold">Use a CPAP: </span>
+                                <check if="{{ $_SESSION['AdditionalInfo']->getCpap() == 'true' }}">
+                                    <true>Use a CPAP</true>
+                                    <false>Do not use a CPAP</false>
+                                </check>
+                                <span class="font-weight-bold ml-4">Room with a CPAP User: </span>
+                                <check if="{{ $_SESSION['AdditionalInfo']->getCpapRoommate() == 'true' }}">
+                                    <true>Fine with roommate with CPAP</true>
+                                    <false>Do not want to roommate with CPAP user</false>
+                                </check>
                             </h6>
                         </div>
                     </div>
