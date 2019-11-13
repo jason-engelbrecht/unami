@@ -595,8 +595,25 @@ $f3->route('GET /dashboard', function($f3)
     echo $view->render('views/portal/dashboard.html');
 });
 
+$f3->set('applicationCategories',
+    array(
+        0 =>'Archive',
+        1 => 'Active',
+        2 => 'Waitlist'
+    )
+);
+
+$f3->set('applicationStatuses',
+    array(
+        0 => 'Denied',
+        1 => 'Submitted',
+        2 => 'Approved',
+        3 => 'Complete'
+    )
+);
+
 //active
-$f3->route('GET /active', function($f3)
+$f3->route('GET|POST /active', function($f3)
 {
     if($_SESSION['loggedIn'] !== 1) {
         $f3->reroute('/login');
@@ -607,42 +624,92 @@ $f3->route('GET /active', function($f3)
     $f3->set('page_title', 'Active Applicants');
 
     //get all active applicants
-    $f3->set('ActiveApplicants', $db->getActiveApplicants());
+    $active = 1;
+    $f3->set('ActiveApplicants', $db->getApplicants($active));
 
     //get various metrics
-    $f3->set('active', $db->countActive());
+    $f3->set('active', $db->countApplicants($active));
     $f3->set('submitted', $db->countSubmitted());
     $f3->set('approved', $db->countApproved());
     $f3->set('denied', $db->countDenied());
     $f3->set('complete', $db->countComplete());
+
+    //update submission
+    if(isset($_POST['update'])) {
+
+        $id = $_POST['id'];
+        $category = $_POST['category'];
+        $status = $_POST['status'];
+
+
+        //run update query
+        $db->updateApplicant($id, $category, $status);
+        $f3->reroute('/active');
+    }
 
     $view = new Template();
     echo $view->render('views/portal/applications/active.html');
 });
 
 //waitlist
-$f3->route('GET /waitlist', function($f3)
+$f3->route('GET|POST /waitlist', function($f3)
 {
     if($_SESSION['loggedIn'] !== 1) {
         $f3->reroute('/login');
     }
 
+    //get all waitlisted applicants
+    global $db;
+    $waitilist = 2;
+    $f3->set('WaitlistedApplicants', $db->getApplicants($waitilist));
+    $f3->set('numWaitlist', $db->countApplicants($waitilist));
+
     $f3->set('page', 'waitlist');
     $f3->set('page_title', 'Waitlisted Applicants');
+
+    //update submission
+    if(isset($_POST['updateWaitlist'])) {
+
+        $id = $_POST['id'];
+        $category = $_POST['category'];
+        $status = $_POST['status'];
+
+        //run update query
+        $db->updateApplicant($id, $category, $status);
+        $f3->reroute('/waitlist');
+    }
 
     $view = new Template();
     echo $view->render('views/portal/applications/waitlist.html');
 });
 
 //archive
-$f3->route('GET /archive', function($f3)
+$f3->route('GET|POST /archive', function($f3)
 {
     if($_SESSION['loggedIn'] !== 1) {
         $f3->reroute('/login');
     }
 
+    //get all archived applicants
+    global $db;
+    $archive = 0;
+    $f3->set('ArchivedApplicants', $db->getApplicants($archive));
+    $f3->set('numArchive', $db->countApplicants($archive));
+
     $f3->set('page', 'archive');
     $f3->set('page_title', 'Archived Applicants');
+
+    //update submission
+    if(isset($_POST['updateArchive'])) {
+
+        $id = $_POST['id'];
+        $category = $_POST['category'];
+        $status = $_POST['status'];
+
+        //run update query
+        $db->updateApplicant($id, $category, $status);
+        $f3->reroute('/archive');
+    }
 
     $view = new Template();
     echo $view->render('views/portal/applications/archive.html');
@@ -657,6 +724,11 @@ $f3->route('GET /affiliates', function($f3)
 
     $f3->set('page', 'affiliates');
     $f3->set('page_title', 'Affiliates');
+
+    //get all affiliates
+    global $db;
+    $f3->set('Affiliates', $db->getAffiliates());
+    $f3->set('NumAffiliates', $db->countAffiliates());
 
     $view = new Template();
     echo $view->render('views/portal/other/affiliates.html');

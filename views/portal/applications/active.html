@@ -8,6 +8,7 @@
     <p class="lead mb-4">This where you can discover the status of all active applications</p>
 
     <!-- metrics -->
+    <h1 class="h4 mb-2 text-gray-800">Number of Applications by Status </h1>
     <div class="row mb-4">
         <!-- submitted -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -94,7 +95,7 @@
     <!-- active applications data table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Showing All {{ @active['Active'] }} Active Applications</h6>
+            <h5 class="m-0 text-gray-800">Showing All <strong>{{ @active['NumApplicants'] }}</strong> Active Applications</h5>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -182,29 +183,63 @@
                                     <div class="modal-content">
 
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-primary" id="modalLabel">
+                                            <h4 class="modal-title text-primary" id="modalLabel">
                                                 <i class="fas fa-edit"></i> Edit
                                                 <span class="font-weight-bold">{{ @ActiveApplicant['Name'] }}'s</span>
                                                 Application
-                                            </h5>
+                                            </h4>
 
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
 
-                                        <!-- add edit form here -->
-                                        <div class="modal-body">
-                                            Here you'll be able to edit the status and category of the application
-                                            <form>
+                                        <!-- edit form -->
+                                        <form action="active" method="post">
+                                            <div class="modal-body">
 
-                                            </form>
-                                        </div>
+                                                <input type="hidden" value="{{ @ActiveApplicant['ID'] }}" name="id">
 
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
+                                                <h5><i class="fas fa-suitcase mr-1 text-primary"></i>Move Application</h5>
+                                                <div class="form-row mb-3">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="sr-only" for="category">Location</label>
+                                                        <select id="category" class="form-control" name="category">
+                                                            <repeat group="{{ @applicationCategories }}" key="{{ @DBvalue }}" value="{{ @category }}">
+                                                                <option value="{{ @DBvalue }}"
+                                                                    <check if="{{ @DBvalue == @ActiveApplicant['Category'] }}">
+                                                                        selected
+                                                                    </check>>
+                                                                {{ @category }}
+                                                                </option>
+                                                            </repeat>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <h5><i class="fas fa-exchange-alt mr-1 text-primary"></i>Change Status</h5>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="sr-only" for="category">Status</label>
+                                                        <select id="status" class="form-control" name="status">
+                                                            <repeat group="{{ @applicationStatuses }}" key="{{ @DBvalue }}" value="{{ @status }}">
+                                                                <option value="{{ @DBvalue }}"
+                                                                <check if="{{ @DBvalue == @ActiveApplicant['AppStatus'] }}">
+                                                                    selected
+                                                                </check>>
+                                                                {{ @status }}
+                                                                </option>
+                                                            </repeat>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="update" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
