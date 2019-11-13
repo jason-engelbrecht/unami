@@ -5,15 +5,17 @@
 
     <!-- Page Heading -->
     <h1 class="h2 mb-2 text-primary"><i class="fas fa-building"></i> Affiliates </h1>
-    <p class="lead mb-5">Here you can add, update, and remove affiliates</p>
+    <p class="lead mb-5">Here you can add(coming soon) and edit affiliate information</p>
 
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Showing All 20 Affiliates
+            <h5 class="m-0 text-gray-800">Showing All <strong>{{ @NumAffiliates['NumAffiliates'] }}</strong> Affiliates
+<!--
                 <a class="btn btn-circle btn-success float-right text-white mr-2" href="#"><i class="fas fa-plus fa-lg"></i></a>
-            </h6>
+-->
+            </h5>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -23,8 +25,8 @@
                         <th>Affiliate</th>
                         <th>Phone</th>
                         <th>Email</th>
+                        <th>No-Reply Email</th>
                         <th>Edit</th>
-                        <th class="bg-danger">Remove</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -32,18 +34,71 @@
                         <th>Affiliate</th>
                         <th>Phone</th>
                         <th>Email</th>
+                        <th>No-Reply Email</th>
                         <th>Edit</th>
-                        <th>Remove</th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    <tr>
-                        <td>NAMI Chelan-Douglas</td>
-                        <td>(253) 657-1929</td>
-                        <td>nixon.tiger@gmail.com</td>
-                        <td class="text-center"><a href="#"><i class="fas fa-edit fa-lg"></i></a></td>
-                        <td class="text-center"><a href="#" class="text-decoration-none text-danger"><i class="fas fa-trash-alt fa-lg"></i></a></td>
-                    </tr>
+                    <!-- all active applicants -->
+                    <repeat group="{{ @Affiliates }}" value="{{ @Affiliate }}">
+                        <tr>
+                            <!-- name, phone, email -->
+                            <td>{{ @Affiliate['name'] }}</td>
+
+                            <!--<td>{{ @Affiliate['phone'] }}</td>-->
+                            <!-- mailto affiliate email -->
+                            <!--<td>
+                                <a  class="text-decoration-none text-body"
+                                    href="mailto: {{ @Affiliate['email'] }}">
+                                    {{ @Affiliate['email'] }}
+                                </a>
+                            </td>-->
+
+                            <td>(123) 456 - 7890</td>
+                            <td>affiliate@email.com</td>
+                            <td>no-reply-afilliate@email.com</td>
+
+                            <!-- edit -> modal -- use ID here -->
+                            <td class="text-center">
+                                <a href="#" class="text-decoration-none text-primary" data-toggle="modal" data-target="#affmodal{{ @Affiliate['affiliate_id'] }}">
+                                    <i class="fas fa-edit fa-lg"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                        <!-- edit modal -->
+                        <div class="modal fade" id="affmodal{{ @Affiliate['affiliate_id'] }}" tabindex="-1" role="dialog"
+                             aria-labelledby="affmodal{{ @Affiliate['affiliate_id'] }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title text-primary" id="modalLabel">
+                                            <i class="fas fa-edit"></i> Edit
+                                            <span class="font-weight-bold">{{ @Affiliate['name'] }}</span>
+                                        </h4>
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- add edit form here -->
+                                    <div class="modal-body">
+                                        Here you'll be able to edit the status and category of the application
+                                        <form>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </repeat>
                     </tbody>
                 </table>
             </div>

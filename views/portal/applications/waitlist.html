@@ -11,7 +11,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Showing All 110 Waitlisted Applications</h6>
+            <h5 class="m-0 text-gray-800">Showing All <strong>{{ @numWaitlist['NumApplicants'] }}</strong> Waitlisted Applications</h5>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -23,7 +23,7 @@
                         <th>Training</th>
                         <th>Email</th>
                         <th>Date Submitted</th>
-                        <th>Edit</th>
+                        <th>Move</th>
                         <th>View</th>
                     </tr>
                     </thead>
@@ -34,47 +34,94 @@
                         <th>Training</th>
                         <th>Email</th>
                         <th>Date Submitted</th>
-                        <th>Edit</th>
+                        <th>Move</th>
                         <th>View</th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>NAMI Chelan-Douglas</td>
-                        <td>Family Support Group</td>
-                        <td>nixon.tiger@gmail.com</td>
-                        <td>02/23/2019</td>
-                        <td class="text-center"><a href="#" class="text-decoration-none text-primary"><i class="fas fa-edit fa-lg"></i></a></td>
-                        <td class="text-center"><a href="#" class="text-decoration-none text-primary"><i class="fas fa-external-link-square-alt fa-lg ml-1"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Dwayne Johnson</td>
-                        <td>NAMI Clallam County</td>
-                        <td>Family Support Group</td>
-                        <td>therock@gmail.com</td>
-                        <td>09/28/2019</td>
-                        <td class="text-center"><a href="#" class="text-decoration-none text-primary"><i class="fas fa-edit fa-lg"></i></a></td>
-                        <td class="text-center"><a href="#" class="text-decoration-none text-primary"><i class="fas fa-external-link-square-alt fa-lg ml-1"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Tony Stark</td>
-                        <td>NAMI Eastside</td>
-                        <td>Family Support Group</td>
-                        <td>edith@gmail.com</td>
-                        <td>06/28/2019</td>
-                        <td class="text-center"><a href="#" class="text-decoration-none text-primary"><i class="fas fa-edit fa-lg"></i></a></td>
-                        <td class="text-center"><a href="#" class="text-decoration-none text-primary"><i class="fas fa-external-link-square-alt fa-lg ml-1"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Bruce Wayne</td>
-                        <td>NAMI Jefferson County</td>
-                        <td>Family Support Group</td>
-                        <td>batman@gmail.com</td>
-                        <td>04/13/2019</td>
-                        <td class="text-center"><a href="#" class="text-decoration-none text-primary"><i class="fas fa-edit fa-lg"></i></a></td>
-                        <td class="text-center"><a href="#" class="text-decoration-none text-primary"><i class="fas fa-external-link-square-alt fa-lg ml-1"></i></a></td>
-                    </tr>
+                        <!-- all waitlisteed applicants -->
+                        <repeat group="{{ @WaitlistedApplicants }}" value="{{ @WaitlistedApplicant }}">
+                            <tr>
+                                <!-- name, affiliate, training -->
+                                <td>{{ @WaitlistedApplicant['Name'] }}</td>
+                                <td>{{ @WaitlistedApplicant['Affiliate'] }}</td>
+                                <td>{{ @WaitlistedApplicant['Training'] }}</td>
+
+                                <!-- mailto applicant email -->
+                                <td>
+                                    <a  class="text-decoration-none text-body"
+                                        href="mailto: {{ @WaitlistedApplicant['Email'] }}">
+                                        {{ @WaitlistedApplicant['Email'] }}
+                                    </a>
+                                </td>
+
+                                <!-- date submitted -->
+                                <td>{{ @WaitlistedApplicant['DateSubmitted'] }}</td>
+
+                                <!-- edit -> modal -- use ID here -->
+                                <td class="text-center">
+                                    <a href="#" class="text-decoration-none text-primary" data-toggle="modal" data-target="#modal{{ @WaitlistedApplicant['ID'] }}">
+                                        <i class="fas fa-suitcase fa-lg"></i>
+                                    </a>
+                                </td>
+
+                                <!-- view -- use ID here -->
+                                <td class="text-center"><a href="#" class="text-decoration-none text-primary"><i class="fas fa-external-link-square-alt fa-lg"></i></a></td>
+                            </tr>
+
+                            <!-- edit modal -->
+                            <div class="modal fade" id="modal{{ @WaitlistedApplicant['ID'] }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="modal{{ @WaitlistedApplicant['ID'] }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-primary" id="modalLabel">
+                                                <i class="fas fa-suitcase"></i> Move
+                                                <span class="font-weight-bold">{{ @WaitlistedApplicant['Name'] }}'s</span>
+                                                Application
+                                            </h4>
+
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <!-- edit form -->
+                                        <form action="waitlist" method="post">
+                                            <div class="modal-body py-4">
+
+                                                <input type="hidden" value="{{ @WaitlistedApplicant['ID'] }}" name="id">
+                                                <input type="hidden" value="{{ @WaitlistedApplicant['AppStatus'] }}" name="status">
+
+                                                <h5><i class="fas fa-map-marker-alt mr-1 text-primary"></i>Location</h5>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="sr-only" for="category">Location</label>
+                                                        <select id="category" class="form-control" name="category">
+                                                            <repeat group="{{ @applicationCategories }}" key="{{ @DBvalue }}" value="{{ @category }}">
+                                                                <option value="{{ @DBvalue }}"
+                                                                <check if="{{ @DBvalue == @WaitlistedApplicant['Category'] }}">
+                                                                    selected
+                                                                </check>>
+                                                                {{ @category }}
+                                                                </option>
+                                                            </repeat>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="updateWaitlist" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- edit modal -->
+                        </repeat>
                     </tbody>
                 </table>
             </div>
