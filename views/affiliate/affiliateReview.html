@@ -1,274 +1,258 @@
 <include href="views/forms/includes/header.html"/>
 
 <div class="container p-3">
-    <h1>Application for: {{ @applicant['fname'].' '.@applicant['lname'] }}</h1>
-</div>
-
-<div class="container p-3">
     <form method="post">
         <div class="card mb-3 shadow-sm bg-white rounded">
             <div class="card-header">
-                <h4 class="float-left">Personal Information</h4>
+                <h4 class="pt-2"><i class="fas fa-globe-americas mr-1 text-primary"></i>
+                    Application for: {{ @applicant['fname'].' '.@applicant['lname'] }}</h4>
             </div>
             <div class="card-body m-3">
-                <div class="row m-3">
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">First Name: </h6>
-                        <p class="pl-2">{{ @applicant['fname'] }}</p>
-                    </div>
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Last Name: </h6>
-                        <p class="pl-2">{{ @applicant['lname'] }}</p>
-                    </div>
-                    <div class="col-md-2 pl-0">
-                        <h6 class="lead">Pronouns: </h6>
-                        <p class="pl-2">{{ @applicant['pronouns'] }}</p>
-                    </div>
-                </div>
 
-                <hr>
-
-                <div class="row m-3">
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Address 1: </h6>
-                        <p class="pl-2">{{ @applicant['address'] }}</p>
-                    </div>
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Address 2: </h6>
-                        <p class="pl-2">{{ @applicant['address2'] }}</p>
-                    </div>
-                    <div class="col-md-2 pl-0">
-                        <h6 class="lead">Date of Birth: </h6>
-                        <p class="pl-2">{{ @applicant['birthdate'] }}</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row m-3">
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">City: </h6>
-                        <p class="pl-2">{{ @applicant['city'] }}</p>
-                    </div>
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">State: </h6>
-                        <p class="pl-2">{{ @applicant['state'] }}</p>
-                    </div>
-                    <div class="col-md-2 pl-0">
-                        <h6 class="lead">Zip: </h6>
-                        <p class="pl-2">{{ @applicant['zip'] }}</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row m-3">
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Primary Phone Number: </h6>
-                        <p class="pl-2">{{ @applicant['primary_phone'] }}</p>
-                    </div>
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Best time to call: </h6>
-                        <p class="pl-2">{{ @applicant['primary_time'] }}</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row m-3">
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Alternate Phone Number: </h6>
-                        <p class="pl-2">{{ @applicant['alternate_phone'] }}</p>
-                    </div>
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Best time to call: </h6>
-                        <p class="pl-2">{{ @applicant['alternate_time'] }}</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row m-3">
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Email: </h6>
-                        <p class="pl-2">{{ @applicant['email'] }}</p>
-                    </div>
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Email or Phone: </h6>
-                        <p class="pl-2">{{ @applicant['preference'] }}</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row m-3">
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Affiliate: </h6>
-                        <p class="pl-2">{{ @affiliate }}</p>
-                    </div>
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">NAMI member: </h6>
-                        <check if="{{ @applicant['NAMI_member'] == 1 }}">
-                            <p class="pl-2">Already a NAMI member</p>
-                        </check>
-                        <check if="{{ @applicant['NAMI_member'] != 1 }}">
-                            <p class="pl-2">Needs to become a NAMI member</p>
-                        </check>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row mt-3 mx-3">
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Emergency Contact Name: </h6>
-                        <p class="pl-2">{{ @applicant['emergency_name'] }}</p>
-                    </div>
-                    <div class="col-md-5 pl-0">
-                        <h6 class="lead">Emergency Contact Phone Number: </h6>
-                        <p class="pl-2">{{ @applicant['emergency_phone'] }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3 shadow-sm bg-white rounded">
-            <div class="card-header">
-                <h4 class="float-left">Accommodations</h4>
-            </div>
-            <div class="card-body m-3">
-                <div class="row m-3">
-                    <div class="col-md-4 pl-0">
-                        <h6 class="lead">Special Needs: </h6>
-                        <check if="{{ @applicant['special_needs'] == 1 }}">
-                            <p class="pl-2">Has special needs</p>
-                        </check>
-                        <check if="{{ @applicant['special_needs'] != 1 }}">
-                            <p class="pl-2">No special needs</p>
-                        </check>
+                <!-- personal information -->
+                <div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5 class="font-weight-bold d-inline">Personal Information</h5>
+                            <hr class="mt-0 bg-primary">
+                        </div>
                     </div>
 
-                    <div class="col-md-4 pl-0">
-                        <h6 class="lead">Bringing a Service Animal: </h6>
-                        <check if="{{ @applicant['service_animal'] == 1 }}">
-                            <p class="pl-2">Has service animal</p>
-                        </check>
-                        <check if="{{ @applicant['service_animal'] != 1 }}">
-                            <p class="pl-2">No service animal</p>
-                        </check>
-                    </div>
-
-                    <div class="col-md-4 pl-0">
-                        <h6 class="lead">Walker or Wheelchair used: </h6>
-                        <check if="{{ @applicant['mobility_need'] == 1 }}">
-                            <p class="pl-2">Has a mobility disability</p>
-                        </check>
-                        <check if="{{ @applicant['mobility_need'] != 1 }}">
-                            <p class="pl-2">No mobility disability</p>
-                        </check>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row m-3">
-                    <div class="col-md-6 pl-0">
-                        <h6 class="lead">Live within 1 hour of training: </h6>
-                        <check if="{{ @applicant['need_rooming'] == 1 }}">
-                            <p class="pl-2">Room is needed</p>
-                        </check>
-                        <check if="{{ @applicant['need_rooming'] != 1 }}">
-                            <p class="pl-2">Room is not needed</p>
-                        </check>
-                    </div>
-                    <check if="{{ @applicant['need_rooming'] == 1}}">
+                    <!-- name, pronouns -->
+                    <div class="row m-1 mb-2">
                         <div class="col-md-6 pl-0">
-                            <h6 class="lead">Did they want to pay extra for a single room: </h6>
-                            <check if="{{ @applicant['single_room'] == 1 }}">
-                                <p class="pl-2">Single room wanted</p>
+                            <h6 class="pl-2"><span class="font-weight-bold">Name:</span>
+                                {{ @applicant['fname'] }} {{ @applicant['lname'] }}
+                                <span class="font-weight-bold ml-5">Pronouns:</span> {{ @applicant['pronouns'] }}</h6>
+                        </div>
+                    </div>
+
+                    <!-- dob -->
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-6 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Date of Birth:</span>
+                                {{ @applicant['birthdate'] }}
+                            </h6>
+                        </div>
+                    </div>
+
+                    <!-- address -->
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-12 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Address:</span>
+                                {{ @applicant['address'] }} {{ @applicant['address2'] }}
+                                {{ @applicant['city'] }}, {{ @applicant['state'] }} {{ @applicant['zip'] }}
+                            </h6>
+                        </div>
+                    </div>
+
+                    <!-- nami stuff -->
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-4 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Affiliate:</span> {{ @affiliate }}</h6>
+                        </div>
+                        <div class="col-md-6 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">NAMI Member:</span>
+                                <check if="{{ @applicant['NAMI_member'] == 1 }}">
+                                    <true>Is a NAMI member</true>
+                                    <false>Is not a NAMI member</false>
+                                </check>
+                            </h6>
+                        </div>
+                    </div>
+
+                    <!-- primary phone -->
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-4 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Primary Phone:</span>
+                                {{ @applicant['primary_phone'] }}</h6>
+                        </div>
+                        <div class="col-md-6 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call:</span>
+                                {{ @applicant['primary_time'] }}</h6>
+                        </div>
+                    </div>
+
+                    <!-- alternate phone -->
+                    <check if="{{ @SESSION.alternatePhone == 1 }}">
+                        <div class="row m-1 mb-2">
+                            <div class="col-md-4 pl-0">
+                                <h6 class="pl-2"><span class="font-weight-bold">Alternate Phone:</span>
+                                    {{ @applicant['alternate_phone'] }}
+                                </h6>
+                            </div>
+                            <div class="col-md-6 pl-0">
+                                <h6 class="pl-2"><span class="font-weight-bold">Best Time to Call:</span>
+                                    {{ @applicant['alternate_time'] }}
+                                </h6>
+                            </div>
+                        </div>
+                    </check>
+
+                    <!-- email and best way to contact -->
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-4 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Email:</span>
+                                {{ @applicant['email'] }}
+                            </h6>
+                        </div>
+                        <div class="col-md-6 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Best Way to Contact:</span>
+                                {{ @applicant['preference'] }}
+                            </h6>
+                        </div>
+                    </div>
+
+                    <!-- emergency contact -->
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-4 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Emergency Contact Name: </span>
+                                {{ @applicant['emergency_name'] }}
+                            </h6>
+                        </div>
+                        <div class="col-md-6 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Phone: </span>
+                                {{ @applicant['emergency_phone'] }}
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- end personal information -->
+
+                <!-- accommodations -->
+                <div>
+                    <div class="row mt-5">
+                        <div class="col-md-8">
+                            <h5 class="font-weight-bold d-inline">Accommodations</h5>
+                            <hr class="mt-0 bg-primary">
+                        </div>
+                    </div>
+
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-10 pl-0">
+                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Special Needs: </span>
+                                <check if="{{ @applicant['special_needs'] == 1 }}">
+                                    <true>yes</true><false>no</false>
+                                </check>
+                            </h6>
+                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Bringing a Service Animal: </span>
+                                <check if="{{ @applicant['service_animal'] == 1 }}">
+                                    <true>Yes</true><false>No</false>
+                                </check>
+                            </h6>
+                            <h6 class="pl-2"><span class="font-weight-bold">Walker or Wheelchair used: </span>
+                                <check if="{{ @applicant['mobility_need'] == 1 }}">
+                                    <true>Yes</true><false>No</false>
+                                </check>
+                            </h6>
+                        </div>
+                    </div>
+
+                    <div class="row m-1">
+                        <div class="col-md-10 pl-0">
+                            <h6 class="pl-2 pb-2"><span class="font-weight-bold">Need rooming during training: </span>
+                                <check if="{{ @applicant['need_rooming'] == 1 }}">
+                                    <true>Room is needed</true>
+                                    <false>Room not needed</false>
+                                </check>
+                            </h6>
+
+                            <check if="{{ @applicant['need_rooming'] == 1 }}">
+                                <h6 class="pl-2 pb-2"><span class="font-weight-bold">I want to pay for a Single room: </span>
+                                    <check if="{{ @applicant['single_room'] == 1 }}">
+                                        <true>Single room wanted</true>
+                                        <false>Single room not wanted</false>
+                                    </check>
+
+                                </h6>
                             </check>
-                            <check if="{{ @applicant['single_room'] != 1 }}">
-                                <p class="pl-2">Single room not wanted</p>
-                            </check>
+                        </div>
+                    </div>
+
+                    <check if="{{ @applicant['single_room'] != 1 && @applicant['need_rooming'] == 1 }}">
+
+                        <div class="row m-1 mb-2">
+                            <h6 class="pl-2"><span class="font-weight-bold text-primary">Rooming Information</span></h6>
+                        </div>
+
+                        <div class="row m-1 mb-2">
+                            <div class="col-md-10 pl-0">
+                                <h6 class="pl-2">
+                                    <span class="font-weight-bold">Your Gender: </span> {{ @applicant['gender'] }}
+                                    <span class="font-weight-bold ml-3">Want to Room With: </span> {{ @applicant['roommate_gender'] }}
+                                </h6>
+                            </div>
+                        </div>
+
+                        <div class="row m-1 mb-2">
+                            <div class="col-md-10 pl-0">
+                                <h6 class="pl-2">
+                                    <span class="font-weight-bold">CPAP User: </span>
+                                    <check if="{{ @applicant['cpap_user'] == 1 }}">
+                                        <true>Uses a CPAP</true>
+                                        <false>Do not use a CPAP</false>
+                                    </check>
+                                    <span class="font-weight-bold ml-4">Room with a CPAP User: </span>
+                                    <check if="{{ @applicant['roommate_cpap'] == 1 }}">
+                                        <true>Fine with roommate with CPAP</true>
+                                        <false>Do not want to roommate with CPAP user</false>
+                                    </check>
+                                </h6>
+                            </div>
+                        </div>
+
+                        <div class="row m-1 mb-2">
+                            <div class="col-md-10 ml-0 pl-0">
+                                <h6 class="pl-2"><span class="font-weight-bold">Need Housing for These Nights: </span>
+                                    {{ @applicant['days_rooming'] }}
+                                </h6>
+                            </div>
                         </div>
                     </check>
                 </div>
+                <!-- end accommodations -->
 
-                <check if="{{ @applicant['single_room'] != 1 && @applicant['need_rooming'] == 1 }}">
-                    <hr>
-
-                    <div class="row m-3">
-                        <h6 class="lead">Rooming Information: </h6>
-                    </div>
-                    <div class="row m-3">
-                        <div class="col-md-4 pl-0">
-                            <h6 class="lead">Their Gender: </h6>
-                            <p class="pl-2">{{ @applicant['gender'] }}</p>
-                        </div>
-                        <div class="col-md-4 pl-0">
-                            <h6 class="lead">Want to Room With: </h6>
-                            <p class="pl-2">{{ @applicant['roommate_gender'] }}</p>
-                        </div>
-                        <div class="col-md-2 pl-0">
-                            <h6 class="lead">Use a CPAP: </h6>
-                            <check if="{{ @applicant['cpap_user'] == 1 }}">
-                                <p class="pl-2">Applicant uses a CPAP</p>
-                            </check>
-                            <check if="{{ @applicant['cpap_user'] != 1 }}">
-                                <p class="pl-2">Applicant doesn't use a CPAP</p>
-                            </check>
-                        </div>
-                        <div class="col-md-2 pl-0">
-                            <h6 class="lead">Room with a CPAP User: </h6>
-                            <check if="{{ @applicant['roommate_cpap'] == 1 }}">
-                                <p class="pl-2">Fine with a CPAP using roommate</p>
-                            </check>
-                            <check if="{{ @applicant['roommate_cpap'] != 1 }}">
-                                <p class="pl-2">Doesn't want a CPAP using roommate</p>
-                            </check>
+                <div class="pb-4">
+                    <div class="row mt-5">
+                        <div class="col-md-8">
+                            <h5 class="font-weight-bold d-inline">Additional Questions</h5>
+                            <hr class="mt-0 bg-primary">
                         </div>
                     </div>
 
-                    <div class="row mt-3 mx-3">
-                        <div class="col-md-12 pl-0">
-                            <h6 class="lead">Need Housing for these nights: </h6>
-                            <p class="pl-2">{{ @applicant['days_rooming'] }}</p>
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-10 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">How they heard about this Training Class: </span>
+                                {{ @applicant['heard_about_training'] }}
+                            </h6>
                         </div>
                     </div>
-                </check>
-            </div>
-        </div>
 
-        <div class="card mb-3 shadow-sm bg-white rounded">
-            <div class="card-header">
-                <h4 class="float-left">Additional Questions</h4>
-            </div>
-            <div class="card-body m-3">
-                <div class="row m-3">
-                    <div class="col-md-12 pl-0">
-                        <h6 class="lead">How did they hear about this training class: </h6>
-                        <p class="pl-2">What they wrote: {{ @applicant['heard_about_training'] }}</p>
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-6 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">Have they taken other classes: </span>
+                                <check if="{{ trim(@applicant['trained']) == '' }}">
+                                    <true>Have not taken any other classes</true>
+                                    <false>{{ @applicant['trained'] }}</false>
+                                </check>
+                            </h6>
+                        </div>
+                    </div>
+
+                    <div class="row m-1 mb-2">
+                        <div class="col-md-6 pl-0">
+                            <h6 class="pl-2"><span class="font-weight-bold">What classes they can teach: </span>
+                                <check if="{{ trim(@applicant['certified']) == '' }}">
+                                    <true>Not certified for any classes</true>
+                                    <false>{{ @applicant['certified'] }}</false>
+                                </check>
+                            </h6>
+                        </div>
                     </div>
                 </div>
-
-                <hr>
-
-                <div class="row m-3">
-                    <div class="col-md-9 pl-0">
-                        <h6 class="lead">Other Classes Applicant Took: </h6>
-                        <p class="pl-2">{{ @applicant['other_classes'] }}</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row m-3">
-                    <div class="col-md-9 pl-0">
-                        <h6 class="lead">Which Classes can they Teach: </h6>
-                        <p class="pl-2">{{ @applicant['certified'] }}</p>
-                    </div>
-                </div>
+                <!-- end not required -->
             </div>
+            <!-- end card body -->
         </div>
 
         <div class="card mb-3 shadow-sm bg-white rounded">
@@ -297,8 +281,8 @@
             </div>
         </div>
     </form>
-
-
+    <!-- end card -->
 </div>
+<!-- end container -->
 
 <include href="views/forms/includes/footer.html"/>
