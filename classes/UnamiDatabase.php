@@ -1,121 +1,13 @@
 <?php /** @noinspection SqlResolve */
-/* SQL STATEMENTS USED
-//status:   0 is denied,
-            1 is submitted,
-            2 is approved,
-            3 is complete
-
-//category: 0 is archive,
-            1 is active,
-            2 is waitlist
-CREATE TABLE applicants
-(
-	applicant_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-	date_submitted VARCHAR(10) NOT NULL,
-	app_status INT NOT NULL,
-    category INT NOT NULL,
-    app_type INT NOT NULL,
-    fname VARCHAR(60) NOT NULL,
-	lname VARCHAR(70) NOT NULL,
-	pronouns VARCHAR(50) NOT NULL,
-	birthdate VARCHAR(10) NOT NULL,
-	NAMI_member boolean NOT NULL,
-	affiliate VARCHAR(50) NOT NULL,
-	address VARCHAR(70) NOT NULL,
-	city VARCHAR(70) NOT NULL,
-	address2 VARCHAR(70),
-	state VARCHAR(30) NOT NULL,
-	zip VARCHAR(12) NOT NULL,
-	primary_phone VARCHAR(15) NOT NULL,
-	primary_time VARCHAR(100) NOT NULL,
-	alternate_phone VARCHAR(15),
-	alternate_time VARCHAR(100),
-	email VARCHAR(254) NOT NULL,
-	preference VARCHAR(5) NOT NULL,
-	emergency_name VARCHAR(120),
-	emergency_phone VARCHAR(15),
-    special_needs boolean NOT NULL,
-	service_animal boolean NOT NULL,
-	mobility_need boolean NOT NULL,
-	need_rooming boolean NOT NULL,
-	single_room boolean DEFAULT false,
-	days_rooming VARCHAR(200) DEFAULT 'N/A',
-	gender VARCHAR(50) DEFAULT 'N/A',
-	roommate_gender VARCHAR(50) DEFAULT 'N/A',
-	cpap_user boolean DEFAULT false,
-	roommate_cpap boolean DEFAULT false,
-	heard_about_training MEDIUMTEXT,
-	other_classes MEDIUMTEXT,
-	certified MEDIUMTEXT,
-    FOREIGN KEY(app_type) references app_type(app_id),
-    FOREIGN KEY(affiliate) references affiliates(affiliate_id)
-);
-
-CREATE TABLE adminUser
-(
-	admin_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    fname VARCHAR(60) NOT NULL,
-	lname VARCHAR(70) NOT NULL,
-	email VARCHAR(254) NOT NULL,
-    password VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE app_type
-(
-    app_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    app_type VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE affiliates
-(
-    affiliate_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    name VARCHAR(200) NOT NULL,
-    phone VARCHAR(30) NOT NULL,
-    email VARCHAR(254) NOT NULL
-);
-
-CREATE TABLE notes
-(
-    applicant_id INT NOT NULL,
-    affiliate_notes MEDIUMTEXT,
-    state_notes MEDIUMTEXT,
-    FOREIGN KEY(applicant_id) references applicants(applicant_id)
-);
-
-INSERT INTO affiliates(name)
- VALUES
-('NAMI Chelan-Douglas'),
-('NAMI Clallam County'),
-('NAMI Eastside'),
-('NAMI Jefferson County'),
-('NAMI Kitsap County'),
-('NAMI Lewis County'),
-('NAMI Pierce County'),
-('NAMI Seattle'),
-('NAMI Skagit'),
-('NAMI Snohomish County'),
-('NAMI South King County'),
-('NAMI Southwest Washington'),
-('NAMI Spokane'),
-('NAMI Thurston-Mason'),
-('NAMI Tri-Cities'),
-('NAMI Walla Walla'),
-('NAMI Washington Coast'),
-('NAMI Whatcom'),
-('NAMI Yakima');
-
-INSERT INTO app_type(app_type) VALUES('Family Support Group');
-
-ALTER TABLE applicants
-MODIFY COLUMN date_submitted DATE;
- */
 
 $user = $_SERVER['USER'];
 require "/home/$user/config_UNAMI.php";
 
 /**
  * Class Database
- * @author Max Lee
+ * SQL setup statements at the bottom
+ *
+ * @author Max Lee & Jason Engelbrecht
  * @version 11/2/2019
  */
 class UnamiDatabase
@@ -147,6 +39,7 @@ class UnamiDatabase
         }
     }
 
+    ////////////////////////////////////////////////////FORMS///////////////////////////////////////////////////////////
     /**
      * @param $personalInfo PersonalInfo
      * @param $accommodations AdditionalInfo
@@ -172,8 +65,6 @@ class UnamiDatabase
         $statement = $this->_dbh->prepare($sql);
 
         // assign values
-        $rawDate = getdate();
-        //$date = $rawDate['mon'] . '/' . $rawDate['mday'] . '/' . $rawDate['year'];
         $status = 1;
         $category = 1;
         $app_type = 1;
@@ -234,7 +125,6 @@ class UnamiDatabase
         }
 
         // bind params
-        $statement->bindParam(':date_submitted', $date, PDO::PARAM_STR);
         $statement->bindParam(':app_status', $status, PDO::PARAM_INT);
         $statement->bindParam(':category', $category, PDO::PARAM_INT);
         $statement->bindParam(':app_type', $app_type, PDO::PARAM_INT);
@@ -283,30 +173,7 @@ class UnamiDatabase
         return $this->_dbh->lastInsertId();
     }
 
-    /**
-     * Gets the applicant for review
-     *
-     * @param $appId int
-     * @return mixed the array for the applicant
-     */
-    function getApplicant($appId)
-    {
-        //define query
-        $query = "SELECT * FROM applicants WHERE applicant_id = :applicant_id";
-
-        //prepare statement
-        $statement = $this->_dbh->prepare($query);
-
-        //bind parameters
-        $statement->bindParam(':applicant_id', $appId, PDO::PARAM_INT);
-
-        $statement->execute();
-
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return $result;
-    }
-
+    //////////////////////////////////////////////////AFFILIATE/////////////////////////////////////////////////////////
     /**
      * Gets the affiliate's email
      *
@@ -376,6 +243,23 @@ class UnamiDatabase
         $statement->execute();
     }
 
+    /**
+     * @param $appId int applicants id
+     * @param $notes String notes written by affiliate
+     */
+    function insertAffiliateNotes($appId, $notes)
+    {
+        $query = "INSERT INTO notes(applicant_id, affiliate_notes) VALUES (:applicant_id, :affiliate_notes)";
+
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->bindParam(':applicant_id', $appId, PDO::PARAM_INT);
+        $statement->bindParam(':affiliate_notes', $notes, PDO::PARAM_STR);
+
+        $statement->execute();
+    }
+
+    ////////////////////////////////////////////////////ADMIN///////////////////////////////////////////////////////////
     /**
      * Inserts a new admin user
      *
@@ -689,19 +573,141 @@ class UnamiDatabase
         $statement->execute();
     }
 
+    //////////////////////////////////////////////////GENERAL///////////////////////////////////////////////////////////
     /**
-     * @param $appId int applicants id
-     * @param $notes String notes written by affiliate
+     * Gets the applicant by ID
+     *
+     * @param $appId int
+     * @return mixed the array for the applicant
      */
-    function insertAffiliateNotes($appId, $notes)
+    function getApplicant($appId)
     {
-        $query = "INSERT INTO notes(applicant_id, affiliate_notes) VALUES (:applicant_id, :affiliate_notes)";
+        //define query
+        $query = "SELECT * FROM applicants WHERE applicant_id = :applicant_id";
 
+        //prepare statement
         $statement = $this->_dbh->prepare($query);
 
+        //bind parameters
         $statement->bindParam(':applicant_id', $appId, PDO::PARAM_INT);
-        $statement->bindParam(':affiliate_notes', $notes, PDO::PARAM_STR);
 
         $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 }
+/*
+SQL STATEMENTS USED
+
+//status:   0 is denied,
+            1 is submitted,
+            2 is approved,
+            3 is complete
+
+//category: 0 is archive,
+            1 is active,
+            2 is waitlist
+
+CREATE TABLE applicants
+(
+	applicant_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	date_submitted DATE NOT NULL,
+	app_status INT NOT NULL,
+    category INT NOT NULL,
+    app_type INT NOT NULL,
+    fname VARCHAR(60) NOT NULL,
+	lname VARCHAR(70) NOT NULL,
+	pronouns VARCHAR(50) NOT NULL,
+	birthdate VARCHAR(10) NOT NULL,
+	NAMI_member boolean NOT NULL,
+	affiliate VARCHAR(50) NOT NULL,
+	address VARCHAR(70) NOT NULL,
+	city VARCHAR(70) NOT NULL,
+	address2 VARCHAR(70),
+	state VARCHAR(30) NOT NULL,
+	zip VARCHAR(12) NOT NULL,
+	primary_phone VARCHAR(15) NOT NULL,
+	primary_time VARCHAR(100) NOT NULL,
+	alternate_phone VARCHAR(15),
+	alternate_time VARCHAR(100),
+	email VARCHAR(254) NOT NULL,
+	preference VARCHAR(5) NOT NULL,
+	emergency_name VARCHAR(120),
+	emergency_phone VARCHAR(15),
+    special_needs boolean NOT NULL,
+	service_animal boolean NOT NULL,
+	mobility_need boolean NOT NULL,
+	need_rooming boolean NOT NULL,
+	single_room boolean DEFAULT false,
+	days_rooming VARCHAR(200) DEFAULT 'N/A',
+	gender VARCHAR(50) DEFAULT 'N/A',
+	roommate_gender VARCHAR(50) DEFAULT 'N/A',
+	cpap_user boolean DEFAULT false,
+	roommate_cpap boolean DEFAULT false,
+	heard_about_training MEDIUMTEXT,
+	other_classes MEDIUMTEXT,
+	certified MEDIUMTEXT,
+    FOREIGN KEY(app_type) references app_type(app_id),
+    FOREIGN KEY(affiliate) references affiliates(affiliate_id)
+);
+
+CREATE TABLE adminUser
+(
+	admin_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    fname VARCHAR(60) NOT NULL,
+	lname VARCHAR(70) NOT NULL,
+	email VARCHAR(254) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE app_type
+(
+    app_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    app_type VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE affiliates
+(
+    affiliate_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    email VARCHAR(254) NOT NULL
+);
+
+CREATE TABLE notes
+(
+    applicant_id INT NOT NULL,
+    affiliate_notes MEDIUMTEXT,
+    state_notes MEDIUMTEXT,
+    FOREIGN KEY(applicant_id) references applicants(applicant_id)
+);
+
+INSERT INTO affiliates(name)
+ VALUES
+('NAMI Chelan-Douglas'),
+('NAMI Clallam County'),
+('NAMI Eastside'),
+('NAMI Jefferson County'),
+('NAMI Kitsap County'),
+('NAMI Lewis County'),
+('NAMI Pierce County'),
+('NAMI Seattle'),
+('NAMI Skagit'),
+('NAMI Snohomish County'),
+('NAMI South King County'),
+('NAMI Southwest Washington'),
+('NAMI Spokane'),
+('NAMI Thurston-Mason'),
+('NAMI Tri-Cities'),
+('NAMI Walla Walla'),
+('NAMI Washington Coast'),
+('NAMI Whatcom'),
+('NAMI Yakima');
+
+INSERT INTO app_type(app_type) VALUES('Family Support Group');
+
+ALTER TABLE applicants
+MODIFY COLUMN date_submitted DATE;
+ */

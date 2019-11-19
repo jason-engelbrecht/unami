@@ -336,7 +336,6 @@ function validEmail($email)
 }
 
 //////////////////admin portal validation////////////////////////////
-
 /**
  * Check if admin create account input is all valid
  *
