@@ -9,9 +9,10 @@ require "/home/$user/config_email.php";
 class Emailer
 {
     /**
-     * @param $applicantId int
-     * @param $personalInfo PersonalInfo
-     * @param $db UnamiDatabase
+     * Handles sending the affiliate an email to review an application
+     * @param $applicantId int ID of the applicant
+     * @param $personalInfo PersonalInfo The personal info from the form
+     * @param $db UnamiDatabase The database we are using
      */
     static function sendAffiliateEmail($applicantId, $personalInfo, $db)
     {
@@ -19,8 +20,11 @@ class Emailer
         $toEmail = $db->getAffiliateEmail($personalInfo->getAffiliate());
         $toEmailAlias = $db->getAffiliateName($personalInfo->getAffiliate());
 
-        try {
-            $message = (new Swift_Message('Wonderful Subject'))
+        $applicantName = $personalInfo->getFname() .' '.$personalInfo->getLname();
+
+        try
+        {
+            $message = (new Swift_Message('Review Application: '.$applicantName))
                 ->setFrom([EMAIL_USERNAME => 'UNAMI: DO-NOT-REPLY'])
                 ->setTo([$toEmail => $toEmailAlias])
                 ->setBody($body);
@@ -32,36 +36,40 @@ class Emailer
             $mailer = new Swift_Mailer($transport);
 
             //sends the email
-            $result = $mailer->send($message);
-
-            //for testing
-            //echo $message->toString();
-            //echo '<br><br>'.$result;
+            $mailer->send($message);
         }
+
         catch (Exception $e)
         {
             echo $e->getMessage();
         }
     }
 
+    /**
+     * Handles sending the applicant a confirmation email
+     * @param $personalInfo PersonalInfo The personal info from the form
+     */
     static function sendConfirmationEmail($personalInfo)
     {
         $body = 'Thank you for sending your application';
         $toEmail = $personalInfo->getEmail();
+        $toEmailName = $personalInfo->getFname() .' '.$personalInfo->getLname();
 
-        try {
+        try
+        {
             $message = (new Swift_Message('UNAMI application'))
-                ->setFrom(['_mainaccount@tluu9.greenriverdev.com' => 'DO-NOT-REPLY'])
-                ->setTo([$toEmail => 'Trang Luu'])
+                ->setFrom([EMAIL_USERNAME => 'UNAMI: DO-NOT-REPLY'])
+                ->setTo([$toEmail => $toEmailName])
                 ->setBody($body);
 
-            $transport = (new Swift_SmtpTransport('mail.tluu9.greenriverdev.com', 25))
-                ->setUsername('trangluu@tluu9.greenriverdev.com')
-                ->setPassword('xEu)2mm-V4Yz');
+            $transport = (new Swift_SmtpTransport(EMAIL_SERVER, 465, 'ssl'))
+                ->setUsername(EMAIL_USERNAME)
+                ->setPassword(EMAIL_PASSWORD);
             $mailer = new Swift_Mailer($transport);
 
-            $result = $mailer->send($message);
+            $mailer->send($message);
         }
+
         catch (Exception $e)
         {
             echo $e->getMessage();
