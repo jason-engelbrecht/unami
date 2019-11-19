@@ -567,10 +567,14 @@ $f3->route('GET /forgot-password', function($f3)
 });
 
 //create account
-$f3->route('GET|POST /register', function($f3)
+$f3->route('GET|POST /create-account', function($f3)
 {
     $f3->set('page_title', 'Create Account');
     global $db;
+
+    if($_SESSION['loggedIn'] !== 1) {
+        $f3->reroute('/login');
+    }
 
     //form submission
     if(!empty($_POST)) {
@@ -616,11 +620,15 @@ $f3->route('GET /dashboard', function($f3)
     $numComplete = $db->countComplete();
     $numApproved = $db->countApproved();
     $numDenied = $db->countDenied();
+    $numWaitlisted = $db->countApplicants(2);
+    $numArchived = $db->countApplicants(0);
 
     $f3->set('numActive', $numActive);
     $f3->set('numComplete', $numComplete);
     $f3->set('numApproved', $numApproved);
     $f3->set('numDenied', $numDenied);
+    $f3->set('numWaitlisted', $numWaitlisted);
+    $f3->set('numArchived', $numArchived);
 
     $f3->set('page', 'dashboard');
     $f3->set('page_title', 'Dashboard');
