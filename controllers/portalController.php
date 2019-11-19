@@ -267,3 +267,24 @@ $f3->route('GET /trainings', function($f3)
     $view = new Template();
     echo $view->render('views/portal/other/trainings.html');
 });
+
+//full application
+$f3->route('GET /@applicant', function($f3, $params)
+{
+    if($_SESSION['loggedIn'] !== 1) {
+        $f3->reroute('/login');
+    }
+
+    $f3->set('page', 'active');
+    $f3->set('page_title', 'Applicant');
+    $f3->set('back', true);
+
+    global $db;
+
+    $applicant_id = $params['applicant']; //must match^
+    $applicant = $db->getApplicant($applicant_id);
+    $f3->set('applicant', $applicant);
+
+    $view = new Template();
+    echo $view->render('views/portal/applications/applicant.html');
+});

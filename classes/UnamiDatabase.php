@@ -577,22 +577,33 @@ class UnamiDatabase
     /**
      * Gets the applicant by ID
      *
-     * @param $appId int
+     * @param $appID int
      * @return mixed the array for the applicant
      */
-    function getApplicant($appId)
-    {
+    function getApplicant($appID) {
+
         //define query
-        $query = "SELECT * FROM applicants WHERE applicant_id = :applicant_id";
+        $query = "SELECT *,
+                  affiliates.name AS Affiliate, 
+                  app_type.app_type AS Training,
+                  applicants.email AS Email
+                  FROM applicants 
+                  INNER JOIN affiliates ON applicants.affiliate = affiliates.affiliate_id
+                  INNER JOIN app_type ON applicants.app_type = app_type.app_id
+                  WHERE applicant_id = :appID
+                  AND applicants.affiliate = affiliates.affiliate_id
+                  AND applicants.app_type = app_type.app_id";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
 
-        //bind parameters
-        $statement->bindParam(':applicant_id', $appId, PDO::PARAM_INT);
+        //bind parameter
+        $statement->bindParam(':appID', $appID, PDO::PARAM_STR);
 
+        //execute
         $statement->execute();
 
+        //get result
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $result;
