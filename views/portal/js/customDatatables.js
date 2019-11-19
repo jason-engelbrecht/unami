@@ -1,11 +1,20 @@
-//start datatables
+//start other datatables, order by 4th column - date submitted
 $(document).ready( function () {
-    $('#dataTable').DataTable();
+    $('#dataTable').DataTable({
+        "order": [[ 4, "desc" ]],
+    });
+} );
+
+//default sort, start active data table, order by 5th column - date submitted
+$(document).ready(function() {
+    $('#activeDataTable').DataTable( {
+        "order": [[ 5, "desc" ]],
+    } );
 } );
 
 //searchable status cards on active applications
 $(document).ready( function () {
-    var table = $('#dataTable').DataTable();
+    var table = $('#activeDataTable').DataTable();
     $('.statusButtons').click(function (){
         let value = $(this).data("value");
         table.search(value).draw();
@@ -23,9 +32,3 @@ $(document).ready(function() {
     );
 });
 
-//default sort
-$(document).ready(function() {
-    $('#activeDataTable').DataTable( {
-        "order": [[ 5, "asc" ]]
-    } );
-} );

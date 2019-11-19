@@ -106,6 +106,8 @@ INSERT INTO affiliates(name)
 
 INSERT INTO app_type(app_type) VALUES('Family Support Group');
 
+ALTER TABLE applicants
+MODIFY COLUMN date_submitted DATE;
  */
 
 $user = $_SERVER['USER'];
@@ -159,7 +161,7 @@ class UnamiDatabase
                 alternate_time, email, preference, emergency_name, emergency_phone, special_needs, service_animal, 
                 mobility_need, need_rooming, single_room, days_rooming, gender, roommate_gender, cpap_user, 
                 roommate_cpap, heard_about_training, other_classes, certified) 
-                VALUES (:date_submitted, :app_status, :category, :app_type, :fname, :lname, :pronouns, :birthdate, :NAMI_member, 
+                VALUES (NOW(), :app_status, :category, :app_type, :fname, :lname, :pronouns, :birthdate, :NAMI_member, 
                 :affiliate, :address, :city, :address2, :state, :zip, :primary_phone, :primary_time, 
                 :alternate_phone, :alternate_time, :email, :preference, :emergency_name, :emergency_phone, 
                 :special_needs, :service_animal, :mobility_need, :need_rooming, :single_room, :days_rooming, 
@@ -171,7 +173,7 @@ class UnamiDatabase
 
         // assign values
         $rawDate = getdate();
-        $date = $rawDate['mon'] . '/' . $rawDate['mday'] . '/' . $rawDate['year'];
+        //$date = $rawDate['mon'] . '/' . $rawDate['mday'] . '/' . $rawDate['year'];
         $status = 1;
         $category = 1;
         $app_type = 1;

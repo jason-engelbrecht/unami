@@ -55,8 +55,10 @@
                                     </a>
                                 </td>
 
-                                <!-- date submitted -->
-                                <td>{{ @WaitlistedApplicant['DateSubmitted'] }}</td>
+                                <!-- date submitted, order w raw date -->
+                                <td data-order="{{ @WaitlistedApplicant['DateSubmitted'] }}">
+                                    {{ date('m/d/Y', strtotime(@WaitlistedApplicant['DateSubmitted'])) }}
+                                </td>
 
                                 <!-- edit -> modal -- use ID here -->
                                 <td class="text-center">

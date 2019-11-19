@@ -55,8 +55,10 @@
                                     </a>
                                 </td>
 
-                                <!-- date submitted -->
-                                <td>{{ @ArchivedApplicant['DateSubmitted'] }}</td>
+                                <!-- date submitted, order w raw date -->
+                                <td data-order="{{ @ArchivedApplicant['DateSubmitted'] }}">
+                                    {{ date('m/d/Y', strtotime(@ArchivedApplicant['DateSubmitted'])) }}
+                                </td>
 
                                 <!-- edit -> modal -- use ID here -->
                                 <td class="text-center">

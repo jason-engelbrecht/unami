@@ -171,8 +171,10 @@
                                     </a>
                                 </td>
 
-                                <!-- date submitted -->
-                                <td>{{ @ActiveApplicant['DateSubmitted'] }}</td>
+                                <!-- date submitted, order w raw date -->
+                                <td data-order="{{ @ActiveApplicant['DateSubmitted'] }}">
+                                    {{ date('m/d/Y', strtotime(@ActiveApplicant['DateSubmitted'])) }}
+                                </td>
 
                                 <!-- edit -> modal -- use ID here -->
                                 <td class="text-center">
