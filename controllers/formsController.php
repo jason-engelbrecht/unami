@@ -8,6 +8,18 @@
 global $f3;
 global $db;
 
+//default route
+$f3->route('GET /fsg', function($f3)
+{
+    $f3->set('page_title', 'Family Support Group');
+
+    session_destroy();
+    session_start();
+
+    $view = new Template();
+    echo $view->render('views/forms/specific_form_pages/FSG/FSGtrainingDescription.html');
+});
+
 $f3->route('GET|POST /personal_information', function($f3)
 {
     $f3->set('page_title', 'Personal information');
