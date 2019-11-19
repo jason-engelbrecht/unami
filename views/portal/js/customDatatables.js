@@ -1,14 +1,30 @@
 //start other datatables, order by 4th column - date submitted
+//save state
 $(document).ready( function () {
     $('#dataTable').DataTable({
         "order": [[ 4, "desc" ]],
+        "bStateSave": true,
+        "fnStateSave": function (oSettings, oData) {
+            localStorage.setItem('offersDataTables', JSON.stringify(oData));
+        },
+        "fnStateLoad": function (oSettings) {
+            return JSON.parse(localStorage.getItem('offersDataTables'));
+        }
     });
 } );
 
 //default sort, start active data table, order by 5th column - date submitted
+//also save state
 $(document).ready(function() {
     $('#activeDataTable').DataTable( {
         "order": [[ 5, "desc" ]],
+        "bStateSave": true,
+        "fnStateSave": function (oSettings, oData) {
+            localStorage.setItem('offersDataTables', JSON.stringify(oData));
+        },
+        "fnStateLoad": function (oSettings) {
+            return JSON.parse(localStorage.getItem('offersDataTables'));
+        }
     } );
 } );
 

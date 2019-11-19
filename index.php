@@ -21,11 +21,20 @@ require_once 'model/validation.php';
 require_once 'model/data.php';
 
 //default route
-$f3->route('GET /', function($f3)
+$f3->route('GET|POST /', function($f3)
 {
-    $f3->set('page_title', 'Start');
+    $f3->set('page_title', 'Trainings');
 
-    session_destroy();
+    if(isset($_POST['fsgSubmit'])) {
+        //get selection
+
+
+        $f3->reroute('/fsg');
+    }
+
+    //get other submissions
+
+
     session_start();
     $view = new Template();
     echo $view->render('views/forms/general_form_pages/home.html');

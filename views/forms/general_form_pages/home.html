@@ -1,8 +1,39 @@
-<include href="views/forms/includes/header.html"/>
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <!-- custom font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- jquery ui -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+    <!-- custom styles -->
+    <link rel="stylesheet" href="views/forms/css/generalFormStyles.css">
+
+    <title>{{ @page_title }}</title>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark">
+    <a class="navbar-brand py-3 pl-2" href="/unami">
+        <img id="namiLogo" src="images/namiLogo.png" alt="The logo for NAMI Washington">
+    </a>
+</nav>
 
 <!-- Jumbotron Header -->
-<header class="jumbotron mb-4 px-5 text-center">
-    <h1 class="mb-3">NAMI WA State Trainings</h1>
+<header class="jumbotron mb-4 px-5 text-center rounded-0" style="background-color: #CEDAEB">
+    <h1 class="mb-3 text-primary">NAMI WA State Trainings</h1>
     <h5 class="px-5 mx-5">
         NAMI Washington offers trainings in NAMI Signature programs which allow local
         affiliates to bring NAMI programs to their communities. All trainings are offered
@@ -24,13 +55,15 @@
                 <div class="card-body">
                     <h5 class="card-title mb-4 mt-2"><img src="images/training_logos/fsg.jpg" alt="" class="img-fluid text-center"> </h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <div class="mb-4">
-                        <label for="fsgDate">Select a Date</label>
-                        <select class="form-control" id="fsgDate">
-                            <option>-- Select --</option>
-                        </select>
-                    </div>
-                    <a href="fsg" class="btn btn-primary mx-auto">View Application</a>
+                    <form action="" method="post">
+                        <div class="mb-4">
+                            <label for="fsgDate">Select a Date</label>
+                            <select class="form-control" id="fsgDate" name="fsgSelection">
+                                <option>-- Select --</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mx-auto" name="fsgSubmit">View Application</button>
+                    </form>
                 </div>
             </div>
         </div>

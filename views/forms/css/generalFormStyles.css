@@ -30,14 +30,18 @@ body {
 }
 
 .questions:hover {
-    color: gray !important;
+    color: #0c499c !important;
     text-decoration: none;
 }
 
 .questions:active {
-    color: gray !important;
+    color: #0c499c !important;
 }
 
 .text-primary {
     color: #0c499c !important;
+}
+
+.navbar-brand:hover {
+    filter: brightness(85%);
 }
