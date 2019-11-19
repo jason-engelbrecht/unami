@@ -38,30 +38,7 @@
 <!-- Data tables -->
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $(document).ready( function () {
-        $('#dataTable').DataTable();
-    } );
-
-    $(document).ready( function () {
-        var table = $('#dataTable').DataTable();
-        $('.statusButtons').click(function (){
-            let value = $(this).data("value");
-            table.search(value).draw();
-        });
-    } );
-
-    $(document).ready(function() {
-        $( ".statusCards" ).hover(
-            function() {
-                $(this).addClass('shadow-lg').css('cursor', 'pointer');
-            }, function() {
-                $(this).removeClass('shadow-lg');
-            }
-        );
-    });
-
-</script>
+<script src="views/portal/js/customDatatables.js"></script>
 
 <!-- Custom scripts for all pages -->
 <script src="views/portal/js/sb-admin-2.min.js"></script>
