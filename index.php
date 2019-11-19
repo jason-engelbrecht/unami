@@ -21,7 +21,7 @@ require_once 'model/validation.php';
 require_once 'model/data.php';
 
 //default route
-$f3->route('GET /home', function($f3)
+$f3->route('GET /', function($f3)
 {
     $f3->set('page_title', 'Start');
 
