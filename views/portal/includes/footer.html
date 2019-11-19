@@ -42,6 +42,25 @@
     $(document).ready( function () {
         $('#dataTable').DataTable();
     } );
+
+    $(document).ready( function () {
+        var table = $('#dataTable').DataTable();
+        $('.statusButtons').click(function (){
+            let value = $(this).data("value");
+            table.search(value).draw();
+        });
+    } );
+
+    $(document).ready(function() {
+        $( ".statusCards" ).hover(
+            function() {
+                $(this).addClass('shadow-lg').css('cursor', 'pointer');
+            }, function() {
+                $(this).removeClass('shadow-lg');
+            }
+        );
+    });
+
 </script>
 
 <!-- Custom scripts for all pages -->
