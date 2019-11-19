@@ -131,22 +131,35 @@
                                 <!-- check app status for icons -->
                                 <!-- denied -->
                                 <check if="{{ @ActiveApplicant['AppStatus'] == 0 }}">
-                                    <td class="text-center text-danger"><i class="fas fa-times-circle fa-lg"></i></td>
+                                    <td class="text-center text-danger">
+                                        <i class="fas fa-times-circle fa-lg"></i>
+                                        <span class="sr-only">Denied</span>
+                                    </td>
                                 </check>
 
                                 <!-- submitted -->
                                 <check if="{{ @ActiveApplicant['AppStatus'] == 1 }}">
-                                    <td class="text-center text-info"><i class="fas fa-arrow-alt-circle-up fa-lg"></i></td>
+                                    <td class="text-center text-info">
+                                        <i class="fas fa-arrow-alt-circle-up fa-lg"></i>
+                                        <span class="sr-only">Submitted</span>
+
+                                    </td>
                                 </check>
 
                                 <!-- approved -->
                                 <check if="{{ @ActiveApplicant['AppStatus'] == 2 }}">
-                                    <td class="text-center text-warning"><i class="fas fa-exclamation-circle fa-lg"></i></td>
+                                    <td class="text-center text-warning">
+                                        <i class="fas fa-exclamation-circle fa-lg"></i>
+                                        <span class="sr-only">Approved</span>
+                                    </td>
                                 </check>
 
-                                <!-- denied -->
+                                <!-- complete -->
                                 <check if="{{ @ActiveApplicant['AppStatus'] == 3 }}">
-                                    <td class="text-center text-success"><i class="fas fa-check-circle fa-lg"></i></td>
+                                    <td class="text-center text-success">
+                                        <i class="fas fa-check-circle fa-lg"></i>
+                                        <span class="sr-only">Complete</span>
+                                    </td>
                                 </check>
 
                                 <!-- name, affiliate, training -->
