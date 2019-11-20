@@ -52,6 +52,7 @@ CREATE TABLE applicants
     other_classes MEDIUMTEXT,
     certified MEDIUMTEXT,
     notes MEDIUMTEXT,
+    member_expiration VARCHAR(50),
     FOREIGN KEY(app_type) references app_type(app_id),
     FOREIGN KEY(affiliate) references affiliates(affiliate_id)
 );
@@ -80,7 +81,7 @@ CREATE TABLE app_type_info
     deadline VARCHAR(200),
     app_type INT,
     FOREIGN KEY(app_type) references app_type(app_id)
-)
+);
 
 CREATE TABLE affiliates
 (
@@ -88,14 +89,6 @@ CREATE TABLE affiliates
     name VARCHAR(200) NOT NULL,
     phone VARCHAR(30) NOT NULL,
     email VARCHAR(254) NOT NULL
-);
-
-CREATE TABLE notes
-(
-    applicant_id INT NOT NULL,
-    affiliate_notes MEDIUMTEXT,
-    state_notes MEDIUMTEXT,
-    FOREIGN KEY(applicant_id) references applicants(applicant_id)
 );
 
 INSERT INTO affiliates(name)
