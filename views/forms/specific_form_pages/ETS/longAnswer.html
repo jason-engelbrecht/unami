@@ -44,22 +44,10 @@
                 <form method="post" action="long_answer">
                     <div class="form-row">
 
-                        <!--Question 1-->
-                        <div class="form-group">
-                            <div class="col-md-7">
-                                <h5 class="mb-0"><label for="heardAboutTraining">How did you hear about this
-                                    training class?</label></h5>
-                                <textarea name="heardAboutTraining" class="form-control" id="heardAboutTraining"
-                                          rows="4" cols="50"></textarea>
-                            </div>
-
-                            <!--Question 2-->
-
-                        </div>
 
                         <!--Question 3-->
-                        <div class="form-group pt-5">
-                            <h5 class="mb-3">Have you ever been convicted of a crime against another person including but not limited to: assault of any
+                        <div class="form-group pt-2">
+                            <h5 class="mb-3 ml-1">Have you ever been convicted of a crime against another person including but not limited to: assault of any
                                 kind, harassment of any kind, or stalking?</h5>
 
                             <div class="form-check form-check-inline ml-2">
@@ -81,48 +69,13 @@
                         </div>
 
                         <!--Question 4-->
-                        <div class="form-group pt-5">
-                            <h5 class="mb-3">Have you taken other NAMI classes or trainings? </h5>
-                            <div class="form-check form-check-inline ml-2">
-                                <input name="trained" class="form-check-input" type="radio" id="show1" value="yes" required
-                                <label class="form-check-label" for="show1">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input name="trained" class="form-check-input" type="radio" id="hide1" value="no" required
-                                <label class="form-check-label" for="hide1">No</label>
-                            </div><br>
+                        <div class="form-group pt-3">
 
-                            <div class="form-row mt-3 ml-2" id="textbox1" style="display: none">
-                                <div class="col-md-7">
-                                    <label for="textarea1">If yes, please list: </label>
-                                    <textarea name="trainedText" class="form-control" id="textarea1" rows="5"
-                                    ></textarea>
-                                </div>
-                            </div>
 
-                            <!--Question 5-->
-                            <h5 class="lead mb-3">Are you currently certified to teach/lead any other NAMI signature programs? </h5>
-                            <div class="form-check form-check-inline ml-2">
-                                <input name="certified" class="form-check-input" type="radio" id="show2" value="yes" required
-                                <label class="form-check-label" for="show2">Yes</label>
-                            </div>
-
-                            <div class="form-check form-check-inline">
-                                <input name="certified" class="form-check-input" type="radio" id="hide2" value="no" required
-                                <label class="form-check-label" for="hide2">No</label>
-                            </div><br>
-
-                            <div class="form-row mt-3 ml-2" id="textbox2" style="display: none">
-                                <div class="col-md-7">
-                                    <label for="textarea2">If yes, please list all Signature Programs you are certified to lead: </label>
-                                    <textarea name="certifiedText" class="form-control" id="textarea2" rows="5"
-                                    ></textarea>
-                                </div>
-                            </div>
 
                             <!--Question 6-->
 
-                            <div class="form-row">
+                            <div class="form-row ml-1">
                                 <h5 class="mb-0"><label for="availability">Availability to Present</label></h5>
                                 <input name="availability" type="text" class="form-control" id="availability" required
                                        value="" placeholder="Morning - Monday, Tuesday, etc.">
@@ -131,10 +84,10 @@
 
                             <!--Question 7-->
 
-                            <div class="form-row">
-                                <h5>Because different audiences require different presenters, we ask that you
-                                    complete the following:</h5>
-                                <div class="form-group col-md-6">
+                            <div class="form-row pt-5">
+                                <h5><strong>Because different audiences require different presenters, we ask that you
+                                    complete the following:</strong></h5>
+                                <div class="form-group col-md-6 pt-3">
                                     <h5 class="mb-0"><label for="education">Education</label></h5>
                                     <input name="education" type="text" class="form-control" id="education"
                                            required value="" placeholder="Last degree completed">
@@ -144,7 +97,7 @@
                             <!--Question 8-->
 
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6 ml-1">
                                     <h5 class="mb-0"><label for="experience">Work/Volunteer Experience</label></h5>
                                     <input name="experience" type="text" class="form-control" id="experience"
                                            required value="" placeholder="Work/Volunteer Experience">
@@ -154,7 +107,7 @@
                             <!--Question 9-->
 
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6 ml-1">
                                     <h5 class="mb-0"><label for="language">What language(s) do you speak fluently?</label></h5>
                                     <input name="language" type="text" class="form-control" id="language"
                                            required value="" placeholder="English, Spanish, etc...">
@@ -163,20 +116,17 @@
 
 
                             <div class="form-row mb-4">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6 ml-1">
                                     <p class="lead mb-2">Are you a young adult?</p>
-                                    <label><input class="mt-1 ml-1" type="radio" name="ageRange" value="" required
-                                        <check if="{{}}">checked</check>> Age 18-30</label>
-                                    <label><input class="ml-3" type="radio" name="ageRange" value="" required
-                                        <check if="{{}}">checked</check>> Age 31-35</label>
-                                    <label><input class="ml-3" type="radio" name="ageRange" value="" required
-                                        <check if="{{}}">checked</check>> No</label>
+                                    <label><input class="mt-1 ml-1" type="radio" name="ageRange" value="" required> Age 18-30</label>
+                                    <label><input class="ml-3" type="radio" name="ageRange" value="" required> Age 31-35</label>
+                                    <label><input class="ml-3" type="radio" name="ageRange" value="" required> No</label>
                                 </div>
                             </div>
 
 
                             <div class="row">
-                                <div class="col-md-7">
+                                <div class="col-md-7 ml-1">
                                     <h5 class="mb-0"><label for="diagnosis">What is your, or your family member’s, current diagnosis?</label></h5>
                                     <textarea name="diagnosis" class="form-control" id="diagnosis"
                                               rows="4" cols="50"></textarea>
@@ -185,7 +135,7 @@
 
 
 
-                            <div class="form-row mb-4">
+                            <div class="form-row mb-4 ml-1">
                                 <div class="form-group col-md-6">
                                     <p class="lead mb-2">Are you comfortable with self-disclosure?</p>
                                     <label><input class="mt-1 ml-1" type="radio" name="disclosure" value="" required> Yes</label>
@@ -194,18 +144,16 @@
                             </div>
 
 
-                            <div class="form-row mb-4">
+                            <div class="form-row mb-4 ml-1">
                                 <div class="form-group col-md-6">
                                     <p class="lead mb-2">Are you able to maintain a positive outlook and talk about your experience without “going negative”?</p>
-                                    <label><input class="mt-1 ml-1" type="radio" name="outlook" value="" required
-                                        <check if="{{}}">checked</check>> Yes</label>
-                                    <label><input class="ml-3" type="radio" name="outlook" value="" required
-                                        <check if="{{}}">checked</check>> No</label>
+                                    <label><input class="mt-1 ml-1" type="radio" name="outlook" value="" required> Yes</label>
+                                    <label><input class="ml-3" type="radio" name="outlook" value="" required> No</label>
                                 </div>
                             </div>
 
 
-                            <div class="form-row mb-4">
+                            <div class="form-row mb-0 ml-1">
                                 <div class="form-group col-md-6">
                                     <p class="lead mb-2">Are you willing to undergo a background check if required by your NAMI Affiliate?</p>
                                     <label><input class="mt-1 ml-1" type="radio" name="background" value="" required> Yes</label>
@@ -216,33 +164,36 @@
 
 
                             <div class="form-group pt-5">
-                                <h5><label for="exampleFormControlTextarea2">Why do you want to be an Ending the Silence Presenter?</label></h5>
-                                <textarea name="whyFacilitator" class="form-control" id="exampleFormControlTextarea2" rows="4"
-                                ></textarea>
+                                <div class="form-group col-md-6">
+                                    <h5><label for="exampleFormControlTextarea2">Why do you want to be an Ending the Silence Presenter?</label></h5>
+                                    <textarea name="whyFacilitator" class="form-control" id="exampleFormControlTextarea2" rows="4"
+                                    ></textarea>
 
-                                <!--Question 5-->
-                                <h5><label for="exampleFormControlTextarea3" class="pt-5 mt-3">What was your experience as a
-                                    young person with a mental illness in the school system, as a teacher and/or as a
-                                    parent/caregiver with a child in the school system?</label></h5>
-                                <textarea name="experience" class="form-control" id="exampleFormControlTextarea3" rows="4"
-                                ></textarea>
+                                    <!--Question 5-->
+                                    <h5><label for="exampleFormControlTextarea3" class="pt-5 mt-3">What was your experience as a
+                                        young person with a mental illness in the school system, as a teacher and/or as a
+                                        parent/caregiver with a child in the school system?</label></h5>
+                                    <textarea name="experience" class="form-control" id="exampleFormControlTextarea3" rows="4"
+                                    ></textarea>
 
-                                <h5><label for="exampleFormControlTextarea4" class="pt-5 mt-3">What can you share about
-                                    your experience that can help school personnel create a more supportive learning
-                                    environment for youth with a mental illness and/or connect students with warning
-                                    signs of mental illness to get support and services early? </label></h5>
-                                <textarea name="environment" class="form-control" id="exampleFormControlTextarea4" rows="4"
-                                ></textarea>
+                                    <h5><label for="exampleFormControlTextarea4" class="pt-5 mt-3">What can you share about
+                                        your experience that can help school personnel create a more supportive learning
+                                        environment for youth with a mental illness and/or connect students with warning
+                                        signs of mental illness to get support and services early? </label></h5>
+                                    <textarea name="environment" class="form-control" id="exampleFormControlTextarea4" rows="4"
+                                    ></textarea>
 
-                                <h5><label for="exampleFormControlTextarea5" class="pt-5 mt-3">What does recovery in relation to mental illness mean to you?</label></h5>
-                                <textarea name="recovery" class="form-control" id="exampleFormControlTextarea5" rows="4"
-                                ></textarea>
+                                    <h5><label for="exampleFormControlTextarea5" class="pt-5 mt-3">What does recovery in relation to mental illness mean to you?</label></h5>
+                                    <textarea name="recovery" class="form-control" id="exampleFormControlTextarea5" rows="4"
+                                    ></textarea>
 
-                                <h5><label for="exampleFormControlTextarea6" class="pt-5 mt-3">What are your views on
-                                    the roles of teachers and parents in the school setting in relation to youth with
-                                    mental illness? </label></h5>
-                                <textarea name="recovery" class="form-control" id="exampleFormControlTextarea6" rows="4"
-                                ></textarea>
+                                    <h5><label for="exampleFormControlTextarea6" class="pt-5 mt-3">What are your views on
+                                        the roles of teachers and parents in the school setting in relation to youth with
+                                        mental illness? </label></h5>
+                                    <textarea name="recovery" class="form-control" id="exampleFormControlTextarea6" rows="4"
+                                    ></textarea>
+                                </div>
+
 
                             </div>
 

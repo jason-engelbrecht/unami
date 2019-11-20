@@ -126,18 +126,6 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -146,13 +134,13 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
+                      <i class="fas fa-circle text-primary"></i> Active
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
+                      <i class="fas fa-circle text-success"></i> Waitlisted
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
+                      <i class="fas fa-circle text-info"></i> Archived
                     </span>
                   </div>
                 </div>
@@ -204,3 +192,31 @@
       <!-- End of Main Content -->
 
 <include href="views/portal/includes/footer.html"/>
+
+<script>
+//   new Chart(document.getElementById("chartjs-4"),
+//         {"type":"doughnut","data":{"labels":["Active","WaitListed","Archived"],
+//             "datasets":[{"label":"My First Dataset","data":[{{ @numActive['NumApplicants'] }},
+//               {{ @numWaitlisted['NumApplicants'] }}, {{ @numArchived['NumApplicants'] }}],
+// "backgroundColor":["rgb(255, 99, 132)","rgb(54, 162, 235)",
+//   "rgb(255, 205, 86)"]}]}});
+
+var myPieChart = document.getElementById("myPieChart");
+myPieChart = new Chart(ctx, {
+  type: 'pie',
+  data: data,
+  options: options
+});
+
+data = {
+  datasets: [{
+    data: [10, 20, 30]}],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: [
+      'Active',
+      'Waitlisted',
+      'Archived']
+};
+
+</script>
