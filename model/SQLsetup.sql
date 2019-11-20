@@ -51,7 +51,7 @@ CREATE TABLE applicants
     heard_about_training MEDIUMTEXT,
     other_classes MEDIUMTEXT,
     certified MEDIUMTEXT,
-    notes MEDIUMTEXT
+    notes MEDIUMTEXT,
     FOREIGN KEY(app_type) references app_type(app_id),
     FOREIGN KEY(affiliate) references affiliates(affiliate_id)
 );
@@ -68,8 +68,19 @@ CREATE TABLE adminUser
 CREATE TABLE app_type
 (
     app_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    app_type VARCHAR(100) NOT NULL
+    app_type VARCHAR(100) NOT NULL,
+    ref_name VARCHAR(50)
 );
+
+CREATE TABLE app_type_info
+(
+    info_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    date VARCHAR(200),
+    location VARCHAR(200),
+    deadline VARCHAR(200),
+    app_type INT,
+    FOREIGN KEY(app_type) references app_type(app_id)
+)
 
 CREATE TABLE affiliates
 (
@@ -109,6 +120,15 @@ VALUES
 ('NAMI Whatcom'),
 ('NAMI Yakima');
 
-INSERT INTO app_type(app_type)
+INSERT INTO app_type(app_type, ref_name)
 VALUES
-('Family Support Group');
+('Family Support Group', 'familySupportGroup'),
+('Peer-to-Peer', 'peer2peer'),
+('Ending the Silence', 'endingTheSilence'),
+('Connection', 'connection'),
+('In Our Own Voice', 'inOurOwnVoice'),
+('Provider Education', 'providerEducation'),
+('Family-to-Family', 'family2family'),
+('Homefront', 'homefront'),
+('Basics', 'basics'),
+('Smarts', 'smarts');

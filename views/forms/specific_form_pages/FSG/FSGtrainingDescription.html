@@ -15,14 +15,13 @@
             <!-- header info -->
             <div class="row mt-2">
                 <div class="col-md-6">
-                    <h5 class="mb-2"><i class="fas fa-map-marker-alt mr-1 text-primary"></i><strong> Training Location:</strong>  Kirkland, WA</h5>
-                    <h5><i class="fas fa-reply fa-rotate-180 text-primary"></i><strong> Application Deadline:</strong>  Friday, December 21, 2019</h5>
+                    <h5 class="mb-2"><i class="fas fa-map-marker-alt mr-1 text-primary"></i><strong> Training Location:</strong>  {{ @SESSION.training_info['location'] }}</h5>
+                    <h5><i class="fas fa-reply fa-rotate-180 text-primary"></i><strong> Application Deadline:</strong>  {{ @SESSION.training_info['deadline'] }}</h5>
 
                     <hr>
 
                     <h5><i class="far fa-calendar-alt mr-2 text-primary"></i><strong>Training Schedule:</strong></h5>
-                    <h5>Saturday, January 12, 2019 	8:30 am – 6:00 pm</h5>
-                    <h5>Sunday, January 13, 2019	8:30 am – 6:00 pm</h5>
+                    <h5>{{ @SESSION.training_info['date'] }}</h5>
                 </div>
                 <div class="col-md-6 py-3">
                     <h5><i class="fas fa-info-circle mr-1 text-primary"></i><strong>NAMI Family Support Groups (FSG) are:</strong></h5>

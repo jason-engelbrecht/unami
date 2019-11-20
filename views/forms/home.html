@@ -56,59 +56,39 @@
 
     <!-- Page Features -->
     <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title mb-4 mt-2"><img src="images/training_logos/familySupportGroup.jpg" alt="" class="img-fluid text-center"> </h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <form action="" method="post">
-                        <div class="mb-4">
-                            <label for="fsgDate">Select a Date</label>
-                            <select class="form-control" id="fsgDate" name="fsgSelection">
-                                <option>-- Select --</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary mx-auto" name="fsgSubmit">View Application</button>
-                    </form>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title mb-4 mt-2"><img src="images/training_logos/peer2peer.jpg" alt="" class="img-fluid text-center"> </h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <div class="mb-4">
-                        <label for="p2pDate">Select a Date</label>
-                        <select class="form-control" id="p2pDate">
-                            <option>-- Select --</option>
-                        </select>
+        <!-- show all training cards -->
+        <repeat group="{{ @app_types }}" value="{{ @training }}">
+            <div class="col-md-4 mb-4 d-flex">
+                <div class="card shadow-sm flex-fill">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4 mt-2"><img src="images/training_logos/{{ @training['ref_name'] }}.jpg" alt="" class="img-fluid text-center"> </h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <form action="" method="post">
+                            <div class="mb-4">
+                                <label class="font-weight-bold" for="{{ @training['ref_name'] }}Info">Choose a Date and Location</label>
+                                <select class="form-control" id="{{ @training['ref_name'] }}Info" name="{{ @training['ref_name'] }}Info">
+                                    <option value="none">-- Select --</option>
+
+                                    <!-- get all training dates and their location -->
+                                    <repeat group="{{ @app_types_info }}" value="{{ @info }}">
+                                        <check if="{{ @info['app_type'] == @training['app_id'] }}">
+                                            <option value="{{ @info['info_id'] }}">{{ @info['date'] }} in {{ @info['location'] }}</option>
+                                        </check>
+                                    </repeat>
+                                    <!-- get all training dates and their location -->
+
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="{{ @training['ref_name'] }}Submit">View Application</button>
+                        </form>
                     </div>
-                    <a href="#" class="btn btn-primary mx-auto">View Application</a>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title mb-4"><img src="images/training_logos/endingTheSilence.jpg" alt="" class="img-fluid text-center"> </h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <div class="mb-4">
-                        <label for="etsDate">Select a Date</label>
-                        <select class="form-control" id="etsDate">
-                            <option>-- Select --</option>
-                        </select>
-                    </div>
-                    <a href="#" class="btn btn-primary mx-auto">View Application</a>
-                </div>
-            </div>
-        </div>
-
+        </repeat>
+        <!-- show all training cards -->
     </div>
     <!-- /.row -->
-
 </div>
 <!-- /.container -->
 

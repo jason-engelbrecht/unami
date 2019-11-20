@@ -370,6 +370,68 @@ class UnamiDatabase
     }
 
     /**
+     * Get all application types
+     *
+     * @return mixed
+     */
+    function getAppTypes()
+    {
+        //define query
+        $query = "SELECT app_id, app_type, ref_name FROM app_type";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Get all application types info
+     *
+     * @return mixed
+     */
+    function getAppTypesInfo()
+    {
+        //define query
+        $query = "SELECT info_id, date, location, deadline, app_type FROM app_type_info";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    function getAppTypeInfo($infoId) {
+
+        //define query
+        $query = "SELECT date, location, deadline, app_type 
+                  FROM app_type_info
+                  WHERE info_id = :infoId";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameter
+        $statement->bindParam(':infoId', $infoId, PDO::PARAM_STR);
+
+        //execute
+        $statement->execute();
+
+        //get result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
      * Counts number of affiliates
      *
      * @return mixed

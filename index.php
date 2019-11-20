@@ -23,19 +23,32 @@ require_once 'model/data.php';
 //default route
 $f3->route('GET|POST /', function($f3)
 {
+    session_start();
+
+    global $db;
+
     $f3->set('page_title', 'Trainings');
 
-    if(isset($_POST['fsgSubmit'])) {
+    //get app types
+    $app_types = $db->getAppTypes();
+    $f3->set('app_types', $app_types);
+
+    //get app types info
+    $app_types_info = $db->getAppTypesInfo();
+    $f3->set('app_types_info', $app_types_info);
+
+    if(isset($_POST['familySupportGroupSubmit'])) {
         //get selection
+        $info_id = $_POST['familySupportGroupInfo'];
+        $_SESSION['training_info'] = $db->getAppTypeInfo($info_id);
 
-
+        //go to right form
         $f3->reroute('/fsg');
     }
 
     //get other submissions
 
 
-    session_start();
     $view = new Template();
     echo $view->render('views/forms/home.html');
 });

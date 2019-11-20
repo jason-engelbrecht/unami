@@ -21,6 +21,9 @@ $f3->set('states', array('Alabama','Alaska','Arizona','Arkansas','California',
 //affiliates
 $f3->set('affiliates', $db->getAffiliates());
 
+//app types
+$f3->set('application_types', $db->getAppTypes());
+
 //categories
 $f3->set('applicationCategories',
     array(
