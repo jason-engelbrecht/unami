@@ -67,9 +67,9 @@ $f3->route('GET|POST /create-account', function($f3)
     $f3->set('page_title', 'Create Account');
     global $db;
 
-    if($_SESSION['loggedIn'] !== 1) {
+    /*if($_SESSION['loggedIn'] !== 1) {
         $f3->reroute('/login');
-    }
+    }*/
 
     //form submission
     if(!empty($_POST)) {
