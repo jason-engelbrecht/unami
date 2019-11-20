@@ -32,21 +32,28 @@
 </nav>
 
 <!-- Jumbotron Header -->
-<header class="jumbotron mb-4 px-5 text-center rounded-0" style="background-color: #CEDAEB">
-    <h1 class="mb-3 text-primary">NAMI WA State Trainings</h1>
-    <h5 class="px-5 mx-5">
-        NAMI Washington offers trainings in NAMI Signature programs which allow local
-        affiliates to bring NAMI programs to their communities.
-
-        All trainings are offered
-        at no cost to participants.
-
-        All NAMI members or those becoming a member may apply
-        to attend State Training programs.
-
-        For more information, contact Deanna Roy at
-        droy@namiwa.org or 206-783-4288.
-    </h5>
+<header class="jumbotron mb-4 px-5 rounded-0" style="background-color: #CEDAEB">
+    <h1 class="mb-3 text-primary text-center">NAMI WA State Trainings</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h5 class="pb-2">
+                NAMI Washington offers trainings in NAMI Signature programs which allow local
+                affiliates to bring NAMI programs to their communities.
+            </h5>
+            <h5 class="pb-2">
+                All trainings are offered
+                at no cost to participants.
+            </h5>
+            <h5 class="pb-2">
+                All NAMI members or those becoming a member may apply
+                to attend State Training programs.
+            </h5>
+            <h5>
+                For more information, contact Deanna Roy at<br>
+                <span class="text-primary">droy@namiwa.org</span> or <span class="text-primary">206-783-4288.</span>
+            </h5>
+        </div>
+    </div>
 </header>
 
 <!-- Page Content -->
@@ -55,39 +62,53 @@
     <h2 class="text-center mb-5 pt-3">Trainings Offered</h2>
 
     <!-- Page Features -->
-    <div class="row">
+    <div class="row justify-content-center">
 
         <!-- show all training cards -->
-        <repeat group="{{ @app_types }}" value="{{ @training }}">
+        <repeat group="{{ @app_types }}" value="{{ @training }}" counter="{{ @ctr }}">
             <div class="col-md-4 mb-4 d-flex">
                 <div class="card shadow-sm flex-fill">
                     <div class="card-body">
                         <h5 class="card-title mb-4 mt-2"><img src="images/training_logos/{{ @training['ref_name'] }}.jpg" alt="" class="img-fluid text-center"> </h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text">
+                            {{ @training_descriptions[@training['app_id']] }}
+                        </p>
                         <form action="" method="post">
 
-
                             <div class="mb-2 pt-2">
-                                <h6 class="text-center">
-                                    <a class="questions" data-toggle="collapse" href="#{{ @training['ref_name'] }}Collapse" role="button" aria-expanded="false">
-                                        Show More <i class="fas fa-caret-down"></i>
-                                    </a>
-                                </h6>
-                                <div class="collapse pt-3" id="{{ @training['ref_name'] }}Collapse">
-                                    <label class="font-weight-bold" for="{{ @training['ref_name'] }}Info">Choose a Date and Location</label>
-                                    <select class="form-control" id="{{ @training['ref_name'] }}Info" name="{{ @training['ref_name'] }}Info">
-                                        <option value="none">-- Select --</option>
+                                <!-- not all done -->
+                                <check if="{{ @ctr <= 3 }}">
+                                    <true>
+                                        <h6 class="text-center">
+                                            <a class="questions" data-toggle="collapse" href="#{{ @training['ref_name'] }}Collapse" role="button" aria-expanded="false">
+                                                Show More <i class="fas fa-caret-down"></i>
+                                            </a>
+                                        </h6>
+                                        <div class="collapse pt-3" id="{{ @training['ref_name'] }}Collapse">
+                                            <label class="font-weight-bold" for="{{ @training['ref_name'] }}Info">Choose a Date and Location</label>
+                                            <select class="form-control" id="{{ @training['ref_name'] }}Info" name="{{ @training['ref_name'] }}Info">
+                                                <option value="none">-- Select --</option>
 
-                                        <!-- get all training dates and their location -->
-                                        <repeat group="{{ @app_types_info }}" value="{{ @info }}">
-                                            <check if="{{ @info['app_type'] == @training['app_id'] }}">
-                                                <option value="{{ @info['info_id'] }}">{{ @info['date'] }} in {{ @info['location'] }}</option>
-                                            </check>
-                                        </repeat>
-                                        <!-- get all training dates and their location -->
-                                    </select>
-                                    <button type="submit" class="btn btn-primary mt-3" name="{{ @training['ref_name'] }}Submit">View Application</button>
-                                </div>
+                                                <!-- get all training dates and their location -->
+                                                <repeat group="{{ @app_types_info }}" value="{{ @info }}">
+                                                    <check if="{{ @info['app_type'] == @training['app_id'] }}">
+                                                        <option value="{{ @info['info_id'] }}">{{ @info['date'] }} in {{ @info['location'] }}</option>
+                                                    </check>
+                                                </repeat>
+                                                <!-- get all training dates and their location -->
+
+                                            </select>
+                                            <input type="hidden" name="trainingType" value="{{ @training['app_id'] }}">
+                                            <button type="submit" class="btn btn-primary mt-3" name="{{ @training['ref_name'] }}Submit">View Application</button>
+                                        </div>
+                                    </true>
+                                    <false>
+                                        <h6 class="text-center text-primary">Coming soon!</h6>
+                                    </false>
+
+                                </check>
+
+
                             </div>
                         </form>
                     </div>

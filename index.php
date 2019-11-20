@@ -37,17 +37,44 @@ $f3->route('GET|POST /', function($f3)
     $app_types_info = $db->getAppTypesInfo();
     $f3->set('app_types_info', $app_types_info);
 
+    //family support group
     if(isset($_POST['familySupportGroupSubmit'])) {
-        //get selection
+        //get training date and location(info)
         $info_id = $_POST['familySupportGroupInfo'];
         $_SESSION['training_info'] = $db->getAppTypeInfo($info_id);
 
+        //get training_type
+        $_SESSION['training_type'] = $_POST['trainingType'];
+
         //go to right form
-        $f3->reroute('/fsg');
+        $f3->reroute('/familySupportGroup');
     }
 
-    //get other submissions
+    //peer 2 peer
+    else if(isset($_POST['peer2peerSubmit'])) {
+        //get training date and location(info)
+        $info_id = $_POST['peer2peerInfo'];
+        $_SESSION['training_info'] = $db->getAppTypeInfo($info_id);
 
+        //get training_type
+        $_SESSION['training_type'] = $_POST['trainingType'];
+
+        //go to right form
+        $f3->reroute('/peer2peer');
+    }
+
+    //ending the silence
+    else if(isset($_POST['endingTheSilenceSubmit'])) {
+        //get training date and location(info)
+        $info_id = $_POST['endingTheSilenceInfo'];
+        $_SESSION['training_info'] = $db->getAppTypeInfo($info_id);
+
+        //get training_type
+        $_SESSION['training_type'] = $_POST['trainingType'];
+
+        //go to right form
+        $f3->reroute('/endingTheSilence');
+    }
 
     $view = new Template();
     echo $view->render('views/forms/home.html');
