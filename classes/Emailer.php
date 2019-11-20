@@ -16,7 +16,8 @@ class Emailer
      */
     static function sendAffiliateEmail($applicantId, $personalInfo, $db)
     {
-        $body = 'Please go here: http://mlee.greenriverdev.com/unami/affiliate_review?appId='.$applicantId;
+        $hashedId = password_hash($applicantId, PASSWORD_BCRYPT);
+        $body = 'Please go here: http://mlee.greenriverdev.com/unami/affiliate_review/'.$applicantId.'/'.$hashedId;
         $toEmail = $db->getAffiliateEmail($personalInfo->getAffiliate());
         $toEmailAlias = $db->getAffiliateName($personalInfo->getAffiliate());
 
