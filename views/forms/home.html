@@ -65,22 +65,30 @@
                         <h5 class="card-title mb-4 mt-2"><img src="images/training_logos/{{ @training['ref_name'] }}.jpg" alt="" class="img-fluid text-center"> </h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                         <form action="" method="post">
-                            <div class="mb-4">
-                                <label class="font-weight-bold" for="{{ @training['ref_name'] }}Info">Choose a Date and Location</label>
-                                <select class="form-control" id="{{ @training['ref_name'] }}Info" name="{{ @training['ref_name'] }}Info">
-                                    <option value="none">-- Select --</option>
 
-                                    <!-- get all training dates and their location -->
-                                    <repeat group="{{ @app_types_info }}" value="{{ @info }}">
-                                        <check if="{{ @info['app_type'] == @training['app_id'] }}">
-                                            <option value="{{ @info['info_id'] }}">{{ @info['date'] }} in {{ @info['location'] }}</option>
-                                        </check>
-                                    </repeat>
-                                    <!-- get all training dates and their location -->
 
-                                </select>
+                            <div class="mb-2 pt-2">
+                                <h6 class="text-center">
+                                    <a class="questions" data-toggle="collapse" href="#{{ @training['ref_name'] }}Collapse" role="button" aria-expanded="false">
+                                        Show More <i class="fas fa-caret-down"></i>
+                                    </a>
+                                </h6>
+                                <div class="collapse pt-3" id="{{ @training['ref_name'] }}Collapse">
+                                    <label class="font-weight-bold" for="{{ @training['ref_name'] }}Info">Choose a Date and Location</label>
+                                    <select class="form-control" id="{{ @training['ref_name'] }}Info" name="{{ @training['ref_name'] }}Info">
+                                        <option value="none">-- Select --</option>
+
+                                        <!-- get all training dates and their location -->
+                                        <repeat group="{{ @app_types_info }}" value="{{ @info }}">
+                                            <check if="{{ @info['app_type'] == @training['app_id'] }}">
+                                                <option value="{{ @info['info_id'] }}">{{ @info['date'] }} in {{ @info['location'] }}</option>
+                                            </check>
+                                        </repeat>
+                                        <!-- get all training dates and their location -->
+                                    </select>
+                                    <button type="submit" class="btn btn-primary mt-3" name="{{ @training['ref_name'] }}Submit">View Application</button>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary" name="{{ @training['ref_name'] }}Submit">View Application</button>
                         </form>
                     </div>
                 </div>
