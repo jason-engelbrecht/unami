@@ -17,18 +17,39 @@ class Emailer
     static function sendAffiliateEmail($applicantId, $personalInfo, $db)
     {
         $hashedId = password_hash($applicantId, PASSWORD_BCRYPT);
-        $body = 'Please go here: http://mlee.greenriverdev.com/unami/affiliate_review/'.$applicantId.'/'.$hashedId;
+        $applicantName = $personalInfo->getFname() .' '.$personalInfo->getLname();
+
         $toEmail = $db->getAffiliateEmail($personalInfo->getAffiliate());
         $toEmailAlias = $db->getAffiliateName($personalInfo->getAffiliate());
-
-        $applicantName = $personalInfo->getFname() .' '.$personalInfo->getLname();
 
         try
         {
             $message = (new Swift_Message('Review Application: '.$applicantName))
                 ->setFrom([EMAIL_USERNAME => 'UNAMI: DO-NOT-REPLY'])
-                ->setTo([$toEmail => $toEmailAlias])
-                ->setBody($body);
+                ->setTo([$toEmail => $toEmailAlias]);
+
+
+            $cid = $message->embed(Swift_Image::fromPath('http://mlee.greenriverdev.com/unami/images/namiLogo.png',
+                'image.png', 'image/png'));
+
+            $body = <<<EOD
+        <html lang="en">
+            <body>
+                <div style="background-color: #0c499c">
+                    <img src="$cid" alt="NAMI WA Logo">
+                </div>
+                
+                <div>
+                    <p>Please review $applicantName's application: 
+                    <a href="http://mlee.greenriverdev.com/unami/affiliate_review/$applicantId/$hashedId">Here</a></p>
+                </div>
+            </body>
+        </html>
+EOD;
+
+            $message->setBody($body, 'text/html');
+            $message->addPart('Please review '.$applicantName."'s application: 
+            http://mlee.greenriverdev.com/unami/affiliate_review/".$applicantId.'/'.$hashedId, 'text/plain');
 
             $transport = (new Swift_SmtpTransport(EMAIL_SERVER, 465, 'ssl'))
                 ->setUsername(EMAIL_USERNAME)
