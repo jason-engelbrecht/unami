@@ -37,7 +37,7 @@ $f3->route('GET|POST /', function($f3)
 
     session_start();
     $view = new Template();
-    echo $view->render('views/forms/general_form_pages/home.html');
+    echo $view->render('views/forms/home.html');
 });
 
 //add other controllers

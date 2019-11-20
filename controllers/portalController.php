@@ -275,14 +275,23 @@ $f3->route('GET /@applicant', function($f3, $params)
         $f3->reroute('/login');
     }
 
-    $f3->set('page', 'active');
     $f3->set('page_title', 'Applicant');
-    $f3->set('back', true);
 
     global $db;
 
     $applicant_id = $params['applicant']; //must match^
     $applicant = $db->getApplicant($applicant_id);
+
+    if($applicant['category'] == 1) {
+        $f3->set('page', 'active');
+    }
+    else if($applicant['category'] == 0) {
+        $f3->set('page', 'archive');
+    }
+    else if($applicant['category'] == 2) {
+        $f3->set('page', 'waitlist');
+    }
+
     $f3->set('applicant', $applicant);
 
     $view = new Template();
