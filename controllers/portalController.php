@@ -160,10 +160,10 @@ $f3->route('GET|POST /active', function($f3)
         $id = $_POST['id'];
         $category = $_POST['category'];
         $status = $_POST['status'];
-
+        $notes = $_POST['notes'];
 
         //run update query
-        $db->updateApplicant($id, $category, $status);
+        $db->updateApplicant($id, $category, $status, $notes);
         $f3->reroute('/active');
     }
 
@@ -193,9 +193,10 @@ $f3->route('GET|POST /waitlist', function($f3)
         $id = $_POST['id'];
         $category = $_POST['category'];
         $status = $_POST['status'];
+        $notes = $_POST['notes'];
 
         //run update query
-        $db->updateApplicant($id, $category, $status);
+        $db->updateApplicant($id, $category, $status, $notes);
         $f3->reroute('/waitlist');
     }
 
@@ -225,9 +226,10 @@ $f3->route('GET|POST /archive', function($f3)
         $id = $_POST['id'];
         $category = $_POST['category'];
         $status = $_POST['status'];
+        $notes = $_POST['notes'];
 
         //run update query
-        $db->updateApplicant($id, $category, $status);
+        $db->updateApplicant($id, $category, $status, $notes);
         $f3->reroute('/archive');
     }
 

@@ -233,7 +233,7 @@
                                                 </div>
 
                                                 <h5><i class="fas fa-exchange-alt mr-1 text-primary"></i>Change Status</h5>
-                                                <div class="form-row">
+                                                <div class="form-row mb-3">
                                                     <div class="form-group col-md-6">
                                                         <label class="sr-only" for="category">Status</label>
                                                         <select id="status" class="form-control" name="status">
@@ -246,6 +246,14 @@
                                                                 </option>
                                                             </repeat>
                                                         </select>
+                                                    </div>
+                                                </div>
+
+                                                <h5><i class="fas fa-pen-alt mr-1 text-primary"></i>Add Notes</h5>
+                                                <div class="form-row mb-2">
+                                                    <div class="form-group col-md-10">
+                                                        <label class="sr-only" for="notes">Notes</label>
+                                                        <textarea class="form-control" id="notes" rows="4" name="notes">{{ @ActiveApplicant['Notes'] }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>

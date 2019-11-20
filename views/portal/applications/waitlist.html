@@ -23,7 +23,7 @@
                         <th>Training</th>
                         <th>Email</th>
                         <th>Date Submitted</th>
-                        <th>Move</th>
+                        <th>Edit</th>
                         <th>View</th>
                     </tr>
                     </thead>
@@ -34,7 +34,7 @@
                         <th>Training</th>
                         <th>Email</th>
                         <th>Date Submitted</th>
-                        <th>Move</th>
+                        <th>Edit</th>
                         <th>View</th>
                     </tr>
                     </tfoot>
@@ -63,7 +63,7 @@
                                 <!-- edit -> modal -- use ID here -->
                                 <td class="text-center">
                                     <a href="#" class="text-decoration-none text-primary" data-toggle="modal" data-target="#modal{{ @WaitlistedApplicant['ID'] }}">
-                                        <i class="fas fa-suitcase fa-lg"></i>
+                                        <i class="fas fa-edit fa-lg"></i>
                                     </a>
                                 </td>
 
@@ -83,7 +83,7 @@
 
                                         <div class="modal-header">
                                             <h4 class="modal-title text-primary" id="modalLabel">
-                                                <i class="fas fa-suitcase"></i> Move
+                                                <i class="fas fa-edit"></i> Edit
                                                 <span class="font-weight-bold">{{ @WaitlistedApplicant['Name'] }}'s</span>
                                                 Application
                                             </h4>
@@ -100,8 +100,8 @@
                                                 <input type="hidden" value="{{ @WaitlistedApplicant['ID'] }}" name="id">
                                                 <input type="hidden" value="{{ @WaitlistedApplicant['AppStatus'] }}" name="status">
 
-                                                <h5><i class="fas fa-map-marker-alt mr-1 text-primary"></i>Location</h5>
-                                                <div class="form-row">
+                                                <h5><i class="fas fa-suitcase mr-1 text-primary"></i>Move Application</h5>
+                                                <div class="form-row mb-3">
                                                     <div class="form-group col-md-6">
                                                         <label class="sr-only" for="category">Location</label>
                                                         <select id="category" class="form-control" name="category">
@@ -114,6 +114,14 @@
                                                                 </option>
                                                             </repeat>
                                                         </select>
+                                                    </div>
+                                                </div>
+
+                                                <h5><i class="fas fa-pen-alt mr-1 text-primary"></i>Add Notes</h5>
+                                                <div class="form-row mb-2">
+                                                    <div class="form-group col-md-10">
+                                                        <label class="sr-only" for="notes">Notes</label>
+                                                        <textarea class="form-control" id="notes" rows="4" name="notes">{{ @WaitlistedApplicant['Notes'] }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
