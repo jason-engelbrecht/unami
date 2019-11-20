@@ -12,6 +12,7 @@ category: 0 is archive,
           2 is waitlist
 */
 
+/* General application fields */
 CREATE TABLE applicants
 (
     applicant_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -57,15 +58,58 @@ CREATE TABLE applicants
     FOREIGN KEY(affiliate) references affiliates(affiliate_id)
 );
 
-CREATE TABLE adminUser
+/* specific application tables */
+CREATE TABLE FSG
 (
-    admin_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    fname VARCHAR(60) NOT NULL,
-    lname VARCHAR(70) NOT NULL,
-    email VARCHAR(254) NOT NULL,
-    password VARCHAR(255) NOT NULL
-);
+    FSG_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    training_info VARCHAR(100),
+    relative_mental MEDIUMTEXT,
+    conviction MEDIUMTEXT,
+    why_want MEDIUMTEXT,
+    experience MEDIUMTEXT,
+    whom_co MEDIUMTEXT,
+    where_co MEDIUMTEXT,
+    FOREIGN KEY(applicant_id) references applicants(applicant_id)
+)
 
+CREATE TABLE P2P
+(
+    P2P_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    training_info VARCHAR(100),
+    conviction MEDIUMTEXT,
+    why_want MEDIUMTEXT,
+    describe_recovery MEDIUMTEXT,
+    give_back MEDIUMTEXT,
+    FOREIGN KEY(applicant_id) references applicants(applicant_id)
+)
+
+CREATE TABLE ETS
+(
+    ETS_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    training_info VARCHAR(100),
+    conviction MEDIUMTEXT,
+    availability MEDIUMTEXT,
+    education VARCHAR(200),
+    experience VARCHAR(200),
+    languages VARCHAR(200),
+    age VARCHAR(100),
+    description VARCHAR(200),
+    diagnosis VARCHAR(200),
+    self_disclosure CHAR(10),
+    positive_outlook CHAR(10),
+    background_check CHAR(10),
+    why_want MEDIUMTEXT,
+    mental_experience MEDIUMTEXT,
+    support_experience MEDIUMTEXT,
+    recovery MEDIUMTEXT,
+    view_roles MEDIUMTEXT,
+    FOREIGN KEY(applicant_id) references applicants(applicant_id)
+)
+
+/* application/training type tables */
 CREATE TABLE app_type
 (
     app_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -83,6 +127,7 @@ CREATE TABLE app_type_info
     FOREIGN KEY(app_type) references app_type(app_id)
 );
 
+/* affiliates table */
 CREATE TABLE affiliates
 (
     affiliate_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -91,6 +136,17 @@ CREATE TABLE affiliates
     email VARCHAR(254) NOT NULL
 );
 
+/* admin portal user */
+CREATE TABLE adminUser
+(
+    admin_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    fname VARCHAR(60) NOT NULL,
+    lname VARCHAR(70) NOT NULL,
+    email VARCHAR(254) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+/* setup basic data for tables */
 INSERT INTO affiliates(name)
 VALUES
 ('NAMI Chelan-Douglas'),
