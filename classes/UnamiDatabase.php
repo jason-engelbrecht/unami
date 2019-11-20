@@ -97,21 +97,30 @@ class UnamiDatabase
         $emergency_phone = $personalInfo->getEmergencyPhone();
 
         //accommodations
-        $special_needs = $accommodations->getSpecialNeeds();
-        $service_animal = $accommodations->getServiceAnimal();
-        $mobility_need = $accommodations->getMovementDisability();
-        $need_rooming = $accommodations->getNeedAccommodations();
-        $single_room = $accommodations->getSingleRoom();
+        $special_needs = ($accommodations->getSpecialNeeds() == 'true' ? true : false);
+        $service_animal = ($accommodations->getServiceAnimal() == 'true' ? true : false);
+        $mobility_need = ($accommodations->getMovementDisability() == 'true' ? true : false);
+        $need_rooming = ($accommodations->getNeedAccommodations() == 'true' ? true : false);
+        $single_room = ($accommodations->getSingleRoom() == 'true' ? true : false);
 
         $daysAsString = '';
-        foreach ($accommodations->getDaysRooming() as $day) {
-            $daysAsString += $day;
+        if(is_array($accommodations->getDaysRooming()))
+        {
+            foreach ($accommodations->getDaysRooming() as $day) {
+                $daysAsString.=$day;
+                $daysAsString.=' ';
+            }
         }
+        else
+        {
+            $daysAsString = "Not needed";
+        }
+
         $days_rooming = $daysAsString;
         $gender = $accommodations->getGender();
         $roommate_gender = $accommodations->getRoommateGender();
-        $cpap_user = $accommodations->getCpap();
-        $roommateCpap = $accommodations->getCpapRoommate();
+        $cpap_user = ($accommodations->getCpap() == 'true' ? true : false);
+        $roommateCpap = ($accommodations->getCpapRoommate() == 'true' ? true : false);
 
         //not required
         $heard_about_training = $notRequired->getHeardAboutTraining();

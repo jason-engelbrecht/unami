@@ -131,7 +131,7 @@ $f3->route('GET|POST /additional_information', function($f3)
         $cpapRoommate = $_POST['cpapRoommate'];
         $singleRoom = $_POST['singleRoom'];
 
-        if(sizeof($daysRooming) == 0)
+        if(!isset($daysRooming))
         {
             $daysRooming = array('N/A');
         }
