@@ -497,6 +497,26 @@ class UnamiDatabase
     }
 
     /**
+     * Count number of open trainings
+     *
+     * @return mixed
+     */
+    function countTrainings() {
+        //define query
+        $query = "SELECT COUNT(info_id) AS Trainings
+                  FROM app_type_info";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
      * Counts number of affiliates
      *
      * @return mixed
