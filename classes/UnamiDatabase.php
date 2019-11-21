@@ -441,6 +441,62 @@ class UnamiDatabase
     }
 
     /**
+     * Insert a new info/training for a specific application type
+     *
+     * @param $id
+     * @param $dates
+     * @param $location
+     * @param $deadline
+     * @return mixed
+     */
+    function insertAppTypeInfo($id, $dates, $location, $deadline) {
+
+        //define query
+        $query = 'INSERT INTO app_type_info
+                  (date, location, deadline, app_type)
+                  VALUES
+                  (:date, :location, :deadline, :app_type)';
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameters
+        $statement->bindParam(':date', $dates, PDO::PARAM_STR);
+        $statement->bindParam(':location', $location, PDO::PARAM_STR);
+        $statement->bindParam(':deadline', $deadline, PDO::PARAM_STR);
+        $statement->bindParam(':app_type', $id, PDO::PARAM_STR);
+
+        //execute statement
+        $statement->execute();
+
+        return $this->_dbh->lastInsertId();
+    }
+
+    /**
+     * Delete an info/training for a specific application type
+     *
+     * @param $id
+     * @return mixed
+     */
+    function deleteAppTypeInfo($id) {
+        //define query
+        $query = 'DELETE FROM app_type_info
+                  WHERE info_id = :info_id
+                  LIMIT 1';
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameters
+        $statement->bindParam(':info_id', $id, PDO::PARAM_STR);
+
+        //execute statement
+        $result = $statement->execute();
+
+        return $result;
+    }
+
+    /**
      * Counts number of affiliates
      *
      * @return mixed

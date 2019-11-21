@@ -259,7 +259,7 @@ $f3->route('GET /affiliates', function($f3)
 });
 
 //trainings
-$f3->route('GET /trainings', function($f3)
+$f3->route('GET|POST /trainings', function($f3)
 {
     if($_SESSION['loggedIn'] !== 1) {
         $f3->reroute('/login');
@@ -273,6 +273,23 @@ $f3->route('GET /trainings', function($f3)
     $f3->set('trainings', $db->getAppTypes());
     $f3->set('trainings_infos', $db->getAppTypesInfo());
 
+    //add training
+    if(isset($_POST['add'])) {
+        //insert
+        $dates = $_POST['dates'];
+        $location = $_POST['location'];
+        $deadline = $_POST['deadline'];
+        $id = $_POST['addId'];
+        $db->insertAppTypeInfo($id, $dates, $location, $deadline);
+        $f3->reroute('/trainings');
+    }
+
+    //delete training
+    if(isset($_POST['delete'])) {
+        $id = $_POST['deleteId'];
+        $db->deleteAppTypeInfo($id);
+        $f3->reroute('/trainings');
+    }
 
     $view = new Template();
     echo $view->render('views/portal/other/trainings.html');

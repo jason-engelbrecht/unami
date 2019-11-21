@@ -9,46 +9,92 @@
 
     <div class="row">
     <repeat group="{{ @trainings }}" value="{{ @training }}">
-        <div class="col-lg-6 col-md-12 mb-4">
+        <div class="col-lg-4 col-md-12 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">{{ @training['app_type'] }}</div>
+                            <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">{{ @training['app_type'] }}</div>
                             <div class="h6 mb-0 text-gray-800 mt-2">
 
-                                <repeat group="{{ @trainings_infos }}" value="{{ @info }}">
+                                <repeat group="{{ @trainings_infos }}" value="{{ @info }}" counter="{{ @ctr }}">
                                     <check if="{{ @info['app_type'] == @training['app_id'] }}">
                                         <true>
-                                            <span class="font-weight-bold">Dates:</span> {{ @info['date'] }}
-                                            <span class="font-weight-bold">Location:</span> {{ @info['location'] }}
-                                            <span class="font-weight-bold">Deadline:</span> {{ @info['deadline'] }}
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto mr-2">
+                                                    <a href="#" class="text-decoration-none text-success"
+                                                       data-toggle="modal" data-target="#deleteModal{{ @training['app_id'] }}">
+                                                        <i class="fas fa-minus-circle text-danger"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-10">
+                                                    <span class="font-weight-bold">Dates:</span> {{ @info['date'] }}<br>
+                                                    <span class="font-weight-bold">Location:</span> {{ @info['location'] }}<br>
+                                                    <span class="font-weight-bold">Deadline:</span> {{ @info['deadline'] }}<br>
+                                                </div>
+                                            </div>
+
+                                            <check if="{{ @ctr !==  count(@trainings_infos) }}">
+                                                <hr>
+                                            </check>
                                         </true>
                                         <false>
                                             Nothing to show yet
                                         </false>
                                     </check>
+
+                                    <!-- delete modal -->
+                                    <div class="modal fade" id="deleteModal{{ @training['app_id'] }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="deleteModal{{ @training['app_id'] }}" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header bg-danger">
+                                                    <h4 class="modal-title text-white" id="modalLabel2">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                        Delete Training
+                                                    </h4>
+
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body my-4">
+                                                    <h4 class="text-center">Are you sure you want to delete this training?</h4>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <form action="trainings" method="post">
+                                                        <input type="hidden" name="deleteId" value="{{ @info['info_id'] }}">
+                                                        <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </repeat>
 
                             </div>
                         </div>
                         <div class="col-auto">
                             <a href="#" class="text-decoration-none text-success"
-                               data-toggle="modal" data-target="#modal{{ @training['app_id'] }}">
+                               data-toggle="modal" data-target="#addModal{{ @training['app_id'] }}">
                                 <i class="fas fa-plus-circle fa-2x"></i>
                             </a>
                         </div>
 
-                        <!-- edit modal -->
-                        <div class="modal fade" id="modal{{ @training['app_id'] }}" tabindex="-1" role="dialog"
-                             aria-labelledby="modal{{ @training['app_id'] }}" aria-hidden="true">
+                        <!-- add modal -->
+                        <div class="modal fade" id="addModal{{ @training['app_id'] }}" tabindex="-1" role="dialog"
+                             aria-labelledby="addModal{{ @training['app_id'] }}" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
 
-                                    <div class="modal-header">
-                                        <h4 class="modal-title text-gray-800" id="modalLabel">
-                                            <i class="fas fa-plus text-success"></i>
-                                            Add <span class="font-weight-bold">{{ @training['app_type'] }}</span> Training
+                                    <div class="modal-header bg-success">
+                                        <h4 class="modal-title text-white" id="modalLabel">
+                                            <i class="fas fa-plus"></i>
+                                            Add Training
                                         </h4>
 
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -56,14 +102,42 @@
                                         </button>
                                     </div>
 
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" name="update" class="btn btn-success">Save changes</button>
-                                    </div>
+                                    <form action="trainings" method="post">
+                                        <div class="modal-body">
+                                            <div class="col-8">
+                                                <h5><i class="far fa-calendar-alt mr-1 text-success"></i> Dates</h5>
+                                                <div class="form-group pb-2">
+                                                    <label for="dates" class="sr-only">Dates</label>
+                                                    <input type="text" class="form-control" name="dates" id="dates">
+                                                </div>
+
+                                                <h5><i class="fas fa-map-marker mr-1 text-success"></i> Location</h5>
+                                                <div class="form-group pb-2">
+                                                    <label for="location" class="sr-only">Location</label>
+                                                    <input type="text" class="form-control" name="location" id="location">
+                                                </div>
+
+                                                <h5><i class="far fa-calendar-times mr-1 text-success"></i>Deadline</h5>
+                                                <div class="form-group pb-2">
+                                                    <label for="deadline" class="sr-only">Deadline</label>
+                                                    <input type="text" class="form-control" name="deadline" id="deadline">
+                                                </div>
+
+                                                <input type="hidden" value="{{ @training['app_id'] }}" name="addId">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" name="add" class="btn btn-success">Add</button>
+                                        </div>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
