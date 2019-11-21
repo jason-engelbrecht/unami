@@ -43,6 +43,8 @@ class Emailer
                 <div>
                     <p>Please review $applicantName's application: 
                     <a href="http://mlee.greenriverdev.com/unami/affiliate_review/$applicantId/$linkHashedId">Here</a></p>
+                    <p>Please make sure to review this application with the applicant and get their NAMI membership 
+                    expiration. Thanks!</p>
                 </div>
             </body>
         </html>
