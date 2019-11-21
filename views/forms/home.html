@@ -95,14 +95,22 @@
                                 <!-- not all done -->
                                 <check if="{{ @ctr <= 3 }}">
                                     <true>
-                                        <h5 class="text-center">
-                                            <a href="#" class="text-decoration-none text-info"
-                                               data-toggle="modal" data-target="#{{ @training['ref_name'] }}Modal">
-                                                <i class="fas fa-info-circle"></i> Apply
-                                            </a>
-                                        </h5>
-
-                                        <!-- delete modal -->
+                                        <check if="{{ @db->countTrainingAppTypeInfo(@training['app_id'])['Trainings'] > 0 }}">
+                                            <true>
+                                                <h5 class="text-center">
+                                                    <a href="#" class="text-decoration-none text-info"
+                                                       data-toggle="modal" data-target="#{{ @training['ref_name'] }}Modal">
+                                                        <i class="fas fa-info-circle"></i> Apply
+                                                    </a>
+                                                </h5>
+                                            </true>
+                                            <false>
+                                                <h5 class="text-center text-info">
+                                                    Coming Soon!
+                                                </h5>
+                                            </false>
+                                        </check>
+                                        <!-- modal -->
                                         <div class="modal fade" id="{{ @training['ref_name'] }}Modal" tabindex="-1" role="dialog"
                                              aria-labelledby="{{ @training['ref_name'] }}Modal" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -138,19 +146,16 @@
 
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-info" name="{{ @training['ref_name'] }}Submit">View Application</button>
+                                                        <button type="submit" class="btn btn-info" name="{{ @training['ref_name'] }}Submit">Apply</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </true>
                                     <false>
-                                        <h6 class="text-center text-primary">Coming soon!</h6>
+                                        <h5 class="text-center text-info">Coming soon!</h5>
                                     </false>
-
                                 </check>
-
-
                             </div>
                         </form>
                     </div>

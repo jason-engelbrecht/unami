@@ -500,6 +500,31 @@ class UnamiDatabase
     }
 
     /**
+     * Count number of trainings per app type
+     *
+     * @param $id
+     * @return mixed
+     */
+    function countTrainingAppTypeInfo($id) {
+        //define query
+        $query = "SELECT COUNT(info_id) AS Trainings
+                  FROM app_type_info
+                  WHERE app_type = :id";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameters
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
      * Count number of open trainings
      *
      * @return mixed

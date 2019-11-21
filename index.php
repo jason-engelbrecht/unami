@@ -26,6 +26,8 @@ $f3->route('GET|POST /', function($f3)
     session_start();
 
     global $db;
+    $f3->set('db', $db);
+
 
     $f3->set('page_title', 'Trainings');
 
