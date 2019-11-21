@@ -256,14 +256,15 @@ class UnamiDatabase
      * @param $appId int applicants id
      * @param $notes String notes written by affiliate
      */
-    function insertAffiliateNotes($appId, $notes)
+    function insertAffiliateNotes($appId, $notes, $memExp)
     {
-        $query = "INSERT INTO notes(applicant_id, affiliate_notes) VALUES (:applicant_id, :affiliate_notes)";
+        $query = "UPDATE applicants SET notes = :notes, member_expiration = :memExp WHERE applicant_id = :applicant_id";
 
         $statement = $this->_dbh->prepare($query);
 
+        $statement->bindParam(':notes', $notes, PDO::PARAM_STR);
+        $statement->bindParam(':memExp', $memExp, PDO::PARAM_STR);
         $statement->bindParam(':applicant_id', $appId, PDO::PARAM_INT);
-        $statement->bindParam(':affiliate_notes', $notes, PDO::PARAM_STR);
 
         $statement->execute();
     }

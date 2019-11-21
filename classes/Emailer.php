@@ -17,6 +17,7 @@ class Emailer
     static function sendAffiliateEmail($applicantId, $personalInfo, $db)
     {
         $hashedId = password_hash($applicantId, PASSWORD_BCRYPT);
+        $linkHashedId = str_replace('/', '-', $hashedId);
         $applicantName = $personalInfo->getFname() .' '.$personalInfo->getLname();
 
         $toEmail = $db->getAffiliateEmail($personalInfo->getAffiliate());
@@ -41,7 +42,7 @@ class Emailer
                 
                 <div>
                     <p>Please review $applicantName's application: 
-                    <a href="http://mlee.greenriverdev.com/unami/affiliate_review/$applicantId/$hashedId">Here</a></p>
+                    <a href="http://mlee.greenriverdev.com/unami/affiliate_review/$applicantId/$linkHashedId">Here</a></p>
                 </div>
             </body>
         </html>

@@ -2,7 +2,7 @@
 /**
  * Controller for affiliate routes
  *
- * @author Jason Engelbrecht
+ * @author Jason Engelbrecht & Max Lee
  * Date: 11/18/2019
  */
 global $f3;
@@ -10,7 +10,8 @@ global $db;
 
 $f3->route('GET|POST /affiliate_review/@applicantId/@hashcode', function($f3, $params)
 {
-    if(!password_verify($params['applicantId'], $params['hashcode']))
+    $hashedId = str_replace('-', '/', $params['hashcode']);
+    if(!password_verify($params['applicantId'], $hashedId))
     {
         $f3->reroute('/home');
     }
@@ -32,9 +33,9 @@ $f3->route('GET|POST /affiliate_review/@applicantId/@hashcode', function($f3, $p
     if(!empty($_POST))
     {
         $db->updateApplicantStatus($_POST['newStatus'], $params['applicantId']);
-        $db->insertAffiliateNotes($params['applicantId'], $_POST['affiliateNotes']);
+        $db->insertAffiliateNotes($params['applicantId'], $_POST['affiliateNotes'], $_POST['membershipExpiration']);
 
-        //need to make a thank you page
+        //reroute to thank you message
         $f3->reroute('/affiliate_confirmation');
     }
 
