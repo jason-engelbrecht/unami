@@ -8,7 +8,7 @@
 
     <div class="row">
     <repeat group="{{ @trainings }}" value="{{ @training }}">
-        <div class="col-lg-4 col-md-12 mb-4">
+        <div class="col-lg-6 col-md-12 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -27,7 +27,8 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-10">
-                                                    <span class="font-weight-bold">Dates:</span> {{ @info['date'] }}<br>
+                                                    <span class="font-weight-bold">Day 1:</span> {{ @info['date'] }}<br>
+                                                    <span class="font-weight-bold">Day 2:</span> {{ @info['date2'] }}<br>
                                                     <span class="font-weight-bold">Location:</span> {{ @info['location'] }}<br>
                                                     <span class="font-weight-bold">Deadline:</span> {{ @info['deadline'] }}<br>
                                                 </div>
@@ -99,10 +100,16 @@
                                     <form action="trainings" method="post">
                                         <div class="modal-body">
                                             <div class="col-8">
-                                                <h5><i class="far fa-calendar-alt mr-1 text-success"></i> Dates</h5>
+                                                <h5><i class="far fa-calendar-alt mr-1 text-success"></i> Day 1</h5>
                                                 <div class="form-group pb-2">
-                                                    <label for="dates" class="sr-only">Dates</label>
+                                                    <label for="dates" class="sr-only">Day 1</label>
                                                     <input type="text" class="form-control" name="dates" id="dates">
+                                                </div>
+
+                                                <h5><i class="far fa-calendar-alt mr-1 text-success"></i> Day 2</h5>
+                                                <div class="form-group pb-2">
+                                                    <label for="dates2" class="sr-only">Day 2</label>
+                                                    <input type="text" class="form-control" name="dates2" id="dates2">
                                                 </div>
 
                                                 <h5><i class="fas fa-map-marker mr-1 text-success"></i> Location</h5>

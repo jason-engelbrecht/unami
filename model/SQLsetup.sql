@@ -124,6 +124,7 @@ CREATE TABLE app_type_info
     location VARCHAR(200),
     deadline VARCHAR(200),
     app_type INT,
+    date2 VARCHAR(200),
     FOREIGN KEY(app_type) references app_type(app_id)
 );
 

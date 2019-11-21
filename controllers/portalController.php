@@ -278,11 +278,12 @@ $f3->route('GET|POST /trainings', function($f3)
     //add training
     if(isset($_POST['add'])) {
         //insert
-        $dates = $_POST['dates'];
+        $date = $_POST['dates'];
+        $date2 = $_POST['dates2'];
         $location = $_POST['location'];
         $deadline = $_POST['deadline'];
         $id = $_POST['addId'];
-        $db->insertAppTypeInfo($id, $dates, $location, $deadline);
+        $db->insertAppTypeInfo($id, $date, $date2, $location, $deadline);
         $f3->reroute('/trainings');
     }
 

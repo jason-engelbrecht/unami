@@ -407,7 +407,7 @@ class UnamiDatabase
     function getAppTypesInfo()
     {
         //define query
-        $query = "SELECT info_id, date, location, deadline, app_type FROM app_type_info";
+        $query = "SELECT info_id, date, location, deadline, app_type, date2 FROM app_type_info";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
@@ -422,7 +422,7 @@ class UnamiDatabase
     function getAppTypeInfo($infoId) {
 
         //define query
-        $query = "SELECT date, location, deadline, app_type 
+        $query = "SELECT date, location, deadline, app_type, date2 
                   FROM app_type_info
                   WHERE info_id = :infoId";
 
@@ -445,24 +445,26 @@ class UnamiDatabase
      * Insert a new info/training for a specific application type
      *
      * @param $id
-     * @param $dates
+     * @param $date
+     * @param $date2
      * @param $location
      * @param $deadline
      * @return mixed
      */
-    function insertAppTypeInfo($id, $dates, $location, $deadline) {
+    function insertAppTypeInfo($id, $date, $date2, $location, $deadline) {
 
         //define query
         $query = 'INSERT INTO app_type_info
-                  (date, location, deadline, app_type)
+                  (date, location, deadline, app_type, date2)
                   VALUES
-                  (:date, :location, :deadline, :app_type)';
+                  (:date, :location, :deadline, :app_type, :date2)';
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
 
         //bind parameters
-        $statement->bindParam(':date', $dates, PDO::PARAM_STR);
+        $statement->bindParam(':date', $date, PDO::PARAM_STR);
+        $statement->bindParam(':date2', $date2, PDO::PARAM_STR);
         $statement->bindParam(':location', $location, PDO::PARAM_STR);
         $statement->bindParam(':deadline', $deadline, PDO::PARAM_STR);
         $statement->bindParam(':app_type', $id, PDO::PARAM_STR);
