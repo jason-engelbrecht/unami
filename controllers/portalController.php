@@ -266,6 +266,12 @@ $f3->route('GET /trainings', function($f3)
     $f3->set('page', 'trainings');
     $f3->set('page_title', 'Trainings');
 
+    //get trainings
+    global $db;
+    $f3->set('trainings', $db->getAppTypes());
+    $f3->set('trainings_infos', $db->getAppTypesInfo());
+
+
     $view = new Template();
     echo $view->render('views/portal/other/trainings.html');
 });

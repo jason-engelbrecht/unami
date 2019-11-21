@@ -7,11 +7,42 @@
     <h1 class="h2 mb-2 text-primary"><i class="far fa-calendar-alt"></i> Trainings</h1>
     <p class="lead mb-5">This is where you'll be able to change training dates and times</p>
 
-    <div class="align-content-center">
-        <h1 class="h3 mb-4 text-gray-800">Coming soon! </h1>
+    <div class="row">
+    <repeat group="{{ @trainings }}" value="{{ @training }}">
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">{{ @training['app_type'] }}</div>
+                            <div class="h6 mb-0 text-gray-800 mt-2">
+
+                                <repeat group="{{ @trainings_infos }}" value="{{ @info }}">
+                                    <check if="{{ @info['app_type'] == @training['app_id'] }}">
+                                        <true>
+                                            <span class="font-weight-bold">Dates:</span> {{ @info['date'] }}
+                                            <span class="font-weight-bold">Location:</span> {{ @info['location'] }}
+                                        </true>
+                                        <false>
+                                            Nothing to show yet
+                                        </false>
+
+                                    </check>
+                                </repeat>
+
+
+
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-plus-circle fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </repeat>
     </div>
-
-
 </div>
 <!-- /.container-fluid -->
 
