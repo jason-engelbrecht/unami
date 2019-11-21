@@ -295,20 +295,23 @@
                     <div class="col-md-12 pl-0">
                         <h5 class="lead">Please write any notes you have on this application here: </h5>
                         <label>Notes:
-                            <textarea name="affiliateNotes" class="form-control" rows="4" cols="100">
-                                {{ @applicant['notes'] }}
-                            </textarea>
+                            <textarea name="affiliateNotes" class="form-control" rows="4" cols="100">{{ @applicant['notes'] }}</textarea>
                         </label>
 
+                        <hr>
+
                         <h5 class="mb-3">Reminders for affiliate volunteers:</h5>
-                        <label class="ml-3 mr-3">
-                            <input type="checkbox"> You have talked to the applicant about this training
+                        <label class="mr-3">
+                            <input type="checkbox"> You have talked to the applicant about this training (required)
                         </label>
                         <label> What is the member's expiration date on their NAMI membership?
                             (Leave blank if not a member yet)
-                            <input type="text" name="membershipExpiration" class="form-control"
+                            <input type="text" name="membershipExpiration" class="form-control mb-2"
                                    value="{{ @applicant['member_expiration'] }}"> 
                         </label>
+                        <br>
+                        <button type="submit" name="saveNotes" value="save" class="btn btn-primary float-center">
+                            Save</button>
                     </div>
                 </div>
             </div>

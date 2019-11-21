@@ -19,6 +19,20 @@ $f3->route('GET|POST /affiliate_review/@applicantId/@hashcode', function($f3, $p
     $f3->set('page_title', 'Application Approve/Deny');
 
     global $db;
+
+    if(!empty($_POST))
+    {
+        $db->insertAffiliateNotes($params['applicantId'], $_POST['affiliateNotes'], $_POST['membershipExpiration']);
+
+        if($_POST['saveNotes'] != 'save')
+        {
+            $db->updateApplicantStatus($_POST['newStatus'], $params['applicantId']);
+
+            //reroute to thank you message
+            $f3->reroute('/affiliate_confirmation');
+        }
+    }
+
     $applicant = $db->getApplicant($params['applicantId']);
 
     //if app is already approve/deny, no need to show it
@@ -30,14 +44,7 @@ $f3->route('GET|POST /affiliate_review/@applicantId/@hashcode', function($f3, $p
     $f3->set('applicant', $applicant);
     $f3->set('affiliate', $db->getAffiliateName($applicant['affiliate']));
 
-    if(!empty($_POST))
-    {
-        $db->updateApplicantStatus($_POST['newStatus'], $params['applicantId']);
-        $db->insertAffiliateNotes($params['applicantId'], $_POST['affiliateNotes'], $_POST['membershipExpiration']);
 
-        //reroute to thank you message
-        $f3->reroute('/affiliate_confirmation');
-    }
 
     $view = new Template();
     echo $view->render('views/affiliate/affiliateReview.html');
