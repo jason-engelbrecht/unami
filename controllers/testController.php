@@ -55,3 +55,10 @@ $f3->route('GET /test_P2PlongAnswer', function() {
 
     echo $view->render('views/forms/specific_form_pages/P2P/longAnswer.html');
 });
+
+// test route for dashboard analytics
+$f3->route('GET /testDashboard', function() {
+    $view = new Template();
+
+    echo $view->render('views/portal/dashBoardAnalytics.html');
+});

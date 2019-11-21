@@ -125,7 +125,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Application Status</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -134,13 +134,16 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Active
+                      <i class="fas fa-circle text-info"></i> Submitted
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Waitlisted
+                      <i class="fas fa-circle text-warning"></i> Approved
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Archived
+                      <i class="fas fa-circle text-danger"></i> Denied
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Completed
                     </span>
                   </div>
                 </div>
@@ -148,48 +151,8 @@
             </div>
           </div>
 
-          <script>
-            // Set new default font family and font color to mimic Bootstrap's default styling
-            Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-            Chart.defaults.global.defaultFontColor = '#858796';
 
 
-            // Pie Chart Example
-            var ctx = document.getElementById("myPieChart");
-            var myPieChart = new Chart(ctx, {
-              type: 'doughnut',
-              data: {
-                labels: ["Submitted", "Referral", "Social"],
-                datasets: [{
-                  data: [55, 30, 15],
-                  backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                  hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-                  hoverBorderColor: "rgba(234, 236, 244, 1)",
-                }],
-              },
-              options: {
-                maintainAspectRatio: false,
-                tooltips: {
-                  backgroundColor: "rgb(255,255,255)",
-                  bodyFontColor: "#858796",
-                  borderColor: '#dddfeb',
-                  borderWidth: 1,
-                  xPadding: 15,
-                  yPadding: 15,
-                  displayColors: false,
-                  caretPadding: 10,
-                },
-                legend: {
-                  display: false
-                },
-                cutoutPercentage: 80,
-              },
-            });
-
-
-
-
-          </script>
 
           <!-- Content Row -->
           <div class="row">
@@ -236,30 +199,3 @@
 
 <include href="views/portal/includes/footer.html"/>
 
-<script>
-//   new Chart(document.getElementById("chartjs-4"),
-//         {"type":"doughnut","data":{"labels":["Active","WaitListed","Archived"],
-//             "datasets":[{"label":"My First Dataset","data":[{{ @numActive['NumApplicants'] }},
-//               {{ @numWaitlisted['NumApplicants'] }}, {{ @numArchived['NumApplicants'] }}],
-// "backgroundColor":["rgb(255, 99, 132)","rgb(54, 162, 235)",
-//   "rgb(255, 205, 86)"]}]}});
-
-var myPieChart = document.getElementById("myPieChart");
-myPieChart = new Chart(ctx, {
-  type: 'pie',
-  data: data,
-  options: options
-});
-
-data = {
-  datasets: [{
-    data: [10, 20, 30]}],
-
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-      'Active',
-      'Waitlisted',
-      'Archived']
-};
-
-</script>

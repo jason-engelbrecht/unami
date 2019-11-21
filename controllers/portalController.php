@@ -117,6 +117,7 @@ $f3->route('GET /dashboard', function($f3)
     $numDenied = $db->countDenied();
     $numWaitlisted = $db->countApplicants(2);
     $numArchived = $db->countApplicants(0);
+    $numSubmitted = $db->countSubmitted();
 
     $f3->set('numActive', $numActive);
     $f3->set('numComplete', $numComplete);
@@ -124,6 +125,7 @@ $f3->route('GET /dashboard', function($f3)
     $f3->set('numDenied', $numDenied);
     $f3->set('numWaitlisted', $numWaitlisted);
     $f3->set('numArchived', $numArchived);
+    $f3->set('numSubmitted', $numSubmitted);
 
     $f3->set('page', 'dashboard');
     $f3->set('page_title', 'Dashboard');
