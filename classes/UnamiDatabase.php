@@ -44,22 +44,23 @@ class UnamiDatabase
      * @param $personalInfo PersonalInfo
      * @param $accommodations AdditionalInfo
      * @param $notRequired NotRequired
+     * @param $info_id
      * @return int the id of the last applicant
      */
-    function addApplicant($personalInfo, $accommodations, $notRequired)
+    function addApplicant($personalInfo, $accommodations, $notRequired, $info_id)
     {
         //prepare SQL statement
         $sql = "INSERT INTO applicants(date_submitted, app_status, category, app_type, fname, lname, pronouns, birthdate, NAMI_member, 
                 affiliate, address, city, address2, state, zip, primary_phone, primary_time, alternate_phone, 
                 alternate_time, email, preference, emergency_name, emergency_phone, special_needs, service_animal, 
                 mobility_need, need_rooming, single_room, days_rooming, gender, roommate_gender, cpap_user, 
-                roommate_cpap, heard_about_training, other_classes, certified) 
+                roommate_cpap, heard_about_training, other_classes, certified, info_id) 
                 VALUES (NOW(), :app_status, :category, :app_type, :fname, :lname, :pronouns, :birthdate, :NAMI_member, 
                 :affiliate, :address, :city, :address2, :state, :zip, :primary_phone, :primary_time, 
                 :alternate_phone, :alternate_time, :email, :preference, :emergency_name, :emergency_phone, 
                 :special_needs, :service_animal, :mobility_need, :need_rooming, :single_room, :days_rooming, 
                 :gender, :roommate_gender, :cpap_user, :roommate_cpap, :heard_about_training, :other_classes, 
-                :certified)";
+                :certified, info_id)";
 
         // save prepared statement
         $statement = $this->_dbh->prepare($sql);
@@ -175,6 +176,9 @@ class UnamiDatabase
         $statement->bindParam(':heard_about_training', $heard_about_training, PDO::PARAM_STR);
         $statement->bindParam(':other_classes', $other_classes, PDO::PARAM_STR);
         $statement->bindParam(':certified', $certified, PDO::PARAM_STR);
+
+        //training info id
+        $statement->bindParam(':info_id', $info_id, PDO::PARAM_STR);
 
         // execute insert into users
         $statement->execute();
@@ -407,7 +411,9 @@ class UnamiDatabase
     function getAppTypesInfo()
     {
         //define query
-        $query = "SELECT info_id, date, location, deadline, app_type, date2 FROM app_type_info";
+        $query = "SELECT info_id, date, location, deadline, app_type, date2 
+                  FROM app_type_info
+                  WHERE active = 1";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
@@ -424,7 +430,8 @@ class UnamiDatabase
         //define query
         $query = "SELECT date, location, deadline, app_type, date2 
                   FROM app_type_info
-                  WHERE info_id = :infoId";
+                  WHERE info_id = :infoId
+                  AND active = 1";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
@@ -455,9 +462,9 @@ class UnamiDatabase
 
         //define query
         $query = 'INSERT INTO app_type_info
-                  (date, location, deadline, app_type, date2)
+                  (date, location, deadline, app_type, date2, active)
                   VALUES
-                  (:date, :location, :deadline, :app_type, :date2)';
+                  (:date, :location, :deadline, :app_type, :date2, 1)';
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
@@ -483,9 +490,9 @@ class UnamiDatabase
      */
     function deleteAppTypeInfo($id) {
         //define query
-        $query = 'DELETE FROM app_type_info
-                  WHERE info_id = :info_id
-                  LIMIT 1';
+        $query = 'UPDATE app_type_info
+                  SET active = 0
+                  WHERE info_id = :info_id;';
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
@@ -509,7 +516,8 @@ class UnamiDatabase
         //define query
         $query = "SELECT COUNT(info_id) AS Trainings
                   FROM app_type_info
-                  WHERE app_type = :id";
+                  WHERE app_type = :id
+                  AND active = 1";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
@@ -532,7 +540,8 @@ class UnamiDatabase
     function countTrainings() {
         //define query
         $query = "SELECT COUNT(info_id) AS Trainings
-                  FROM app_type_info";
+                  FROM app_type_info
+                  WHERE active = 1";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);

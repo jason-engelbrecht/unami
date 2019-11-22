@@ -49,6 +49,7 @@ $f3->route('GET|POST /', function($f3)
             //get training date and location(info)
             $info_id = $_POST["$infoName"];
             $_SESSION['training_info'] = $db->getAppTypeInfo($info_id);
+            $_SESSION['info_id'] = $info_id;
 
             //get training_type
             $_SESSION['training_type'] = $_POST['trainingType'];

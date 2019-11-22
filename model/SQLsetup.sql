@@ -1,7 +1,10 @@
 /*
 SQL STATEMENTS USED
 use for DB setup
+*/
 
+/*
+General application fields
 status:   0 is denied,
           1 is submitted,
           2 is approved,
@@ -11,8 +14,6 @@ category: 0 is archive,
           1 is active,
           2 is waitlist
 */
-
-/* General application fields */
 CREATE TABLE applicants
 (
     applicant_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -54,8 +55,10 @@ CREATE TABLE applicants
     certified MEDIUMTEXT,
     notes MEDIUMTEXT,
     member_expiration VARCHAR(50),
+    info_id INT NOT NULL,
     FOREIGN KEY(app_type) references app_type(app_id),
-    FOREIGN KEY(affiliate) references affiliates(affiliate_id)
+    FOREIGN KEY(affiliate) references affiliates(affiliate_id),
+    FOREIGN KEY(info_id) references app_type_info(info_id)
 );
 
 /* specific application tables */
@@ -117,6 +120,7 @@ CREATE TABLE app_type
     ref_name VARCHAR(50)
 );
 
+-- active 1, inactive 0
 CREATE TABLE app_type_info
 (
     info_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -125,6 +129,7 @@ CREATE TABLE app_type_info
     deadline VARCHAR(200),
     app_type INT,
     date2 VARCHAR(200),
+    active INT,
     FOREIGN KEY(app_type) references app_type(app_id)
 );
 

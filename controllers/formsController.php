@@ -324,7 +324,7 @@ $f3->route('GET|POST /confirmation', function($f3)
 
     global $db;
     $lastId = $db->addApplicant($_SESSION['PersonalInfo'], $_SESSION['AdditionalInfo'],
-        $_SESSION['NotRequired']);
+        $_SESSION['NotRequired'], $_SESSION['info_id']);
 
     Emailer::sendAffiliateEmail($lastId, $_SESSION['PersonalInfo'], $db);
     Emailer::sendConfirmationEmail($_SESSION['PersonalInfo']);

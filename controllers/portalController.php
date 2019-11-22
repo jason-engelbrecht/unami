@@ -272,6 +272,7 @@ $f3->route('GET|POST /trainings', function($f3)
 
     //get trainings
     global $db;
+    $f3->set('db', $db);
     $f3->set('trainings', $db->getAppTypes());
     $f3->set('trainings_infos', $db->getAppTypesInfo());
 
