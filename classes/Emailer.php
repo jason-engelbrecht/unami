@@ -76,18 +76,21 @@ EOD;
      */
     static function sendConfirmationEmail($personalInfo)
     {
-        //$body = 'Thank you for sending your application';
         $toEmail = $personalInfo->getEmail();
+        $member = $personalInfo->getMember();
         $toEmailName = $personalInfo->getFname() .' '.$personalInfo->getLname();
 
         try
         {
+
             $message = (new Swift_Message('UNAMI application'))
                 ->setFrom([EMAIL_USERNAME => 'UNAMI: DO-NOT-REPLY'])
                 ->setTo([$toEmail => $toEmailName]);
             $cid = $message->embed(Swift_Image::fromPath('http://mlee.greenriverdev.com/unami/images/namiLogo.png',
                 'image.png', 'image/png'));
-            $body = <<<EOD
+
+            if ($member == "yes") {
+                $body = <<<EOD
         <html lang="en">
             <body>
                 <div style="background-color: #0c499c">
@@ -96,6 +99,21 @@ EOD;
                 
                 <div>
                     <p><center>Thank you for sending your application!</center></p><br>
+                </div>
+            </body>
+        </html>
+EOD;
+            } else {
+                $body = <<<EOD
+        <html lang="en">
+            <body>
+                <div style="background-color: #0c499c">
+                    <img src="$cid" alt="NAMI WA Logo">
+                </div>
+                
+                <div>
+                    <p><center>Thank you for sending your application!</center></p><br>
+                    
                     <p><center>If you're not a NAMI member, please sign-up 
                     <a href="https://www.nami.org/Get-Involved/Join">here
                     </a> to complete the training with NAMI.</center></p>
@@ -103,6 +121,8 @@ EOD;
             </body>
         </html>
 EOD;
+            }
+
             $message->setBody($body, 'text/html');
 
 
