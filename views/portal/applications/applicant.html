@@ -41,9 +41,7 @@
         {{ @applicant['fname'] }} {{ @applicant['lname'] }}'s Application
     </h1>
 
-    <p class="lead">Here you can view all the details of an application</p>
-
-    <h6 class="mb-4">
+    <h6 class="mb-4 mt-3">
         <a href="{{ @page }}" class="text-decoration-none mt-0 pt-0 text-primary">
             <i class="fas fa-arrow-left fa-sm"></i> Back
         </a>
@@ -54,8 +52,8 @@
         <!-- personal information -->
         <div class="col-lg-6 d-flex">
             <div class="card shadow mb-4 flex-fill">
-                <div class="card-header py-3">
-                    <h5 class="m-0 text-primary"><i class="fas fa-user-circle"></i> Personal Information</h5>
+                <div class="card-header py-3 bg-primary">
+                    <h5 class="m-0 text-white"><i class="fas fa-user-circle"></i> Personal Information</h5>
                 </div>
                 <div class="card-body">
                     <!-- name, pronouns -->
@@ -123,7 +121,7 @@
 
                     <!-- emergency contact -->
                     <div class="row m-1 mb-2">
-                        <h6 class="pl-2"><span class="font-weight-bold">Emergency Contact: </span>
+                        <h6 class="pl-2"><span class="font-weight-bold text-danger">Emergency Contact: </span>
                             {{ @applicant['emergency_name'] }}, {{ @applicant['emergency_phone'] }}
                         </h6>
                     </div>
@@ -135,8 +133,8 @@
         <!-- accomodations -->
         <div class="col-lg-6 d-flex">
             <div class="card shadow mb-4 flex-fill">
-                <div class="card-header py-3">
-                    <h5 class="m-0 text-primary"><i class="fas fa-universal-access"></i> Accommodations</h5>
+                <div class="card-header py-3 bg-primary">
+                    <h5 class="m-0 text-white"><i class="fas fa-universal-access"></i> Accommodations</h5>
                 </div>
                 <div class="card-body">
 
@@ -234,11 +232,34 @@
         <!-- long answer -->
         <div class="col-lg-6 d-flex">
             <div class="card shadow mb-4 flex-fill">
-                <div class="card-header py-3">
-                    <h5 class="m-0 text-primary"><i class="fas fa-question-circle"></i> {{ @applicant['Training'] }} Questions</h5>
+                <div class="card-header py-3 bg-primary">
+                    <h5 class="m-0 text-white"><i class="far fa-calendar-alt"></i> Training Info</h5>
                 </div>
                 <div class="card-body">
-                    coming soon
+                    <div class="row m-1 mb-2">
+                        <h6 class="pl-2"><span class="font-weight-bold">Day 1: </span>
+                            {{ @applicant['Day1'] }}
+                        </h6>
+                    </div>
+
+                    <div class="row m-1 mb-2">
+                        <h6 class="pl-2"><span class="font-weight-bold">Day 2: </span>
+                            {{ @applicant['Day2'] }}
+                        </h6>
+                    </div>
+
+                    <div class="row m-1 mb-2">
+                        <h6 class="pl-2"><span class="font-weight-bold">Location: </span>
+                            {{ @applicant['Location'] }}
+                        </h6>
+                    </div>
+
+                    <div class="row m-1 mb-2">
+                        <h6 class="pl-2"><span class="font-weight-bold">Date Submitted: </span>
+                            {{ date('m/d/Y', strtotime(@applicant['date_submitted'])) }}
+                        </h6>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -247,8 +268,8 @@
         <!-- not required -->
         <div class="col-lg-6 d-flex">
             <div class="card shadow mb-4 flex-fill">
-                <div class="card-header py-3">
-                    <h5 class="m-0 text-primary"><i class="fas fa-question-circle"></i> Additional Questions</h5>
+                <div class="card-header py-3 bg-primary">
+                    <h5 class="m-0 text-white"><i class="fas fa-question-circle"></i> Additional Questions</h5>
                 </div>
                 <div class="card-body">
 
@@ -261,7 +282,7 @@
                     <div class="row m-1 mb-2">
                         <h6 class="pl-2"><span class="font-weight-bold">Have they taken other classes: </span>
                             <check if="{{ trim(@applicant['trained']) == '' }}">
-                                <true>Have not taken any other classes</true>
+                                <true><br>Have not taken any other classes</true>
                                 <false><br>{{ @applicant['trained'] }}</false>
                             </check>
                         </h6>
@@ -282,6 +303,22 @@
         <!-- not required -->
     </div>
     <!-- row -->
+
+    <!-- row -->
+    <div class="row">
+        <!-- long answer -->
+        <div class="col-lg-12 d-flex">
+            <div class="card shadow mb-4 flex-fill">
+                <div class="card-header py-3 bg-primary">
+                    <h5 class="m-0 text-white"><i class="fas fa-question-circle"></i> {{ @applicant['Training'] }} Questions</h5>
+                </div>
+                <div class="card-body">
+                    coming soon
+                </div>
+            </div>
+        </div>
+        <!-- long answer -->
+    </div>
 
 </div>
 <!-- /.container-fluid -->

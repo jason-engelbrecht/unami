@@ -91,6 +91,15 @@
                         </p>
                         <form action="" method="post">
 
+                            <style>
+                                .text-info {
+                                    position: absolute;
+                                    bottom: 10px;
+                                    right: 0;
+                                    left: 0;
+                                }
+                            </style>
+
                             <div class="mb-2 pt-2">
                                 <!-- not all done -->
                                 <check if="{{ @ctr <= 3 }}">
@@ -130,7 +139,7 @@
                                                     <div class="modal-body mx-2">
                                                         <h4 class="mb-4 mt-3">Interested in this training?</h4>
 
-                                                        <label for="{{ @training['ref_name'] }}Info">Select an Available Date and Location</label>
+                                                        <label for="{{ @training['ref_name'] }}Info">Please Select an Available Day 1 and Location</label>
                                                         <select class="form-control mb-4" id="{{ @training['ref_name'] }}Info" name="{{ @training['ref_name'] }}Info">
                                                             <!-- get all training dates and their location -->
                                                             <repeat group="{{ @app_types_info }}" value="{{ @info }}">
