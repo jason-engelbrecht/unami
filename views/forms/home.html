@@ -14,6 +14,8 @@
 
     <!-- custom font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 
     <!-- jquery ui -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -33,7 +35,7 @@
 
 <!-- Jumbotron Header -->
 <header class="jumbotron rounded-0" style="background-color: #CEDAEB">
-    <h1 class="display-4 text-primary text-center">
+    <h1 class="display-4 text-primary text-center homeHeading">
         <span class="font-weight-bold">NAMI WA</span> State Trainings
     </h1>
 </header>
@@ -48,7 +50,7 @@
                     <h5 class="text-center"><i class="fas fa-graduation-cap fa-2x text-primary"></i></h5>
                 </div>
                 <div class="col-lg-8">
-                    <h5 class="pb-2">
+                    <h5 class="pb-2 blurb">
                         Trainings in NAMI Signature programs which allow local
                         affiliates to bring programs to their communities.
                     </h5>
@@ -61,7 +63,7 @@
                     <h5 class="text-center"><i class="fas fa-door-open fa-2x text-primary"></i></h5>
                 </div>
                 <div class="col-lg-8">
-                    <h5 class="pb-2">
+                    <h5 class="pb-2 blurb">
                         All NAMI members or those becoming a member may apply
                         to attend State Training programs.
                     </h5>
@@ -70,7 +72,7 @@
         </div>
     </div>
 
-    <h5 class="pb-4 text-center font-weight-bold">
+    <h5 class="pb-4 text-center blurb">
         <i class="fas fa-star-of-life fa-sm"></i> All trainings are offered
         at no cost to participants.
     </h5>
@@ -86,19 +88,10 @@
                 <div class="card shadow-sm flex-fill">
                     <div class="card-body">
                         <h5 class="card-title mb-4 mt-2"><img src="images/training_logos/{{ @training['ref_name'] }}.jpg" alt="" class="img-fluid text-center"> </h5>
-                        <p class="card-text">
+                        <p class="card-text pb-3">
                             {{ @training_descriptions[@training['app_id']] }}
                         </p>
                         <form action="" method="post">
-
-                            <style>
-                                .text-info {
-                                    position: absolute;
-                                    bottom: 10px;
-                                    right: 0;
-                                    left: 0;
-                                }
-                            </style>
 
                             <div class="mb-2 pt-2">
                                 <!-- not all done -->
@@ -107,14 +100,14 @@
                                         <check if="{{ @db->countTrainingAppTypeInfo(@training['app_id'])['Trainings'] > 0 }}">
                                             <true>
                                                 <h5 class="text-center">
-                                                    <a href="#" class="text-decoration-none text-info"
+                                                    <a href="#" class="text-decoration-none text-primary apply activeApply"
                                                        data-toggle="modal" data-target="#{{ @training['ref_name'] }}Modal">
                                                         <i class="fas fa-info-circle"></i> Apply
                                                     </a>
                                                 </h5>
                                             </true>
                                             <false>
-                                                <h5 class="text-center text-info">
+                                                <h5 class="text-center text-primary apply">
                                                     No Trainings Currently Available
                                                 </h5>
                                             </false>
@@ -125,13 +118,13 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
 
-                                                    <div class="modal-header bg-info">
+                                                    <div class="modal-header" style="background-color: #0c499c;">
                                                         <h4 class="modal-title text-white" id="modalLabel2">
                                                             <i class="fas fa-info-circle"></i>
                                                             {{ @training['app_type'] }}
                                                         </h4>
 
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
@@ -155,14 +148,14 @@
 
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-info" name="{{ @training['ref_name'] }}Submit">Apply</button>
+                                                        <button type="submit" class="btn btn-primary" name="{{ @training['ref_name'] }}Submit">Apply</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </true>
                                     <false>
-                                        <h5 class="text-center text-info">Coming soon!</h5>
+                                        <h5 class="text-center text-primary apply">Coming soon!</h5>
                                     </false>
                                 </check>
                             </div>

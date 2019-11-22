@@ -45,3 +45,22 @@ body {
 .navbar-brand:hover {
     filter: brightness(85%);
 }
+
+.apply {
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+    left: 0;
+}
+
+.activeApply:hover {
+    filter: brightness(130%);
+}
+
+.homeHeading {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.blurb {
+    font-family: 'Raleway', sans-serif;
+}

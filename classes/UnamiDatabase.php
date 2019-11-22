@@ -800,19 +800,4 @@ class UnamiDatabase
 
         return $result;
     }
-    /*
-     when info is integrated
-       SELECT *,
-       affiliates.name AS Affiliate,
-       app_type.app_type AS Training,
-       applicants.email AS Email
-       FROM applicants
-       INNER JOIN affiliates ON applicants.affiliate = affiliates.affiliate_id
-       INNER JOIN app_type ON applicants.app_type = app_type.app_id
-       INNER JOIN app_type_info ON applicants.info_id = app_type_info.info_id
-       WHERE applicant_id = :appID
-       AND applicants.affiliate = affiliates.affiliate_id
-       AND applicants.app_type = app_type.app_id
-       AND applicants.info_id = app_type_info.info_id
-     */
 }
