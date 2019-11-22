@@ -54,7 +54,7 @@ $f3->route('GET|POST /', function($f3)
             $_SESSION['training_type'] = $_POST['trainingType'];
 
             //go to right form
-            $f3->reroute("/$refName");
+            $f3->reroute("/description?type=$refName");
         }
     }
 

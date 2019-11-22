@@ -8,31 +8,14 @@
 global $f3;
 global $db;
 
-//family support group start
-$f3->route('GET /familySupportGroup', function($f3)
+//must have a get variable named type to work
+$f3->route('GET /description', function($f3)
 {
-    $f3->set('page_title', 'Family Support Group');
+    $f3->set('page_title', 'Training Description');
+    $trainingRoute = $_GET['type'];
 
     $view = new Template();
-    echo $view->render('views/forms/specific_form_pages/FSG/FSGtrainingDescription.html');
-});
-
-//peer 2 peer start
-$f3->route('GET /peer2peer', function($f3)
-{
-    $f3->set('page_title', 'Peer 2 Peer');
-
-    $view = new Template();
-    echo $view->render('views/forms/specific_form_pages/P2P/P2PtrainingDescription.html');
-});
-
-//ending the silence start
-$f3->route('GET /endingTheSilence', function($f3)
-{
-    $f3->set('page_title', 'Ending the Silence');
-
-    $view = new Template();
-    echo $view->render('views/forms/specific_form_pages/ETS/ETStrainingDescription.html');
+    echo $view->render("views/forms/specific_form_pages/$trainingRoute/trainingDescription.html");
 });
 
 $f3->route('GET|POST /personal_information', function($f3)
