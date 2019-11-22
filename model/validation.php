@@ -158,7 +158,7 @@ function validAccommodationsForm()
 /** Checks if the long answer form is valid
  * @return bool if the long answers is valid
  */
-function validLongAnswersForm()
+function validFSGLongAnswersForm()
 {
     global $f3;
     $isValid = true;
@@ -209,6 +209,126 @@ function validLongAnswersForm()
             $isValid = false;
             $f3->set("errors['coFacWhere']", "Please type something about where you want to co-facilitate");
         }
+    }
+
+    return $isValid;
+}
+
+/**
+ * Checks if P2P long answers are valid
+ * @return bool whether or not the P2P long answers form is valid
+ */
+function validP2PLongAnswersForm()
+{
+    global $f3;
+    $isValid = true;
+
+    if($f3->get('convict') == 'yes')
+    {
+        if (!validRequiredTextarea($f3->get('convictText')))
+        {
+            $isValid = false;
+            $f3->set("errors['convict']", "Please type something about your conviction");
+        }
+    }
+
+    if (!validRequiredTextarea($f3->get('whyLeader')))
+    {
+        $isValid = false;
+        $f3->set("errors['whyLeader']", "Please type something about why you want to become a Peer to Peer leader");
+    }
+
+    if (!validRequiredTextarea($f3->get('mentalHealth')))
+    {
+        $isValid = false;
+        $f3->set("errors['mentalHealth']", "Please type something about how you define or describe mental health recovery");
+    }
+
+    if (!validRequiredTextarea($f3->get('giveBack')))
+    {
+        $isValid = false;
+        $f3->set("errors['giveBack']", "Please type something why you feel you are ready to “give back” to others");
+    }
+
+    return $isValid;
+}
+
+/**
+ * Checks if ETS long answers are valid
+ * @return bool whether or not the ETS long answers form is valid
+ */
+function validETSLongAnswersForm()
+{
+    global $f3;
+    $isValid = true;
+
+    if($f3->get('convict') == 'yes')
+    {
+        if (!validRequiredTextarea($f3->get('convictText')))
+        {
+            $isValid = false;
+            $f3->set("errors['convict']", "Please type something about your conviction");
+        }
+    }
+
+    if (!alphabetical($f3->get('availability')))
+    {
+        $isValid = false;
+        $f3->set("errors['availability']", "Please type something about your availability");
+    }
+
+    if (!validRequiredTextarea($f3->get('education')))
+    {
+        $isValid = false;
+        $f3->set("errors['education']", "Please type something about your education");
+    }
+
+    if (!validRequiredTextarea($f3->get('experience')))
+    {
+        $isValid = false;
+        $f3->set("errors['experience']", "Please type something about your work/volunteer experience");
+    }
+
+    if (!validRequiredTextarea($f3->get('languages')))
+    {
+        $isValid = false;
+        $f3->set("errors['languages']", "Please type something about the languages you know");
+    }
+
+    if (!validRequiredTextarea($f3->get('diagnosis')))
+    {
+        $isValid = false;
+        $f3->set("errors['diagnosis']", "Please type something ");
+    }
+
+    if (!validRequiredTextarea($f3->get('whyPresenter')))
+    {
+        $isValid = false;
+        $f3->set("errors['whyPresenter']", "Please type something about why you want to become a presenter");
+    }
+
+    if (!validRequiredTextarea($f3->get('personalExperience')))
+    {
+        $isValid = false;
+        $f3->set("errors['personalExperience']", "Please type something about your personal experience");
+    }
+
+    if (!validRequiredTextarea($f3->get('supportiveExperience')))
+    {
+        $isValid = false;
+        $f3->set("errors['supportiveExperience']", "Please type something about a supportive experience");
+    }
+
+    if (!validRequiredTextarea($f3->get('recoveryMeaning')))
+    {
+        $isValid = false;
+        $f3->set("errors['recoveryMeaning']", "Please type something about what mental recovery means to you");
+    }
+
+    if (!validRequiredTextarea($f3->get('roles')))
+    {
+        $isValid = false;
+        $f3->set("errors['roles']", "Please type something about your view on roles");
     }
 
     return $isValid;

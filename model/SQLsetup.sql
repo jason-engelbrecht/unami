@@ -71,7 +71,7 @@ CREATE TABLE FSG
     whom_co MEDIUMTEXT,
     where_co MEDIUMTEXT,
     FOREIGN KEY(applicant_id) references applicants(applicant_id)
-)
+);
 
 CREATE TABLE P2P
 (
@@ -83,7 +83,7 @@ CREATE TABLE P2P
     describe_recovery MEDIUMTEXT,
     give_back MEDIUMTEXT,
     FOREIGN KEY(applicant_id) references applicants(applicant_id)
-)
+);
 
 CREATE TABLE ETS
 (
@@ -107,7 +107,7 @@ CREATE TABLE ETS
     recovery MEDIUMTEXT,
     view_roles MEDIUMTEXT,
     FOREIGN KEY(applicant_id) references applicants(applicant_id)
-)
+);
 
 /* application/training type tables */
 CREATE TABLE app_type

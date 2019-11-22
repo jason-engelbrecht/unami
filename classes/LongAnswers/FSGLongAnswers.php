@@ -5,7 +5,7 @@
  * @author Max Lee
  * @version 10/19/19
  */
-class LongAnswers
+class FSGLongAnswers
 {
     private $_relativeMentalIllness;
     private $_relativeMentalIllnessText;

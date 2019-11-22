@@ -13,6 +13,7 @@ $f3->route('GET /description', function($f3)
 {
     $f3->set('page_title', 'Training Description');
     $trainingRoute = $_GET['type'];
+    $_SESSION['trainingRoute'] = $trainingRoute;
 
     $view = new Template();
     echo $view->render("views/forms/specific_form_pages/$trainingRoute/trainingDescription.html");
@@ -208,87 +209,17 @@ $f3->route('GET|POST /additional_information', function($f3)
 $f3->route('GET|POST /long_answer', function($f3)
 {
     $f3->set('page_title', 'Long Answer');
+    $trainingRoute = $_SESSION['trainingRoute'];
 
-    if($_SESSION['applicationStarted'] != 1) {
+    if($_SESSION['applicationStarted'] != 1)
+    {
         $f3->reroute('/');
     }
 
-    if(!empty($_POST))
-    {
-        // get data from form
-        $relativeMentalIllness = $_POST['relativeMentalIllness'];
-        $relativeMentalIllnessText = $_POST['relativeMentalIllnessText'];
-        $convict = $_POST['convict'];
-        $convictText = $_POST['convictText'];
-        $whyFacilitator = $_POST['whyFacilitator'];
-        $experience = $_POST['experience'];
-        $coFacWhom = $_POST['coFacWhom'];
-        $coFacWhomText = $_POST['coFacWhomText'];
-        $coFacWhere = $_POST['coFacWhere'];
-        $coFacWhereText = $_POST['coFacWhereText'];
-
-        if($relativeMentalIllness == 'no')
-        {
-            $relativeMentalIllnessText = 'N/A';
-        }
-
-        if($convict == 'no')
-        {
-            $convictText = 'N/A';
-        }
-
-        if($coFacWhom == 'no')
-        {
-            $coFacWhomText = 'N/A';
-        }
-
-        if($coFacWhere == 'no')
-        {
-            $coFacWhereText = 'N/A';
-        }
-
-        // add data to hive
-        $f3->set('relativeMentalIllness', $relativeMentalIllness);
-        $f3->set('relativeMentalIllnessText', $relativeMentalIllnessText);
-        $f3->set('convict', $convict);
-        $f3->set('convictText', $convictText);
-        $f3->set('whyFacilitator', $whyFacilitator);
-        $f3->set('experience', $experience);
-        $f3->set('coFacWhom', $coFacWhom);
-        $f3->set('coFacWhomText', $coFacWhomText);
-        $f3->set('coFacWhere', $coFacWhere);
-        $f3->set('coFacWhereText', $coFacWhereText);
-
-        $_SESSION['LongAnswer'] =  new LongAnswers($relativeMentalIllness, $relativeMentalIllnessText, $convict,
-            $convictText, $whyFacilitator, $experience, $coFacWhom, $coFacWhomText, $coFacWhere, $coFacWhereText);
-
-        /*
-        if($_POST['goBack'] = 'goBack')
-        {
-            $f3->reroute('/additional_information');
-        }
-        */
-
-        // validate data
-        if(validLongAnswersForm())
-        {
-            if($_POST['goToReview'] == true)
-            {
-                $f3->reroute('/review');
-            }
-
-            $f3->reroute('/not_required');
-        }
-    }
-
-    if(!isset($_SESSION['LongAnswer']))
-    {
-        $_SESSION['LongAnswer'] = new LongAnswers('','','','',
-            '','', '', '', '', '');
-    }
+    require_once "controllers/longAnswerControllers/$trainingRoute/longAnswerController.php";
 
     $view = new Template();
-    echo $view->render('views/forms/specific_form_pages/FSG/longAnswer.html');
+    echo $view->render("views/forms/specific_form_pages/$trainingRoute/longAnswer.html");
 });
 
 $f3->route('GET|POST /not_required', function($f3)
