@@ -44,6 +44,8 @@ $f3->route('GET|POST /', function($f3)
         $refName = $type['ref_name'];
         $postName = $refName.'Submit';
         $infoName = $refName.'Info';
+
+
         if(isset($_POST["$postName"]))
         {
             //get training date and location(info)

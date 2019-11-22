@@ -130,19 +130,39 @@
                                                     </div>
 
                                                     <div class="modal-body mx-2">
-                                                        <h4 class="mb-4 mt-3">Interested in this training?</h4>
+                                                        <h4 class="mb-4 mt-3">Please select an available training</h4>
 
-                                                        <label for="{{ @training['ref_name'] }}Info">Please Select an Available Day 1 and Location</label>
+                                                        <repeat group="{{ @app_types_info }}" value="{{ @info }}" counter="{{ @ctr }}">
+                                                            <check if="{{ @info['app_type'] == @training['app_id'] }}">
+                                                                <div class="form-check mb-4">
+                                                                    <input class="form-check-input mt-4" type="radio"
+                                                                           name="{{ @training['ref_name'] }}Info"
+                                                                           id="{{ @info['info_id'] }}Info"
+                                                                           value="{{ @info['info_id'] }}"
+                                                                    <check if="{{ @ctr == 1 }}">checked</check>>
+                                                                    <h6>
+                                                                        <label class="form-check-label" for="{{ @info['info_id'] }}Info">
+                                                                            <span class="font-weight-bold">Day 1: </span>{{ @info['date'] }}
+                                                                            <br><span class="font-weight-bold">Day 2: </span>{{ @info['date2'] }}
+                                                                            <br><span class="font-weight-bold">Location: </span>{{ @info['location'] }}
+                                                                        </label>
+                                                                    </h6>
+                                                                </div>
+                                                            </check>
+                                                        </repeat>
+
+
+                                                        <!--<label for="{{ @training['ref_name'] }}Info">Please Select an Available Day 1 and Location</label>
                                                         <select class="form-control mb-4" id="{{ @training['ref_name'] }}Info" name="{{ @training['ref_name'] }}Info">
-                                                            <!-- get all training dates and their location -->
+                                                            &lt;!&ndash; get all training dates and their location &ndash;&gt;
                                                             <repeat group="{{ @app_types_info }}" value="{{ @info }}">
                                                                 <check if="{{ @info['app_type'] == @training['app_id'] }}">
                                                                     <option value="{{ @info['info_id'] }}">{{ @info['date'] }} in {{ @info['location'] }}</option>
                                                                 </check>
                                                             </repeat>
-                                                            <!-- get all training dates and their location -->
+                                                            &lt;!&ndash; get all training dates and their location &ndash;&gt;
 
-                                                        </select>
+                                                        </select>-->
                                                         <input type="hidden" name="trainingType" value="{{ @training['app_id'] }}">
                                                     </div>
 
