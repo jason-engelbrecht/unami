@@ -404,7 +404,7 @@ class UnamiDatabase
     }
 
     /**
-     * Get all application types info
+     * Get all application types info that is active
      *
      * @return mixed
      */
@@ -414,6 +414,28 @@ class UnamiDatabase
         $query = "SELECT info_id, date, location, deadline, app_type, date2 
                   FROM app_type_info
                   WHERE active = 1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Get all application types info that is old
+     *
+     * @return mixed
+     */
+    function getOldAppTypesInfo()
+    {
+        //define query
+        $query = "SELECT info_id, date, location, deadline, app_type, date2 
+                  FROM app_type_info
+                  WHERE active = 0";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);

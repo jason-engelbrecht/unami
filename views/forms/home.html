@@ -108,7 +108,7 @@
                                             </true>
                                             <false>
                                                 <h5 class="text-center text-primary apply">
-                                                    No Trainings Currently Available
+                                                    Coming Soon!
                                                 </h5>
                                             </false>
                                         </check>
@@ -134,7 +134,7 @@
 
                                                         <repeat group="{{ @app_types_info }}" value="{{ @info }}" counter="{{ @ctr }}">
                                                             <check if="{{ @info['app_type'] == @training['app_id'] }}">
-                                                                <div class="form-check mb-4">
+                                                                <div class="form-check mb-4 ml-2">
                                                                     <input class="form-check-input mt-4" type="radio"
                                                                            name="{{ @training['ref_name'] }}Info"
                                                                            id="{{ @info['info_id'] }}Info"

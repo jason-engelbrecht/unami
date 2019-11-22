@@ -299,6 +299,24 @@ $f3->route('GET|POST /trainings', function($f3)
     echo $view->render('views/portal/other/trainings.html');
 });
 
+$f3->route('GET /oldTrainings', function($f3)
+{
+    if($_SESSION['loggedIn'] !== 1) {
+        $f3->reroute('/login');
+    }
+
+    $f3->set('page', 'trainings');
+    $f3->set('page_title', 'Old Trainings');
+
+    //get all affiliates
+    global $db;
+    $f3->set('oldTrainings', $db->getOldAppTypesInfo());
+
+    $view = new Template();
+    echo $view->render('views/portal/other/oldTrainings.html');
+});
+
+
 //full application
 $f3->route('GET /@applicant', function($f3, $params)
 {

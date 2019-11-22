@@ -48,3 +48,29 @@ $(document).ready(function() {
     );
 });
 
+$(document).ready(function() {
+    $('#oldTrainingDataTable').DataTable( {
+        "bStateSave": true,
+        "fnStateSave": function (oSettings, oData) {
+            localStorage.setItem('offersDataTables', JSON.stringify(oData));
+        },
+        "fnStateLoad": function (oSettings) {
+            return JSON.parse(localStorage.getItem('offersDataTables'));
+        }
+    } );
+} );
+
+$(document).ready(function() {
+    $('#affiliatesDataTable').DataTable( {
+        "bStateSave": true,
+        "fnStateSave": function (oSettings, oData) {
+            localStorage.setItem('offersDataTables', JSON.stringify(oData));
+        },
+        "fnStateLoad": function (oSettings) {
+            return JSON.parse(localStorage.getItem('offersDataTables'));
+        }
+    } );
+} );
+
+
+

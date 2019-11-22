@@ -1,0 +1,61 @@
+<include href="views/portal/includes/header.html"/>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h2 text-primary"><i class="far fa-calendar-times"></i> Old Trainings </h1>
+
+    <h6 class="mb-4 mt-3">
+        <a href="trainings" class="text-decoration-none mt-0 pt-0 text-primary">
+            <i class="fas fa-arrow-left fa-sm"></i> Back
+        </a>
+    </h6>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="m-0 text-gray-800">Showing All Old Trainings
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="oldTrainingDataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr class="bg-primary text-white">
+                        <th>Day 1</th>
+                        <th>Day 2</th>
+                        <th>Location</th>
+                        <th>Deadline</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr class="bg-light">
+                        <th>Day 1</th>
+                        <th>Day 2</th>
+                        <th>Location</th>
+                        <th>Deadline</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <!-- all active applicants -->
+                    <repeat group="{{ @oldTrainings }}" value="{{ @oldTraining }}">
+                        <tr>
+                            <td>{{ @oldTraining['date'] }}</td>
+                            <td>{{ @oldTraining['date2'] }}</td>
+                            <td>{{ @oldTraining['location'] }}</td>
+                            <td>{{ @oldTraining['deadline'] }}</td>
+                        </tr>
+                    </repeat>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<include href="views/portal/includes/footer.html"/>
