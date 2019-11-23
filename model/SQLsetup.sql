@@ -66,7 +66,6 @@ CREATE TABLE FSG
 (
     FSG_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     applicant_id INT NOT NULL,
-    training_info VARCHAR(100),
     relative_mental MEDIUMTEXT,
     conviction MEDIUMTEXT,
     why_want MEDIUMTEXT,
@@ -80,7 +79,6 @@ CREATE TABLE P2P
 (
     P2P_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     applicant_id INT NOT NULL,
-    training_info VARCHAR(100),
     conviction MEDIUMTEXT,
     why_want MEDIUMTEXT,
     describe_recovery MEDIUMTEXT,
@@ -92,7 +90,6 @@ CREATE TABLE ETS
 (
     ETS_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     applicant_id INT NOT NULL,
-    training_info VARCHAR(100),
     conviction MEDIUMTEXT,
     availability MEDIUMTEXT,
     education VARCHAR(200),
