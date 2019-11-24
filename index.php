@@ -28,7 +28,6 @@ $f3->route('GET|POST /', function($f3)
     global $db;
     $f3->set('db', $db);
 
-
     $f3->set('page_title', 'Trainings');
 
     //get app types

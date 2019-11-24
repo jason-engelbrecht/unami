@@ -289,11 +289,15 @@ $f3->route('GET|POST /review', function($f3)
 {
     global $db;
 
-    if($_SESSION['applicationStarted'] != 1) {
+    if($_SESSION['applicationStarted'] != 1)
+    {
         $f3->reroute('/');
     }
 
     $f3->set('page_title', 'Review');
+
+    $trainingRoute = $_SESSION['trainingRoute'];
+    $f3->set('reviewIncludes', "views/forms/specific_form_pages/$trainingRoute/reviewIncludes.html");
     $f3->set('affiliateName', $db->getAffiliateName($_SESSION['PersonalInfo']->getAffiliate()));
 
     $view = new Template();

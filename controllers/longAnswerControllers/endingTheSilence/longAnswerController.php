@@ -3,7 +3,6 @@ global $f3;
 
 if(!empty($_POST))
 {
-    var_dump($_POST);
     // get data from form
     $convict = $_POST['convict'];
     $convictText = $_POST['convictText'];
