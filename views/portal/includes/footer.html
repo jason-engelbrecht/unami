@@ -88,11 +88,53 @@
             cutoutPercentage: 80,
         },
     });
-
-
-
-
 </script>
+
+<!--Bar chart for Applications Submitted by Year-->
+<script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
+
+
+    var submit = "{{ @numSubmitted['Submitted'] }}";
+    var year = "{{@numDate['Date']}}";
+
+
+    // Pie Chart Example
+    var ctx = document.getElementById("myBarChart");
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["2019", "2020", "2021", "2020"],
+            datasets: [{
+                data: [submit, 10, 5, 4,''],
+                backgroundColor: ['#36b9cc', '#f6c23e', '#e74a3b', '#1cc88a'],
+                hoverBorderColor: "rgba(234, 236, 244, 250)",
+
+            }],
+        },
+
+        options: {
+            maintainAspectRatio: false,
+            tooltips: {
+                backgroundColor: "rgb(255,255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+            },
+            legend: {
+                display: false
+            },
+            cutoutPercentage: 100,
+        },
+    });
+</script>
+
 </body>
 
 </html>
