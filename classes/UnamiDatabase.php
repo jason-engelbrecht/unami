@@ -60,7 +60,7 @@ class UnamiDatabase
                 :alternate_phone, :alternate_time, :email, :preference, :emergency_name, :emergency_phone, 
                 :special_needs, :service_animal, :mobility_need, :need_rooming, :single_room, :days_rooming, 
                 :gender, :roommate_gender, :cpap_user, :roommate_cpap, :heard_about_training, :other_classes, 
-                :certified, info_id)";
+                :certified, :info_id)";
 
         // save prepared statement
         $statement = $this->_dbh->prepare($sql);
@@ -184,6 +184,102 @@ class UnamiDatabase
         $statement->execute();
 
         return $this->_dbh->lastInsertId();
+    }
+
+    /**
+     * Inserts answers to FamilySupportGroup questions
+     * @param $applicantId int id of last inserted
+     * @param $FSGAnswers FSGLongAnswers object that holds all data
+     */
+    function insertFSGAnswers($applicantId, $FSGAnswers)
+    {
+        //prepare SQL statement
+        $sql = "INSERT INTO FSG(applicant_id, relative_mental, conviction, why_want, experience, whom_co, where_co) 
+                VALUES (:applicant_id, :relative_mental, :conviction, :why_want, :experience, :whom_co, :where_co)";
+
+        //save prepared statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //assign values: already in $FSGAnswers
+        //bind params
+        $statement->bindParam(':applicant_id', $applicantId, PDO::PARAM_INT);
+        $statement->bindParam(':relative_mental', $FSGAnswers->getRelativeMentalIllness(), PDO::PARAM_STR);
+        $statement->bindParam(':conviction', $FSGAnswers->getConvictText(), PDO::PARAM_STR);
+        $statement->bindParam(':why_want', $FSGAnswers->getWhyFacilitator(), PDO::PARAM_STR);
+        $statement->bindParam(':experience', $FSGAnswers->getExperience(), PDO::PARAM_STR);
+        $statement->bindParam(':whom_co', $FSGAnswers->getCoFacWhomText(), PDO::PARAM_STR);
+        $statement->bindParam(':where_co', $FSGAnswers->getCoFacWhereText(), PDO::PARAM_STR);
+
+        //execute SQL statement
+        $statement->execute();
+    }
+
+    /**
+     * Inserts the answers to P2P's long answer questions
+     * @param $applicantId int last applicant inserted
+     * @param $P2PAnswers P2PLongAnswers holds all P2P long answers
+     */
+    function insertP2PAnswers($applicantId, $P2PAnswers)
+    {
+        //prepare SQL statement
+        $sql = "INSERT INTO P2P(applicant_id, conviction, why_want, describe_recovery, give_back) 
+                VALUES (:applicant_id, :conviction, :why_want, :describe_recovery, :give_back)";
+
+        //save prepared statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //assign values: already in $P2PAnswers
+        //bind params
+        $statement->bindParam(':applicant_id', $applicantId, PDO::PARAM_INT);
+        $statement->bindParam(':conviction', $P2PAnswers->getConvictText(), PDO::PARAM_STR);
+        $statement->bindParam(':why_want', $P2PAnswers->getWhyLeader(), PDO::PARAM_STR);
+        $statement->bindParam(':describe_recovery', $P2PAnswers->getMentalHealth(), PDO::PARAM_STR);
+        $statement->bindParam(':give_back', $P2PAnswers->getGiveBack(), PDO::PARAM_STR);
+
+        //execute SQL statement
+        $statement->execute();
+    }
+
+    /**
+     * Inserts the ETS long answer's into the DB
+     * @param $applicantId int last applicant inserted
+     * @param $ETSAnswers ETSLongAnswers holds all answers
+     */
+    function insertETSAnswers($applicantId, $ETSAnswers)
+    {
+        //prepare SQL statement
+        $sql = "INSERT INTO ETS(applicant_id, conviction, availability, education, experience, languages, age, 
+                diagnosis, self_disclosure, positive_outlook, background_check, why_want, 
+                mental_experience, support_experience, recovery, view_roles) 
+                VALUES (:applicant_id, :conviction, :availability, :education, :experience, :languages, :age, 
+                :diagnosis, :self_disclosure, :positive_outlook, :background_check, :why_want, 
+                :mental_experience, :support_experience, :recovery, :view_roles)";
+
+        //save prepared statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //assign values: already in $P2PAnswers
+        //bind params
+        $statement->bindParam(':applicant_id', $applicantId, PDO::PARAM_INT);
+        $statement->bindParam(':conviction', $ETSAnswers->getConvictText(), PDO::PARAM_STR);
+        $statement->bindParam(':availability', $ETSAnswers->getAvailability(), PDO::PARAM_STR);
+        $statement->bindParam(':education', $ETSAnswers->getEducation(), PDO::PARAM_STR);
+        $statement->bindParam(':experience', $ETSAnswers->getExperience(), PDO::PARAM_STR);
+        $statement->bindParam(':languages', $ETSAnswers->getLanguages(), PDO::PARAM_STR);
+        $statement->bindParam(':age', $ETSAnswers->getYoungAdult(), PDO::PARAM_STR);
+        //$statement->bindParam(':description', $ETSAnswers->get(), PDO::PARAM_STR);
+        $statement->bindParam(':diagnosis', $ETSAnswers->getDiagnosis(), PDO::PARAM_STR);
+        $statement->bindParam(':self_disclosure', $ETSAnswers->getSelfDisclosure(), PDO::PARAM_STR);
+        $statement->bindParam(':positive_outlook', $ETSAnswers->getPositiveOutlook(), PDO::PARAM_STR);
+        $statement->bindParam(':background_check', $ETSAnswers->getBackgroundCheck(), PDO::PARAM_STR);
+        $statement->bindParam(':why_want', $ETSAnswers->getWhyPresenter(), PDO::PARAM_STR);
+        $statement->bindParam(':mental_experience', $ETSAnswers->getPersonalExperience(), PDO::PARAM_STR);
+        $statement->bindParam(':support_experience', $ETSAnswers->getSupportiveExperience(), PDO::PARAM_STR);
+        $statement->bindParam(':recovery', $ETSAnswers->getRecoveryMeaning(), PDO::PARAM_STR);
+        $statement->bindParam(':view_roles', $ETSAnswers->getRoles(), PDO::PARAM_STR);
+
+        //execute SQL statement
+        $statement->execute();
     }
 
     //////////////////////////////////////////////////AFFILIATE/////////////////////////////////////////////////////////

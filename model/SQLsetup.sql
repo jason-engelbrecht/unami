@@ -96,7 +96,6 @@ CREATE TABLE ETS
     experience VARCHAR(200),
     languages VARCHAR(200),
     age VARCHAR(100),
-    description VARCHAR(200),
     diagnosis VARCHAR(200),
     self_disclosure CHAR(10),
     positive_outlook CHAR(10),

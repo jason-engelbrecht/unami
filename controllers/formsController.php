@@ -312,12 +312,14 @@ $f3->route('GET|POST /performance_agreement', function($f3)
 
     $f3->set('page_title', 'Performance Agreement');
 
-    if(!empty($_POST)) {
+    if(!empty($_POST))
+    {
         $f3->reroute('/confirmation');
     }
 
+    $trainingRoute = $_SESSION['trainingRoute'];
     $view = new Template();
-    echo $view->render('views/forms/general_form_pages/performanceAgreement.html');
+    echo $view->render("views/forms/specific_form_pages/$trainingRoute/performanceAgreement.html");
 });
 
 $f3->route('GET|POST /confirmation', function($f3)
@@ -329,6 +331,19 @@ $f3->route('GET|POST /confirmation', function($f3)
     global $db;
     $lastId = $db->addApplicant($_SESSION['PersonalInfo'], $_SESSION['AdditionalInfo'],
         $_SESSION['NotRequired'], $_SESSION['info_id']);
+
+    switch ($_SESSION['trainingRoute'])
+    {
+        case 'familySupportGroup':
+            $db->insertFSGAnswers($lastId, $_SESSION['LongAnswer']);
+            break;
+        case 'peer2peer':
+            $db->insertP2PAnswers($lastId, $_SESSION['LongAnswer']);
+            break;
+        case 'endingTheSilence':
+            $db->insertETSAnswers($lastId, $_SESSION['LongAnswer']);
+            break;
+    }
 
     Emailer::sendAffiliateEmail($lastId, $_SESSION['PersonalInfo'], $db);
     Emailer::sendConfirmationEmail($_SESSION['PersonalInfo']);
