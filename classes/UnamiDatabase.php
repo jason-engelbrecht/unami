@@ -938,6 +938,28 @@ class UnamiDatabase
         return $result;
     }
 
+    function getLongAnswer($applicant_id, $application_type) {
+        //define query
+        $query = "SELECT *
+                  FROM :table
+                  WHERE applicant_id = :applicant_id";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //bind parameter
+        $statement->bindParam(':applicant_id', $applicant_id, PDO::PARAM_STR);
+        $statement->bindParam(':table', $application_type, PDO::PARAM_STR);
+
+        //execute
+        $statement->execute();
+
+        //get result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
     /**
      * @param $applicationId int
      * @return mixed array with all the applicants

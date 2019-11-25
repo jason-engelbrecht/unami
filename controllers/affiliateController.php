@@ -41,10 +41,27 @@ $f3->route('GET|POST /affiliate_review/@applicantId/@hashcode', function($f3, $p
         $f3->reroute('/application_reviewed');
     }
 
+    //table names for reference
+    $tables = array(
+        1 => 'FSG',
+        2 => 'P2P',
+        3=> 'ETS');
+
+    //get app id
+    $app_id = $params['applicantId'];
+
+    //get app type
+    $app_type = $applicant['app_type'];
+    $table = $tables[$app_type];
+
+    //pull data based on app type and id
+    $longAnswers = $db->getLongAnswer($app_id, $table);
+
+    //set to hive
+    $f3->set('longAnswers', $longAnswers);
+
     $f3->set('applicant', $applicant);
     $f3->set('affiliate', $db->getAffiliateName($applicant['affiliate']));
-
-
 
     $view = new Template();
     echo $view->render('views/affiliate/affiliateReview.html');
