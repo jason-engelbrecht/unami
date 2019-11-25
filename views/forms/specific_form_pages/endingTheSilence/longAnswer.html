@@ -51,19 +51,25 @@
                                 kind, harassment of any kind, or stalking?</h5>
 
                             <div class="form-check form-check-inline ml-2">
-                                <input name="convict" class="form-check-input" type="radio" id="yesConvict" value="yes" required
+                                <input name="convict" class="form-check-input" type="radio" id="yesConvict" value="yes"
+                                       required <check
+                                    if="{{ $_SESSION['LongAnswer']->getConvict() == 'yes' }}">
+                                    checked</check>>
                                 <label class="form-check-label" for="yesConvict">Yes</label>
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input name="convict" class="form-check-input" type="radio" id="noConvict" value="no" required
+                                <input name="convict" class="form-check-input" type="radio" id="noConvict" value="no"
+                                       required <check
+                                    if="{{ $_SESSION['LongAnswer']->getConvict() == 'no' }}">
+                                    checked</check>
                                 <label class="form-check-label" for="noConvict">No</label>
                             </div><br>
 
-                            <div class="form-row mt-3 ml-2" id="textbox3" style="display: none">
+                            <div class="form-row mt-3 ml-2" id="convictText" style="display: none">
                                 <label>Please explain why you selected "Yes"
                                     <br><textarea class="form-control" rows="4" cols="50" name="convictText"
-                                    ></textarea>
+                                    >{{ $_SESSION['LongAnswer']->getConvictText() }}</textarea>
                                 </label>
                             </div>
                         </div>
@@ -78,7 +84,8 @@
                             <div class="form-row ml-1">
                                 <h5 class="mb-0"><label for="availability">Availability to Present</label></h5>
                                 <input name="availability" type="text" class="form-control" id="availability" required
-                                       value="" placeholder="Morning - Monday, Tuesday, etc.">
+                                       value="{{ $_SESSION['LongAnswer']->getAvailability() }}"
+                                       placeholder="Morning - Monday, Tuesday, etc.">
                             </div>
 
 
@@ -90,7 +97,8 @@
                                 <div class="form-group col-md-6 pt-3">
                                     <h5 class="mb-0"><label for="education">Education</label></h5>
                                     <input name="education" type="text" class="form-control" id="education"
-                                           required value="" placeholder="Last degree completed">
+                                           required value="{{ $_SESSION['LongAnswer']->getEducation() }}"
+                                           placeholder="Last degree completed">
                                 </div>
                             </div>
 
@@ -100,7 +108,8 @@
                                 <div class="form-group col-md-6 ml-1">
                                     <h5 class="mb-0"><label for="experience">Work/Volunteer Experience</label></h5>
                                     <input name="experience" type="text" class="form-control" id="experience"
-                                           required value="" placeholder="Work/Volunteer Experience">
+                                           required value="{{ $_SESSION['LongAnswer']->getExperience() }}"
+                                           placeholder="Work/Volunteer Experience">
                                 </div>
                             </div>
 
@@ -110,7 +119,8 @@
                                 <div class="form-group col-md-6 ml-1">
                                     <h5 class="mb-0"><label for="languages">What language(s) do you speak fluently?</label></h5>
                                     <input name="languages" type="text" class="form-control" id="languages"
-                                           required value="" placeholder="English, Spanish, etc...">
+                                           required value="{{ $_SESSION['LongAnswer']->getLanguages() }}"
+                                           placeholder="English, Spanish, etc...">
                                 </div>
                             </div>
 
@@ -118,9 +128,21 @@
                             <div class="form-row mb-4">
                                 <div class="form-group col-md-6 ml-1">
                                     <p class="lead mb-2">Are you a young adult?</p>
-                                    <label><input class="mt-1 ml-1" type="radio" name="ageRange" value="Age 18-30" required> Age 18-30</label>
-                                    <label><input class="ml-3" type="radio" name="ageRange" value="Age 31-35" required> Age 31-35</label>
-                                    <label><input class="ml-3" type="radio" name="ageRange" value="No" required> No</label>
+                                    <label>
+                                        <input class="mt-1 ml-1" type="radio" name="ageRange" value="Age 18-30"
+                                               required <check if="{{ $_SESSION['LongAnswer']->getYoungAdult() == 'Age 18-30'}}">
+                                        checked</check>> Age 18-30
+                                    </label>
+                                    <label>
+                                        <input class="ml-3" type="radio" name="ageRange" value="Age 31-35"
+                                               required <check if="{{ $_SESSION['LongAnswer']->getYoungAdult() == 'Age 31-35'}}">
+                                        checked</check>> Age 31-35
+                                    </label>
+                                    <label>
+                                        <input class="ml-3" type="radio" name="ageRange" value="No"
+                                               required <check if="{{ $_SESSION['LongAnswer']->getYoungAdult() == 'No'}}">
+                                        checked</check>> No
+                                    </label>
                                 </div>
                             </div>
 
@@ -129,7 +151,7 @@
                                 <div class="col-md-7 ml-1">
                                     <h5 class="mb-0"><label for="diagnosis">What is your, or your family member’s, current diagnosis?</label></h5>
                                     <textarea name="diagnosis" class="form-control" id="diagnosis"
-                                              rows="4" cols="50"></textarea>
+                                              rows="4" cols="50">{{ $_SESSION['LongAnswer']->getDiagnosis() }}</textarea>
                                 </div>
                             </div>
 
@@ -138,26 +160,41 @@
                             <div class="form-row mb-4 ml-1">
                                 <div class="form-group col-md-6">
                                     <p class="lead mb-2">Are you comfortable with self-disclosure?</p>
-                                    <label><input class="mt-1 ml-1" type="radio" name="selfDisclosure" value="yes" required> Yes</label>
-                                    <label><input class="ml-3" type="radio" name="selfDisclosure" value="no" required> No</label>
+                                    <label>
+                                        <input class="mt-1 ml-1" type="radio" name="selfDisclosure" value="yes" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getSelfDisclosure() == 'yes'}}">
+                                            checked</check>> Yes</label>
+                                    <label><input class="ml-3" type="radio" name="selfDisclosure" value="no" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getSelfDisclosure() == 'no'}}">
+                                            checked</check>> No</label>
                                 </div>
                             </div>
 
 
                             <div class="form-row mb-4 ml-1">
                                 <div class="form-group col-md-6">
-                                    <p class="lead mb-2">Are you able to maintain a positive outlook and talk about your experience without “going negative”?</p>
-                                    <label><input class="mt-1 ml-1" type="radio" name="outlook" value="yes" required> Yes</label>
-                                    <label><input class="ml-3" type="radio" name="outlook" value="no" required> No</label>
+                                    <p class="lead mb-2">Are you able to maintain a positive outlook and talk about
+                                        your experience without “going negative”?</p>
+                                    <label><input class="mt-1 ml-1" type="radio" name="outlook" value="yes" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getPositiveOutlook() == 'yes'}}">
+                                            checked</check>> Yes</label>
+                                    <label><input class="ml-3" type="radio" name="outlook" value="no" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getPositiveOutlook() == 'no'}}">
+                                            checked</check>> No</label>
                                 </div>
                             </div>
 
 
                             <div class="form-row mb-0 ml-1">
                                 <div class="form-group col-md-6">
-                                    <p class="lead mb-2">Are you willing to undergo a background check if required by your NAMI Affiliate?</p>
-                                    <label><input class="mt-1 ml-1" type="radio" name="background" value="yes" required> Yes</label>
-                                    <label><input class="ml-3" type="radio" name="background" value="no" required> No</label>
+                                    <p class="lead mb-2">Are you willing to undergo a background check if required by
+                                        your NAMI Affiliate?</p>
+                                    <label><input class="mt-1 ml-1" type="radio" name="background" value="yes" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getBackgroundCheck() == 'yes'}}">
+                                            checked</check>> Yes</label>
+                                    <label><input class="ml-3" type="radio" name="background" value="no" required
+                                        <check if="{{ $_SESSION['LongAnswer']->getBackgroundCheck() == 'no'}}">
+                                            checked</check>> No</label>
                                 </div>
                             </div>
 
@@ -165,33 +202,34 @@
 
                             <div class="form-group pt-5">
                                 <div class="form-group col-md-6">
-                                    <h5><label for="exampleFormControlTextarea2">Why do you want to be an Ending the Silence Presenter?</label></h5>
+                                    <h5><label for="exampleFormControlTextarea2">Why do you want to be an Ending
+                                        the Silence Presenter?</label></h5>
                                     <textarea name="whyPresenter" class="form-control" id="exampleFormControlTextarea2" rows="4"
-                                    ></textarea>
+                                    >{{ $_SESSION['LongAnswer']->getWhyPresenter() }}</textarea>
 
                                     <!--Question 5-->
                                     <h5><label for="exampleFormControlTextarea3" class="pt-5 mt-3">What was your experience as a
                                         young person with a mental illness in the school system, as a teacher and/or as a
                                         parent/caregiver with a child in the school system?</label></h5>
                                     <textarea name="personalExperience" class="form-control" id="exampleFormControlTextarea3" rows="4"
-                                    ></textarea>
+                                    >{{ $_SESSION['LongAnswer']->getPersonalExperience() }}</textarea>
 
                                     <h5><label for="exampleFormControlTextarea4" class="pt-5 mt-3">What can you share about
                                         your experience that can help school personnel create a more supportive learning
                                         environment for youth with a mental illness and/or connect students with warning
                                         signs of mental illness to get support and services early? </label></h5>
                                     <textarea name="supportiveExperience" class="form-control" id="exampleFormControlTextarea4" rows="4"
-                                    ></textarea>
+                                    >{{ $_SESSION['LongAnswer']->getSupportiveExperience() }}</textarea>
 
                                     <h5><label for="exampleFormControlTextarea5" class="pt-5 mt-3">What does recovery in relation to mental illness mean to you?</label></h5>
                                     <textarea name="recoveryMeaning" class="form-control" id="exampleFormControlTextarea5" rows="4"
-                                    ></textarea>
+                                    >{{ $_SESSION['LongAnswer']->getRecoveryMeaning() }}</textarea>
 
                                     <h5><label for="exampleFormControlTextarea6" class="pt-5 mt-3">What are your views on
                                         the roles of teachers and parents in the school setting in relation to youth with
                                         mental illness? </label></h5>
                                     <textarea name="roles" class="form-control" id="exampleFormControlTextarea6" rows="4"
-                                    ></textarea>
+                                    >{{ $_SESSION['LongAnswer']->getRoles() }}</textarea>
                                 </div>
 
 

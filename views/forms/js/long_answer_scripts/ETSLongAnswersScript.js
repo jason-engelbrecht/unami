@@ -1,20 +1,20 @@
 $(document).ready(function()
 {
     //revealing the convict textarea
-    let convict = $("#textbox2");
-    $("#hide2").click(function()
+    let convict = $("#convictText");
+    $("#yesConvict").click(function()
+    {
+        convict.show();
+    });
+    $("#noConvict").click(function()
     {
         convict.hide();
     });
-    $("#show2").click(function()
-    {
-        convict.show();
-    });
-    if(document.getElementById('show2').checked)
+    if(document.getElementById('yesConvict').checked)
     {
         convict.show();
     }
-    if(document.getElementById('hide2').checked)
+    if(document.getElementById('noConvict').checked)
     {
         convict.hide();
     }
