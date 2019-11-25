@@ -23,6 +23,7 @@ require_once 'model/data.php';
 //default route
 $f3->route('GET|POST /', function($f3)
 {
+    session_destroy();
     session_start();
 
     global $db;
