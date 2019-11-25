@@ -49,12 +49,15 @@ $f3->route('GET|POST /affiliate_review/@applicantId/@hashcode', function($f3, $p
 
     //pull data based on app type and id
     $longAnswers = $db->getLongAnswer($app_id, $app_type);
+    $refName = $db->getRefName($app_type);
+    $routing = $refName['ref_name'];
 
     //set to hive
     $f3->set('longAnswers', $longAnswers);
 
     $f3->set('applicant', $applicant);
     $f3->set('affiliate', $db->getAffiliateName($applicant['affiliate']));
+    $f3->set('reviewIncludes', "views/affiliate/long_answers/$routing/affiliateReviewIncludes.html");
 
     $view = new Template();
     echo $view->render('views/affiliate/affiliateReview.html');

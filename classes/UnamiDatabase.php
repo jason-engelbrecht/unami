@@ -1015,4 +1015,24 @@ class UnamiDatabase
 
         return $result;
     }
+
+
+    /**
+     * @param $app_type int application id
+     * @return mixed
+     */
+    function getRefName($app_type)
+    {
+        $sql = "SELECT ref_name FROM app_type WHERE app_id = :app_id";
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam(':app_id', $app_type, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 }
