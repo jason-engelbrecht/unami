@@ -271,7 +271,7 @@ function validETSLongAnswersForm()
         }
     }
 
-    if (!alphabetical($f3->get('availability')))
+    if (empty($f3->get('availability')))
     {
         $isValid = false;
         $f3->set("errors['availability']", "Please type something about your availability");

@@ -153,8 +153,7 @@
                     <div class="form-row mb-5 mt-4">
                         <div class="form-group col-md-7">
                             <h4 class="lead mb-0"><label for="signature">Signature:</label></h4>
-                            <input disabled type="text" class="form-control" id="signature" placeholder="Type your full name" name="signature"
-                                   value="{{ @SESSION.PersonalInfo->getFname() }} {{ @SESSION.PersonalInfo->getLname() }}">
+                            <input required type="text" class="form-control" id="signature" placeholder="Type your full name" name="signature">
                         </div>
 
                         <div class="form-group col-md-5">
