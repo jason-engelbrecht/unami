@@ -91,7 +91,7 @@
                         <p class="card-text pb-3">
                             {{ @training_descriptions[@training['app_id']] }}
                         </p>
-                        <form action="" method="post">
+                        <form method="post">
 
                             <div class="mb-2 pt-2">
                                 <!-- not all done -->
@@ -119,7 +119,7 @@
                                                 <div class="modal-content">
 
                                                     <div class="modal-header" style="background-color: #0c499c;">
-                                                        <h4 class="modal-title text-white" id="modalLabel2">
+                                                        <h4 class="modal-title text-white" id="{{ @training['ref_name'] }}ModalLabel">
                                                             <i class="fas fa-info-circle"></i>
                                                             {{ @training['app_type'] }}
                                                         </h4>

@@ -52,19 +52,25 @@
                                     kind, harassment of any kind, or stalking?</h5>
 
                                 <div class="form-check form-check-inline ml-2">
-                                    <input name="convict" class="form-check-input" type="radio" id="show2" value="yes" required
+                                    <input name="convict" class="form-check-input" type="radio" id="show2" value="yes"
+                                           required <check
+                                        if="{{ $_SESSION['LongAnswer']->getConvict() == 'yes' }}">
+                                    checked</check>>
                                     <label class="form-check-label" for="show2">Yes</label>
                                 </div>
 
                                 <div class="form-check form-check-inline">
-                                    <input name="convict" class="form-check-input" type="radio" id="hide2" value="no" required
+                                    <input name="convict" class="form-check-input" type="radio" id="hide2" value="no"
+                                           required <check
+                                        if="{{ $_SESSION['LongAnswer']->getConvict() == 'no' }}">
+                                    checked</check>>
                                     <label class="form-check-label" for="hide2">No</label>
                                 </div><br>
 
                                 <div class="form-row mt-3 ml-2" id="textbox2" style="display: none">
                                     <label>Please explain why you selected "Yes"
                                         <br><textarea class="form-control" rows="4" cols="50" name="convictText"
-                                        ></textarea>
+                                        >{{ $_SESSION['LongAnswer']->getConvictText() }}</textarea>
                                     </label>
                                 </div>
                             </div>
@@ -80,20 +86,20 @@
                         <div class="form-group pt-3">
                             <h5><label for="exampleFormControlTextarea2">Why do you want to be a Peer-to-Peer leader?</label></h5>
                             <textarea name="whyLeader" class="form-control" id="exampleFormControlTextarea2" rows="4"
-                            ></textarea>
+                            >{{ $_SESSION['LongAnswer']->getWhyLeader() }}</textarea>
 
                             <!--Question 5-->
                             <h5><label for="exampleFormControlTextarea3" class="pt-5 mt-3">How do you define or describe
                                 mental health recovery?</label></h5>
                             <textarea name="mentalHealth" class="form-control" id="exampleFormControlTextarea3" rows="4"
-                            ></textarea>
+                            >{{ $_SESSION['LongAnswer']->getMentalHealth() }}</textarea>
 
                             <!--Question 6-->
 
-                            <h5><label for="exampleFormControlTextarea3" class="pt-5 mt-3">Why do you feel you are
+                            <h5><label for="exampleFormControlTextarea4" class="pt-5 mt-3">Why do you feel you are
                                 ready to “give back” to others through Peer-to-Peer? </label></h5>
                             <textarea name="giveBack" class="form-control" id="exampleFormControlTextarea4" rows="4"
-                            ></textarea>
+                            >{{ $_SESSION['LongAnswer']->getGiveBack() }}</textarea>
 
                         </div>
 
@@ -114,6 +120,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="views/forms/js/longAnswersScript.js"></script>
+<script type="text/javascript" src="views/forms/js/long_answer_scripts/P2PLongAnswersScript.js"></script>
 
 <include href="views/forms/includes/footer.html"/>
