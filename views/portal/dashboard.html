@@ -221,7 +221,29 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">Blah</div>
+
+      <div class="modal-body">
+        <form method="post">
+          <repeat group="{{ @app_types }}" value="{{ @formType }}" counter="{{ @counter }}">
+
+            <span>{{ @formType['app_type'] }}
+              <check if="{{ @counter <= 3 }}">
+                <true>
+                  <button class="btn btn-primary float-right" type="submit" name="formType"
+                          value="{{ @formType['app_id'] }}">Export</button>
+                </true>
+                <false>
+                  <p class="btn btn-secondary float-right disabled">Coming Soon</p>
+                </false>
+              </check>
+
+            </span>
+
+            <hr>
+          </repeat>
+        </form>
+      </div>
+
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
         <a class="btn btn-primary" href="#">Export</a>

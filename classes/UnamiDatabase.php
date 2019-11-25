@@ -187,12 +187,29 @@ class UnamiDatabase
     }
 
     /**
+     * @param $appType int
+     * @param $applicantId int
+     */
+    function updateAppType($appType, $applicantId)
+    {
+        $sql = "UPDATE applicants SET app_type = :app_type WHERE applicant_id = :applicant_id";
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam(':app_type', $appType, PDO::PARAM_INT);
+        $statement->bindParam(':applicant_id', $applicantId, PDO::PARAM_INT);
+
+        $statement->execute();
+    }
+
+    /**
      * Inserts answers to FamilySupportGroup questions
      * @param $applicantId int id of last inserted
      * @param $FSGAnswers FSGLongAnswers object that holds all data
      */
     function insertFSGAnswers($applicantId, $FSGAnswers)
     {
+        $this->updateAppType(1, $applicantId);
         //prepare SQL statement
         $sql = "INSERT INTO FSG(applicant_id, relative_mental, conviction, why_want, experience, whom_co, where_co) 
                 VALUES (:applicant_id, :relative_mental, :conviction, :why_want, :experience, :whom_co, :where_co)";
@@ -221,6 +238,7 @@ class UnamiDatabase
      */
     function insertP2PAnswers($applicantId, $P2PAnswers)
     {
+        $this->updateAppType(2, $applicantId);
         //prepare SQL statement
         $sql = "INSERT INTO P2P(applicant_id, conviction, why_want, describe_recovery, give_back) 
                 VALUES (:applicant_id, :conviction, :why_want, :describe_recovery, :give_back)";
@@ -247,6 +265,7 @@ class UnamiDatabase
      */
     function insertETSAnswers($applicantId, $ETSAnswers)
     {
+        $this->updateAppType(3, $applicantId);
         //prepare SQL statement
         $sql = "INSERT INTO ETS(applicant_id, conviction, availability, education, experience, languages, age, 
                 diagnosis, self_disclosure, positive_outlook, background_check, why_want, 
@@ -841,7 +860,7 @@ class UnamiDatabase
         $statement = $this->_dbh->prepare($query);
 
         $statement->execute();
-        
+
 
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -915,6 +934,41 @@ class UnamiDatabase
 
         //get result
         $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * @param $applicationId int
+     * @return mixed array with all the applicants
+     */
+    function getTrainingInfo($applicationId)
+    {
+        //name, phone, email, special needs, and all rooming info
+        //define query
+        $query="SELECT fname, lname, primary_phone, email, 
+                special_needs, service_animal, mobility_need, need_rooming,
+                single_room, days_rooming, gender, roommate_gender, 
+                cpap_user, roommate_cpap
+                FROM applicants
+                WHERE app_type = :app_type
+                AND app_status = :app_status";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        //only get complete applications
+        $app_status = 3;
+
+        //bind parameter
+        $statement->bindParam(':app_type', $applicationId, PDO::PARAM_INT);
+        $statement->bindParam(':app_status', $app_status, PDO::PARAM_INT);
+
+        //execute
+        $statement->execute();
+
+        //get result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
     }

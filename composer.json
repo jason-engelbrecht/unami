@@ -21,7 +21,8 @@
   ],
   "require": {
     "bcosca/fatfree-core": "dev-master",
-    "swiftmailer/swiftmailer": "^6.0"
+    "swiftmailer/swiftmailer": "^6.0",
+    "phpoffice/phpspreadsheet": "1.8.2"
   },
 
   "autoload": {

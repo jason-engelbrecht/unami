@@ -101,7 +101,7 @@ $f3->route('GET|POST /create-account', function($f3)
 });
 
 //dashboard
-$f3->route('GET /dashboard', function($f3)
+$f3->route('GET|POST /dashboard', function($f3)
 {
     if($_SESSION['loggedIn'] !== 1) {
         $f3->reroute('/login');
@@ -131,6 +131,15 @@ $f3->route('GET /dashboard', function($f3)
 
     $f3->set('page', 'dashboard');
     $f3->set('page_title', 'Dashboard');
+
+    //set up excel export
+    $app_types = $db->getAppTypes();
+    $f3->set('app_types', $app_types);
+
+    if(!empty($_POST))
+    {
+        Exporter::exportTrainingInfo($_POST['formType'], $db);
+    }
 
     $view = new Template();
     echo $view->render('views/portal/dashboard.html');
