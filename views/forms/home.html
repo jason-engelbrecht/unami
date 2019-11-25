@@ -87,7 +87,12 @@
             <div class="col-lg-4 mb-4 d-flex">
                 <div class="card shadow-sm flex-fill">
                     <div class="card-body">
-                        <h5 class="card-title mb-4 mt-2"><img src="images/training_logos/{{ @training['ref_name'] }}.jpg" alt="" class="img-fluid text-center"> </h5>
+                        <h5 class="card-title mb-4 mt-2 text-center">
+                            <img src="images/training_logos/{{ @training['ref_name'] }}.jpg"
+                                 alt="{{ @training['app_type'] }}"
+                                 class="img-fluid text-center"
+                                 style="height: 50px; width: 300px;">
+                        </h5>
                         <p class="card-text pb-3">
                             {{ @training_descriptions[@training['app_id']] }}
                         </p>
@@ -151,18 +156,6 @@
                                                             </check>
                                                         </repeat>
 
-
-                                                        <!--<label for="{{ @training['ref_name'] }}Info">Please Select an Available Day 1 and Location</label>
-                                                        <select class="form-control mb-4" id="{{ @training['ref_name'] }}Info" name="{{ @training['ref_name'] }}Info">
-                                                            &lt;!&ndash; get all training dates and their location &ndash;&gt;
-                                                            <repeat group="{{ @app_types_info }}" value="{{ @info }}">
-                                                                <check if="{{ @info['app_type'] == @training['app_id'] }}">
-                                                                    <option value="{{ @info['info_id'] }}">{{ @info['date'] }} in {{ @info['location'] }}</option>
-                                                                </check>
-                                                            </repeat>
-                                                            &lt;!&ndash; get all training dates and their location &ndash;&gt;
-
-                                                        </select>-->
                                                         <input type="hidden" name="trainingType" value="{{ @training['app_id'] }}">
                                                     </div>
 
