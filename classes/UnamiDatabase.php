@@ -939,17 +939,38 @@ class UnamiDatabase
     }
 
     function getLongAnswer($applicant_id, $application_type) {
-        //define query
-        $query = "SELECT *
-                  FROM :table
-                  WHERE applicant_id = :applicant_id";
+        //tables
+        define('FSG', 1);
+        define('P2P', 2);
+        define('ETS', 3);
+
+        $query = '';
+
+        //find the right table
+        if($application_type == FSG) {
+            //define query
+            $query = "SELECT *
+                      FROM FSG
+                      WHERE applicant_id = :applicant_id";
+        }
+        else if($application_type == P2P) {
+            //define query
+            $query = "SELECT *
+                      FROM P2P
+                      WHERE applicant_id = :applicant_id";
+        }
+        else if($application_type == ETS) {
+            //define query
+            $query = "SELECT *
+                      FROM ETS
+                      WHERE applicant_id = :applicant_id";
+        }
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
 
         //bind parameter
         $statement->bindParam(':applicant_id', $applicant_id, PDO::PARAM_STR);
-        $statement->bindParam(':table', $application_type, PDO::PARAM_STR);
 
         //execute
         $statement->execute();
