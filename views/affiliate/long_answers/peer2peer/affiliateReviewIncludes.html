@@ -2,12 +2,6 @@
     <div class="row mt-5">
         <div class="col-md-8">
             <h5 class="font-weight-bold d-inline">Long Answer Questions</h5>
-            <form action="long_answer" method="get" class="d-inline">
-                <label hidden>Go back to long answer
-                    <input hidden name="fromReview" value="true">
-                </label>
-                <button type="submit" class="btn btn-link"><i class="fas fa-edit fa-lg" style="margin-bottom: 10px;"></i></button>
-            </form>
             <hr class="mt-0 bg-primary">
         </div>
     </div>
@@ -24,25 +18,25 @@
     <div class="row m-1 mb-2">
         <div class="col-md-10 pl-0">
             <h6 class="pl-2">
-                <span class="font-weight-bold">Why you want to be a NAMI Peer to Peer leader:</span><br>
-                {{ $_SESSION['LongAnswer']->getWhyLeader() }}
+                <span class="font-weight-bold">Why they want to be a NAMI Peer to Peer leader:</span><br>
+                {{ @longAnswers['why_want'] }}
             </h6>
         </div>
     </div>
 
     <div class="row m-1 mb-2">
         <div class="col-md-10 pl-0">
-            <h6 class="pl-2"><span class="font-weight-bold">How you define or describe mental health recovery:</span><br>
-                {{ $_SESSION['LongAnswer']->getMentalHealth() }}
+            <h6 class="pl-2"><span class="font-weight-bold">How they define or describe mental health recovery:</span><br>
+                {{ @longAnswers['describe_recovery'] }}
             </h6>
         </div>
     </div>
 
     <div class="row m-1 mb-2">
         <div class="col-md-10 pl-0">
-            <h6 class="pl-2"><span class="font-weight-bold">Why you feel you are
+            <h6 class="pl-2"><span class="font-weight-bold">Why they feel they are
                                 ready to “give back” to others through Peer-to-Peer: </span><br>
-                {{ $_SESSION['LongAnswer']->getGiveBack() }}
+                {{ @longAnswers['give_back'] }}
             </h6>
         </div>
     </div>

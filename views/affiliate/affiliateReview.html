@@ -303,14 +303,21 @@
                         <hr>
 
                         <h5 class="mb-3">Reminders for affiliate volunteers:</h5>
-                        <label class="mr-3">
-                            <input type="checkbox"> You have talked to the applicant about this training (required)
-                        </label>
-                        <label> What is the member's expiration date on their NAMI membership?
-                            (Leave blank if not a member yet)
-                            <input type="text" name="membershipExpiration" class="form-control mb-2"
-                                   value="{{ @applicant['member_expiration'] }}"> 
-                        </label>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label> What is the member's expiration date on their NAMI membership?
+                                    (Leave blank if not a member yet)
+                                    <input type="text" name="membershipExpiration" class="form-control mb-2"
+                                           value="{{ @applicant['member_expiration'] }}" placeholder="MM/DD/YYYY">
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="mr-3">
+                                    <input required type="checkbox"> You have talked to the applicant about this
+                                    training (required)
+                                </label>
+                            </div>
+                        </div>
                         <br>
                         <button type="submit" name="saveNotes" value="save" class="btn btn-primary float-center">
                             Save</button>
