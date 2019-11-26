@@ -119,6 +119,8 @@ $f3->route('GET|POST /dashboard', function($f3)
     $numArchived = $db->countApplicants(0);
     $numSubmitted = $db->countSubmitted();
     $numTrainings = $db->countTrainings();
+    $numDate = $db->countDate();
+    $numApplicationByMonthYear = $db->countApplicationByMonthYear();
 
     $f3->set('numActive', $numActive);
     $f3->set('numComplete', $numComplete);
@@ -128,6 +130,21 @@ $f3->route('GET|POST /dashboard', function($f3)
     $f3->set('numArchived', $numArchived);
     $f3->set('numSubmitted', $numSubmitted);
     $f3->set('numTrainings', $numTrainings);
+    $f3->set('numDate',$numDate);
+    $f3->set('numApplicationByMonthYear',$numApplicationByMonthYear);
+
+    $labelDataForGraph = array();
+    $barDataForGraph = array();
+
+    for($i = 0; $i < sizeof($numDate); $i++)
+    {
+        array_push($labelDataForGraph, $numDate[$i]['MonthYear']);
+        array_push($barDataForGraph, $numApplicationByMonthYear[$i]['AppSubmit']);
+
+    }
+
+    $f3->set('labelDataForGraph', json_encode($labelDataForGraph));
+    $f3->set('barDataForGraph', json_encode($barDataForGraph));
 
     $f3->set('page', 'dashboard');
     $f3->set('page_title', 'Dashboard');
@@ -166,6 +183,8 @@ $f3->route('GET|POST /active', function($f3)
     $f3->set('approved', $db->countApproved());
     $f3->set('denied', $db->countDenied());
     $f3->set('complete', $db->countComplete());
+    $f3->set('numDate', $db->countDate());
+    $f3->set('numApp',$db->countApplicationByMonthYear());
 
     //update submission
     if(isset($_POST['update'])) {
