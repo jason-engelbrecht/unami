@@ -868,6 +868,51 @@ class UnamiDatabase
     }
 
     /**
+     * Counts date month-year
+     *
+     * @return mixed
+     */
+    function countDate() {
+        //define query
+        //$query = "SELECT COUNT(date_submitted) As Submitted, EXTRACT(YEAR_MONTH FROM date_submitted) AS MonthYear FROM applicants;";
+        $query = "SELECT EXTRACT(YEAR_MONTH FROM date_submitted) AS MonthYear 
+                  FROM applicants GROUP BY MonthYear ORDER BY MonthYear";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Counts date month-year
+     *
+     * @return mixed
+     */
+    function countApplicationByMonthYear() {
+        //define query
+        //$query = "SELECT COUNT(date_submitted) As Submitted, EXTRACT(YEAR_MONTH FROM date_submitted) AS MonthYear FROM applicants;";
+        $query = "SELECT COUNT(applicant_id) AS AppSubmit FROM applicants 
+                    GROUP BY EXTRACT(YEAR_MONTH FROM applicants.date_submitted) 
+                    ORDER BY EXTRACT(YEAR_MONTH FROM applicants.date_submitted)";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
      * Update applicant category or status
      *
      * @param $id
@@ -938,49 +983,6 @@ class UnamiDatabase
         return $result;
     }
 
-    function getLongAnswer($applicant_id, $application_type) {
-        //tables
-        define('FSG', 1);
-        define('P2P', 2);
-        define('ETS', 3);
-
-        $query = '';
-
-        //find the right table
-        if($application_type == FSG) {
-            //define query
-            $query = "SELECT *
-                      FROM FSG
-                      WHERE applicant_id = :applicant_id";
-        }
-        else if($application_type == P2P) {
-            //define query
-            $query = "SELECT *
-                      FROM P2P
-                      WHERE applicant_id = :applicant_id";
-        }
-        else if($application_type == ETS) {
-            //define query
-            $query = "SELECT *
-                      FROM ETS
-                      WHERE applicant_id = :applicant_id";
-        }
-
-        //prepare statement
-        $statement = $this->_dbh->prepare($query);
-
-        //bind parameter
-        $statement->bindParam(':applicant_id', $applicant_id, PDO::PARAM_STR);
-
-        //execute
-        $statement->execute();
-
-        //get result
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return $result;
-    }
-
     /**
      * @param $applicationId int
      * @return mixed array with all the applicants
@@ -1012,26 +1014,6 @@ class UnamiDatabase
 
         //get result
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        return $result;
-    }
-
-
-    /**
-     * @param $app_type int application id
-     * @return mixed
-     */
-    function getRefName($app_type)
-    {
-        $sql = "SELECT ref_name FROM app_type WHERE app_id = :app_id";
-
-        $statement = $this->_dbh->prepare($sql);
-
-        $statement->bindParam(':app_id', $app_type, PDO::PARAM_INT);
-
-        $statement->execute();
-
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $result;
     }
