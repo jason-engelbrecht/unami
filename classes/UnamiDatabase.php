@@ -1080,4 +1080,249 @@ class UnamiDatabase
         return $result;
     }
 
+    /**
+     * @return Name/percentage of the top five affiliates with the most pending applications
+     */
+    ////////////the first///////////
+
+    //name//
+    function getTheFirstSlacker() {
+        //define query
+        $query =   "SELECT affiliates.name as affiliateName1 from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP by affiliate
+                    ORDER by COUNT(category) DESC
+                    LIMIT 1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    //percentage//
+    function getTheFirstPercentage(){
+        $query =   "SELECT
+                    ROUND((((SELECT COUNT(app_type) from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 1)/
+                    (SELECT COUNT(app_type) as firstPercentage from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 1))*100),0)
+                    as firstPercentage";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+
+    ////////////the second////////////
+
+    //name//
+    function getTheSecondSlacker() {
+        //define query
+        $query =   "SELECT affiliates.name as affiliateName2 from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP by affiliate
+                    ORDER by COUNT(category) DESC
+                    LIMIT 1,1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    //percentage//
+    function getTheSecondPercentage(){
+        $query =   "SELECT
+                    ROUND((((SELECT COUNT(app_type) from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 1,1)/
+                    (SELECT COUNT(app_type) as firstPercentage from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 1,1))*100),0)
+                    as secondPercentage";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+
+    ////////////the third////////////
+
+    //name//
+    function getTheThirdSlacker() {
+        //define query
+        $query =   "SELECT affiliates.name as affiliateName3 from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP by affiliate
+                    ORDER by COUNT(category) DESC
+                    LIMIT 2,1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    //percentage//
+    function getTheThirdPercentage(){
+        $query =   "SELECT
+                    ROUND((((SELECT COUNT(app_type) from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 2,1)/
+                    (SELECT COUNT(app_type) as firstPercentage from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 2,1))*100),0)
+                    as thirdPercentage";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    ////////////the fourth////////////
+
+    //name//
+    function getTheFourthSlacker() {
+        //define query
+        $query =   "SELECT affiliates.name as affiliateName4 from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP by affiliate
+                    ORDER by COUNT(category) DESC
+                    LIMIT 3,1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    //percentage//
+    function getTheFourthPercentage(){
+        $query =   "SELECT
+                    ROUND((((SELECT COUNT(app_type) from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 3,1)/
+                    (SELECT COUNT(app_type) as firstPercentage from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 3,1))*100),0)
+                    as fourthPercentage";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    ////////////the fifth////////////
+
+    //name//
+    function getTheFifthSlacker() {
+        //define query
+        $query =   "SELECT affiliates.name as affiliateName5 from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP by affiliate
+                    ORDER by COUNT(category) DESC
+                    LIMIT 4,1";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    //percentage//
+    function getTheFifthPercentage(){
+        $query =   "SELECT
+                    ROUND((((SELECT COUNT(app_type) from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    WHERE app_type = 1
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 4,1)/
+                    (SELECT COUNT(app_type) as firstPercentage from applicants
+                    INNER JOIN  affiliates ON affiliates.affiliate_id = applicants.affiliate
+                    GROUP BY affiliate
+                    ORDER BY COUNT(app_type) DESC
+                    LIMIT 4,1))*100),0)
+                    as fifthPercentage";
+
+        //prepare statement
+        $statement = $this->_dbh->prepare($query);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
 }
