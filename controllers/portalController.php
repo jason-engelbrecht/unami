@@ -121,6 +121,16 @@ $f3->route('GET|POST /dashboard', function($f3)
     $numTrainings = $db->countTrainings();
     $numDate = $db->countDate();
     $numApplicationByMonthYear = $db->countApplicationByMonthYear();
+    $first = $db->getTheFirstSlacker();
+    $second = $db->getTheSecondSlacker();
+    $third = $db->getTheThirdSlacker();
+    $fourth = $db->getTheFourthSlacker();
+    $fifth = $db->getTheFifthSlacker();
+    $firstPercentage = $db->getTheFirstPercentage();
+    $secondPercentage = $db->getTheSecondPercentage();
+    $thirdPercentage = $db->getTheThirdPercentage();
+    $fourthPercentage = $db->getTheFourthPercentage();
+    $fifthPercentage = $db->getTheFifthPercentage();
 
     $f3->set('numActive', $numActive);
     $f3->set('numComplete', $numComplete);
@@ -132,6 +142,16 @@ $f3->route('GET|POST /dashboard', function($f3)
     $f3->set('numTrainings', $numTrainings);
     $f3->set('numDate',$numDate);
     $f3->set('numApplicationByMonthYear',$numApplicationByMonthYear);
+    $f3->set('first',$first);
+    $f3->set('second',$second);
+    $f3->set('third',$third);
+    $f3->set('fourth',$fourth);
+    $f3->set('fifth',$fifth);
+    $f3->set('firstPercentage',$firstPercentage);
+    $f3->set('secondPercentage',$secondPercentage);
+    $f3->set('thirdPercentage',$thirdPercentage);
+    $f3->set('fourthPercentage',$fourthPercentage);
+    $f3->set('fifthPercentage',$fifthPercentage);
 
     $labelDataForGraph = array();
     $barDataForGraph = array();
