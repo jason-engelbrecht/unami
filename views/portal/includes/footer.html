@@ -141,6 +141,28 @@
     });
 </script>
 
+<!--Affiliates W/ Most Pending-->
+<script>
+var first = "{{ @first['affiliateName1'] }}"
+var second = "{{ @second['affiliateName2'] }}"
+var third = "{{ @third['affiliateName3'] }}"
+var fourth = "{{ @fourth['affiliateName4'] }}"
+var fifth = "{{ @fifth['affiliateName5'] }}"
+
+var firstPercentage = "{{@firstPercentage['firstPercentage']}}"
+var secondPercentage = "{{@secondPercentage['secondPercentage']}}"
+var thirdPercentage = "{{@thirdPercentage['thirdPercentage']}}"
+var fourthPercentage = "{{@fourthPercentage['fourthPercentage']}}"
+var fifthPercentage = "{{@fifthPercentage['fifthPercentage']}}"
+
+$('.progress mb-4').sort(function (a, b) {
+
+      var contentA =parseInt( $(a).attr('aria-valuenow'));
+      var contentB =parseInt( $(b).attr('aria-valuenow'));
+      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+   });
+</script>
+
 </body>
 
 </html>
