@@ -176,7 +176,8 @@ class AdditionalInfo
     }
 
     /**
-     * @return String
+     * Gets the special needs details
+     * @return String details
      */
     public function getSpecialNeedsText()
     {
@@ -184,7 +185,8 @@ class AdditionalInfo
     }
 
     /**
-     * @return String
+     * Gets the details of the service animal
+     * @return String details
      */
     public function getServiceAnimalText()
     {
@@ -192,7 +194,8 @@ class AdditionalInfo
     }
 
     /**
-     * @return String
+     * Gets the details of movement disability
+     * @return String details
      */
     public function getMovementDisabilityText()
     {

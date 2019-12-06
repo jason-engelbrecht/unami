@@ -121,8 +121,11 @@ $f3->route('GET|POST /additional_information', function($f3)
     {
         // get data from form
         $specialNeeds = $_POST['specialNeeds'];
+        $specialNeedsText = $_POST['specialNeedsText'];
         $serviceAnimal = $_POST['serviceAnimal'];
+        $serviceAnimalText = $_POST['serviceAnimalText'];
         $movementDisability = $_POST['movementDisability'];
+        $movementDisabilityText = $_POST['movementDisabilityText'];
         $needAccommodations = $_POST['needAccommodations'];
         $needRoom = $_POST['needRoom'];
         $daysRooming = $_POST['daysRooming'];
@@ -157,10 +160,28 @@ $f3->route('GET|POST /additional_information', function($f3)
             $cpapRoommate = 'false';
         }
 
+        if($specialNeeds == 'false')
+        {
+            $specialNeedsText = 'No special needs';
+        }
+
+        if($serviceAnimal == 'false')
+        {
+            $serviceAnimalText = 'No service animal';
+        }
+
+        if($movementDisability == 'false')
+        {
+            $movementDisabilityText = 'No movement disability';
+        }
+
         // add data to hive
         $f3->set('specialNeeds', $specialNeeds);
+        $f3->set('specialNeedsText', $specialNeedsText);
         $f3->set('serviceAnimal', $serviceAnimal);
+        $f3->set('serviceAnimalText', $serviceAnimalText);
         $f3->set('movementDisability', $movementDisability);
+        $f3->set('movementDisabilityText', $movementDisabilityText);
         $f3->set('needAccommodations', $needAccommodations);
         $f3->set('needRoom', $needRoom);
         $f3->set('daysRooming', $daysRooming);
@@ -171,9 +192,9 @@ $f3->route('GET|POST /additional_information', function($f3)
         $f3->set('cpapRoommate', $cpapRoommate);
         $f3->set('singleRoom', $singleRoom);
 
-        $_SESSION['AdditionalInfo'] = new AdditionalInfo($specialNeeds, $serviceAnimal, $movementDisability,
-            $needAccommodations, $needRoom, $daysRooming, $roommate, $gender, $roommateGender, $cpap, $cpapRoommate,
-            $singleRoom);
+        $_SESSION['AdditionalInfo'] = new AdditionalInfo($specialNeeds, $specialNeedsText, $serviceAnimal,
+            $serviceAnimalText, $movementDisability, $movementDisabilityText, $needAccommodations, $needRoom,
+            $daysRooming, $roommate, $gender, $roommateGender, $cpap, $cpapRoommate, $singleRoom);
 
         /*
         if($_POST['goBack'] = 'goBack')
@@ -197,9 +218,9 @@ $f3->route('GET|POST /additional_information', function($f3)
     if(!isset($_SESSION['AdditionalInfo']))
     {
         $dummyArray = array('N/A');
-        $_SESSION['AdditionalInfo'] = new AdditionalInfo('','','',
-            '','',$dummyArray, '', '', '',
-            '', '', '');
+        $_SESSION['AdditionalInfo'] = new AdditionalInfo('', '', '',
+            '', '', '', '','',
+            $dummyArray, '', '', '', '', '', '');
     }
 
     $view = new Template();
