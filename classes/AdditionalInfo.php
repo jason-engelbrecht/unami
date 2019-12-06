@@ -8,8 +8,11 @@
 class AdditionalInfo
 {
     private $_specialNeeds;
+    private $_specialNeedsText;
     private $_serviceAnimal;
+    private $_serviceAnimalText;
     private $_movementDisability;
+    private $_movementDisabilityText;
     private $_needAccommodations;
     private $_needRoom;
     private $_daysRooming;
@@ -23,8 +26,11 @@ class AdditionalInfo
     /**
      * AdditionalInfo constructor.
      * @param $_specialNeeds String whether the applicant has special needs
+     * @param $_specialNeedsText String special needs details
      * @param $_serviceAnimal String whether the applicant has a service animal
+     * @param $_serviceAnimalText String service animal details
      * @param $_movementDisability String whether the applicant has a movement disability
+     * @param $_movementDisabilityText String movement disability details
      * @param $_needAccommodations String whether the applicant needs accommodations
      * @param $_needRoom String if the applicant needs a room
      * @param $_daysRooming mixed the days the applicant is rooming
@@ -35,13 +41,17 @@ class AdditionalInfo
      * @param $_cpapRoommate String if they mind sleeping with a cpap user
      * @param $_singleRoom String if they want to pay for a single room
      */
-    public function __construct($_specialNeeds, $_serviceAnimal, $_movementDisability, $_needAccommodations, $_needRoom,
+    public function __construct($_specialNeeds, $_specialNeedsText, $_serviceAnimal, $_serviceAnimalText,
+                                $_movementDisability, $_movementDisabilityText, $_needAccommodations, $_needRoom,
                                 $_daysRooming, $_roommate, $_gender, $_roommateGender, $_cpap, $_cpapRoommate,
                                 $_singleRoom)
     {
         $this->_specialNeeds = $_specialNeeds;
+        $this->_specialNeedsText = $_specialNeedsText;
         $this->_serviceAnimal = $_serviceAnimal;
+        $this->_serviceAnimalText = $_serviceAnimalText;
         $this->_movementDisability = $_movementDisability;
+        $this->_movementDisabilityText = $_movementDisabilityText;
         $this->_needAccommodations = $_needAccommodations;
         $this->_needRoom = $_needRoom;
         $this->_daysRooming = $_daysRooming;
@@ -163,5 +173,29 @@ class AdditionalInfo
     public function getSingleRoom()
     {
         return $this->_singleRoom;
+    }
+
+    /**
+     * @return String
+     */
+    public function getSpecialNeedsText()
+    {
+        return $this->_specialNeedsText;
+    }
+
+    /**
+     * @return String
+     */
+    public function getServiceAnimalText()
+    {
+        return $this->_serviceAnimalText;
+    }
+
+    /**
+     * @return String
+     */
+    public function getMovementDisabilityText()
+    {
+        return $this->_movementDisabilityText;
     }
 }
