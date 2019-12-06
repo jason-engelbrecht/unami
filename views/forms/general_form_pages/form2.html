@@ -130,23 +130,23 @@
                             </div>
                         </div>
 
-                        <div class="form-row my-3" id="singleRoom" style="display: none">
-                            <div class="col-md-12">
-                                <h5 class="mb-4">I would like a single room and understand I, the attendee, will be responsible for the
-                                    additional amount and I will be billed by NAMI Washington 3 weeks after the training is
-                                    complete.</h5>
-                                <label class="mr-3 ml-3"><input type="radio" name="singleRoom" value="true" id="hide2"
-                                    <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() === 'true'}}">
-                                        checked</check> <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 'true'}}">
-                                        required</check>> Yes, I want to pay for a single room</label>
-                                <label class="mr-3"><input type="radio" name="singleRoom" value="false" id="show2"
-                                    <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() === 'false'}}">
-                                        checked</check> <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 'true'}}">
-                                        required</check>> No, I want to room with someone</label>
+                        <div id="singleRoom" style="display: none">
+                            <div class="form-row my-3" >
+                                <div class="col-md-12">
+                                    <h5 class="mb-4">I would like a single room and understand I, the attendee, will be responsible for the
+                                        additional amount and I will be billed by NAMI Washington 3 weeks after the training is
+                                        complete.</h5>
+                                    <label class="mr-3 ml-3"><input type="radio" name="singleRoom" value="true" id="hide2"
+                                        <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() === 'true'}}">
+                                            checked</check> <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 'true'}}">
+                                            required</check>> Yes, I want to pay for a single room</label>
+                                    <label class="mr-3"><input type="radio" name="singleRoom" value="false" id="show2"
+                                        <check if="{{$_SESSION['AdditionalInfo']->getSingleRoom() === 'false'}}">
+                                            checked</check> <check if="{{$_SESSION['AdditionalInfo']->getNeedAccommodations() == 'true'}}">
+                                            required</check>> No, I want to room with someone</label>
+                                </div>
                             </div>
-                        </div>
 
-                        <div id="daysRooming" style="display: none">
                             <div class="form-row my-3 mt-4">
                                 <div class="form-group col-md-12">
                                     <h5 class="mb-3">I will need housing for the following nights:</h5>
@@ -158,7 +158,9 @@
                                             checked</check>> Saturday</label>
                                 </div>
                             </div>
+                        </div>
 
+                        <div id="daysRooming" style="display: none">
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5 class="mb-3">NAMI-WA will try to accommodate roommate requests: </h5>
