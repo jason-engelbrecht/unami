@@ -1,5 +1,67 @@
 $(document).ready(function()
 {
+    let specialNeedsYes = $("#specialNeedsYes");
+    let specialNeedsNo = $("#specialNeedsNo");
+    let specialNeedsText = $("#specialNeedsText");
+
+    specialNeedsNo.click(function()
+    {
+        specialNeedsText.hide();
+    });
+    specialNeedsYes.click(function()
+    {
+        specialNeedsText.show();
+    });
+    if(document.getElementById("specialNeedsYes").checked)
+    {
+        specialNeedsText.show();
+    }
+    if(document.getElementById("specialNeedsNo").checked)
+    {
+        specialNeedsText.hide();
+    }
+
+    let serviceAnimalYes = $("#serviceAnimalYes");
+    let serviceAnimalNo = $("#serviceAnimalNo");
+    let serviceAnimalText = $("#serviceAnimalText");
+
+    serviceAnimalNo.click(function()
+    {
+        serviceAnimalText.hide();
+    });
+    serviceAnimalYes.click(function()
+    {
+        serviceAnimalText.show();
+    });
+    if(document.getElementById("serviceAnimalYes").checked)
+    {
+        serviceAnimalText.show();
+    }
+    if(document.getElementById("serviceAnimalNo").checked)
+    {
+        serviceAnimalText.hide();
+    }
+
+    let movementDisabilityYes = $("#movementDisabilityYes");
+    let movementDisabilityNo = $("#movementDisabilityNo");
+    let movementDisabilityText = $("#movementDisabilityText");
+
+    movementDisabilityNo.click(function()
+    {
+        movementDisabilityText.hide();
+    });
+    movementDisabilityYes.click(function()
+    {
+        movementDisabilityText.show();
+    });
+    if(document.getElementById("movementDisabilityYes").checked)
+    {
+        movementDisabilityText.show();
+    }
+    if(document.getElementById("movementDisabilityNo").checked)
+    {
+        movementDisabilityText.hide();
+    }
 
     let singleRoom = $("#singleRoom");
     let daysRooming = $("#daysRooming");
