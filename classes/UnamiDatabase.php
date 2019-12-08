@@ -187,6 +187,21 @@ class UnamiDatabase
     }
 
     /**
+     * @param $id int applicant's id
+     * @return mixed Info needed to resend email to affiliate
+     */
+    function getInfoForEmailResend($id)
+    {
+        $sql = "SELECT fname, lname, affiliate FROM applicants WHERE applicant_id = :app_id";
+
+        $statement = $this->_dbh->prepare($sql);
+        $statement->bindParam(':app_id', $id, PDO::PARAM_INT);
+
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * @param $appType int
      * @param $applicantId int
      */
@@ -727,6 +742,7 @@ class UnamiDatabase
                   app_status AS AppStatus, 
                   CONCAT(fname, ' ', lname) AS Name, 
                   affiliates.name AS Affiliate, 
+                  affiliates.affiliate_id AS AffiliateID,
                   app_type.app_type AS Training, 
                   applicants.email AS Email, 
                   date_submitted AS DateSubmitted,

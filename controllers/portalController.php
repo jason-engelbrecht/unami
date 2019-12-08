@@ -219,6 +219,16 @@ $f3->route('GET|POST /active', function($f3)
         $f3->reroute('/active');
     }
 
+    if(isset($_POST['resendEmail']))
+    {
+        $id = $_POST['id'];
+        $db->updateApplicantStatus(1, $id);
+        $personal = $db->getInfoForEmailResend($id);
+        Emailer::sendAffiliateEmail($id, $personal['fname'], $personal['lname'], $personal['affiliate'], $db);
+        $f3->set('emailSent', true);
+        $f3->set('affiliateName', $db->getAffiliateName($personal['affiliate']));
+    }
+
     $view = new Template();
     echo $view->render('views/portal/applications/active.html');
 });

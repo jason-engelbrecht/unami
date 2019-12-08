@@ -11,17 +11,19 @@ class Emailer
     /**
      * Handles sending the affiliate an email to review an application
      * @param $applicantId int ID of the applicant
-     * @param $personalInfo PersonalInfo The personal info from the form
+     * @param $fname String first name
+     * @param $lname String last name
+     * @param $affiliate int affiliate's id
      * @param $db UnamiDatabase The database we are using
      */
-    static function sendAffiliateEmail($applicantId, $personalInfo, $db)
+    static function sendAffiliateEmail($applicantId, $fname, $lname, $affiliate, $db)
     {
         $hashedId = password_hash($applicantId, PASSWORD_BCRYPT);
         $linkHashedId = str_replace('/', '-', $hashedId);
-        $applicantName = $personalInfo->getFname() .' '.$personalInfo->getLname();
+        $applicantName = $fname .' '.$lname;
 
-        $toEmail = $db->getAffiliateEmail($personalInfo->getAffiliate());
-        $toEmailAlias = $db->getAffiliateName($personalInfo->getAffiliate());
+        $toEmail = $db->getAffiliateEmail($affiliate);
+        $toEmailAlias = $db->getAffiliateName($affiliate);
 
         try
         {

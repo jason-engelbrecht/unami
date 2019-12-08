@@ -6,6 +6,15 @@
     <!-- Page Heading -->
     <h1 class="h2 mb-4 text-primary"><i class="fas fa-users"></i> Active Applications </h1>
 
+    <check if="{{ @emailSent == true }}">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Email was sent to {{ @affiliateName }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </check>
+
     <!-- metrics -->
     <div class="row mb-4 pt-2">
         <!-- submitted -->
@@ -252,6 +261,15 @@
                                                     <div class="form-group col-md-10">
                                                         <label class="sr-only" for="notes">Notes</label>
                                                         <textarea class="form-control" id="notes" rows="4" name="notes">{{ @ActiveApplicant['Notes'] }}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <h5><i class="fas fa-envelope mr-1 text-primary"></i>Resend Affiliate Email</h5>
+                                                <div class="form-row mb-2">
+                                                    <div class="form-group col-md-10">
+                                                        <button class="btn btn-primary" type="submit" name="resendEmail"
+                                                                value="{{ @ActiveApplicant['AffiliateID'] }}">Resend
+                                                            Email to {{ @ActiveApplicant['Affiliate'] }}</button>
                                                     </div>
                                                 </div>
                                             </div>
