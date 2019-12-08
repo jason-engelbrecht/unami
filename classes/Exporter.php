@@ -26,20 +26,22 @@ class Exporter
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        $sheet->setCellValue('A1', 'First Name');
-        $sheet->setCellValue('B1', 'Last Name');
-        $sheet->setCellValue('C1', 'Phone #');
-        $sheet->setCellValue('D1', 'Email');
-        $sheet->setCellValue('E1', 'Special Needs');
-        $sheet->setCellValue('F1', 'Service Animal');
-        $sheet->setCellValue('G1', 'Mobility Need');
-        $sheet->setCellValue('H1', 'Needs a Room');
-        $sheet->setCellValue('I1', 'Wants a Single Room');
-        $sheet->setCellValue('J1', 'Days they Need a Room');
-        $sheet->setCellValue('K1', 'Their Gender');
-        $sheet->setCellValue('L1', 'Requested Roommate Gender');
-        $sheet->setCellValue('M1', 'CPAP User');
-        $sheet->setCellValue('N1', "Doesn't mind CPAP using Roommate");
+        $sheet->setCellValue('A1', 'Date Submitted');
+        $sheet->setCellValue('B1', 'Application Status');
+        $sheet->setCellValue('C1', 'First Name');
+        $sheet->setCellValue('D1', 'Last Name');
+        $sheet->setCellValue('E1', 'Phone #');
+        $sheet->setCellValue('F1', 'Email');
+        $sheet->setCellValue('G1', 'Special Needs');
+        $sheet->setCellValue('H1', 'Service Animal');
+        $sheet->setCellValue('I1', 'Mobility Need');
+        $sheet->setCellValue('J1', 'Needs a Room');
+        $sheet->setCellValue('K1', 'Wants a Single Room');
+        $sheet->setCellValue('L1', 'Days they Need a Room');
+        $sheet->setCellValue('M1', 'Their Gender');
+        $sheet->setCellValue('N1', 'Requested Roommate Gender');
+        $sheet->setCellValue('O1', 'CPAP User');
+        $sheet->setCellValue('P1', "Doesn't mind CPAP using Roommate");
         $sheet->fromArray($trainingInfo, NULL, 'A2');
 
         $writer = new Xlsx($spreadsheet);

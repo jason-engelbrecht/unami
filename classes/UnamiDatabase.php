@@ -98,11 +98,11 @@ class UnamiDatabase
         $emergency_phone = $personalInfo->getEmergencyPhone();
 
         //accommodations
-        $special_needs = ($accommodations->getSpecialNeeds() == 'true' ? true : false);
-        $service_animal = ($accommodations->getServiceAnimal() == 'true' ? true : false);
-        $mobility_need = ($accommodations->getMovementDisability() == 'true' ? true : false);
-        $need_rooming = ($accommodations->getNeedAccommodations() == 'true' ? true : false);
-        $single_room = ($accommodations->getSingleRoom() == 'true' ? true : false);
+        $special_needs = ($accommodations->getSpecialNeedsText());
+        $service_animal = ($accommodations->getServiceAnimalText());
+        $mobility_need = ($accommodations->getMovementDisabilityText());
+        $need_rooming = ($accommodations->getNeedAccommodations() == 'true' ? "Yes" : "No");
+        $single_room = ($accommodations->getSingleRoom() == 'true' ? "Yes" : "No");
 
         $daysAsString = '';
         if(is_array($accommodations->getDaysRooming()))
@@ -120,8 +120,8 @@ class UnamiDatabase
         $days_rooming = $daysAsString;
         $gender = $accommodations->getGender();
         $roommate_gender = $accommodations->getRoommateGender();
-        $cpap_user = ($accommodations->getCpap() == 'true' ? true : false);
-        $roommateCpap = ($accommodations->getCpapRoommate() == 'true' ? true : false);
+        $cpap_user = ($accommodations->getCpap() == 'true' ? "Yes" : "No");
+        $roommateCpap = ($accommodations->getCpapRoommate() == 'true' ? "Yes" : "No");
 
         //not required
         $heard_about_training = $notRequired->getHeardAboutTraining();
@@ -161,16 +161,16 @@ class UnamiDatabase
         $statement->bindParam(':emergency_phone', $emergency_phone, PDO::PARAM_STR);
 
         //accommodations
-        $statement->bindParam(':special_needs', $special_needs, PDO::PARAM_BOOL);
-        $statement->bindParam(':service_animal', $service_animal, PDO::PARAM_BOOL);
-        $statement->bindParam(':mobility_need', $mobility_need, PDO::PARAM_BOOL);
-        $statement->bindParam(':need_rooming', $need_rooming, PDO::PARAM_BOOL);
-        $statement->bindParam(':single_room', $single_room, PDO::PARAM_BOOL);
+        $statement->bindParam(':special_needs', $special_needs, PDO::PARAM_STR);
+        $statement->bindParam(':service_animal', $service_animal, PDO::PARAM_STR);
+        $statement->bindParam(':mobility_need', $mobility_need, PDO::PARAM_STR);
+        $statement->bindParam(':need_rooming', $need_rooming, PDO::PARAM_STR);
+        $statement->bindParam(':single_room', $single_room, PDO::PARAM_STR);
         $statement->bindParam(':days_rooming', $days_rooming, PDO::PARAM_STR);
         $statement->bindParam(':gender', $gender, PDO::PARAM_STR);
         $statement->bindParam(':roommate_gender', $roommate_gender, PDO::PARAM_STR);
-        $statement->bindParam(':cpap_user', $cpap_user, PDO::PARAM_BOOL);
-        $statement->bindParam(':roommate_cpap', $roommateCpap, PDO::PARAM_BOOL);
+        $statement->bindParam(':cpap_user', $cpap_user, PDO::PARAM_STR);
+        $statement->bindParam(':roommate_cpap', $roommateCpap, PDO::PARAM_STR);
 
         //not required
         $statement->bindParam(':heard_about_training', $heard_about_training, PDO::PARAM_STR);
@@ -991,29 +991,48 @@ class UnamiDatabase
     {
         //name, phone, email, special needs, and all rooming info
         //define query
-        $query="SELECT fname, lname, primary_phone, email, 
+        $query="SELECT date_submitted, app_status, fname, lname, primary_phone, email, 
                 special_needs, service_animal, mobility_need, need_rooming,
                 single_room, days_rooming, gender, roommate_gender, 
                 cpap_user, roommate_cpap
                 FROM applicants
-                WHERE app_type = :app_type
-                AND app_status = :app_status";
+                WHERE app_type = :app_type";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
 
         //only get complete applications
-        $app_status = 3;
+        //$app_status = 3;
 
         //bind parameter
         $statement->bindParam(':app_type', $applicationId, PDO::PARAM_INT);
-        $statement->bindParam(':app_status', $app_status, PDO::PARAM_INT);
+        //$statement->bindParam(':app_status', $app_status, PDO::PARAM_INT);
 
         //execute
         $statement->execute();
 
         //get result
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        for($i = 0; $i < sizeof($result); $i++)
+        {
+            if($result[$i]['app_status'] == 0)
+            {
+                $result[$i]['app_status'] = "denied";
+            }
+            else if($result[$i]['app_status'] == 1)
+            {
+                $result[$i]['app_status'] = "submitted";
+            }
+            else if($result[$i]['app_status'] == 2)
+            {
+                $result[$i]['app_status'] = "approved";
+            }
+            else if($result[$i]['app_status'] == 3)
+            {
+                $result[$i]['app_status'] = "completed";
+            }
+        }
 
         return $result;
     }
