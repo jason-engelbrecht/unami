@@ -1,7 +1,7 @@
 <?php /** @noinspection SqlResolve */
 
 $user = $_SERVER['USER'];
-require "/home/$user/config_UNAMI.php";
+require "/home2/$user/config_UNAMI.php";
 
 /**
  * Class Database
@@ -892,7 +892,7 @@ class UnamiDatabase
         //define query
         //$query = "SELECT COUNT(date_submitted) As Submitted, EXTRACT(YEAR_MONTH FROM date_submitted) AS MonthYear FROM applicants;";
         $query = "SELECT concat(month(date_submitted),'/', year(date_submitted)) as monthYear FROM applicants 
-                    GROUP BY monthYear
+                    GROUP BY MonthYear
                     ORDER BY date_submitted";
 
         //prepare statement
