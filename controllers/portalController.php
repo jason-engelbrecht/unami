@@ -53,12 +53,40 @@ $f3->route('GET|POST /login', function($f3)
 });
 
 //forgot password
-$f3->route('GET /forgot-password', function($f3)
+$f3->route('GET|POST /forgot-password', function($f3)
 {
+    global $db;
     $f3->set('page_title', 'Forgot Password');
+
+    if (!empty($_POST))
+    {
+        Emailer::sendResetEmail($_POST['email'], $db);
+    }
 
     $view = new Template();
     echo $view->render('views/portal/account/forgot-password.html');
+});
+
+//reset password
+$f3->route('GET|POST /reset-password/@adminId/@hashcode', function($f3, $params)
+{
+    $f3->set('page_title', 'Reset Password');
+
+    global $db;
+    $hashedId = str_replace('-', '/', $params['hashcode']);
+    if(!password_verify($params['adminId'], $hashedId))
+    {
+        $f3->reroute('/login');
+    }
+
+    if (!empty($_POST))
+    {
+        $db->changeAdminPassword($params['adminId'], $_POST['password']);
+        $f3->reroute('/login');
+    }
+
+    $view = new Template();
+    echo $view->render('views/portal/account/reset-password.html');
 });
 
 //create account

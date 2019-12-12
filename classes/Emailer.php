@@ -54,7 +54,7 @@ EOD;
 
             $message->setBody($body, 'text/html');
             $message->addPart('Please review '.$applicantName."'s application: 
-            http://mlee.greenriverdev.com/unami/affiliate_review/".$applicantId.'/'.$hashedId, 'text/plain');
+            http://mlee.greenriverdev.com/unami/affiliate_review/".$applicantId.'/'.$linkHashedId, 'text/plain');
 
             $transport = (new Swift_SmtpTransport(EMAIL_SERVER, 465, 'ssl'))
                 ->setUsername(EMAIL_USERNAME)
@@ -141,5 +141,61 @@ EOD;
             echo $e->getMessage();
         }
 
+    }
+
+    static function sendResetEmail($email, $db)
+    {
+        $adminInfo = $db->getAdminInfo($email);
+        $adminID = $adminInfo['admin_id'];
+        $hashedId = password_hash($adminID, PASSWORD_BCRYPT);
+        $linkHashedId = str_replace('/', '-', $hashedId);
+        $applicantName = $adminInfo['fname'] .' '. $adminInfo['lname'];
+
+        $toEmail = $email;
+        $toEmailAlias = $applicantName;
+
+        try
+        {
+            $message = (new Swift_Message('Reset Password: '.$applicantName))
+                ->setFrom([EMAIL_USERNAME => 'UNAMI: DO-NOT-REPLY'])
+                ->setTo([$toEmail => $toEmailAlias]);
+
+
+            $cid = $message->embed(Swift_Image::fromPath('http://mlee.greenriverdev.com/unami/images/namiLogo.png',
+                'image.png', 'image/png'));
+
+            $body = <<<EOD
+        <html lang="en">
+            <body>
+                <div style="background-color: #0c499c">
+                    <img src="$cid" alt="NAMI WA Logo">
+                </div>
+                
+                <div>
+                    <p>Reset your password by following this link: 
+                    <a href="http://mlee.greenriverdev.com/unami/reset-password/$adminID/$linkHashedId">Here</a></p>
+                </div>
+            </body>
+        </html>
+EOD;
+
+            $message->setBody($body, 'text/html');
+            $message->addPart('Reset Password: '.$applicantName.": 
+            http://mlee.greenriverdev.com/unami/reset-password/".$adminID.'/'.$linkHashedId, 'text/plain');
+
+            $transport = (new Swift_SmtpTransport(EMAIL_SERVER, 465, 'ssl'))
+                ->setUsername(EMAIL_USERNAME)
+                ->setPassword(EMAIL_PASSWORD);
+
+            $mailer = new Swift_Mailer($transport);
+
+            //sends the email
+            $mailer->send($message);
+        }
+
+        catch (Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 }

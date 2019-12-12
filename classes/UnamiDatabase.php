@@ -1360,4 +1360,30 @@ class UnamiDatabase
         return $result;
     }
 
+    function getAdminInfo($email)
+    {
+        $sql = "SELECT * FROM adminUser WHERE email = :email";
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+
+        $statement->execute();
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function changeAdminPassword($adminId, $password)
+    {
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE adminUser SET password = :password WHERE admin_id = :admin_id";
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam(':password', $password, PDO::PARAM_STR);
+        $statement->bindParam(':admin_id', $adminId, PDO::PARAM_INT);
+
+        $statement->execute();
+    }
+
 }
