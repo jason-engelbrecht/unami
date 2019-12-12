@@ -891,8 +891,9 @@ class UnamiDatabase
     function countDate() {
         //define query
         //$query = "SELECT COUNT(date_submitted) As Submitted, EXTRACT(YEAR_MONTH FROM date_submitted) AS MonthYear FROM applicants;";
-        $query = "SELECT EXTRACT(YEAR_MONTH FROM date_submitted) AS MonthYear 
-                  FROM applicants GROUP BY MonthYear ORDER BY MonthYear";
+        $query = "select concat(month(date_submitted),'/', year(date_submitted)) as MonthYear FROM applicants 
+                    GROUP BY MonthYear
+                    ORDER BY MonthYear";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);
