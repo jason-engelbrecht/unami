@@ -141,19 +141,13 @@
                     <div class="row m-1 mb-2">
                         <div class="col-md-10 pl-0">
                             <h6 class="pl-2 pb-2"><span class="font-weight-bold">Special Needs: </span>
-                                <check if="{{ @applicant['special_needs'] == 1 }}">
-                                    <true>yes</true><false>no</false>
-                                </check>
+                                {{ @applicant['special_needs'] }}
                             </h6>
                             <h6 class="pl-2 pb-2"><span class="font-weight-bold">Bringing a Service Animal: </span>
-                                <check if="{{ @applicant['service_animal'] == 1 }}">
-                                    <true>Yes</true><false>No</false>
-                                </check>
+                                {{ @applicant['service_animal'] }}
                             </h6>
                             <h6 class="pl-2"><span class="font-weight-bold">Walker or Wheelchair used: </span>
-                                <check if="{{ @applicant['mobility_need'] == 1 }}">
-                                    <true>Yes</true><false>No</false>
-                                </check>
+                                {{ @applicant['mobility_need'] }}
                             </h6>
                         </div>
                     </div>
@@ -161,60 +155,62 @@
                     <div class="row m-1">
                         <div class="col-md-10 pl-0">
                             <h6 class="pl-2 pb-2"><span class="font-weight-bold">Need rooming during training: </span>
-                                <check if="{{ @applicant['need_rooming'] == 1 }}">
+                                <check if="{{ @applicant['need_rooming'] == 'Yes' }}">
                                     <true>Room is needed</true>
                                     <false>Room not needed</false>
                                 </check>
                             </h6>
 
-                            <check if="{{ @applicant['need_rooming'] == 1 }}">
-                                <h6 class="pl-2 pb-2"><span class="font-weight-bold">I want to pay for a Single room: </span>
-                                    <check if="{{ @applicant['single_room'] == 1 }}">
+                            <check if="{{ @applicant['need_rooming'] == 'Yes' }}">
+                                <h6 class="pl-2 pb-2"><span class="font-weight-bold">They want to pay for a Single room: </span>
+                                    <check if="{{ @applicant['single_room'] == 'Yes' }}">
                                         <true>Single room wanted</true>
                                         <false>Single room not wanted</false>
                                     </check>
+                                </h6>
 
+                                <h6 class="pl-2"><span class="font-weight-bold">Need Housing for These Nights: </span>
+                                    {{ @applicant['days_rooming'] }}
                                 </h6>
                             </check>
                         </div>
                     </div>
 
-                    <check if="{{ @applicant['single_room'] != 1 && @applicant['need_rooming'] == 1 }}">
+                    <check if="{{ @applicant['single_room'] != 'Yes' && @applicant['need_rooming'] == 'Yes' }}">
 
-                        <div class="row m-1 mb-2">
+                        <div class="row m-1 ">
                             <h6 class="pl-2"><span class="font-weight-bold text-primary">Rooming Information</span></h6>
                         </div>
 
-                        <div class="row m-1 mb-2">
+                        <div class="row m-1">
                             <div class="col-md-10 pl-0">
                                 <h6 class="pl-2">
-                                    <span class="font-weight-bold">Your Gender: </span> {{ @applicant['gender'] }}
+                                    <span class="font-weight-bold">Gender: </span> {{ @applicant['gender'] }}
                                     <span class="font-weight-bold ml-3">Want to Room With: </span> {{ @applicant['roommate_gender'] }}
                                 </h6>
                             </div>
                         </div>
 
-                        <div class="row m-1 mb-2">
+                        <div class="row m-1">
                             <div class="col-md-10 pl-0">
-                                <h6 class="pl-2">
+                                <h6 class="pl-2 mb-2">
                                     <span class="font-weight-bold">CPAP User: </span>
-                                    <check if="{{ @applicant['cpap_user'] == 1 }}">
+                                    <check if="{{ @applicant['cpap_user'] == 'Yes' }}">
                                         <true>Uses a CPAP</true>
-                                        <false>Do not use a CPAP</false>
-                                    </check>
-                                    <span class="font-weight-bold ml-4">Room with a CPAP User: </span>
-                                    <check if="{{ @applicant['roommate_cpap'] == 1 }}">
-                                        <true>Fine with roommate with CPAP</true>
-                                        <false>Do not want to roommate with CPAP user</false>
+                                        <false>Does not use a CPAP</false>
                                     </check>
                                 </h6>
                             </div>
                         </div>
 
-                        <div class="row m-1 mb-2">
-                            <div class="col-md-10 ml-0 pl-0">
-                                <h6 class="pl-2"><span class="font-weight-bold">Need Housing for These Nights: </span>
-                                    {{ @applicant['days_rooming'] }}
+                        <div class="row m-1">
+                            <div class="col-md-10 pl-0">
+                                <h6 class="pl-2">
+                                    <span class="font-weight-bold">Room with a CPAP User: </span>
+                                    <check if="{{ @applicant['roommate_cpap'] == 'Yes' }}">
+                                        <true>Fine with roommate CPAP user</true>
+                                        <false>Does not want to room with CPAP user</false>
+                                    </check>
                                 </h6>
                             </div>
                         </div>
@@ -313,7 +309,7 @@
                     <h5 class="m-0 text-white"><i class="fas fa-question-circle"></i> {{ @applicant['Training'] }} Questions</h5>
                 </div>
                 <div class="card-body">
-                    coming soon
+                    <include href="{{ @reviewIncludes }}"/>
                 </div>
             </div>
         </div>

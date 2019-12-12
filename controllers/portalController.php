@@ -417,6 +417,19 @@ $f3->route('GET /@applicant', function($f3, $params)
     $applicant_id = $params['applicant']; //must match^
     $applicant = $db->getApplicant($applicant_id);
 
+    //get app type
+    $app_type = $applicant['app_type'];
+
+    //pull data based on app type and id
+    $longAnswers = $db->getLongAnswer($applicant_id, $app_type);
+    $routing = $applicant['Reference'];
+
+    //set to hive
+    $f3->set('longAnswers', $longAnswers);
+
+    $f3->set('applicant', $applicant);
+    $f3->set('reviewIncludes', "views/portal/applications/long_answers/$routing/long_answer.html");
+
     if($applicant['category'] == 1) {
         $f3->set('page', 'active');
     }
@@ -426,8 +439,6 @@ $f3->route('GET /@applicant', function($f3, $params)
     else if($applicant['category'] == 2) {
         $f3->set('page', 'waitlist');
     }
-
-    $f3->set('applicant', $applicant);
 
     $view = new Template();
     echo $view->render('views/portal/applications/applicant.html');

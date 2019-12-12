@@ -971,6 +971,7 @@ class UnamiDatabase
         $query = "SELECT *,
                   affiliates.name AS Affiliate,
                   app_type.app_type AS Training,
+                  app_type.ref_name AS Reference,
                   applicants.email AS Email,
                   app_type_info.date AS Day1,
                   app_type_info.date2 AS Day2,

@@ -219,12 +219,12 @@
                                     <span class="font-weight-bold">CPAP User: </span>
                                     <check if="{{ @applicant['cpap_user'] == 'Yes' }}">
                                         <true>Uses a CPAP</true>
-                                        <false>Do not use a CPAP</false>
+                                        <false>Does not use a CPAP</false>
                                     </check>
                                     <span class="font-weight-bold ml-4">Room with a CPAP User: </span>
                                     <check if="{{ @applicant['roommate_cpap'] == 'Yes' }}">
-                                        <true>Fine with roommate with CPAP</true>
-                                        <false>Do not want to roommate with CPAP user</false>
+                                        <true>Fine with roommate CPAP user</true>
+                                        <false>Does not want to room with CPAP user</false>
                                     </check>
                                 </h6>
                             </div>
