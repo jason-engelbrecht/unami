@@ -121,37 +121,51 @@
 
 
     // Pie Chart Example
-    var ctx = document.getElementById("myBarChart");
-    var myBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: data,
-                backgroundColor: '#36b9cc',
-                hoverBorderColor: "rgba(234, 236, 244, 250)",
+        var ctx = document.getElementById("myBarChart");
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: '#36b9cc',
+                    hoverBorderColor: "rgba(234, 236, 244, 250)",
 
-            }]
-        },
+                }]
+            },
 
-        options: {
-            maintainAspectRatio: false,
-            tooltips: {
-                backgroundColor: "rgb(255,255,255,255)",
-                bodyFontColor: "#858796",
-                borderColor: '#dddfeb',
-                borderWidth: 1,
-                xPadding: 15,
-                yPadding: 15,
-                displayColors: false,
-                caretPadding: 10,
+            options: {
+                title: {
+                            display: true,
+                            text: 'Year/Month (YYYY-MM)',
+                            position:'bottom'
+                        },
+
+                scales: {
+                    yAxes: [{
+                      scaleLabel: {
+                        display: true,
+                        labelString: 'Total Application Per Month'
+                      }
+                    }]
+                  },
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 1,
             },
-            legend: {
-                display: false
-            },
-            cutoutPercentage: 1,
-        },
-    });
+        });
 </script>
 
 <!--Affiliates W/ Most Pending-->
