@@ -1,7 +1,7 @@
 <?php /** @noinspection SqlResolve */
 
 $user = $_SERVER['USER'];
-require "/home2/$user/config_UNAMI.php";
+require "/home/$user/config_UNAMI.php";
 
 /**
  * Class Database
