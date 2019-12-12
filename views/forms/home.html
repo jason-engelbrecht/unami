@@ -85,7 +85,15 @@
         <!-- show all training cards -->
         <repeat group="{{ @app_types }}" value="{{ @training }}" counter="{{ @ctr }}">
             <div class="col-lg-4 mb-4 d-flex">
-                <div class="card shadow-sm flex-fill">
+                <div class="card shadow-sm flex-fill homeCards">
+
+                    <check if="{{ @db->countTrainingAppTypeInfo(@training['app_id'])['Trainings'] > 0 }}">
+                        <true>
+                            <a href="#" class="text-decoration-none text-body"
+                               data-toggle="modal" data-target="#{{ @training['ref_name'] }}Modal">
+                        </true>
+                    </check>
+
                     <div class="card-body">
                         <h5 class="card-title mb-4 mt-2 text-center">
                             <img src="images/training_logos/{{ @training['ref_name'] }}.jpg"
@@ -104,16 +112,13 @@
                                     <true>
                                         <check if="{{ @db->countTrainingAppTypeInfo(@training['app_id'])['Trainings'] > 0 }}">
                                             <true>
-                                                <h5 class="text-center">
-                                                    <a href="#" class="text-decoration-none text-primary apply activeApply"
-                                                       data-toggle="modal" data-target="#{{ @training['ref_name'] }}Modal">
-                                                        <i class="fas fa-info-circle"></i> Apply
-                                                    </a>
+                                                <h5 class="text-center text-primary apply activeApply">
+                                                    <i class="fas fa-info-circle"></i> Apply
                                                 </h5>
                                             </true>
                                             <false>
                                                 <h5 class="text-center text-primary apply">
-                                                    Coming Soon!
+                                                    Coming Soon!<i class="fas fa-info-circle"></i>
                                                 </h5>
                                             </false>
                                         </check>
@@ -175,6 +180,9 @@
                             </div>
                         </form>
                     </div>
+                    <check if="{{ @db->countTrainingAppTypeInfo(@training['app_id'])['Trainings'] > 0 }}">
+                        </a>
+                    </check>
                 </div>
             </div>
         </repeat>

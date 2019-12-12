@@ -46,6 +46,19 @@
 <!-- Chart.js -->
 <script src="views/portal/vendor/chart.js/Chart.min.js"></script>
 
+<script>
+    //hover animation - cards
+    $(document).ready(function() {
+        $( ".card" ).hover(
+            function() {
+                $(this).addClass('shadow-lg');
+            }, function() {
+                $(this).removeClass('shadow-lg');
+            }
+        );
+    });
+</script>
+
 <!-- custom charts -->
 <!-- application statuses -->
 <script>

@@ -21,5 +21,18 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="views/forms/js/tooltip.js"></script>
+
+<script>
+    //hover animation - cards
+    $(document).ready(function() {
+        $( ".homeCards" ).hover(
+            function() {
+                $(this).addClass('shadow');
+            }, function() {
+                $(this).removeClass('shadow');
+            }
+        );
+    });
+</script>
 </body>
 </html>

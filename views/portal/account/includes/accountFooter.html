@@ -14,6 +14,19 @@
 <!-- jQuery easing  -->
 <script src="views/portal/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+<script>
+    //hover animation - cards
+    $(document).ready(function() {
+        $( ".card" ).hover(
+            function() {
+                $(this).addClass('shadow-lg');
+            }, function() {
+                $(this).removeClass('shadow-lg');
+            }
+        );
+    });
+</script>
+
 </body>
 
 </html>
