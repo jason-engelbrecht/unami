@@ -134,7 +134,6 @@ CREATE TABLE affiliates
 (
     affiliate_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
-    phone VARCHAR(30) NOT NULL,
     email VARCHAR(254) NOT NULL
 );
 
@@ -149,27 +148,27 @@ CREATE TABLE adminUser
 );
 
 /* setup basic data for tables */
-INSERT INTO affiliates(name)
+INSERT INTO affiliates(name, email)
 VALUES
-('NAMI Chelan-Douglas'),
-('NAMI Clallam County'),
-('NAMI Eastside'),
-('NAMI Jefferson County'),
-('NAMI Kitsap County'),
-('NAMI Lewis County'),
-('NAMI Pierce County'),
-('NAMI Seattle'),
-('NAMI Skagit'),
-('NAMI Snohomish County'),
-('NAMI South King County'),
-('NAMI Southwest Washington'),
-('NAMI Spokane'),
-('NAMI Thurston-Mason'),
-('NAMI Tri-Cities'),
-('NAMI Walla Walla'),
-('NAMI Washington Coast'),
-('NAMI Whatcom'),
-('NAMI Yakima');
+('NAMI Chelan-Douglas', 'chelandouglasnami@gmail.com'),
+('NAMI Clallam County', 'namiofclallamcounty@gmail.com'),
+('NAMI Eastside', 'info@nami-eastside.org'),
+('NAMI Jefferson County', 'namijeffco@yahoo.com'),
+('NAMI Kitsap County', 'info@namikitsap.org'),
+('NAMI Lewis County', 'namilewiscountywa@gmail.com'),
+('NAMI Pierce County', 'info@namipierce.org'),
+('NAMI Seattle', 'info@namiseattle.org'),
+('NAMI Skagit', 'namiskagitpresident@gmail.com'),
+('NAMI Snohomish County', 'nami.snohomish.county@gmail.com'),
+('NAMI South King County', 'namiskc@qwestoffice.net'),
+('NAMI Southwest Washington', 'info@namiswwa.org'),
+('NAMI Spokane', 'programs@namispokane.org'),
+('NAMI Thurston-Mason', 'info@namitm.org'),
+('NAMI Tri-Cities', 'namitricities@gmail.com'),
+('NAMI Walla Walla', 'namiwallaalla@gmail.com'),
+('NAMI Washington Coast', 'president@nami-wacoast.org'),
+('NAMI Whatcom', 'namiadmin@namiwhatcom.org'),
+('NAMI Yakima', 'info@namiyakima.org');
 
 INSERT INTO app_type(app_type, ref_name)
 VALUES
