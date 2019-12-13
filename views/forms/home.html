@@ -87,6 +87,7 @@
             <div class="col-lg-4 mb-4 d-flex">
                 <div class="card shadow-sm flex-fill homeCards">
 
+                    <!-- if it has trainings - start anchor tag -->
                     <check if="{{ @db->countTrainingAppTypeInfo(@training['app_id'])['Trainings'] > 0 }}">
                         <true>
                             <a href="#" class="text-decoration-none text-body"
@@ -94,6 +95,7 @@
                         </true>
                     </check>
 
+                    <!-- card body -->
                     <div class="card-body">
                         <h5 class="card-title mb-4 mt-2 text-center">
                             <img src="images/training_logos/{{ @training['ref_name'] }}.jpg"
@@ -104,91 +106,100 @@
                         <p class="card-text pb-3">
                             {{ @training_descriptions[@training['app_id']] }}
                         </p>
-                        <form method="post">
-
-                            <div class="mb-2 pt-2">
-                                <!-- not all done -->
-                                <check if="{{ @ctr <= 3 }}">
-                                    <true>
-                                        <check if="{{ @db->countTrainingAppTypeInfo(@training['app_id'])['Trainings'] > 0 }}">
-                                            <true>
-                                                <h5 class="text-center text-primary apply activeApply">
-                                                    <i class="fas fa-info-circle"></i> Apply
-                                                </h5>
-                                            </true>
-                                            <false>
-                                                <h5 class="text-center text-primary apply">
-                                                    Coming Soon!
-                                                </h5>
-                                            </false>
-                                        </check>
-                                        <!-- modal -->
-                                        <div class="modal fade" id="{{ @training['ref_name'] }}Modal" tabindex="-1" role="dialog"
-                                             aria-labelledby="{{ @training['ref_name'] }}Modal" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-
-                                                    <div class="modal-header" style="background-color: #0c499c;">
-                                                        <h4 class="modal-title text-white" id="{{ @training['ref_name'] }}ModalLabel">
-                                                            <i class="fas fa-info-circle"></i>
-                                                            {{ @training['app_type'] }}
-                                                        </h4>
-
-                                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="modal-body mx-2">
-                                                        <h4 class="mb-4 mt-3">Please select an available training</h4>
-
-                                                        <hr>
-                                                        <repeat group="{{ @app_types_info }}" value="{{ @info }}" counter="{{ @ctr2 }}">
-                                                            <check if="{{ @info['app_type'] == @training['app_id'] }}">
-                                                                <div class="form-check mb-4 ml-2">
-                                                                    <input class="form-check-input mt-4" type="radio"
-                                                                           name="{{ @training['ref_name'] }}Info"
-                                                                           id="{{ @info['info_id'] }}Info"
-                                                                           value="{{ @info['info_id'] }}" checked>
-                                                                    <h6>
-                                                                        <label class="form-check-label" for="{{ @info['info_id'] }}Info">
-                                                                            <span class="font-weight-bold">Day 1: </span>{{ @info['date'] }}
-                                                                            <br><span class="font-weight-bold">Day 2: </span>{{ @info['date2'] }}
-                                                                            <br><span class="font-weight-bold">Location: </span>{{ @info['location'] }}
-                                                                        </label>
-                                                                    </h6>
-                                                                </div>
-                                                            </check>
-                                                        </repeat>
-                                                        <hr>
-
-                                                        <input type="hidden" name="trainingType" value="{{ @training['app_id'] }}">
-                                                    </div>
-
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary" name="{{ @training['ref_name'] }}Submit">Apply</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </true>
-                                    <false>
-                                        <h5 class="text-center text-primary apply">Coming soon!</h5>
-                                    </false>
-                                </check>
-                            </div>
-                        </form>
+                        <div class="mb-2 pt-2">
+                            <!-- only show first 3 trainings -->
+                            <check if="{{ @ctr <= 3 }}">
+                                <true>
+                                    <!-- if it has trainings -->
+                                    <check if="{{ @db->countTrainingAppTypeInfo(@training['app_id'])['Trainings'] > 0 }}">
+                                        <!-- has trainings -->
+                                        <true>
+                                            <h5 class="text-center text-primary apply activeApply">
+                                                <i class="fas fa-info-circle"></i> Apply
+                                            </h5>
+                                        </true>
+                                        <!-- no trainings -->
+                                        <false>
+                                            <h5 class="text-center text-primary apply">
+                                                Coming Soon!
+                                            </h5>
+                                        </false>
+                                    </check>
+                                    <!-- if it has trainings -->
+                                </true>
+                                <false>
+                                    <!-- over 3 -->
+                                    <h5 class="text-center text-primary apply">Coming soon!</h5>
+                                </false>
+                            </check>
+                            <!-- only show first 3 trainings -->
+                        </div>
                     </div>
+                    <!-- card body -->
+
+                    <!-- if it has trainings -->
                     <check if="{{ @db->countTrainingAppTypeInfo(@training['app_id'])['Trainings'] > 0 }}">
+                        <!-- close anchor -->
                         </a>
+                        <!-- apply modal -->
+                        <div class="modal fade" id="{{ @training['ref_name'] }}Modal" tabindex="-1" role="dialog"
+                             aria-labelledby="{{ @training['ref_name'] }}Modal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <form method="post">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color: #0c499c;">
+                                            <h4 class="modal-title text-white" id="{{ @training['ref_name'] }}ModalLabel">
+                                                <i class="fas fa-info-circle"></i>
+                                                {{ @training['app_type'] }}
+                                            </h4>
+                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body mx-2">
+                                            <h4 class="mb-4 mt-3">Please select an available training</h4>
+                                            <hr>
+                                            <repeat group="{{ @app_types_info }}" value="{{ @info }}" counter="{{ @ctr2 }}">
+                                                <check if="{{ @info['app_type'] == @training['app_id'] }}">
+                                                    <div class="form-check mb-4 ml-2">
+                                                        <input class="form-check-input mt-4" type="radio"
+                                                               name="{{ @training['ref_name'] }}Info"
+                                                               id="{{ @info['info_id'] }}Info"
+                                                               value="{{ @info['info_id'] }}" checked>
+                                                        <h6>
+                                                            <label class="form-check-label" for="{{ @info['info_id'] }}Info">
+                                                                <span class="font-weight-bold">Day 1: </span>{{ @info['date'] }}
+                                                                <br><span class="font-weight-bold">Day 2: </span>{{ @info['date2'] }}
+                                                                <br><span class="font-weight-bold">Location: </span>{{ @info['location'] }}
+                                                            </label>
+                                                        </h6>
+                                                    </div>
+                                                </check>
+                                            </repeat>
+                                            <hr>
+                                            <input type="hidden" name="trainingType" value="{{ @training['app_id'] }}">
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" name="{{ @training['ref_name'] }}Submit">Apply</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- apply modal -->
                     </check>
+                    <!-- if it has trainings -->
                 </div>
+                <!-- card -->
             </div>
+            <!-- col -->
         </repeat>
         <!-- show all training cards -->
     </div>
-    <!-- /.row -->
+    <!-- row -->
 
     <h5 class="py-4 text-center text-primary">
         For more information, contact Deanna Roy at droy@namiwa.org or 206-783-4288.
