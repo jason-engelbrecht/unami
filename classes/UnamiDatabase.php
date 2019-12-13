@@ -501,7 +501,7 @@ class UnamiDatabase
     function getAffiliates()
     {
         //define query
-        $query = "SELECT name, affiliate_id, phone, email FROM affiliates";
+        $query = "SELECT name, affiliate_id, email FROM affiliates";
 
         //prepare statement
         $statement = $this->_dbh->prepare($query);

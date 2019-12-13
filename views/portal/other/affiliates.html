@@ -18,7 +18,6 @@
                     <thead>
                     <tr class="bg-primary text-white">
                         <th>Affiliate</th>
-                        <th>Phone</th>
                         <th>Email</th>
                         <!--<th>Edit</th>-->
                     </tr>
@@ -26,7 +25,6 @@
                     <tfoot>
                     <tr class="bg-light">
                         <th>Affiliate</th>
-                        <th>Phone</th>
                         <th>Email</th>
                         <!--<th>Edit</th>-->
                     </tr>
@@ -47,8 +45,7 @@
                                 </a>
                             </td>-->
 
-                            <td>(123) 456 - 7890</td>
-                            <td>affiliate@email.com</td>
+                            <td>{{ @Affiliate['email'] }}</td>
 
                             <!-- edit -> modal -- use ID here -->
                             <!--<td class="text-center">
