@@ -1,2 +1,2 @@
 # unami
-NAMI WA project. 
+NAMI WA project. https://apply.namiwa.org/
